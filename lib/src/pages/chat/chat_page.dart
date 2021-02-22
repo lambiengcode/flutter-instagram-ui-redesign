@@ -48,9 +48,9 @@ class _ChatPageState extends State<ChatPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: _size.height / 22.5),
+            SizedBox(height: _size.height / 20.0),
             Padding(
-              padding: EdgeInsets.only(left: 14.0, right: 8.0),
+              padding: EdgeInsets.only(left: 14.0, right: 14.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -60,8 +60,8 @@ class _ChatPageState extends State<ChatPage> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
                         child: CachedNetworkImage(
-                          width: 32.0,
-                          height: 32.0,
+                          width: 38.0,
+                          height: 38.0,
                           fit: BoxFit.cover,
                           placeholder: (context, url) => PlaceHolderImage(),
                           errorWidget: (context, url, error) =>
@@ -98,8 +98,8 @@ class _ChatPageState extends State<ChatPage> {
                     ],
                   ),
                   Container(
-                    height: 48.0,
-                    width: 48.0,
+                    height: 54.0,
+                    width: 54.0,
                     decoration: nMboxCategoryOff,
                     child: Icon(
                       Feather.plus,
