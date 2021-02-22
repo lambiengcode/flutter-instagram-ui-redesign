@@ -6,7 +6,6 @@ import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
 import 'package:whoru/src/widgets/image_widget.dart';
 
 import '../../common/styles.dart';
-import '../../common/styles.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -16,6 +15,10 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  double _height, min = 0.44, initial = 0.44, max = 0.86;
+
+  @override
+  bool get wantKeepAlive => null;
 
   @override
   void initState() {
@@ -237,9 +240,9 @@ class _ProfilePageState extends State<ProfilePage>
     final _size = MediaQuery.of(context).size;
 
     return DraggableScrollableSheet(
-      maxChildSize: .88,
-      minChildSize: .42,
-      initialChildSize: .42,
+      minChildSize: min,
+      maxChildSize: max,
+      initialChildSize: initial,
       builder: (BuildContext context, ScrollController scrollController) {
         var _pages = [
           PhotosGridview(
@@ -249,71 +252,81 @@ class _ProfilePageState extends State<ProfilePage>
           Container(),
         ];
 
-        return Container(
-          decoration: BoxDecoration(
-            color: mC,
-          ),
-          child: Column(
-            children: <Widget>[
-              Container(
+        return AnimatedBuilder(
+          animation: scrollController,
+          builder: (context, child) {
+            return ClipRRect(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(16.0),
+              ),
+              child: Container(
                 decoration: BoxDecoration(
                   color: mC,
-                  boxShadow: [
-                    BoxShadow(
-                      color: mCD,
-                      offset: Offset(10, 10),
-                      blurRadius: 10,
-                    ),
-                  ],
                 ),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
-                      height: 2.5,
+                    Container(
+                      decoration: BoxDecoration(
+                        color: mC,
+                        boxShadow: [
+                          BoxShadow(
+                            color: mCD,
+                            offset: Offset(10, 10),
+                            blurRadius: 10,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                          TabBar(
+                            controller: _tabController,
+                            labelColor: colorPrimary,
+                            indicatorColor: colorPrimary,
+                            unselectedLabelColor: colorDarkGrey,
+                            indicatorSize: TabBarIndicatorSize.tab,
+                            indicatorWeight: 2.5,
+                            labelStyle: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: _size.width / 26.5,
+                            ),
+                            unselectedLabelStyle: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: _size.width / 28.5,
+                            ),
+                            tabs: [
+                              Tab(
+                                text: 'Photos',
+                              ),
+                              Tab(
+                                text: 'Posts',
+                              ),
+                              Tab(
+                                text: 'Info',
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    TabBar(
-                      controller: _tabController,
-                      labelColor: colorPrimary,
-                      indicatorColor: colorPrimary,
-                      unselectedLabelColor: colorDarkGrey,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      indicatorWeight: 2.5,
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: _size.width / 26.5,
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        controller: _tabController,
+                        children: _pages.map((Widget tab) {
+                          return tab;
+                        }).toList(),
                       ),
-                      unselectedLabelStyle: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: _size.width / 28.5,
-                      ),
-                      tabs: [
-                        Tab(
-                          text: 'Photos',
-                        ),
-                        Tab(
-                          text: 'Posts',
-                        ),
-                        Tab(
-                          text: 'Info',
-                        ),
-                      ],
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Expanded(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: _pages.map((Widget tab) {
-                    return tab;
-                  }).toList(),
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         );
       },
     );
