@@ -13,6 +13,7 @@ var colorFailed = colorDarkGrey;
 
 Color mC = Colors.grey.shade100;
 Color mCL = Colors.white;
+Color mCM = Colors.grey.shade300;
 Color mCD = Colors.black.withOpacity(0.075);
 Color mCC = Colors.green.withOpacity(0.65);
 Color fCD = Colors.grey.shade700;
@@ -36,7 +37,6 @@ BoxDecoration nMbox = BoxDecoration(
 );
 
 BoxDecoration nMboxCategoryOff = BoxDecoration(
-  border: Border.all(color: colorPrimary, width: 3.5),
   shape: BoxShape.circle,
   color: mC,
   boxShadow: [

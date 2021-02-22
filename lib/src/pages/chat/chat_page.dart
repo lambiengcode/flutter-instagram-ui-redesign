@@ -3,16 +3,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:whoru/src/models/access.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/widgets/image_widget.dart';
 
-class HomePage extends StatefulWidget {
+class ChatPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _HomePageState();
+  State<StatefulWidget> createState() => _ChatPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ChatPageState extends State<ChatPage> {
   SlidableController slidableController = new SlidableController();
   Animation<double> _rotationAnimation;
   Color _fabColor = Colors.blue;
@@ -44,10 +43,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Container(
         color: mC,
+        height: _size.height,
+        width: _size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: _size.height / 18.0),
+            SizedBox(height: _size.height / 22.5),
             Padding(
               padding: EdgeInsets.only(left: 14.0, right: 8.0),
               child: Row(
@@ -59,8 +60,8 @@ class _HomePageState extends State<HomePage> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
                         child: CachedNetworkImage(
-                          width: 40.0,
-                          height: 40.0,
+                          width: 32.0,
+                          height: 32.0,
                           fit: BoxFit.cover,
                           placeholder: (context, url) => PlaceHolderImage(),
                           errorWidget: (context, url, error) =>
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                               'https://avatars.githubusercontent.com/u/60530946?s=460&u=e342f079ed3571122e21b42eedd0ae251a9d91ce&v=4',
                         ),
                       ),
-                      SizedBox(width: 12.0),
+                      SizedBox(width: 8.0),
                       RichText(
                         text: TextSpan(
                           children: [
@@ -97,51 +98,21 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   Container(
-                    height: 54.0,
-                    width: 54.0,
+                    height: 48.0,
+                    width: 48.0,
                     decoration: nMboxCategoryOff,
                     child: Icon(
-                      Feather.mic,
-                      color: colorDarkGrey,
-                      size: _size.width / 22.5,
+                      Feather.plus,
+                      color: colorPrimary,
+                      size: _size.width / 20.5,
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 12.0),
-            _buildTitle(context, 'Activities'),
             SizedBox(height: 16.0),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildTitle(context, title) {
-    final _size = MediaQuery.of(context).size;
-    return Padding(
-      padding: EdgeInsets.only(left: 14.0, right: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              color: colorTitle,
-              fontSize: _size.width / 20.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            'View All',
-            style: TextStyle(
-              color: colorPrimary,
-              fontSize: _size.width / 28.5,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
       ),
     );
   }

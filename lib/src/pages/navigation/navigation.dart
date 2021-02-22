@@ -1,8 +1,9 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:whoru/src/pages/home/home_page.dart';
+import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/pages/profile/profile_page.dart';
 
 class Navigation extends StatefulWidget {
   @override
@@ -14,9 +15,9 @@ class _NavigationState extends State<Navigation> {
   var _pages = [
     Container(),
     Container(),
-    HomePage(),
+    ChatPage(),
     Container(),
-    Container(),
+    ProfilePage(),
   ];
 
   // final FirebaseMessaging _fcm = FirebaseMessaging();
@@ -52,8 +53,7 @@ class _NavigationState extends State<Navigation> {
     return Scaffold(
       bottomNavigationBar: StyleProvider(
         style: Style(),
-        child: ConvexAppBar.badge(
-          {3: currentPage == 3 ? '' : '2', 4: currentPage == 4 ? '' : '1'},
+        child: ConvexAppBar(
           initialActiveIndex: 2,
           height: 60.0,
           top: -24.0,
@@ -61,13 +61,13 @@ class _NavigationState extends State<Navigation> {
           style: TabStyle.reactCircle,
           activeColor: colorTitle,
           color: colorTitle,
-          elevation: 2.0,
+          elevation: .6,
           items: [
-            TabItem(icon: Feather.hard_drive),
-            TabItem(icon: Feather.clipboard),
-            TabItem(icon: Feather.home),
-            TabItem(icon: Feather.github),
+            TabItem(icon: Feather.radio),
+            TabItem(icon: Feather.feather),
             TabItem(icon: Feather.mail),
+            TabItem(icon: Feather.search),
+            TabItem(icon: Feather.user),
           ],
           backgroundColor: mC,
           onTap: (int i) {
