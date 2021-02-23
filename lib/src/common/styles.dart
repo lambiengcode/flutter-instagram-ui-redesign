@@ -10,10 +10,12 @@ var colorMedium = Colors.amber.shade700;
 var colorLow = colorPrimary;
 var colorCompleted = Colors.green;
 var colorFailed = colorDarkGrey;
+var colorActive = Color(0xFF00D72F);
 
 Color mC = Colors.grey.shade100;
 Color mCL = Colors.white;
-Color mCM = Colors.grey.shade300;
+Color mCM = Colors.grey.shade200;
+Color mCH = Colors.grey.shade400;
 Color mCD = Colors.black.withOpacity(0.075);
 Color mCC = Colors.green.withOpacity(0.65);
 Color fCD = Colors.grey.shade700;

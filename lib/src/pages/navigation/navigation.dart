@@ -5,13 +5,19 @@ import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/profile/profile_page.dart';
 
+import '../../common/styles.dart';
+import '../../common/styles.dart';
+import '../../common/styles.dart';
+import '../../common/styles.dart';
+import '../../common/styles.dart';
+
 class Navigation extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _NavigationState();
 }
 
 class _NavigationState extends State<Navigation> {
-  int currentPage = 2;
+  int currentPage = 0;
   var _pages = [
     Container(),
     Container(),
@@ -54,19 +60,19 @@ class _NavigationState extends State<Navigation> {
       bottomNavigationBar: StyleProvider(
         style: Style(),
         child: ConvexAppBar(
-          initialActiveIndex: 2,
+          initialActiveIndex: 0,
           height: 60.0,
           top: -24.0,
           curveSize: 85.0,
-          style: TabStyle.reactCircle,
-          activeColor: colorTitle,
+          style: TabStyle.fixedCircle,
+          activeColor: currentPage == 2 ? colorTitle : colorPrimary,
           color: colorTitle,
-          elevation: .6,
+          elevation: .4,
           items: [
-            TabItem(icon: Feather.radio),
-            TabItem(icon: Feather.feather),
-            TabItem(icon: Feather.mail),
+            TabItem(icon: Feather.home),
             TabItem(icon: Feather.search),
+            TabItem(icon: AntDesign.message1),
+            TabItem(icon: Feather.activity),
             TabItem(icon: Feather.user),
           ],
           backgroundColor: mC,

@@ -1,10 +1,14 @@
 import 'dart:ui';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:whoru/src/common/styles.dart';
-import 'package:whoru/src/widgets/image_widget.dart';
+import 'package:whoru/src/data/chat.dart';
+import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
+import 'package:whoru/src/pages/chat/widgets/message_card.dart';
+
+import '../../common/styles.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -45,74 +49,128 @@ class _ChatPageState extends State<ChatPage> {
         color: mC,
         height: _size.height,
         width: _size.width,
+        padding: EdgeInsets.only(left: 16.0, right: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: _size.height / 20.0),
-            Padding(
-              padding: EdgeInsets.only(left: 14.0, right: 14.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: CachedNetworkImage(
-                          width: 38.0,
-                          height: 38.0,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) => PlaceHolderImage(),
-                          errorWidget: (context, url, error) =>
-                              ErrorLoadingImage(),
-                          imageUrl:
-                              'https://avatars.githubusercontent.com/u/60530946?s=460&u=e342f079ed3571122e21b42eedd0ae251a9d91ce&v=4',
-                        ),
-                      ),
-                      SizedBox(width: 8.0),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Hi, ',
-                              style: TextStyle(
-                                fontSize: _size.width / 16.0,
-                                color: colorTitle,
-                                fontWeight: FontWeight.w300,
-                                fontFamily: 'Lobster',
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'lambiengcode',
-                              style: TextStyle(
-                                fontSize: _size.width / 16.0,
-                                color: colorPrimary,
-                                fontWeight: FontWeight.w300,
-                                fontFamily: 'Lobster',
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+            SizedBox(height: _size.height / 19.5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Messages',
+                  style: TextStyle(
+                    fontSize: _size.width / 16.8,
+                    color: colorBlack,
+                    fontFamily: 'Lato-Bold',
                   ),
-                  Container(
-                    height: 54.0,
-                    width: 54.0,
-                    decoration: nMboxCategoryOff,
-                    child: Icon(
-                      Feather.plus,
-                      color: colorPrimary,
-                      size: _size.width / 20.5,
+                ),
+                Container(
+                  height: 54.0,
+                  width: 54.0,
+                  decoration: nMboxCategoryOff,
+                  child: Icon(
+                    Feather.search,
+                    color: colorPrimary,
+                    size: _size.width / 20.5,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 12.0),
+            _buildActiveFriend(context),
+            SizedBox(height: 16.0),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildTitle(context, 'Pinned'),
+                  ListView.builder(
+                    padding: EdgeInsets.only(top: 8.0),
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return MessageCard(
+                        pendingMessage: chats[3].pendingMessage,
+                        urlToImage: chats[3].image,
+                        fullName: chats[3].fullName,
+                        lastMessage: chats[3].lastMessage,
+                        time: chats[3].time,
+                        notification: chats[3].notification,
+                      );
+                    },
+                  ),
+                  SizedBox(height: 12.5),
+                  _buildTitle(context, 'Recent Conversation'),
+                  Expanded(
+                    child: ListView.builder(
+                      padding: EdgeInsets.only(top: 8.0),
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: chats.length,
+                      itemBuilder: (context, index) {
+                        return MessageCard(
+                          pendingMessage: chats[index].pendingMessage,
+                          urlToImage: chats[index].image,
+                          fullName: chats[index].fullName,
+                          lastMessage: chats[index].lastMessage,
+                          time: chats[index].time,
+                          notification: chats[index].notification,
+                        );
+                      },
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 16.0),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildTitle(context, title) {
+    final _size = MediaQuery.of(context).size;
+    return Row(
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            color: colorDarkGrey,
+            fontSize: _size.width / 26.5,
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Lato',
+          ),
+        ),
+        SizedBox(width: 12.0),
+        title == 'Pinned'
+            ? Padding(
+                padding: EdgeInsets.only(bottom: 2.0),
+                child: Icon(
+                  LineAwesomeIcons.thumb_tack,
+                  color: fCD,
+                  size: _size.width / 22.5,
+                ),
+              )
+            : Container(),
+      ],
+    );
+  }
+
+  Widget _buildActiveFriend(context) {
+    final _size = MediaQuery.of(context).size;
+    return Container(
+      height: _size.width * .2,
+      width: _size.width,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: chats.length,
+        itemBuilder: (context, index) {
+          return ActiveFriendCard(
+            urlToImage: chats[index].image,
+            fullName: chats[index].fullName,
+          );
+        },
       ),
     );
   }

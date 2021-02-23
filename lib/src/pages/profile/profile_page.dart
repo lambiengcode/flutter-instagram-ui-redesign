@@ -104,20 +104,21 @@ class _ProfilePageState extends State<ProfilePage>
                     _buildTitleFollow(context, 'Following', '10k'),
                   ],
                 ),
-                SizedBox(height: _size.height * .032),
+                SizedBox(height: _size.height * .03),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: _size.width * .1),
                   alignment: Alignment.center,
                   child: Text(
-                    'This is project about social network can use on multi platform. Use flutter and nodejs, firebase and ec2 for deploy api.',
+                    'This is project about social network can use on multi platform. Use flutter and nodejs, firebase...',
                     style: TextStyle(
                       color: colorDarkGrey,
-                      fontSize: _size.width / 30.0,
+                      fontSize: _size.width / 29.4,
+                      fontFamily: 'Lato',
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 18.0),
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: _size.width * .145,
@@ -212,6 +213,7 @@ class _ProfilePageState extends State<ProfilePage>
                     fontSize: _size.width / 28.5,
                     color: colorDarkGrey,
                     fontWeight: FontWeight.w400,
+                    fontFamily: 'Lato',
                   ),
                 ),
               ],
@@ -291,10 +293,12 @@ class _ProfilePageState extends State<ProfilePage>
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: _size.width / 26.5,
+                              fontFamily: 'Lato',
                             ),
                             unselectedLabelStyle: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: _size.width / 28.5,
+                              fontFamily: 'Lato',
                             ),
                             tabs: [
                               Tab(
