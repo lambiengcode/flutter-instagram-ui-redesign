@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
+import 'package:whoru/src/pages/home/widgets/post_card.dart';
 
 import '../../common/styles.dart';
 import '../../common/styles.dart';
@@ -43,14 +44,27 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 10.0),
             _buildActiveFriend(context),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.0),
+              padding: EdgeInsets.only(top: 16.0),
+              child: Divider(
+                height: .2,
+                thickness: .2,
+                color: mCH,
+              ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 12,
-                itemBuilder: (context, index) {
-                  return Container();
+              child: NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (overscroll) {
+                  overscroll.disallowGlow();
+                  return true;
                 },
+                child: ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  padding: EdgeInsets.only(top: .0),
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return PostCard();
+                  },
+                ),
               ),
             ),
           ],

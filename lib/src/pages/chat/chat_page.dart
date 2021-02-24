@@ -40,7 +40,7 @@ class _ChatPageState extends State<ChatPage> {
                   'Messages',
                   style: TextStyle(
                     fontSize: _size.width / 16.8,
-                    color: colorBlack,
+                    color: colorTitle,
                     fontFamily: 'Lato-Bold',
                   ),
                 ),
@@ -50,7 +50,7 @@ class _ChatPageState extends State<ChatPage> {
                   decoration: nMboxCategoryOff,
                   child: Icon(
                     Feather.search,
-                    color: colorPrimary,
+                    color: colorDarkGrey,
                     size: _size.width / 20.5,
                   ),
                 ),
