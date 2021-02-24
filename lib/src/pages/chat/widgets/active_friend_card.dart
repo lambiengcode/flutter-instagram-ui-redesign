@@ -20,34 +20,61 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: _size.width * .14,
-            width: _size.width * .14,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: NetworkImage(widget.urlToImage),
-                fit: BoxFit.cover,
-              ),
-            ),
-            alignment: Alignment.bottomRight,
-            child: Container(
-              height: 16.0,
-              width: 16.0,
-              decoration: BoxDecoration(
-                color: mC,
-                shape: BoxShape.circle,
-              ),
-              alignment: Alignment.center,
-              child: Container(
-                height: 12.0,
-                width: 12.0,
+          Stack(
+            children: [
+              Container(
+                height: _size.width * .16,
+                width: _size.width * .16,
                 decoration: BoxDecoration(
-                  color: colorActive,
                   shape: BoxShape.circle,
+                  border: Border.all(
+                    color: colorPrimary,
+                    width: 2.5,
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: Container(
+                  height: _size.width * .135,
+                  width: _size.width * .135,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage(widget.urlToImage),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Container(
+                height: _size.width * .16,
+                width: _size.width * .16,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: colorPrimary,
+                    width: 2.5,
+                  ),
+                ),
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  height: 18.5,
+                  width: 18.5,
+                  decoration: BoxDecoration(
+                    color: mC,
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: 13.5,
+                    width: 13.5,
+                    decoration: BoxDecoration(
+                      color: colorActive,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 6.0),
           Text(

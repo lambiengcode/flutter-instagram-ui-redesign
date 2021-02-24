@@ -1,14 +1,12 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:whoru/src/pages/activity/activity_page.dart';
 import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/pages/home/home_page.dart';
 import 'package:whoru/src/pages/profile/profile_page.dart';
 
-import '../../common/styles.dart';
-import '../../common/styles.dart';
-import '../../common/styles.dart';
-import '../../common/styles.dart';
 import '../../common/styles.dart';
 
 class Navigation extends StatefulWidget {
@@ -19,7 +17,7 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int currentPage = 0;
   var _pages = [
-    Container(),
+    HomePage(),
     Container(),
     ChatPage(),
     Container(),

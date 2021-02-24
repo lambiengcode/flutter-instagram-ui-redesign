@@ -15,10 +15,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  double _height, min = 0.44, initial = 0.44, max = 0.86;
-
-  @override
-  bool get wantKeepAlive => null;
+  double min = 0.44, initial = 0.44, max = 0.86;
 
   @override
   void initState() {
@@ -46,21 +43,21 @@ class _ProfilePageState extends State<ProfilePage>
           text: TextSpan(
             children: [
               TextSpan(
-                text: 'lambiengcode ',
+                text: 'lambiengcode',
                 style: TextStyle(
-                  fontSize: _size.width / 20.0,
+                  fontSize: _size.width / 22.5,
                   color: mCM,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Lobster',
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Lato',
                 ),
               ),
               TextSpan(
-                text: '(Me)',
+                text: ' (me)',
                 style: TextStyle(
                   fontSize: _size.width / 24.0,
                   color: mCM,
-                  fontWeight: FontWeight.w300,
-                  fontFamily: 'Lobster',
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Lato',
                 ),
               ),
             ],

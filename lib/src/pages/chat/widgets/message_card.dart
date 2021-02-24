@@ -69,7 +69,9 @@ class _MessageCardState extends State<MessageCard> {
                                 style: TextStyle(
                                     fontSize: _size.width / 28.5,
                                     color: colorDarkGrey,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: widget.pendingMessage == 0
+                                        ? FontWeight.w500
+                                        : FontWeight.w600,
                                     fontFamily: 'Lato'),
                               ),
                               TextSpan(
@@ -137,7 +139,7 @@ class _MessageCardState extends State<MessageCard> {
           thickness: .2,
           height: .2,
           indent: _size.width * .16,
-          endIndent: _size.width * .02,
+          endIndent: 12.0,
         ),
       ],
     );

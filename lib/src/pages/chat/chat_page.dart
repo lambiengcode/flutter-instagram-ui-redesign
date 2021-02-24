@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/data/chat.dart';
@@ -16,28 +15,8 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  SlidableController slidableController = new SlidableController();
-  Animation<double> _rotationAnimation;
-  Color _fabColor = Colors.blue;
-
-  void handleSlideAnimationChanged(Animation<double> slideAnimation) {
-    setState(() {
-      _rotationAnimation = slideAnimation;
-    });
-  }
-
-  void handleSlideIsOpenChanged(bool isOpen) {
-    setState(() {
-      _fabColor = isOpen ? Colors.green : Colors.blue;
-    });
-  }
-
   @override
   void initState() {
-    slidableController = SlidableController(
-      onSlideAnimationChanged: handleSlideAnimationChanged,
-      onSlideIsOpenChanged: handleSlideIsOpenChanged,
-    );
     super.initState();
   }
 
@@ -160,15 +139,15 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildActiveFriend(context) {
     final _size = MediaQuery.of(context).size;
     return Container(
-      height: _size.width * .2,
+      height: _size.width * .215,
       width: _size.width,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: chats.length,
+        itemCount: chats.length - 1,
         itemBuilder: (context, index) {
           return ActiveFriendCard(
-            urlToImage: chats[index].image,
-            fullName: chats[index].fullName,
+            urlToImage: chats[index + 1].image,
+            fullName: chats[index + 1].fullName,
           );
         },
       ),
