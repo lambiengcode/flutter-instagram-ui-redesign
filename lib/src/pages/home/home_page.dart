@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:get/get.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/home/widgets/horizontal_user.dart';
@@ -42,13 +43,16 @@ class _HomePageState extends State<HomePage> {
           ? AppBar(
               backgroundColor: mC,
               elevation: .0,
-              title: Text(
-                'Whoru',
-                style: TextStyle(
-                  color: colorTitle,
-                  fontFamily: 'Lobster',
-                  fontWeight: FontWeight.w400,
-                  fontSize: _size.width / 16.0,
+              title: GestureDetector(
+                onTap: () => Get.offAndToNamed('/root'),
+                child: Text(
+                  'Whoru',
+                  style: TextStyle(
+                    color: colorTitle,
+                    fontFamily: 'Lobster',
+                    fontWeight: FontWeight.w400,
+                    fontSize: _size.width / 16.0,
+                  ),
                 ),
               ),
               actions: [

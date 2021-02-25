@@ -160,14 +160,17 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
     return Row(
       children: [
         Expanded(
-          child: Container(
-            height: _size.height * .36,
-            decoration: BoxDecoration(
-              borderRadius:
-                  BorderRadius.horizontal(left: Radius.circular(16.0)),
-              image: DecorationImage(
-                image: NetworkImage(widget.images[0]),
-                fit: BoxFit.cover,
+          child: GestureDetector(
+            onTap: () => print('image 01'),
+            child: Container(
+              height: _size.height * .36,
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.horizontal(left: Radius.circular(16.0)),
+                image: DecorationImage(
+                  image: NetworkImage(widget.images[0]),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),

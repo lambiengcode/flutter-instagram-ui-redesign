@@ -19,6 +19,7 @@ class _PostCardState extends State<PostCard> {
     chats.forEach((e) {
       images.add(e.image);
     });
+    images.shuffle();
   }
 
   @override
@@ -91,7 +92,14 @@ class _PostCardState extends State<PostCard> {
           SizedBox(height: images.length == 0 ? .0 : 16.0),
           images.length == 0
               ? Container()
-              : ImageBodyPost(images: images.sublist(1, 5)),
+              : GestureDetector(
+                  onDoubleTap: () {
+                    setState(() {
+                      liked = !liked;
+                    });
+                  },
+                  child: ImageBodyPost(images: images.sublist(1, 5)),
+                ),
           SizedBox(height: images.length == 0 ? 14.0 : 20.0),
         ],
       ),
