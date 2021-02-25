@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:whoru/src/data/chat.dart';
+import 'package:whoru/src/pages/home/widgets/image_body_post.dart';
 
 import '../../../common/styles.dart';
 
@@ -11,6 +11,16 @@ class PostCard extends StatefulWidget {
 }
 
 class _PostCardState extends State<PostCard> {
+  List<String> images = [];
+  bool liked = false;
+  @override
+  void initState() {
+    super.initState();
+    chats.forEach((e) {
+      images.add(e.image);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,12 +29,12 @@ class _PostCardState extends State<PostCard> {
         boxShadow: [
           BoxShadow(
             color: mCD,
-            offset: Offset(10, 10),
+            offset: Offset(5, 5),
             blurRadius: 10,
           ),
           BoxShadow(
             color: mCL,
-            offset: Offset(-10, -10),
+            offset: Offset(-5, -5),
             blurRadius: 10,
           ),
         ],
@@ -62,12 +72,12 @@ class _PostCardState extends State<PostCard> {
   Widget _buildBody(context) {
     final _size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 2.8),
+      margin: EdgeInsets.symmetric(horizontal: 2.5),
       alignment: Alignment.topLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 18.0),
+          SizedBox(height: images.length == 0 ? 12.0 : 18.0),
           Text(
             'Adding a few more photos to my portfolio. Need a photographer? Get in touch!',
             style: TextStyle(
@@ -78,43 +88,11 @@ class _PostCardState extends State<PostCard> {
             ),
             textAlign: TextAlign.start,
           ),
-          SizedBox(height: 18.0),
-          Container(
-            height: _size.height * .26,
-            constraints: BoxConstraints(
-              maxHeight: _size.height * .24,
-              maxWidth: _size.width,
-            ),
-            child: StaggeredGridView.countBuilder(
-              crossAxisCount: 4,
-              itemCount: 3,
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) => Container(
-                decoration: BoxDecoration(
-                  borderRadius: index == 0
-                      ? BorderRadius.horizontal(
-                          left: Radius.circular(12.0),
-                        )
-                      : index == 1
-                          ? BorderRadius.only(
-                              topRight: Radius.circular(12.0),
-                            )
-                          : BorderRadius.only(
-                              bottomRight: Radius.circular(12.0),
-                            ),
-                  image: DecorationImage(
-                    image: NetworkImage(chats[index + 1].image),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              staggeredTileBuilder: (int index) =>
-                  StaggeredTile.count(2, index == 0 ? 2.4 : 1.2),
-            ),
-          ),
-          SizedBox(height: 26.0),
+          SizedBox(height: images.length == 0 ? .0 : 16.0),
+          images.length == 0
+              ? Container()
+              : ImageBodyPost(images: images.sublist(1, 5)),
+          SizedBox(height: images.length == 0 ? 14.0 : 20.0),
         ],
       ),
     );
@@ -131,7 +109,7 @@ class _PostCardState extends State<PostCard> {
                 context,
                 'Like',
                 Feather.thumbs_up,
-                colorPrimary,
+                liked ? colorPrimary : colorDarkGrey,
                 '10k',
               ),
               SizedBox(width: 24.0),
@@ -158,28 +136,37 @@ class _PostCardState extends State<PostCard> {
 
   Widget _buildActionButton(context, title, icon, color, value) {
     final _size = MediaQuery.of(context).size;
-    return Container(
-      child: Row(
-        children: [
-          SizedBox(width: 8.0),
-          Icon(
-            icon,
-            color: color,
-            size: _size.width / 20.0,
-          ),
-          SizedBox(width: 8.0),
-          title == 'Share'
-              ? Container()
-              : Text(
-                  value.toString(),
-                  style: TextStyle(
-                    color: color,
-                    fontSize: _size.width / 28.5,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Lato',
+    return GestureDetector(
+      onTap: () {
+        if (title == 'Like') {
+          setState(() {
+            liked = !liked;
+          });
+        }
+      },
+      child: Container(
+        child: Row(
+          children: [
+            SizedBox(width: images.length == 0 ? 4.0 : 8.0),
+            Icon(
+              icon,
+              color: color,
+              size: _size.width / 20.0,
+            ),
+            SizedBox(width: 8.0),
+            title == 'Share'
+                ? Container()
+                : Text(
+                    value.toString(),
+                    style: TextStyle(
+                      color: color,
+                      fontSize: _size.width / 28.5,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Lato',
+                    ),
                   ),
-                ),
-        ],
+          ],
+        ),
       ),
     );
   }

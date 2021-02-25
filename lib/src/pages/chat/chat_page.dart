@@ -45,9 +45,24 @@ class _ChatPageState extends State<ChatPage> {
                   ),
                 ),
                 Container(
-                  height: 54.0,
-                  width: 54.0,
-                  decoration: nMboxCategoryOff,
+                  padding: EdgeInsets.all(16.0),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: mC,
+                    boxShadow: [
+                      BoxShadow(
+                        color: mCD,
+                        offset: Offset(2, 2),
+                        blurRadius: 2,
+                      ),
+                      BoxShadow(
+                        color: mCL,
+                        offset: Offset(-2, -2),
+                        blurRadius: 2,
+                      ),
+                    ],
+                  ),
                   child: Icon(
                     Feather.search,
                     color: colorDarkGrey,
@@ -56,50 +71,65 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               ],
             ),
-            SizedBox(height: 12.0),
-            _buildActiveFriend(context),
-            SizedBox(height: 16.0),
+            SizedBox(height: 4.0),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildTitle(context, 'Pinned'),
-                  ListView.builder(
-                    padding: EdgeInsets.only(top: 8.0),
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return MessageCard(
-                        pendingMessage: chats[3].pendingMessage,
-                        urlToImage: chats[3].image,
-                        fullName: chats[3].fullName,
-                        lastMessage: chats[3].lastMessage,
-                        time: chats[3].time,
-                        notification: chats[3].notification,
-                      );
-                    },
-                  ),
-                  SizedBox(height: 12.5),
-                  _buildTitle(context, 'Recent Conversation'),
-                  Expanded(
-                    child: ListView.builder(
-                      padding: EdgeInsets.only(top: 8.0),
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: chats.length,
-                      itemBuilder: (context, index) {
-                        return MessageCard(
-                          pendingMessage: chats[index].pendingMessage,
-                          urlToImage: chats[index].image,
-                          fullName: chats[index].fullName,
-                          lastMessage: chats[index].lastMessage,
-                          time: chats[index].time,
-                          notification: chats[index].notification,
-                        );
-                      },
-                    ),
-                  ),
-                ],
+              child: NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (overscroll) {
+                  overscroll.disallowGlow();
+                  return true;
+                },
+                child: ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  padding: EdgeInsets.only(top: .0),
+                  itemCount: chats.length + 2,
+                  itemBuilder: (context, index) {
+                    return index == 0
+                        ? Column(
+                            children: [
+                              _buildActiveFriend(context),
+                              SizedBox(height: 16.0),
+                            ],
+                          )
+                        : index == 1
+                            ? Column(
+                                children: [
+                                  _buildTitle(context, 'Pinned'),
+                                  ListView.builder(
+                                    padding: EdgeInsets.only(top: 8.0),
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: 1,
+                                    itemBuilder: (context, index) {
+                                      return MessageCard(
+                                        pendingMessage: chats[3].pendingMessage,
+                                        urlToImage: chats[3].image,
+                                        fullName: chats[3].fullName,
+                                        lastMessage: chats[3].lastMessage,
+                                        time: chats[3].time,
+                                        notification: chats[3].notification,
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(height: 12.5),
+                                  _buildTitle(context, 'Recent Conversation'),
+                                  SizedBox(height: 4.0),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  MessageCard(
+                                    pendingMessage:
+                                        chats[index - 2].pendingMessage,
+                                    urlToImage: chats[index - 2].image,
+                                    fullName: chats[index - 2].fullName,
+                                    lastMessage: chats[index - 2].lastMessage,
+                                    time: chats[index - 2].time,
+                                    notification: chats[index - 2].notification,
+                                  )
+                                ],
+                              );
+                  },
+                ),
               ),
             ),
           ],
