@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:get/get.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/data/chat.dart';
@@ -112,19 +113,23 @@ class _ChatPageState extends State<ChatPage> {
                                   ),
                                   SizedBox(height: 12.5),
                                   _buildTitle(context, 'Recent Conversation'),
-                                  SizedBox(height: 4.0),
+                                  SizedBox(height: 8.0),
                                 ],
                               )
                             : Column(
                                 children: [
-                                  MessageCard(
-                                    pendingMessage:
-                                        chats[index - 2].pendingMessage,
-                                    urlToImage: chats[index - 2].image,
-                                    fullName: chats[index - 2].fullName,
-                                    lastMessage: chats[index - 2].lastMessage,
-                                    time: chats[index - 2].time,
-                                    notification: chats[index - 2].notification,
+                                  GestureDetector(
+                                    onTap: () => Get.toNamed('/room'),
+                                    child: MessageCard(
+                                      pendingMessage:
+                                          chats[index - 2].pendingMessage,
+                                      urlToImage: chats[index - 2].image,
+                                      fullName: chats[index - 2].fullName,
+                                      lastMessage: chats[index - 2].lastMessage,
+                                      time: chats[index - 2].time,
+                                      notification:
+                                          chats[index - 2].notification,
+                                    ),
                                   )
                                 ],
                               );
@@ -169,7 +174,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildActiveFriend(context) {
     final _size = MediaQuery.of(context).size;
     return Container(
-      height: _size.width * .215,
+      height: _size.width * .225,
       width: _size.width,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

@@ -27,8 +27,8 @@ class _SplashPageState extends State<SplashPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: _size.width * .6,
-                    width: _size.width * .6,
+                    height: _size.width * .5,
+                    width: _size.width * .5,
                     child: Lottie.asset('assets/lottie/splash_cat.json'),
                   ),
                   SizedBox(height: 24.0),
@@ -37,7 +37,7 @@ class _SplashPageState extends State<SplashPage> {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Whoro Social',
+                          text: 'Whoru Social',
                           style: TextStyle(
                             color: mCL,
                             fontFamily: 'Lobster',

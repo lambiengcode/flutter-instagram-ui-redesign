@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           Container(
-            height: _size.width * .215,
+            height: _size.width * .225,
             width: _size.width,
             padding: EdgeInsets.only(left: 16.0, right: 4.0),
             child: NotificationListener<OverscrollIndicatorNotification>(
