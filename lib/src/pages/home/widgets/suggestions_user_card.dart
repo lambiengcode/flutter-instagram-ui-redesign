@@ -109,7 +109,7 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    SizedBox(height: 16.0),
+                    SizedBox(height: 14.0),
                     Container(
                       width: _size.width * .4,
                       alignment: Alignment.center,

@@ -174,7 +174,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildActiveFriend(context) {
     final _size = MediaQuery.of(context).size;
     return Container(
-      height: _size.width * .225,
+      height: _size.width * .22,
       width: _size.width,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

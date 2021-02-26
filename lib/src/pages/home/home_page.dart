@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context, index) {
                     return index == 0
                         ? _buildActiveFriend(context)
-                        : index == 2
+                        : index == 5
                             ? HorizontalUser()
                             : PostCard();
                   },
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           Container(
-            height: _size.width * .225,
+            height: _size.width * .22,
             width: _size.width,
             padding: EdgeInsets.only(left: 16.0, right: 4.0),
             child: NotificationListener<OverscrollIndicatorNotification>(

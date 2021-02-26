@@ -16,9 +16,10 @@ class _HorizontalUserState extends State<HorizontalUser> {
     final _size = MediaQuery.of(context).size;
     return Column(
       children: [
+        SizedBox(height: 10.0),
         Container(
-          margin: EdgeInsets.symmetric(vertical: 4.0),
-          padding: EdgeInsets.only(left: 10.0, right: 6.0),
+          margin: EdgeInsets.symmetric(vertical: 8.0),
+          padding: EdgeInsets.only(left: 12.0, right: 6.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -41,7 +42,7 @@ class _HorizontalUserState extends State<HorizontalUser> {
               //   ),
               // ),
               Icon(
-                Feather.arrow_right,
+                Feather.list,
                 color: colorPrimary,
                 size: _size.width / 18.0,
               ),
@@ -49,7 +50,7 @@ class _HorizontalUserState extends State<HorizontalUser> {
           ),
         ),
         Container(
-          height: _size.width * .5,
+          height: _size.width * .48,
           width: _size.width,
           decoration: BoxDecoration(
             color: mCM,

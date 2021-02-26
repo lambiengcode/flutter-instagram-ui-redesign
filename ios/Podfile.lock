@@ -1,6 +1,4 @@
 PODS:
-  - emoji_picker (0.0.3):
-    - Flutter
   - Flutter (1.0.0)
   - geocoder (0.0.1):
     - Flutter
@@ -28,7 +26,6 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - emoji_picker (from `.symlinks/plugins/emoji_picker/ios`)
   - Flutter (from `Flutter`)
   - geocoder (from `.symlinks/plugins/geocoder/ios`)
   - geolocator (from `.symlinks/plugins/geolocator/ios`)
@@ -45,8 +42,6 @@ SPEC REPOS:
     - GoogleMaps
 
 EXTERNAL SOURCES:
-  emoji_picker:
-    :path: ".symlinks/plugins/emoji_picker/ios"
   Flutter:
     :path: Flutter
   geocoder:
@@ -69,7 +64,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
-  emoji_picker: 0e868059aa18f9473d234f3d0701fbd4d5fd310c
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   geocoder: 3cfab70531a0b367e917bafe82df4c30f6d4c45a
   geolocator: f5e3de65e241caba7ce3e8a618803387bda73384
