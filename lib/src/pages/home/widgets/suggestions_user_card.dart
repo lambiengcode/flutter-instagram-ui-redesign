@@ -138,6 +138,7 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 6.0),
                   ],
                 ),
               ),

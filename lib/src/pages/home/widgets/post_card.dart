@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:like_button/like_button.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/home/widgets/image_body_post.dart';
 
@@ -11,8 +12,21 @@ class PostCard extends StatefulWidget {
 }
 
 class _PostCardState extends State<PostCard> {
+  final GlobalKey<LikeButtonState> _globalKey = GlobalKey<LikeButtonState>();
   List<String> images = [];
   bool liked = false;
+  int likeCount = 547;
+
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
+    /// send your request here
+    // final bool success= await sendRequest();
+
+    /// if failed, you can do nothing
+    // return success? !isLiked:isLiked;
+
+    return !isLiked;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -98,9 +112,7 @@ class _PostCardState extends State<PostCard> {
               ? Container()
               : GestureDetector(
                   onDoubleTap: () {
-                    setState(() {
-                      liked = !liked;
-                    });
+                    _globalKey.currentState.onTap();
                   },
                   child: ImageBodyPost(images: images),
                 ),
@@ -111,6 +123,7 @@ class _PostCardState extends State<PostCard> {
   }
 
   Widget _buildBottom(context) {
+    final _size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
@@ -118,12 +131,47 @@ class _PostCardState extends State<PostCard> {
         children: [
           Row(
             children: [
-              _buildActionButton(
-                context,
-                'Like',
-                Feather.thumbs_up,
-                liked ? colorPrimary : colorDarkGrey,
-                '10k',
+              SizedBox(width: images.length == 0 ? 4.0 : 6.0),
+              LikeButton(
+                key: _globalKey,
+                isLiked: liked,
+                likeCountAnimationType: likeCount < 1000
+                    ? LikeCountAnimationType.part
+                    : LikeCountAnimationType.none,
+                size: _size.width / 18.5,
+                circleColor: CircleColor(
+                  start: Color(0xff00ddff),
+                  end: Color(0xff0099cc),
+                ),
+                bubblesColor: BubblesColor(
+                  dotPrimaryColor: colorHigh,
+                  dotSecondaryColor: colorHigh,
+                ),
+                likeBuilder: (bool isLiked) {
+                  return Icon(
+                    Feather.heart,
+                    color: isLiked ? colorHigh : colorDarkGrey,
+                    size: _size.width / 18.0,
+                  );
+                },
+                likeCount: likeCount,
+                countBuilder: (int count, bool isLiked, String text) {
+                  var color = isLiked ? colorHigh : colorDarkGrey;
+                  Widget result;
+                  result = Text(
+                    text,
+                    style: TextStyle(
+                      color: color,
+                      fontSize: _size.width / 27.0,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Lato',
+                    ),
+                  );
+
+                  return result;
+                },
+                likeCountPadding: EdgeInsets.only(left: 8.0),
+                onTap: onLikeButtonTapped,
               ),
               SizedBox(width: 16.0),
               _buildActionButton(
@@ -164,16 +212,16 @@ class _PostCardState extends State<PostCard> {
             Icon(
               icon,
               color: color,
-              size: _size.width / 20.0,
+              size: _size.width / 18.5,
             ),
-            SizedBox(width: 8.0),
+            SizedBox(width: 6.0),
             title == 'Share'
                 ? Container()
                 : Text(
                     value.toString(),
                     style: TextStyle(
                       color: color,
-                      fontSize: _size.width / 28.5,
+                      fontSize: _size.width / 27.0,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Lato',
                     ),
