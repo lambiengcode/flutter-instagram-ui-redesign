@@ -41,7 +41,7 @@ class _PostCardState extends State<PostCard> {
         ],
       ),
       margin: EdgeInsets.only(bottom: 12.0),
-      padding: EdgeInsets.all(18.0),
+      padding: EdgeInsets.symmetric(vertical: 18.0),
       child: Column(
         children: [
           _buildHeader(context),
@@ -54,40 +54,45 @@ class _PostCardState extends State<PostCard> {
 
   Widget _buildHeader(context) {
     final _size = MediaQuery.of(context).size;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _buildInfoWritter(context),
-        IconButton(
-          icon: Icon(
-            Feather.more_horizontal,
-            color: colorDarkGrey,
-            size: _size.width / 16.0,
-          ),
-          onPressed: () => null,
-        )
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _buildInfoWritter(context),
+          IconButton(
+            icon: Icon(
+              Feather.more_horizontal,
+              color: colorDarkGrey,
+              size: _size.width / 16.0,
+            ),
+            onPressed: () => null,
+          )
+        ],
+      ),
     );
   }
 
   Widget _buildBody(context) {
     final _size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 2.5),
       alignment: Alignment.topLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: images.length == 0 ? 12.0 : 18.0),
-          Text(
-            'Adding a few more photos to my portfolio. Need a photographer? Get in touch!',
-            style: TextStyle(
-              color: colorTitle,
-              fontSize: _size.width / 25.4,
-              fontWeight: FontWeight.w400,
-              fontFamily: 'Lato',
+          SizedBox(height: images.length == 0 ? 12.0 : 14.0),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 14.0),
+            child: Text(
+              'Adding a few more photos to my portfolio. Need a photographer? Get in touch!',
+              style: TextStyle(
+                color: colorTitle,
+                fontSize: _size.width / 25.4,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'Lato',
+              ),
+              textAlign: TextAlign.start,
             ),
-            textAlign: TextAlign.start,
           ),
           SizedBox(height: images.length == 0 ? .0 : 16.0),
           images.length == 0
@@ -98,7 +103,7 @@ class _PostCardState extends State<PostCard> {
                       liked = !liked;
                     });
                   },
-                  child: ImageBodyPost(images: images.sublist(1, 5)),
+                  child: ImageBodyPost(images: images),
                 ),
           SizedBox(height: images.length == 0 ? 14.0 : 20.0),
         ],
@@ -108,6 +113,7 @@ class _PostCardState extends State<PostCard> {
 
   Widget _buildBottom(context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -120,7 +126,7 @@ class _PostCardState extends State<PostCard> {
                 liked ? colorPrimary : colorDarkGrey,
                 '10k',
               ),
-              SizedBox(width: 24.0),
+              SizedBox(width: 16.0),
               _buildActionButton(
                 context,
                 'Comment',

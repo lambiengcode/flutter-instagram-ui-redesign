@@ -30,7 +30,6 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
         Container(
           height: _size.height * .42,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
             image: DecorationImage(
               image: NetworkImage(widget.images[0]),
               fit: BoxFit.cover,
@@ -52,7 +51,6 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
         Container(
           height: _size.height * .42,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
             image: DecorationImage(
               image: NetworkImage(widget.images[0]),
               fit: BoxFit.fitHeight,
@@ -72,8 +70,6 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
           child: Container(
             height: _size.height * .36,
             decoration: BoxDecoration(
-              borderRadius:
-                  BorderRadius.horizontal(left: Radius.circular(16.0)),
               image: DecorationImage(
                 image: NetworkImage(widget.images[0]),
                 fit: BoxFit.cover,
@@ -86,8 +82,6 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
           child: Container(
             height: _size.height * .36,
             decoration: BoxDecoration(
-              borderRadius:
-                  BorderRadius.horizontal(right: Radius.circular(16.0)),
               image: DecorationImage(
                 image: NetworkImage(widget.images[1]),
                 fit: BoxFit.cover,
@@ -107,8 +101,6 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
           child: Container(
             height: _size.height * .36,
             decoration: BoxDecoration(
-              borderRadius:
-                  BorderRadius.horizontal(left: Radius.circular(16.0)),
               image: DecorationImage(
                 image: NetworkImage(widget.images[0]),
                 fit: BoxFit.cover,
@@ -125,8 +117,6 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.only(topRight: Radius.circular(16.0)),
                       image: DecorationImage(
                         image: NetworkImage(widget.images[1]),
                         fit: BoxFit.cover,
@@ -138,8 +128,6 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.only(bottomRight: Radius.circular(16.0)),
                       image: DecorationImage(
                         image: NetworkImage(widget.images[2]),
                         fit: BoxFit.cover,
@@ -165,8 +153,6 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
             child: Container(
               height: _size.height * .36,
               decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.horizontal(left: Radius.circular(16.0)),
                 image: DecorationImage(
                   image: NetworkImage(widget.images[0]),
                   fit: BoxFit.cover,
@@ -175,7 +161,7 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
             ),
           ),
         ),
-        SizedBox(width: 4.0),
+        SizedBox(width: 2.0),
         Expanded(
           child: Container(
             height: _size.height * .36,
@@ -184,8 +170,6 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.only(topRight: Radius.circular(16.0)),
                       image: DecorationImage(
                         image: NetworkImage(widget.images[1]),
                         fit: BoxFit.cover,
@@ -193,14 +177,12 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
                     ),
                   ),
                 ),
-                SizedBox(height: 4.0),
+                SizedBox(height: 2.0),
                 Expanded(
                   child: Stack(
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(16.0)),
                           image: DecorationImage(
                             image: NetworkImage(widget.images[2]),
                             fit: BoxFit.cover,
@@ -213,8 +195,6 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
                           maxWidth: _size.width,
                         ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(16.0)),
                           color: Colors.black26,
                         ),
                         alignment: Alignment.center,

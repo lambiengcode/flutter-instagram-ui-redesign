@@ -35,7 +35,12 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
               ),
             ],
           ),
-          margin: EdgeInsets.only(left: 18.0, bottom: 26.0, top: 10.0),
+          margin: EdgeInsets.only(
+            left: 10.0,
+            right: 4.0,
+            bottom: 16.0,
+            top: 6.0,
+          ),
           child: Stack(
             children: [
               Column(
@@ -104,42 +109,39 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
+                    SizedBox(height: 16.0),
+                    Container(
+                      width: _size.width * .4,
+                      alignment: Alignment.center,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 26.5, vertical: 5.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30.0),
+                          color: colorPrimary,
+                          boxShadow: [
+                            BoxShadow(
+                              color: mCD,
+                              offset: Offset(4, 4),
+                              blurRadius: 4,
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          'Follow',
+                          style: TextStyle(
+                            color: mCL,
+                            fontSize: _size.width / 35.0,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Lato',
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
-          ),
-        ),
-        Positioned(
-          bottom: 14.0,
-          left: .0,
-          child: Container(
-            width: _size.width * .4,
-            margin: EdgeInsets.only(left: 16.0),
-            alignment: Alignment.center,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 26.5, vertical: 5.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.0),
-                color: colorPrimary,
-                boxShadow: [
-                  BoxShadow(
-                    color: mCD,
-                    offset: Offset(4, 4),
-                    blurRadius: 4,
-                  ),
-                ],
-              ),
-              child: Text(
-                'Follow',
-                style: TextStyle(
-                  color: mCL,
-                  fontSize: _size.width / 35.0,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Lato',
-                ),
-              ),
-            ),
           ),
         ),
       ],

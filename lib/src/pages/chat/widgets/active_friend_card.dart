@@ -57,16 +57,16 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
                 ),
                 alignment: Alignment.bottomRight,
                 child: Container(
-                  height: 18.5,
-                  width: 18.5,
+                  height: _size.width / 22.5,
+                  width: _size.width / 22.5,
                   decoration: BoxDecoration(
                     color: mC,
                     shape: BoxShape.circle,
                   ),
                   alignment: Alignment.center,
                   child: Container(
-                    height: 13.5,
-                    width: 13.5,
+                    height: _size.width / 28.5,
+                    width: _size.width / 28.5,
                     decoration: BoxDecoration(
                       color: colorActive,
                       shape: BoxShape.circle,

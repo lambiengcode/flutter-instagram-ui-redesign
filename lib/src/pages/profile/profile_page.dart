@@ -22,12 +22,12 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     super.initState();
     _tabController = new TabController(length: 3, vsync: this, initialIndex: 0);
-    if (Get.height / Get.width > 2.0 && Get.height > 800) {
-      min = .42;
-      initial = .42;
+    if (Get.height / Get.width > 2.0) {
+      min = .425;
+      initial = .425;
     } else {
-      min = .35;
-      initial = .35;
+      min = .365;
+      initial = .365;
     }
   }
 
@@ -39,6 +39,7 @@ class _ProfilePageState extends State<ProfilePage>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: .0,
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(
             Feather.settings,
@@ -94,9 +95,9 @@ class _ProfilePageState extends State<ProfilePage>
                     _buildTitleFollow(context, 'Following', '10k'),
                   ],
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: _size.height * .03),
                 Text(
-                  'lambiengcode',
+                  'Đào Hồng Vinh - Dev',
                   style: TextStyle(
                     color: colorTitle,
                     fontSize: _size.width / 21.5,
@@ -104,16 +105,17 @@ class _ProfilePageState extends State<ProfilePage>
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 12.0),
+                SizedBox(height: 8.0),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: _size.width * .1),
                   alignment: Alignment.center,
                   child: Text(
-                    'This is project about social network can use on multi platform. Use flutter and nodejs, firebase...',
+                    'Mobile App Developer (lambiengcode)',
                     style: TextStyle(
                       color: colorDarkGrey,
-                      fontSize: _size.width / 28.5,
+                      fontSize: _size.width / 26.0,
                       fontFamily: 'Lato',
+                      fontWeight: FontWeight.w400,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -121,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage>
                 SizedBox(height: 16.0),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: _size.width * .145,
+                    horizontal: _size.width * .15,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,14 +154,14 @@ class _ProfilePageState extends State<ProfilePage>
               ],
             ),
             Positioned(
-              top: _size.height * .19,
+              top: _size.height * .186,
               left: 0,
               child: Container(
                 width: _size.width,
                 alignment: Alignment.center,
                 child: Container(
-                  height: _size.height * .145,
-                  width: _size.height * .145,
+                  height: _size.height * .152,
+                  width: _size.height * .152,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -169,8 +171,8 @@ class _ProfilePageState extends State<ProfilePage>
                   ),
                   alignment: Alignment.center,
                   child: Container(
-                    height: _size.height * .125,
-                    width: _size.height * .125,
+                    height: _size.height * .132,
+                    width: _size.height * .132,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
@@ -229,26 +231,11 @@ class _ProfilePageState extends State<ProfilePage>
     return Container(
       padding: EdgeInsets.all(16.0),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: mC,
-        boxShadow: [
-          BoxShadow(
-            color: mCD,
-            offset: Offset(5, 5),
-            blurRadius: 5,
-          ),
-          BoxShadow(
-            color: mCL,
-            offset: Offset(-5, -5),
-            blurRadius: 5,
-          ),
-        ],
-      ),
+      decoration: nMbox,
       child: Icon(
         icon,
         color: colorDarkGrey,
-        size: _size.width / 20.5,
+        size: _size.width / 22.5,
       ),
     );
   }
@@ -296,7 +283,7 @@ class _ProfilePageState extends State<ProfilePage>
                       child: Column(
                         children: <Widget>[
                           SizedBox(
-                            height: 8.0,
+                            height: 4.0,
                           ),
                           TabBar(
                             controller: _tabController,

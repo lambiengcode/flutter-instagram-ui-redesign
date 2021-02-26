@@ -16,58 +16,43 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ScrollController _scrollController = new ScrollController();
-  bool _showAppBar = true;
-  bool _flag = true;
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(() {
-      bool upDirection = _scrollController.position.userScrollDirection ==
-          ScrollDirection.forward;
-      if (upDirection != _flag) {
-        setState(() {
-          _showAppBar = !_showAppBar;
-        });
-      }
-
-      _flag = upDirection;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: _showAppBar
-          ? AppBar(
-              backgroundColor: mC,
-              elevation: .0,
-              title: GestureDetector(
-                onTap: () => Get.offAndToNamed('/root'),
-                child: Text(
-                  'Whoru',
-                  style: TextStyle(
-                    color: colorTitle,
-                    fontFamily: 'Lobster',
-                    fontWeight: FontWeight.w400,
-                    fontSize: _size.width / 16.0,
-                  ),
-                ),
-              ),
-              actions: [
-                _buildActionHome(context, 'Camera', Feather.camera),
-                SizedBox(width: 12.0),
-                _buildActionHome(context, 'Camera', Feather.align_justify),
-                SizedBox(width: 10.0),
-              ],
-            )
-          : null,
+      appBar: AppBar(
+        backgroundColor: mC,
+        elevation: .0,
+        title: GestureDetector(
+          onTap: () => Get.offAndToNamed('/root'),
+          child: Text(
+            'Whoru',
+            style: TextStyle(
+              color: colorTitle,
+              fontFamily: 'Lobster',
+              fontWeight: FontWeight.w400,
+              fontSize: _size.width / 16.0,
+            ),
+          ),
+        ),
+        actions: [
+          _buildActionHome(context, 'Camera', Feather.camera),
+          SizedBox(width: 12.0),
+          _buildActionHome(context, 'Camera', Feather.align_justify),
+          SizedBox(width: 10.0),
+        ],
+      ),
       body: Container(
         color: mC,
         child: Column(
           children: [
-            SizedBox(height: _showAppBar ? 10.0 : _size.height / 18.0),
+            SizedBox(height: 10.0),
             Expanded(
               child: NotificationListener<OverscrollIndicatorNotification>(
                 onNotification: (overscroll) {
