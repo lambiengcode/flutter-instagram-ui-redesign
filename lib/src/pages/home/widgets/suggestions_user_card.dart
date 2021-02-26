@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:whoru/src/lib/blurhash/blurhash.dart';
 
 import '../../../common/styles.dart';
 
 class SuggestionsUserCard extends StatefulWidget {
+  final String blurHash;
   final String cover;
   final String image;
   final String fullName;
-  SuggestionsUserCard({this.fullName, this.image, this.cover});
+  SuggestionsUserCard({
+    this.fullName,
+    this.image,
+    this.cover,
+    this.blurHash,
+  });
   @override
   State<StatefulWidget> createState() => _SuggestionsUserCardState();
 }
@@ -49,13 +56,15 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                 children: [
                   Container(
                     height: _size.width * .16,
-                    decoration: BoxDecoration(
+                    child: ClipRRect(
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(16.0),
                       ),
-                      image: DecorationImage(
-                        image: NetworkImage(widget.cover),
-                        fit: BoxFit.cover,
+                      child: BlurHash(
+                        hash: widget.blurHash,
+                        image: widget.cover,
+                        imageFit: BoxFit.cover,
+                        color: colorPrimary,
                       ),
                     ),
                   ),
@@ -82,9 +91,14 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                           width: _size.height * .05,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: NetworkImage(widget.image),
-                              fit: BoxFit.cover,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(1000.0),
+                            child: BlurHash(
+                              hash: widget.blurHash,
+                              image: widget.image,
+                              imageFit: BoxFit.cover,
+                              color: colorPrimary,
                             ),
                           ),
                         ),

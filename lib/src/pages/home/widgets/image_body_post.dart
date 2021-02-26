@@ -1,12 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:whoru/src/lib/blurhash/blurhash.dart';
 
 import '../../../common/styles.dart';
 
 class ImageBodyPost extends StatefulWidget {
   final List<String> images;
-  ImageBodyPost({this.images});
+  final List<String> blurHashs;
+  ImageBodyPost({this.images, this.blurHashs});
   @override
   State<StatefulWidget> createState() => _ImageBodyPostCard();
 }
@@ -25,17 +27,16 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
 
   Widget _buildSingleImage(context) {
     final _size = MediaQuery.of(context).size;
+
     return Stack(
       children: [
         Container(
           height: _size.height * .42,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(widget.images[0]),
-              fit: BoxFit.cover,
-            ),
+          child: BlurHash(
+            hash: widget.blurHashs[0],
+            image: widget.images[0],
+            imageFit: BoxFit.cover,
           ),
-          alignment: Alignment.center,
         ),
         ClipRRect(
           borderRadius: BorderRadius.circular(16.0),
@@ -49,14 +50,18 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
           ),
         ),
         Container(
-          height: _size.height * .42,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(widget.images[0]),
-              fit: BoxFit.fitHeight,
-            ),
+          constraints: BoxConstraints(
+            maxHeight: _size.height * .42,
+            maxWidth: _size.width,
           ),
-          alignment: Alignment.center,
+          alignment: Alignment.topCenter,
+          child: BlurHash(
+            hash: widget.blurHashs[0],
+            image: widget.images[0],
+            imageFit: BoxFit.fitHeight,
+            color: colorPrimary,
+            needStream: true,
+          ),
         ),
       ],
     );
@@ -68,24 +73,24 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
       children: [
         Expanded(
           child: Container(
-            height: _size.height * .36,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(widget.images[0]),
-                fit: BoxFit.cover,
-              ),
+            height: _size.height * .38,
+            child: BlurHash(
+              hash: widget.blurHashs[0],
+              image: widget.images[0],
+              imageFit: BoxFit.cover,
+              color: colorPrimary,
             ),
           ),
         ),
         SizedBox(width: 4.0),
         Expanded(
           child: Container(
-            height: _size.height * .36,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(widget.images[1]),
-                fit: BoxFit.cover,
-              ),
+            height: _size.height * .38,
+            child: BlurHash(
+              hash: widget.blurHashs[1],
+              image: widget.images[1],
+              imageFit: BoxFit.cover,
+              color: colorPrimary,
             ),
           ),
         ),
@@ -99,39 +104,39 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
       children: [
         Expanded(
           child: Container(
-            height: _size.height * .36,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(widget.images[0]),
-                fit: BoxFit.cover,
-              ),
+            height: _size.height * .38,
+            child: BlurHash(
+              hash: widget.blurHashs[0],
+              image: widget.images[0],
+              imageFit: BoxFit.cover,
+              color: colorPrimary,
             ),
           ),
         ),
         SizedBox(width: 4.0),
         Expanded(
           child: Container(
-            height: _size.height * .36,
+            height: _size.height * .38,
             child: Column(
               children: [
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(widget.images[1]),
-                        fit: BoxFit.cover,
-                      ),
+                    child: BlurHash(
+                      hash: widget.blurHashs[1],
+                      image: widget.images[1],
+                      imageFit: BoxFit.cover,
+                      color: colorPrimary,
                     ),
                   ),
                 ),
                 SizedBox(height: 4.0),
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(widget.images[2]),
-                        fit: BoxFit.cover,
-                      ),
+                    child: BlurHash(
+                      hash: widget.blurHashs[2],
+                      image: widget.images[2],
+                      imageFit: BoxFit.cover,
+                      color: colorPrimary,
                     ),
                   ),
                 ),
@@ -151,12 +156,12 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
           child: GestureDetector(
             onTap: () => print('image 01'),
             child: Container(
-              height: _size.height * .36,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(widget.images[0]),
-                  fit: BoxFit.cover,
-                ),
+              height: _size.height * .38,
+              child: BlurHash(
+                hash: widget.blurHashs[0],
+                image: widget.images[0],
+                imageFit: BoxFit.cover,
+                color: colorPrimary,
               ),
             ),
           ),
@@ -164,16 +169,16 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
         SizedBox(width: 2.0),
         Expanded(
           child: Container(
-            height: _size.height * .36,
+            height: _size.height * .38,
             child: Column(
               children: [
                 Expanded(
                   child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(widget.images[1]),
-                        fit: BoxFit.cover,
-                      ),
+                    child: BlurHash(
+                      hash: widget.blurHashs[1],
+                      image: widget.images[1],
+                      imageFit: BoxFit.cover,
+                      color: colorPrimary,
                     ),
                   ),
                 ),
@@ -182,18 +187,14 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
                   child: Stack(
                     children: [
                       Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(widget.images[2]),
-                            fit: BoxFit.cover,
-                          ),
+                        child: BlurHash(
+                          hash: widget.blurHashs[2],
+                          image: widget.images[2],
+                          imageFit: BoxFit.cover,
+                          color: colorPrimary,
                         ),
                       ),
                       Container(
-                        constraints: BoxConstraints(
-                          maxHeight: _size.height * .24,
-                          maxWidth: _size.width,
-                        ),
                         decoration: BoxDecoration(
                           color: Colors.black26,
                         ),

@@ -130,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                 itemCount: chats.length,
                 itemBuilder: (context, index) {
                   return ActiveFriendCard(
+                    blurHash: chats[index].blurHash,
                     urlToImage: chats[index].image,
                     fullName: chats[index].fullName,
                   );

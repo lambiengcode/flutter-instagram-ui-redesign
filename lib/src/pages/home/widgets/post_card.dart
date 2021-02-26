@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:like_button/like_button.dart';
 import 'package:whoru/src/data/chat.dart';
+import 'package:whoru/src/lib/blurhash/blurhash.dart';
 import 'package:whoru/src/pages/home/widgets/image_body_post.dart';
 
 import '../../../common/styles.dart';
@@ -14,6 +15,7 @@ class PostCard extends StatefulWidget {
 class _PostCardState extends State<PostCard> {
   final GlobalKey<LikeButtonState> _globalKey = GlobalKey<LikeButtonState>();
   List<String> images = [];
+  List<String> blurHashs = [];
   bool liked = false;
   int likeCount = 547;
 
@@ -32,6 +34,7 @@ class _PostCardState extends State<PostCard> {
     super.initState();
     chats.forEach((e) {
       images.add(e.image);
+      blurHashs.add(e.blurHash);
     });
     images.shuffle();
   }
@@ -68,7 +71,7 @@ class _PostCardState extends State<PostCard> {
   Widget _buildHeader(context) {
     final _size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.0),
+      padding: EdgeInsets.only(left: 16.0, right: 6.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -95,7 +98,7 @@ class _PostCardState extends State<PostCard> {
         children: [
           SizedBox(height: images.length == 0 ? 12.0 : 14.0),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.0),
+            padding: EdgeInsets.symmetric(horizontal: 18.0),
             child: Text(
               'Adding a few more photos to my portfolio. Need a photographer? Get in touch!',
               style: TextStyle(
@@ -114,7 +117,10 @@ class _PostCardState extends State<PostCard> {
                   onDoubleTap: () {
                     _globalKey.currentState.onTap();
                   },
-                  child: ImageBodyPost(images: images),
+                  child: ImageBodyPost(
+                    images: images.sublist(0, 5),
+                    blurHashs: blurHashs,
+                  ),
                 ),
           SizedBox(height: images.length == 0 ? 14.0 : 20.0),
         ],
@@ -239,11 +245,13 @@ class _PostCardState extends State<PostCard> {
         Container(
           height: _size.width * .115,
           width: _size.width * .115,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: AssetImage('images/avt.jpg'),
-              fit: BoxFit.cover,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(1000.0),
+            child: BlurHash(
+              hash: chats[0].blurHash,
+              image: chats[0].image,
+              imageFit: BoxFit.cover,
+              color: colorPrimary,
             ),
           ),
         ),

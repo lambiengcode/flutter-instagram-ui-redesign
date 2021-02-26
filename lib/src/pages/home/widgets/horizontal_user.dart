@@ -70,6 +70,7 @@ class _HorizontalUserState extends State<HorizontalUser> {
                   image: chats[index].image,
                   fullName: chats[index].fullName,
                   cover: chats[index].image,
+                  blurHash: chats[index].blurHash,
                 );
               },
             ),

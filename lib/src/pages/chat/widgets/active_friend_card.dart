@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:whoru/src/lib/blurhash/blurhash.dart';
 
 import '../../../common/styles.dart';
 
 class ActiveFriendCard extends StatefulWidget {
+  final String blurHash;
   final String urlToImage;
   final String fullName;
-  ActiveFriendCard({this.urlToImage, this.fullName});
+  ActiveFriendCard({
+    this.urlToImage,
+    this.fullName,
+    this.blurHash,
+  });
   @override
   State<StatefulWidget> createState() => _ActivevFriendCardState();
 }
@@ -29,18 +35,20 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: colorPrimary,
-                    width: 2.5,
+                    width: 2.6,
                   ),
                 ),
                 alignment: Alignment.center,
                 child: Container(
-                  height: _size.width * .135,
-                  width: _size.width * .135,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(widget.urlToImage),
-                      fit: BoxFit.cover,
+                  height: _size.width * .14,
+                  width: _size.width * .14,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(1000.0),
+                    child: BlurHash(
+                      hash: widget.blurHash,
+                      image: widget.urlToImage,
+                      imageFit: BoxFit.cover,
+                      curve: Curves.bounceInOut,
                     ),
                   ),
                 ),

@@ -40,7 +40,8 @@ dependencies:
   like_button: ^1.0.4
   shared_preferences: ^0.5.12+4
 
-  progressive_image: ^1.0.1
+  flutter_blurhash: ^0.5.0
+  blurhash: ^0.2.1
 
   location: ^3.2.1
   geocoder: ^0.2.1

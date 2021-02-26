@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:progressive_image/progressive_image.dart';
+import 'package:whoru/src/lib/blurhash/blurhash.dart';
 
 class PhotosGridview extends StatefulWidget {
   final scrollController;
@@ -39,13 +39,10 @@ class _PhotosGridviewState extends State<PhotosGridview> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(2.5),
               child: Container(
-                child: ProgressiveImage(
-                  placeholder: AssetImage('images/avt.jpg'),
-                  thumbnail: NetworkImage(images[index]),
-                  image: NetworkImage(images[index]),
-                  fit: BoxFit.cover,
-                  width: 400,
-                  height: 400.0,
+                child: BlurHash(
+                  hash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
+                  image: images[index],
+                  imageFit: BoxFit.cover,
                 ),
               ),
             ),

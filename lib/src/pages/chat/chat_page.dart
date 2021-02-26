@@ -108,6 +108,7 @@ class _ChatPageState extends State<ChatPage> {
                                         lastMessage: chats[3].lastMessage,
                                         time: chats[3].time,
                                         notification: chats[3].notification,
+                                        blurHash: chats[3].blurHash,
                                       );
                                     },
                                   ),
@@ -129,6 +130,7 @@ class _ChatPageState extends State<ChatPage> {
                                       time: chats[index - 2].time,
                                       notification:
                                           chats[index - 2].notification,
+                                      blurHash: chats[index - 2].blurHash,
                                     ),
                                   )
                                 ],
@@ -183,6 +185,7 @@ class _ChatPageState extends State<ChatPage> {
           return ActiveFriendCard(
             urlToImage: chats[index + 1].image,
             fullName: chats[index + 1].fullName,
+            blurHash: chats[index + 1].blurHash,
           );
         },
       ),

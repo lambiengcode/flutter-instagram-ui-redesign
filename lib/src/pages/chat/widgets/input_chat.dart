@@ -1,4 +1,4 @@
-import 'package:whoru/src/custom_lib/emoji/emoji.dart';
+import 'package:whoru/src/lib/emoji/emoji.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -84,9 +84,6 @@ class _ChatInputState extends State<ChatInput> {
   emojiContainer(controller) {
     final _size = MediaQuery.of(context).size;
     return EmojiPicker(
-      noRecentsStyle: TextStyle(
-        color: widget.color,
-      ),
       bgColor: Colors.transparent,
       indicatorColor: Colors.white38,
       rows: 3,
@@ -102,6 +99,12 @@ class _ChatInputState extends State<ChatInput> {
       numRecommended: 40,
       buttonMode: ButtonMode.MATERIAL,
       noRecommendationsStyle: TextStyle(
+        color: colorPrimary,
+        fontSize: _size.width / 26.0,
+        fontWeight: FontWeight.w400,
+        fontFamily: 'Lato',
+      ),
+      noRecentsStyle: TextStyle(
         color: colorPrimary,
         fontSize: _size.width / 26.0,
         fontWeight: FontWeight.w400,

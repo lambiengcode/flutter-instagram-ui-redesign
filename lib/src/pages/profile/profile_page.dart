@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:whoru/src/lib/blurhash/blurhash.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:progressive_image/progressive_image.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
 
@@ -75,15 +75,25 @@ class _ProfilePageState extends State<ProfilePage>
           children: [
             Column(
               children: [
+                // Container(
+                //   child: ProgressiveImage(
+                //     placeholder: ,
+                //     thumbnail: NetworkImage(
+                //         'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797'),
+                //     image: NetworkImage(
+                //         'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797'),
+                //     width: _size.width,
+                //     height: _size.height * .265,
+                //   ),
+                // ),
                 Container(
-                  child: ProgressiveImage(
-                    placeholder: AssetImage('images/avt.jpg'),
-                    thumbnail: NetworkImage(
-                        'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797'),
-                    image: NetworkImage(
-                        'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797'),
-                    width: _size.width,
-                    height: _size.height * .265,
+                  width: _size.width,
+                  height: _size.height * .265,
+                  child: BlurHash(
+                    hash: "L79ZK77eC+of+G8^VXz;Ty^lb^2?",
+                    image:
+                        'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797',
+                    imageFit: BoxFit.cover,
                   ),
                 ),
                 SizedBox(height: _size.height * .018),

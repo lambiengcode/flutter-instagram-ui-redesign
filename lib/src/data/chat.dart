@@ -1,17 +1,20 @@
 class Chat {
   final String image;
+  final String blurHash;
   final String fullName;
   final String lastMessage;
   final String time;
   final int pendingMessage;
   final bool notification;
-  Chat(
-      {this.fullName,
-      this.image,
-      this.lastMessage,
-      this.notification,
-      this.pendingMessage,
-      this.time});
+  Chat({
+    this.fullName,
+    this.image,
+    this.blurHash,
+    this.lastMessage,
+    this.notification,
+    this.pendingMessage,
+    this.time,
+  });
 }
 
 List<Chat> chats = [
@@ -23,6 +26,7 @@ List<Chat> chats = [
     time: '5m',
     pendingMessage: 2,
     notification: true,
+    blurHash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
   ),
   Chat(
     image:
@@ -32,6 +36,7 @@ List<Chat> chats = [
     time: '12m',
     pendingMessage: 1,
     notification: true,
+    blurHash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
   ),
   Chat(
     image:
@@ -41,6 +46,7 @@ List<Chat> chats = [
     time: '29m',
     pendingMessage: 4,
     notification: false,
+    blurHash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
   ),
   Chat(
     image:
@@ -50,6 +56,7 @@ List<Chat> chats = [
     time: '1m',
     pendingMessage: 1,
     notification: true,
+    blurHash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
   ),
   Chat(
     image:
@@ -59,5 +66,6 @@ List<Chat> chats = [
     time: '2h',
     pendingMessage: 0,
     notification: true,
+    blurHash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
   ),
 ];

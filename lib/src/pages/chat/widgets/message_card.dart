@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whoru/src/lib/blurhash/blurhash.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 import '../../../common/styles.dart';
@@ -6,6 +7,7 @@ import '../../../common/styles.dart';
 class MessageCard extends StatefulWidget {
   final int pendingMessage;
   final String urlToImage;
+  final String blurHash;
   final String fullName;
   final String lastMessage;
   final String time;
@@ -17,6 +19,7 @@ class MessageCard extends StatefulWidget {
     this.notification,
     this.time,
     this.urlToImage,
+    this.blurHash,
   });
   @override
   State<StatefulWidget> createState() => _MessageCardState();
@@ -38,13 +41,15 @@ class _MessageCardState extends State<MessageCard> {
                   child: Row(
                     children: [
                       Container(
-                        height: _size.width * .135,
-                        width: _size.width * .135,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(widget.urlToImage),
-                            fit: BoxFit.cover,
+                        height: _size.width * .14,
+                        width: _size.width * .14,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(1000.0),
+                          child: BlurHash(
+                            hash: widget.blurHash,
+                            image: widget.urlToImage,
+                            imageFit: BoxFit.cover,
+                            curve: Curves.bounceInOut,
                           ),
                         ),
                       ),
