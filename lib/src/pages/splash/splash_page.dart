@@ -41,13 +41,13 @@ class _SplashPageState extends State<SplashPage> {
                           style: TextStyle(
                             color: mCL,
                             fontFamily: 'Lobster',
-                            fontSize: _size.width / 18.0,
+                            fontSize: _size.width / 18.8,
                           ),
                         ),
                         TextSpan(
                           text: ' ',
                           style: TextStyle(
-                            fontSize: _size.width / 40.0,
+                            fontSize: _size.width / 60.0,
                             color: mCL,
                             fontWeight: FontWeight.w600,
                             fontFamily: 'Lato',
@@ -56,7 +56,7 @@ class _SplashPageState extends State<SplashPage> {
                         TextSpan(
                           text: widget.points,
                           style: TextStyle(
-                            fontSize: _size.width / 15.0,
+                            fontSize: _size.width / 20.0,
                             color: mCL,
                             fontWeight: FontWeight.w600,
                             fontFamily: 'Lato',
@@ -75,14 +75,14 @@ class _SplashPageState extends State<SplashPage> {
                   TextSpan(
                     text: '@${DateTime.now().year} Develop by ',
                     style: TextStyle(
-                      color: mCL,
+                      color: mC,
                       fontFamily: 'Lato',
                       fontSize: _size.width / 32.5,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                   TextSpan(
-                    text: 'Wanted',
+                    text: 'WANTED',
                     style: TextStyle(
                       color: mCL,
                       fontFamily: 'Lato',

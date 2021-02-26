@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
+import 'package:progressive_image/progressive_image.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
-import 'package:whoru/src/widgets/image_widget.dart';
 
 import '../../common/styles.dart';
 
@@ -76,15 +75,15 @@ class _ProfilePageState extends State<ProfilePage>
           children: [
             Column(
               children: [
-                ClipRRect(
-                  child: CachedNetworkImage(
+                Container(
+                  child: ProgressiveImage(
+                    placeholder: AssetImage('images/avt.jpg'),
+                    thumbnail: NetworkImage(
+                        'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797'),
+                    image: NetworkImage(
+                        'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797'),
                     width: _size.width,
                     height: _size.height * .265,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => PlaceHolderImage(),
-                    errorWidget: (context, url, error) => ErrorLoadingImage(),
-                    imageUrl:
-                        'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797',
                   ),
                 ),
                 SizedBox(height: _size.height * .018),

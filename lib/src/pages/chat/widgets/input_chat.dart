@@ -1,4 +1,4 @@
-import 'package:emoji_picker/emoji_picker.dart';
+import 'package:whoru/src/custom_lib/emoji/emoji.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

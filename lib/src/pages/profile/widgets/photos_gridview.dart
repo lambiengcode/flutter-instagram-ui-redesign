@@ -1,7 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import '../../../widgets/image_widget.dart';
+import 'package:progressive_image/progressive_image.dart';
 
 class PhotosGridview extends StatefulWidget {
   final scrollController;
@@ -40,11 +38,15 @@ class _PhotosGridviewState extends State<PhotosGridview> {
             onTap: () {},
             child: ClipRRect(
               borderRadius: BorderRadius.circular(2.5),
-              child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                placeholder: (context, url) => PlaceHolderImage(),
-                errorWidget: (context, url, error) => ErrorLoadingImage(),
-                imageUrl: images[index],
+              child: Container(
+                child: ProgressiveImage(
+                  placeholder: AssetImage('images/avt.jpg'),
+                  thumbnail: NetworkImage(images[index]),
+                  image: NetworkImage(images[index]),
+                  fit: BoxFit.cover,
+                  width: 400,
+                  height: 400.0,
+                ),
               ),
             ),
           );
