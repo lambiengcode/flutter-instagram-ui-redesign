@@ -40,7 +40,6 @@ class _PostCardState extends State<PostCard> {
           ),
         ],
       ),
-      margin: EdgeInsets.only(bottom: 12.0),
       padding: EdgeInsets.symmetric(vertical: 18.0),
       child: Column(
         children: [
