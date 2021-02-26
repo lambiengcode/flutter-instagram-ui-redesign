@@ -7,6 +7,7 @@ import 'package:whoru/src/pages/chat/pages/room_page.dart';
 void main() {
   runApp(GetMaterialApp(
     title: 'Secret App',
+    //showPerformanceOverlay: true,
     debugShowCheckedModeBanner: false,
     initialRoute: '/root',
     defaultTransition: Transition.native,

@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 
-const _DEFAULT_SIZE = 32;
+const _DEFAULT_SIZE = 2;
 
 /// Display a Hash then fade to Image
 class BlurHash extends StatefulWidget {

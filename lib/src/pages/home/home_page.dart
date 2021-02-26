@@ -118,13 +118,14 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: _size.width * .22,
             width: _size.width,
-            padding: EdgeInsets.only(left: 16.0, right: 4.0),
+            padding: EdgeInsets.only(right: 2.0),
             child: NotificationListener<OverscrollIndicatorNotification>(
               onNotification: (overscroll) {
                 overscroll.disallowGlow();
                 return true;
               },
               child: ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
                 physics: ClampingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemCount: chats.length,

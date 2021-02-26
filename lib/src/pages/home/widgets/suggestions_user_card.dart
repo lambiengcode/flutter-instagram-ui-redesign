@@ -25,7 +25,7 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
     return Stack(
       children: [
         Container(
-          width: _size.width * .4,
+          width: _size.width * .38,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.0),
             color: mC,
@@ -48,11 +48,12 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
             bottom: 16.0,
             top: 6.0,
           ),
+          padding: EdgeInsets.only(bottom: 12.0),
           child: Stack(
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     height: _size.width * .16,
@@ -68,6 +69,37 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                       ),
                     ),
                   ),
+                  GestureDetector(
+                    onTap: () => print('follow'),
+                    child: Container(
+                      width: _size.width * .38,
+                      alignment: Alignment.center,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 26.5, vertical: 5.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30.0),
+                          color: colorPrimary,
+                          boxShadow: [
+                            BoxShadow(
+                              color: mCD,
+                              offset: Offset(4, 4),
+                              blurRadius: 4,
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          'Follow',
+                          style: TextStyle(
+                            color: mCL,
+                            fontSize: _size.width / 35.0,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Lato',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               Positioned(
@@ -76,7 +108,7 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                 child: Column(
                   children: [
                     Container(
-                      width: _size.width * .4,
+                      width: _size.width * .38,
                       alignment: Alignment.center,
                       child: Container(
                         height: _size.height * .06,
@@ -108,7 +140,7 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                       widget.fullName,
                       style: TextStyle(
                         color: colorTitle,
-                        fontSize: _size.width / 30.0,
+                        fontSize: _size.width / 32.5,
                         fontFamily: 'Lato',
                         fontWeight: FontWeight.w600,
                       ),
@@ -118,41 +150,11 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                       'You maybe know him',
                       style: TextStyle(
                         color: colorDarkGrey,
-                        fontSize: _size.width / 35.0,
+                        fontSize: _size.width / 36.0,
                         fontFamily: 'Lato',
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    SizedBox(height: 14.0),
-                    Container(
-                      width: _size.width * .4,
-                      alignment: Alignment.center,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 26.5, vertical: 5.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0),
-                          color: colorPrimary,
-                          boxShadow: [
-                            BoxShadow(
-                              color: mCD,
-                              offset: Offset(4, 4),
-                              blurRadius: 4,
-                            ),
-                          ],
-                        ),
-                        child: Text(
-                          'Follow',
-                          style: TextStyle(
-                            color: mCL,
-                            fontSize: _size.width / 35.0,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Lato',
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 6.0),
                   ],
                 ),
               ),
