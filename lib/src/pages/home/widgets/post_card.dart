@@ -17,7 +17,7 @@ class _PostCardState extends State<PostCard> {
   List<String> images = [];
   List<String> blurHashs = [];
   bool liked = false;
-  int likeCount = 547;
+  int likeCount = 797;
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
     /// send your request here

@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
         color: mC,
         child: Column(
           children: [
-            SizedBox(height: 10.0),
+            SizedBox(height: 4.0),
             Expanded(
               child: NotificationListener<OverscrollIndicatorNotification>(
                 onNotification: (overscroll) {
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildActionHome(context, title, icon) {
     final _size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(15.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
       child: Icon(
         icon,
         color: colorDarkGrey,
-        size: _size.width / 20.5,
+        size: _size.width / 22.5,
       ),
     );
   }

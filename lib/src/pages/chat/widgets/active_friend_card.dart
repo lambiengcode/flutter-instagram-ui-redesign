@@ -21,7 +21,7 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(right: 20.0),
+      margin: EdgeInsets.only(right: 12.8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
