@@ -3,6 +3,7 @@ import 'package:whoru/src/lib/blurhash/blurhash.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/pages/profile/pages/end_drawer.dart';
 import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
 import 'package:whoru/src/pages/profile/widgets/posts_listsview.dart';
 
@@ -15,6 +16,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TabController _tabController;
   double min = 0, initial = 0, max = 0.88;
 
@@ -31,11 +33,23 @@ class _ProfilePageState extends State<ProfilePage>
     }
   }
 
+  void _openEndDrawer() {
+    _scaffoldKey.currentState.openEndDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
     return Scaffold(
+      key: _scaffoldKey,
       extendBodyBehindAppBar: true,
+      endDrawer: Container(
+        width: _size.width * .52,
+        child: Drawer(
+          child: EndDrawer(),
+        ),
+      ),
+      endDrawerEnableOpenDragGesture: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: .0,
@@ -64,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage>
               color: mCM,
               size: _size.width / 16.0,
             ),
-            onPressed: () => print('settings'),
+            onPressed: () => _openEndDrawer(),
           ),
         ],
       ),
