@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:whoru/src/app.dart';
 import 'package:whoru/src/lang/translation_service.dart';
 import 'package:whoru/src/pages/chat/pages/room_page.dart';
+import 'package:whoru/src/pages/profile/pages/edit_profile_page.dart';
+import 'package:whoru/src/pages/profile/pages/editor_page.dart';
 
 void main() {
   runApp(GetMaterialApp(
-    title: 'Secret App',
+    title: 'Whoru',
     //showPerformanceOverlay: true,
     debugShowCheckedModeBanner: false,
     initialRoute: '/root',
@@ -22,6 +24,18 @@ void main() {
       GetPage(
         name: '/room',
         page: () => RoomPage(),
+        transition: Transition.rightToLeft,
+        transitionDuration: Duration(milliseconds: 150),
+      ),
+      GetPage(
+        name: '/editProfile',
+        page: () => EditProfilePage(),
+        transition: Transition.rightToLeft,
+        transitionDuration: Duration(milliseconds: 150),
+      ),
+      GetPage(
+        name: '/editor',
+        page: () => EditorPage(),
         transition: Transition.rightToLeft,
         transitionDuration: Duration(milliseconds: 150),
       ),

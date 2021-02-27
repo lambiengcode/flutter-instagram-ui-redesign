@@ -27,7 +27,7 @@ class _RoomPageState extends State<RoomPage> {
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
     return WillPopScope(
-      onWillPop: () async => true,
+      onWillPop: () async => false,
       child: GestureDetector(
         onHorizontalDragEnd: (dragEndDetails) {
           if (dragEndDetails.primaryVelocity < 0) {
@@ -154,23 +154,30 @@ class _RoomPageState extends State<RoomPage> {
                 Column(
                   children: [
                     Expanded(
-                      child: ListView.builder(
-                        padding: EdgeInsets.all(.0),
-                        shrinkWrap: true,
-                        reverse: true,
-                        itemCount: contents.length,
-                        itemBuilder: (context, index) {
-                          return ContentChatCard(
-                            id: contents[index].id,
-                            content: contents[index].content,
-                            image: contents[index].image,
-                            createdAt: contents[index].createdAt,
-                            createdUser: contents[index].createdUser,
-                            isDeteled: contents[index].isDeteled,
-                            isSeenAt: contents[index].isSeenAt,
-                            isLatest: index == 0,
-                          );
+                      child:
+                          NotificationListener<OverscrollIndicatorNotification>(
+                        onNotification: (overscroll) {
+                          overscroll.disallowGlow();
+                          return true;
                         },
+                        child: ListView.builder(
+                          padding: EdgeInsets.all(.0),
+                          shrinkWrap: true,
+                          reverse: true,
+                          itemCount: contents.length,
+                          itemBuilder: (context, index) {
+                            return ContentChatCard(
+                              id: contents[index].id,
+                              content: contents[index].content,
+                              image: contents[index].image,
+                              createdAt: contents[index].createdAt,
+                              createdUser: contents[index].createdUser,
+                              isDeteled: contents[index].isDeteled,
+                              isSeenAt: contents[index].isSeenAt,
+                              isLatest: index == 0,
+                            );
+                          },
+                        ),
                       ),
                     ),
                     Container(

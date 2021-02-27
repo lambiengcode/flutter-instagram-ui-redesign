@@ -4,6 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
+import 'package:whoru/src/pages/profile/widgets/posts_listsview.dart';
 
 import '../../common/styles.dart';
 
@@ -15,7 +16,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  double min = 0, initial = 0, max = 0.86;
+  double min = 0, initial = 0, max = 0.88;
 
   @override
   void initState() {
@@ -139,22 +140,22 @@ class _ProfilePageState extends State<ProfilePage>
                     children: [
                       _buildActionProfile(
                         context,
-                        'Edit',
+                        'Edit Profile',
                         Feather.clipboard,
                       ),
                       _buildActionProfile(
                         context,
-                        'Edit',
-                        Feather.camera,
+                        'Scan',
+                        Feather.maximize,
                       ),
                       _buildActionProfile(
                         context,
-                        'Edit',
-                        Feather.lock,
+                        'Editor',
+                        Feather.image,
                       ),
                       _buildActionProfile(
                         context,
-                        'Edit',
+                        'File Transfer',
                         Feather.mail,
                       ),
                     ],
@@ -237,14 +238,28 @@ class _ProfilePageState extends State<ProfilePage>
 
   Widget _buildActionProfile(context, title, icon) {
     final _size = MediaQuery.of(context).size;
-    return Container(
-      padding: EdgeInsets.all(16.0),
-      alignment: Alignment.center,
-      decoration: nMbox,
-      child: Icon(
-        icon,
-        color: colorDarkGrey,
-        size: _size.width / 22.5,
+    return GestureDetector(
+      onTap: () {
+        switch (title) {
+          case 'Edit Profile':
+            Get.toNamed('/editProfile');
+            break;
+          case 'Editor':
+            Get.toNamed('/editor');
+            break;
+          default:
+            break;
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        alignment: Alignment.center,
+        decoration: nMbox,
+        child: Icon(
+          icon,
+          color: colorDarkGrey,
+          size: _size.width / 22.5,
+        ),
       ),
     );
   }
@@ -258,10 +273,8 @@ class _ProfilePageState extends State<ProfilePage>
       initialChildSize: initial,
       builder: (BuildContext context, ScrollController scrollController) {
         var _pages = [
-          PhotosGridview(
-            scrollController: scrollController,
-          ),
-          Container(),
+          PhotosGridview(scrollController: scrollController),
+          PostsListview(scrollController: scrollController),
           Container(),
         ];
 

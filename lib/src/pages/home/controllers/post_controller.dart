@@ -7,16 +7,15 @@ class PostController extends GetxController {
   int countDown = 0;
   Timer timmerInstance;
 
-  initialCount(String id) {
-    idPost = id;
+  initialCount() {
     countDown = 0;
     update();
   }
 
   void startTimmer(String id) {
     idPost = id;
-    countDown = 1;
-    var oneSec = Duration(seconds: 1);
+    countDown = 3;
+    var oneSec = Duration(milliseconds: 350);
     timmerInstance = Timer.periodic(
       oneSec,
       (Timer timer) {

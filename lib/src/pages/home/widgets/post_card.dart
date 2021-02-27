@@ -39,15 +39,16 @@ class _PostCardState extends State<PostCard> {
 
     setState(() {
       liked = !liked;
+      liked ? likeCount++ : likeCount--;
     });
 
-    return liked;
+    return !isLiked;
   }
 
   @override
   void initState() {
     super.initState();
-    postController.initialCount(widget.idPost);
+    postController.initialCount();
     chats.forEach((e) {
       images.add(e.image);
       blurHashs.add(e.blurHash);
