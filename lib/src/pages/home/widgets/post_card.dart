@@ -1,18 +1,26 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
+import 'package:lottie/lottie.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/lib/blurhash/blurhash.dart';
+import 'package:whoru/src/pages/home/controllers/post_controller.dart';
 import 'package:whoru/src/pages/home/widgets/image_body_post.dart';
 
 import '../../../common/styles.dart';
 
 class PostCard extends StatefulWidget {
+  final String idPost;
+  PostCard({this.idPost});
   @override
   State<StatefulWidget> createState() => _PostCardState();
 }
 
 class _PostCardState extends State<PostCard> {
+  final postController = Get.put(PostController());
   final GlobalKey<LikeButtonState> _globalKey = GlobalKey<LikeButtonState>();
   List<String> images = [];
   List<String> blurHashs = [];
@@ -25,13 +33,21 @@ class _PostCardState extends State<PostCard> {
 
     /// if failed, you can do nothing
     // return success? !isLiked:isLiked;
+    if (liked == false) {
+      postController.startTimmer(widget.idPost);
+    }
 
-    return !isLiked;
+    setState(() {
+      liked = !liked;
+    });
+
+    return liked;
   }
 
   @override
   void initState() {
     super.initState();
+    postController.initialCount(widget.idPost);
     chats.forEach((e) {
       images.add(e.image);
       blurHashs.add(e.blurHash);
@@ -110,9 +126,27 @@ class _PostCardState extends State<PostCard> {
                   onDoubleTap: () {
                     _globalKey.currentState.onTap();
                   },
-                  child: ImageBodyPost(
-                    images: images.sublist(0, 5),
-                    blurHashs: blurHashs,
+                  child: GetBuilder<PostController>(
+                    builder: (controller) => Stack(
+                      children: [
+                        ImageBodyPost(
+                          images: images.sublist(0, 5),
+                          blurHashs: blurHashs,
+                        ),
+                        controller.countDown != 0 &&
+                                controller.idPost == widget.idPost
+                            ? Container(
+                                height: images.length == 1
+                                    ? _size.height * .42
+                                    : _size.height * .38,
+                                width: _size.width,
+                                color: Colors.black26,
+                                child: Lottie.asset(
+                                    'assets/lottie/favourite.json'),
+                              )
+                            : Container(),
+                      ],
+                    ),
                   ),
                 ),
           SizedBox(height: images.length == 0 ? 16.0 : 20.0),

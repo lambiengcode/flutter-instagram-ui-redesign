@@ -69,7 +69,9 @@ class _HomePageState extends State<HomePage> {
                         ? _buildActiveFriend(context)
                         : index == 5
                             ? HorizontalUser()
-                            : PostCard();
+                            : PostCard(
+                                idPost: index.toString(),
+                              );
                   },
                 ),
               ),
