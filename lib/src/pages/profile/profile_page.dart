@@ -44,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage>
       key: _scaffoldKey,
       extendBodyBehindAppBar: true,
       endDrawer: Container(
-        width: _size.width * .52,
+        width: _size.width * .58,
         child: Drawer(
           child: EndDrawer(),
         ),
@@ -60,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage>
             color: mCM,
             size: _size.width / 16.0,
           ),
-          onPressed: () => print('settings'),
+          onPressed: () => Get.toNamed('/settings'),
         ),
         title: Text(
           'Me',
@@ -260,6 +260,9 @@ class _ProfilePageState extends State<ProfilePage>
             break;
           case 'Editor':
             Get.toNamed('/editor');
+            break;
+          case 'File Transfer':
+            Get.toNamed('/room');
             break;
           default:
             break;

@@ -16,7 +16,7 @@ class _EditorPageState extends State<EditorPage> {
   @override
   void initState() {
     super.initState();
-    editorController.requestPermission();
+    //editorController.requestPermission();
   }
 
   @override

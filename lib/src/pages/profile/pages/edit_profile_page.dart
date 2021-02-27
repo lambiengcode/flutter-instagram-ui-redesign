@@ -109,7 +109,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     margin: EdgeInsets.symmetric(horizontal: 22.0),
                     padding: EdgeInsets.symmetric(
                       horizontal: 16.0,
-                      vertical: 16.0,
+                      vertical: 16.5,
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
