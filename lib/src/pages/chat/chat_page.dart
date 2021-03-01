@@ -101,14 +101,18 @@ class _ChatPageState extends State<ChatPage> {
                                     shrinkWrap: true,
                                     itemCount: 1,
                                     itemBuilder: (context, index) {
-                                      return MessageCard(
-                                        pendingMessage: chats[3].pendingMessage,
-                                        urlToImage: chats[3].image,
-                                        fullName: chats[3].fullName,
-                                        lastMessage: chats[3].lastMessage,
-                                        time: chats[3].time,
-                                        notification: chats[3].notification,
-                                        blurHash: chats[3].blurHash,
+                                      return GestureDetector(
+                                        onTap: () => Get.toNamed('/room'),
+                                        child: MessageCard(
+                                          pendingMessage:
+                                              chats[3].pendingMessage,
+                                          urlToImage: chats[3].image,
+                                          fullName: chats[3].fullName,
+                                          lastMessage: chats[3].lastMessage,
+                                          time: chats[3].time,
+                                          notification: chats[3].notification,
+                                          blurHash: chats[3].blurHash,
+                                        ),
                                       );
                                     },
                                   ),

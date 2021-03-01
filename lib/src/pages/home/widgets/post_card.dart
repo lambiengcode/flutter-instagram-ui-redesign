@@ -35,6 +35,9 @@ class _PostCardState extends State<PostCard> {
     // return success? !isLiked:isLiked;
     if (liked == false) {
       postController.startTimmer(widget.idPost);
+      postController.favouritePost(widget.idPost);
+    } else {
+      postController.unFavouritePost(widget.idPost);
     }
 
     setState(() {
@@ -54,6 +57,8 @@ class _PostCardState extends State<PostCard> {
       blurHashs.add(e.blurHash);
     });
     images.shuffle();
+    liked = postController.isFavourite(widget.idPost);
+    if (postController.isFavourite(widget.idPost)) likeCount++;
   }
 
   @override
@@ -184,7 +189,7 @@ class _PostCardState extends State<PostCard> {
                 likeBuilder: (bool isLiked) {
                   return Icon(
                     Feather.heart,
-                    color: isLiked ? colorHigh : colorDarkGrey,
+                    color: liked ? colorHigh : colorDarkGrey,
                     size: _size.width / 20.0,
                   );
                 },

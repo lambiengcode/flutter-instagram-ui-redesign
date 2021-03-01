@@ -66,6 +66,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
       body: Container(
         color: mC,
+        height: _size.height,
         child: SingleChildScrollView(
           child: Stack(
             children: [
@@ -103,49 +104,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     'Please input your fullname',
                   ),
                   _buildDivider(context),
-                  SizedBox(height: 24.0),
+                  SizedBox(height: 32.0),
                   Container(
                     width: _size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 22.0),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 16.5,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: mCD,
-                      boxShadow: [
-                        BoxShadow(
-                          color: mCL,
-                          offset: Offset(1, 1),
-                          blurRadius: 1,
-                          spreadRadius: -1,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Feather.lock,
-                          color: colorHigh,
-                          size: _size.width / 21.5,
-                        ),
-                        SizedBox(width: 10.0),
-                        Padding(
-                          padding: EdgeInsets.only(top: 2.0),
-                          child: Text(
-                            'Change Password',
-                            style: TextStyle(
-                              color: colorHigh,
-                              fontSize: _size.width / 26.0,
-                              fontFamily: 'Lato',
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
+                    margin: EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Text(
+                      'Change Password',
+                      style: TextStyle(
+                        color: colorHigh,
+                        fontSize: _size.width / 26.8,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
+                  SizedBox(height: 16.0),
+                  _buildDivider(context),
                 ],
               ),
               Positioned(

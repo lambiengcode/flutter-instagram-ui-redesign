@@ -112,7 +112,7 @@ class _BottomPickImageState extends State<BottomPickImage> {
                 Icon(
                   icon,
                   size: _size.width / 18.0,
-                  color: Colors.grey.shade800,
+                  color: colorTitle,
                 ),
                 SizedBox(
                   width: 16.0,
@@ -123,8 +123,8 @@ class _BottomPickImageState extends State<BottomPickImage> {
                     title,
                     style: TextStyle(
                       fontSize: _size.width / 24.0,
-                      color: Colors.grey.shade800,
-                      fontWeight: FontWeight.w600,
+                      color: colorTitle,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
