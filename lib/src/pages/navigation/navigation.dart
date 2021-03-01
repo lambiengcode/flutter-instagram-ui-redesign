@@ -5,6 +5,7 @@ import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
 import 'package:whoru/src/pages/profile/profile_page.dart';
+import 'package:whoru/src/pages/search/search_page.dart';
 
 import '../../common/styles.dart';
 
@@ -17,7 +18,7 @@ class _NavigationState extends State<Navigation> {
   int currentPage = 0;
   var _pages = [
     HomePage(),
-    Container(),
+    SearchPage(),
     ChatPage(),
     Container(),
     ProfilePage(),
