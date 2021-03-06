@@ -5,6 +5,7 @@ import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:location/location.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/activity/pages/find_page.dart';
+import 'package:whoru/src/pages/activity/pages/history_page.dart';
 import 'package:whoru/src/pages/activity/pages/stranger_page.dart';
 
 import '../../common/styles.dart';
@@ -23,7 +24,7 @@ class _ActivityPageState extends State<ActivityPage>
   var _pages = [
     StrangerPage(),
     FindPage(),
-    Container(),
+    HistoryPage(),
   ];
 
   getUserLocation() async {
