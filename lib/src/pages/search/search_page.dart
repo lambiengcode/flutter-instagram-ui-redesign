@@ -7,8 +7,23 @@ class SearchPage extends StatefulWidget {
   State<StatefulWidget> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchPageState extends State<SearchPage>
+    with SingleTickerProviderStateMixin {
+  TabController _tabController;
   List<int> indexOfs = [2, 14, 24, 29, 38, 47, 56];
+
+  var _pages = [
+    Container(),
+    Container(),
+    Container(),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = new TabController(length: 3, vsync: this, initialIndex: 0);
+  }
+
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
@@ -16,7 +31,7 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         backgroundColor: mC,
         elevation: .0,
-        toolbarHeight: 56.0,
+        toolbarHeight: 55.0,
         title: GestureDetector(
           onTap: () {},
           child: Container(
@@ -27,8 +42,8 @@ class _SearchPageState extends State<SearchPage> {
               boxShadow: [
                 BoxShadow(
                   color: mCD,
-                  offset: Offset(5, 5),
-                  blurRadius: 5,
+                  offset: Offset(3, 3),
+                  blurRadius: 3,
                 ),
                 BoxShadow(
                   color: mCL,
@@ -45,7 +60,7 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 Icon(
                   Feather.search,
-                  size: _size.width / 22.5,
+                  size: _size.width / 23.5,
                   color: fCL,
                 ),
                 SizedBox(
@@ -55,7 +70,7 @@ class _SearchPageState extends State<SearchPage> {
                   'Search',
                   style: TextStyle(
                     color: fCL,
-                    fontSize: _size.width / 24.0,
+                    fontSize: _size.width / 26.0,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Lato',
                   ),
@@ -78,6 +93,69 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: Container(
         color: mC,
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: mC,
+                boxShadow: [
+                  BoxShadow(
+                    color: mCD,
+                    offset: Offset(4, 4),
+                    blurRadius: 4,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 4.0,
+                  ),
+                  TabBar(
+                    controller: _tabController,
+                    labelColor: colorPrimary,
+                    indicatorColor: colorPrimary,
+                    unselectedLabelColor: colorDarkGrey,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorWeight: 2.5,
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: _size.width / 26.5,
+                      fontFamily: 'Lato',
+                    ),
+                    unselectedLabelStyle: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: _size.width / 28.5,
+                      fontFamily: 'Lato',
+                    ),
+                    tabs: [
+                      Tab(
+                        text: 'Suggest',
+                      ),
+                      Tab(
+                        text: 'Nearby',
+                      ),
+                      Tab(
+                        text: 'Discover',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: _pages.map((Widget tab) {
+                  return tab;
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
