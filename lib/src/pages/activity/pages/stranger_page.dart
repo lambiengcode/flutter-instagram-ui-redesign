@@ -88,12 +88,9 @@ class _StrangerPageState extends State<StrangerPage> {
         }
       },
       child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 18.0,
-          horizontal: 46.0,
-        ),
+        padding: EdgeInsets.all(24.0),
         alignment: Alignment.center,
-        decoration: nMbox,
+        decoration: nMboxCategoryOff,
         child: Icon(
           icon,
           color: color,
