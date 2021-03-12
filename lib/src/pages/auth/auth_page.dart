@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whoru/src/pages/auth/pages/login_page.dart';
+import 'package:whoru/src/pages/auth/pages/register_page.dart';
 
 class AuthenticationPage extends StatefulWidget {
   @override
@@ -17,6 +18,8 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return signIn ? LoginPage(toggleView: togglePage) : Container();
+    return signIn
+        ? LoginPage(toggleView: togglePage)
+        : SignupPage(toggleView: togglePage);
   }
 }

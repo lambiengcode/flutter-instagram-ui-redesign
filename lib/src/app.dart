@@ -59,7 +59,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return _countDown != 0 && App.firstCome
         ? SplashPage(points: points)
-        : App.token != null
+        : App.token == null
             ? AuthenticationPage()
             : Navigation();
   }
