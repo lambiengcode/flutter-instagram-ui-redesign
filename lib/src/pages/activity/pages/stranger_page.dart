@@ -64,10 +64,18 @@ class _StrangerPageState extends State<StrangerPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _buildActionProfile(
-                        context, 'Call', Feather.phone_call, colorCompleted),
+                      context,
+                      'Chat',
+                      Feather.message_square,
+                      colorCompleted,
+                    ),
                     SizedBox(width: 36.0),
                     _buildActionProfile(
-                        context, 'Video', Feather.video, colorPrimary),
+                      context,
+                      'Video',
+                      Feather.video,
+                      colorPrimary,
+                    ),
                   ],
                 ),
               ),
@@ -88,7 +96,7 @@ class _StrangerPageState extends State<StrangerPage> {
         }
       },
       child: Container(
-        padding: EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(_size.width / 18.0),
         alignment: Alignment.center,
         decoration: nMboxCategoryOff,
         child: Icon(
