@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whoru/src/pages/auth/pages/login_page.dart';
 import 'package:whoru/src/pages/auth/pages/register_page.dart';
+import 'package:whoru/src/themes/theme_service.dart';
 
 class AuthenticationPage extends StatefulWidget {
   @override
@@ -8,12 +9,19 @@ class AuthenticationPage extends StatefulWidget {
 }
 
 class _AuthenticationPageState extends State<AuthenticationPage> {
+  final themeService = ThemeService();
   bool signIn = true;
 
   togglePage() {
     setState(() {
       signIn = !signIn;
     });
+  }
+
+  @override
+  void initState() {
+    themeService.switchStatusColor(false);
+    super.initState();
   }
 
   @override

@@ -1,11 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:whoru/src/pages/auth/auth_page.dart';
-import 'dart:io';
 import 'package:whoru/src/pages/navigation/navigation.dart';
 import 'package:whoru/src/pages/splash/splash_page.dart';
+import 'package:whoru/src/themes/theme_service.dart';
 
 class App extends StatefulWidget {
   static bool firstCome = true;
@@ -15,6 +14,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> with WidgetsBindingObserver {
+  final themeService = ThemeService();
   Timer _timmerInstance;
   int _countDown = 3;
   String points = '.';
@@ -39,18 +39,12 @@ class _AppState extends State<App> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarBrightness:
-          Platform.isAndroid ? Brightness.dark : Brightness.light,
-      statusBarIconBrightness:
-          Platform.isAndroid ? Brightness.dark : Brightness.light,
-    ));
     WidgetsBinding.instance.addObserver(this);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
+    themeService.switchStatusColor(true);
     super.initState();
     startTimmer();
   }

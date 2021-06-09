@@ -70,9 +70,13 @@ class _BottomPickImageState extends State<BottomPickImage> {
     final _size = MediaQuery.of(context).size;
 
     Future<void> _pickImage(ImageSource source) async {
-      File selected = await ImagePicker.pickImage(
+      final picker = ImagePicker();
+      var fileImage = await picker.getImage(
         source: source,
+        maxHeight: 450.0,
+        maxWidth: 450.0,
       );
+      File selected = File(fileImage.path);
       if (selected != null) {}
     }
 

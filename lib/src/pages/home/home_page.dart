@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
     final _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        brightness: Theme.of(context).brightness,
         backgroundColor: mC,
         elevation: .0,
         title: GestureDetector(

@@ -7,8 +7,7 @@ import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
 import 'package:whoru/src/pages/profile/profile_page.dart';
 import 'package:whoru/src/pages/search/search_page.dart';
-
-import '../../common/styles.dart';
+import 'package:whoru/src/themes/theme_service.dart';
 
 class Navigation extends StatefulWidget {
   @override
@@ -16,6 +15,7 @@ class Navigation extends StatefulWidget {
 }
 
 class _NavigationState extends State<Navigation> {
+  final themeService = ThemeService();
   int currentPage = 0;
   var _pages = [
     HomePage(),
@@ -24,6 +24,11 @@ class _NavigationState extends State<Navigation> {
     ActivityPage(),
     ProfilePage(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   // final FirebaseMessaging _fcm = FirebaseMessaging();
   // StreamSubscription iosSubscription;
@@ -78,6 +83,11 @@ class _NavigationState extends State<Navigation> {
           onTap: (int i) {
             setState(() {
               currentPage = i;
+              if (i == 4) {
+                themeService.switchStatusColor(true);
+              } else {
+                themeService.switchStatusColor(false);
+              }
             });
           },
         ),

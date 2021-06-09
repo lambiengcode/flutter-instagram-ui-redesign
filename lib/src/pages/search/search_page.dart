@@ -29,6 +29,7 @@ class _SearchPageState extends State<SearchPage>
     final _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        brightness: Theme.of(context).brightness,
         backgroundColor: mC,
         elevation: .0,
         toolbarHeight: 55.0,
