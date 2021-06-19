@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whoru/src/lib/blurhash/blurhash.dart';
+import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
 class PhotosGridview extends StatefulWidget {
   final scrollController;

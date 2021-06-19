@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/common/styles.dart';
-import 'package:whoru/src/lib/blurhash/blurhash.dart';
 import 'package:whoru/src/pages/profile/widgets/bottom_pick_image.dart';
+import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override

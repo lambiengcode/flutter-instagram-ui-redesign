@@ -5,12 +5,11 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 import 'package:lottie/lottie.dart';
+import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/data/chat.dart';
-import 'package:whoru/src/lib/blurhash/blurhash.dart';
 import 'package:whoru/src/pages/home/controllers/post_controller.dart';
 import 'package:whoru/src/pages/home/widgets/image_body_post.dart';
-
-import '../../../common/styles.dart';
+import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
 class PostCard extends StatefulWidget {
   final String idPost;

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:whoru/src/lib/blurhash/blurhash.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/profile/pages/end_drawer.dart';
 import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
 import 'package:whoru/src/pages/profile/widgets/posts_listsview.dart';
-
-import '../../common/styles.dart';
+import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

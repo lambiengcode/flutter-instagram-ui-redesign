@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:whoru/src/lib/blurhash/blurhash.dart';
-
-import '../../../common/styles.dart';
+import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
 class SuggestionsUserCard extends StatefulWidget {
   final String blurHash;

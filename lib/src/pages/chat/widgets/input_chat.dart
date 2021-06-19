@@ -1,12 +1,11 @@
-import 'package:whoru/src/lib/emoji/emoji.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
-
-import '../../../common/styles.dart';
+import 'package:whoru/src/utils/emoji/emoji.dart';
 
 class ChatInput extends StatefulWidget {
   final Color color;

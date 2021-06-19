@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:whoru/src/lib/blurhash/blurhash.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-
-import '../../../common/styles.dart';
+import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
 class MessageCard extends StatefulWidget {
   final int pendingMessage;
