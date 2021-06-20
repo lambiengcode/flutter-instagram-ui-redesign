@@ -7,6 +7,8 @@ import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/home/widgets/horizontal_user.dart';
 import 'package:whoru/src/pages/home/widgets/post_card.dart';
 import 'package:whoru/src/routes/app_pages.dart';
+import 'package:whoru/src/themes/font_family.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,32 +25,33 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        brightness: Theme.of(context).brightness,
         elevation: .0,
         title: GestureDetector(
           onTap: () => Get.offAndToNamed(Routes.ROOT),
           child: Text(
             'Whoru',
             style: TextStyle(
-              fontFamily: 'Lobster',
+              color: Theme.of(context).textTheme.headline2.color,
+              fontFamily: FontFamily.lobster,
               fontWeight: FontWeight.w400,
-              fontSize: _size.width / 16.0,
+              fontSize: 20.sp,
             ),
           ),
         ),
         actions: [
           _buildActionHome(context, 'Camera', Feather.camera),
-          SizedBox(width: 12.0),
-          _buildActionHome(context, 'Camera', Feather.align_justify),
-          SizedBox(width: 10.0),
+          SizedBox(width: 4.w),
+          _buildActionHome(context, 'Camera', Feather.list),
+          SizedBox(width: 2.w),
         ],
       ),
       body: Container(
         child: Column(
           children: [
-            SizedBox(height: 4.0),
+            SizedBox(height: .3.h),
             Expanded(
               child: NotificationListener<OverscrollIndicatorNotification>(
                 onNotification: (overscroll) {
@@ -79,9 +82,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildActionHome(context, title, icon) {
-    final _size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(3.5.w),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -98,27 +100,26 @@ class _HomePageState extends State<HomePage> {
       ),
       child: Icon(
         icon,
-        size: _size.width / 22.5,
+        size: 5.w,
       ),
     );
   }
 
   Widget _buildActiveFriend(context) {
-    final _size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         children: [
           Container(
-            height: _size.width * .22,
-            width: _size.width,
-            padding: EdgeInsets.only(right: 2.0),
+            height: 22.w,
+            width: 100.w,
+            padding: EdgeInsets.only(right: 2.w),
             child: NotificationListener<OverscrollIndicatorNotification>(
               onNotification: (overscroll) {
                 overscroll.disallowGlow();
                 return true;
               },
               child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
                 physics: ClampingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemCount: chats.length,
@@ -133,7 +134,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 16.0, bottom: 2.0),
+            padding: EdgeInsets.only(top: 2.h, bottom: .5.h),
             child: Divider(
               height: .2,
               thickness: .2,

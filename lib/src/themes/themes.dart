@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_text_theme.dart';
 
@@ -23,6 +24,7 @@ class AppTheme {
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: appColors.background,
+        selectedItemColor: colorPrimary,
       ),
       scaffoldBackgroundColor: appColors.background,
       snackBarTheme: SnackBarThemeData(
@@ -51,6 +53,7 @@ class AppTheme {
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: appColors.background,
+        selectedItemColor: colorPrimary,
       ),
       scaffoldBackgroundColor: appColors.background,
       snackBarTheme: SnackBarThemeData(

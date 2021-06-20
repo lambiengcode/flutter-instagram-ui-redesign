@@ -27,12 +27,12 @@ BoxDecoration nMbox = BoxDecoration(
   borderRadius: BorderRadius.circular(15),
   boxShadow: [
     BoxShadow(
-      offset: Offset(1, 1),
-      blurRadius: 1,
+      offset: Offset(.5, .5),
+      blurRadius: .5,
     ),
     BoxShadow(
-      offset: Offset(-1, -1),
-      blurRadius: 1,
+      offset: Offset(-.5, -.5),
+      blurRadius: .5,
     ),
   ],
 );

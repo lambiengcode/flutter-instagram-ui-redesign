@@ -26,6 +26,7 @@ class ThemeService {
   final storageKey = 'isDarkMode';
 
   ThemeMode getThemeMode() {
+    switchStatusColor(true);
     return ThemeMode.dark;
   }
 

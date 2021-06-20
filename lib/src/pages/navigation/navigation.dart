@@ -1,11 +1,11 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
 import 'package:whoru/src/pages/profile/profile_page.dart';
 import 'package:whoru/src/themes/theme_service.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class Navigation extends StatefulWidget {
   @override
@@ -28,85 +28,93 @@ class _NavigationState extends State<Navigation> {
     super.initState();
   }
 
-  // final FirebaseMessaging _fcm = FirebaseMessaging();
-  // StreamSubscription iosSubscription;
-
-  // _saveDeviceToken() async {
-  //   // Get the token for this device
-  //   String fcmToken = await _fcm.getToken();
-
-  //   // Save it to Firestore
-  //   if (fcmToken != null) {
-  //     print(fcmToken + 'lambiengcode');
-  //   }
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   if (Platform.isIOS) {
-  //     iosSubscription = _fcm.onIosSettingsRegistered.listen((data) {
-  //       _saveDeviceToken();
-  //     });
-
-  //     _fcm.requestNotificationPermissions(IosNotificationSettings());
-  //   } else {
-  //     _saveDeviceToken();
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: StyleProvider(
-        style: Style(),
-        child: ConvexAppBar(
-          backgroundColor:
-              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-          activeColor: currentPage == 2 ? colorPrimary : null,
-          initialActiveIndex: 0,
-          height: 60.0,
-          top: -24.0,
-          curveSize: 85.0,
-          style: TabStyle.fixedCircle,
-          elevation: .4,
-          items: [
-            TabItem(icon: Feather.home),
-            TabItem(icon: Feather.search),
-            TabItem(icon: AntDesign.message1),
-            TabItem(icon: Feather.activity),
-            TabItem(icon: Feather.user),
-          ],
-          onTap: (int i) {
-            setState(() {
-              currentPage = i;
-              // if (i == 4) {
-              //   themeService.switchStatusColor(true);
-              // } else {
-              //   themeService.switchStatusColor(false);
-              // }
-            });
-          },
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        height: 46.sp,
+        width: 46.sp,
+        child: FloatingActionButton(
+          child: Icon(
+            AntDesign.message1,
+            color: Colors.white,
+            size: 20.sp,
+          ),
+          onPressed: () => setState(() => currentPage = 2),
+          backgroundColor: colorPrimary,
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 10.0,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.black.withOpacity(.65)
+            : Colors.grey.shade100,
+        elevation: .0,
+        child: Padding(
+          padding: EdgeInsets.only(top: 2.0.h),
+          child: Row(
+            children: [
+              _buildItemBottomBar(Feather.home, 0),
+              _buildItemBottomBar(Feather.search, 1),
+              SizedBox(width: 18.w),
+              _buildItemBottomBar(Feather.activity, 3),
+              _buildItemBottomAccount(
+                'https://avatars.githubusercontent.com/u/60530946?v=4',
+                4,
+              ),
+            ],
+          ),
         ),
       ),
       body: _pages[currentPage],
     );
   }
-}
 
-class Style extends StyleHook {
-  @override
-  double get activeIconSize => 25.0;
+  Widget _buildItemBottomBar(icon, index) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        child: Container(
+          child: Icon(
+            icon,
+            size: 6.25.w,
+            color: index == currentPage ? colorPrimary : null,
+          ),
+        ),
+      ),
+    );
+  }
 
-  @override
-  double get activeIconMargin => 10.0;
-
-  @override
-  double get iconSize => 25.0;
-
-  @override
-  TextStyle textStyle(Color color) {
-    return TextStyle(fontSize: 10.0, color: color);
+  Widget _buildItemBottomAccount(url, index) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        child: Container(
+          height: 22.sp,
+          width: 22.sp,
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: currentPage == index ? 2.0 : .0,
+              color: colorPrimary,
+            ),
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: NetworkImage(url),
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

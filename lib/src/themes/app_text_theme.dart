@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/font_size.dart';
 
 class AppTextTheme {
@@ -63,6 +62,4 @@ extension TextStyleExt on TextStyle {
   TextStyle comfort() => copyWith(height: 1.8);
 
   TextStyle dense() => copyWith(height: 1.2);
-
-  TextStyle rotunda() => copyWith(fontFamily: FontFamily.lato);
 }
