@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 
 var colorBlack = Color(0xFF14171A);
 var colorDarkGrey = Color(0xFF657786);
@@ -22,18 +23,16 @@ Color fCD = Colors.grey.shade700;
 Color fCL = Colors.grey;
 
 BoxDecoration nMbox = BoxDecoration(
+  color: AppColors.dark().background,
   borderRadius: BorderRadius.circular(15),
-  color: mC,
   boxShadow: [
     BoxShadow(
-      color: mCD,
-      offset: Offset(10, 10),
-      blurRadius: 10,
+      offset: Offset(1, 1),
+      blurRadius: 1,
     ),
     BoxShadow(
-      color: mCL,
-      offset: Offset(-10, -10),
-      blurRadius: 10,
+      offset: Offset(-1, -1),
+      blurRadius: 1,
     ),
   ],
 );

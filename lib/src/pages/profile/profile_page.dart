@@ -81,7 +81,6 @@ class _ProfilePageState extends State<ProfilePage>
         ],
       ),
       body: Container(
-        color: mC,
         height: _size.height,
         width: _size.width,
         child: Stack(
@@ -121,7 +120,6 @@ class _ProfilePageState extends State<ProfilePage>
                 Text(
                   'Đào Hồng Vinh - Dev',
                   style: TextStyle(
-                    color: colorTitle,
                     fontSize: _size.width / 21.5,
                     fontFamily: 'Lato',
                     fontWeight: FontWeight.w600,
@@ -134,7 +132,6 @@ class _ProfilePageState extends State<ProfilePage>
                   child: Text(
                     'Mobile App Developer (lambiengcode)',
                     style: TextStyle(
-                      color: colorDarkGrey,
                       fontSize: _size.width / 26.0,
                       fontFamily: 'Lato',
                       fontWeight: FontWeight.w400,
@@ -227,7 +224,6 @@ class _ProfilePageState extends State<ProfilePage>
                   text: '$value\n',
                   style: TextStyle(
                     fontSize: _size.width / 24.0,
-                    color: colorBlack,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -235,7 +231,6 @@ class _ProfilePageState extends State<ProfilePage>
                   text: title,
                   style: TextStyle(
                     fontSize: _size.width / 28.5,
-                    color: colorDarkGrey,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Lato',
                   ),
@@ -272,7 +267,6 @@ class _ProfilePageState extends State<ProfilePage>
         decoration: nMbox,
         child: Icon(
           icon,
-          color: colorDarkGrey,
           size: _size.width / 22.5,
         ),
       ),
@@ -301,19 +295,14 @@ class _ProfilePageState extends State<ProfilePage>
                 top: Radius.circular(24.0),
               ),
               child: Container(
-                decoration: BoxDecoration(
-                  color: mC,
-                ),
                 child: Column(
                   children: <Widget>[
                     Container(
                       decoration: BoxDecoration(
-                        color: mC,
                         boxShadow: [
                           BoxShadow(
-                            color: mCD,
-                            offset: Offset(10, 10),
-                            blurRadius: 10,
+                            offset: Offset(1, 1),
+                            blurRadius: 1,
                           ),
                         ],
                       ),

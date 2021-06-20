@@ -8,8 +8,6 @@ import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/chat/widgets/message_card.dart';
 
-import '../../common/styles.dart';
-
 class ChatPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _ChatPageState();
@@ -26,7 +24,6 @@ class _ChatPageState extends State<ChatPage> {
     final _size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        color: mC,
         height: _size.height,
         width: _size.width,
         padding: EdgeInsets.only(left: 16.0, right: 10.0),
@@ -41,7 +38,6 @@ class _ChatPageState extends State<ChatPage> {
                   'Messages',
                   style: TextStyle(
                     fontSize: _size.width / 16.8,
-                    color: colorTitle,
                     fontFamily: 'Lato-Bold',
                   ),
                 ),
@@ -50,23 +46,19 @@ class _ChatPageState extends State<ChatPage> {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: mC,
                     boxShadow: [
                       BoxShadow(
-                        color: mCD,
-                        offset: Offset(2, 2),
-                        blurRadius: 2,
+                        offset: Offset(1, 1),
+                        blurRadius: 1,
                       ),
                       BoxShadow(
-                        color: mCL,
-                        offset: Offset(-2, -2),
+                        offset: Offset(-1, -1),
                         blurRadius: 2,
                       ),
                     ],
                   ),
                   child: Icon(
                     Feather.search,
-                    color: colorDarkGrey,
                     size: _size.width / 20.5,
                   ),
                 ),
@@ -156,7 +148,6 @@ class _ChatPageState extends State<ChatPage> {
         Text(
           title,
           style: TextStyle(
-            color: colorDarkGrey,
             fontSize: _size.width / 26.5,
             fontWeight: FontWeight.w600,
             fontFamily: 'Lato',
@@ -168,7 +159,6 @@ class _ChatPageState extends State<ChatPage> {
                 padding: EdgeInsets.only(bottom: 2.0),
                 child: Icon(
                   LineAwesomeIcons.thumb_tack,
-                  color: fCD,
                   size: _size.width / 22.5,
                 ),
               )

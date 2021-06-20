@@ -29,7 +29,6 @@ class _MessageCardState extends State<MessageCard> {
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
     return Container(
-      color: mC,
       child: Column(
         children: [
           Container(
@@ -60,7 +59,6 @@ class _MessageCardState extends State<MessageCard> {
                           Text(
                             widget.fullName,
                             style: TextStyle(
-                              color: colorTitle,
                               fontSize: _size.width / 24.5,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Lato',
@@ -74,7 +72,6 @@ class _MessageCardState extends State<MessageCard> {
                                   text: widget.lastMessage,
                                   style: TextStyle(
                                     fontSize: _size.width / 28.5,
-                                    color: colorDarkGrey,
                                     fontWeight: widget.pendingMessage == 0
                                         ? FontWeight.w500
                                         : FontWeight.w600,
@@ -85,7 +82,6 @@ class _MessageCardState extends State<MessageCard> {
                                   text: '\t\t•\t',
                                   style: TextStyle(
                                     fontSize: _size.width / 40.0,
-                                    color: fCL,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Lato',
                                   ),
@@ -94,7 +90,6 @@ class _MessageCardState extends State<MessageCard> {
                                   text: widget.time,
                                   style: TextStyle(
                                     fontSize: _size.width / 32.5,
-                                    color: fCL,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Lato',
                                   ),
@@ -112,7 +107,6 @@ class _MessageCardState extends State<MessageCard> {
                         margin: EdgeInsets.only(right: 10.0),
                         child: Icon(
                           Feather.bell_off,
-                          color: colorDarkGrey,
                           size: _size.width / 20.0,
                         ),
                       )

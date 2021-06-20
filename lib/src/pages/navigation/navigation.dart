@@ -1,12 +1,10 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:whoru/src/pages/activity/activity_page.dart';
 import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
 import 'package:whoru/src/pages/profile/profile_page.dart';
-import 'package:whoru/src/pages/search/search_page.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 
 class Navigation extends StatefulWidget {
@@ -19,9 +17,9 @@ class _NavigationState extends State<Navigation> {
   int currentPage = 0;
   var _pages = [
     HomePage(),
-    SearchPage(),
+    Container(),
     ChatPage(),
-    ActivityPage(),
+    Container(),
     ProfilePage(),
   ];
 
@@ -64,13 +62,14 @@ class _NavigationState extends State<Navigation> {
       bottomNavigationBar: StyleProvider(
         style: Style(),
         child: ConvexAppBar(
+          backgroundColor:
+              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+          activeColor: currentPage == 2 ? colorPrimary : null,
           initialActiveIndex: 0,
           height: 60.0,
           top: -24.0,
           curveSize: 85.0,
           style: TabStyle.fixedCircle,
-          activeColor: currentPage == 2 ? colorTitle : colorPrimary,
-          color: colorTitle,
           elevation: .4,
           items: [
             TabItem(icon: Feather.home),
@@ -79,15 +78,14 @@ class _NavigationState extends State<Navigation> {
             TabItem(icon: Feather.activity),
             TabItem(icon: Feather.user),
           ],
-          backgroundColor: mC,
           onTap: (int i) {
             setState(() {
               currentPage = i;
-              if (i == 4) {
-                themeService.switchStatusColor(true);
-              } else {
-                themeService.switchStatusColor(false);
-              }
+              // if (i == 4) {
+              //   themeService.switchStatusColor(true);
+              // } else {
+              //   themeService.switchStatusColor(false);
+              // }
             });
           },
         ),

@@ -116,7 +116,6 @@ class _PostCardState extends State<PostCard> {
             child: Text(
               'Adding a few more photos to my portfolio. Need a photographer? Get in touch!',
               style: TextStyle(
-                color: colorTitle,
                 fontSize: _size.width / 26.0,
                 fontWeight: FontWeight.w400,
                 fontFamily: 'Lato',
@@ -188,13 +187,13 @@ class _PostCardState extends State<PostCard> {
                 likeBuilder: (bool isLiked) {
                   return Icon(
                     Feather.heart,
-                    color: liked ? colorHigh : colorDarkGrey,
+                    color: liked ? colorHigh : null,
                     size: _size.width / 20.0,
                   );
                 },
                 likeCount: likeCount,
                 countBuilder: (int count, bool isLiked, String text) {
-                  var color = isLiked ? colorHigh : colorDarkGrey;
+                  var color = isLiked ? colorHigh : null;
                   Widget result;
                   result = Text(
                     text,
@@ -249,7 +248,6 @@ class _PostCardState extends State<PostCard> {
             SizedBox(width: images.length == 0 ? 4.0 : 8.0),
             Icon(
               icon,
-              color: color,
               size: _size.width / 20.0,
             ),
             SizedBox(width: 6.0),
@@ -258,7 +256,6 @@ class _PostCardState extends State<PostCard> {
                 : Text(
                     value.toString(),
                     style: TextStyle(
-                      color: color,
                       fontSize: _size.width / 28.5,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Lato',
@@ -295,7 +292,6 @@ class _PostCardState extends State<PostCard> {
             Text(
               'lambiengcode',
               style: TextStyle(
-                color: colorTitle,
                 fontSize: _size.width / 24.0,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'Lato',
@@ -305,7 +301,6 @@ class _PostCardState extends State<PostCard> {
             Text(
               '2m ago',
               style: TextStyle(
-                color: colorDarkGrey,
                 fontSize: _size.width / 28.5,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Lato',

@@ -6,8 +6,7 @@ import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/home/widgets/horizontal_user.dart';
 import 'package:whoru/src/pages/home/widgets/post_card.dart';
-
-import '../../common/styles.dart';
+import 'package:whoru/src/routes/app_pages.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -27,15 +26,12 @@ class _HomePageState extends State<HomePage> {
     final _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        brightness: Theme.of(context).brightness,
-        backgroundColor: mC,
         elevation: .0,
         title: GestureDetector(
-          onTap: () => Get.offAndToNamed('/root'),
+          onTap: () => Get.offAndToNamed(Routes.ROOT),
           child: Text(
             'Whoru',
             style: TextStyle(
-              color: colorTitle,
               fontFamily: 'Lobster',
               fontWeight: FontWeight.w400,
               fontSize: _size.width / 16.0,
@@ -50,7 +46,6 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Container(
-        color: mC,
         child: Column(
           children: [
             SizedBox(height: 4.0),
@@ -86,27 +81,23 @@ class _HomePageState extends State<HomePage> {
   Widget _buildActionHome(context, title, icon) {
     final _size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.all(15.0),
+      padding: EdgeInsets.all(16.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: mC,
         boxShadow: [
           BoxShadow(
-            color: mCD,
-            offset: Offset(2, 2),
-            blurRadius: 2,
+            offset: Offset(1, 1),
+            blurRadius: 1,
           ),
           BoxShadow(
-            color: mCL,
-            offset: Offset(-2, -2),
-            blurRadius: 2,
+            offset: Offset(-1, -1),
+            blurRadius: 1,
           ),
         ],
       ),
       child: Icon(
         icon,
-        color: colorDarkGrey,
         size: _size.width / 22.5,
       ),
     );
@@ -115,7 +106,6 @@ class _HomePageState extends State<HomePage> {
   Widget _buildActiveFriend(context) {
     final _size = MediaQuery.of(context).size;
     return Container(
-      color: mC,
       child: Column(
         children: [
           Container(
@@ -147,7 +137,6 @@ class _HomePageState extends State<HomePage> {
             child: Divider(
               height: .2,
               thickness: .2,
-              color: mCH,
             ),
           ),
         ],
