@@ -61,7 +61,7 @@ class _MessageCardState extends State<MessageCard> {
                           Text(
                             widget.fullName,
                             style: TextStyle(
-                              fontSize: 13.5.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Lato',
                             ),

@@ -15,22 +15,24 @@ class AppTheme {
     final mode = ThemeMode.light;
     final appColors = AppColors.light();
     final themeData = ThemeData.light().copyWith(
-      appBarTheme: AppBarTheme(
-        backgroundColor: appColors.background,
-        brightness: Brightness.dark,
-        textTheme: TextTheme(
-          headline2: TextStyle(color: appColors.background),
-        ),
-      ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: appColors.background,
-        selectedItemColor: colorPrimary,
-      ),
+      primaryColor: appColors.primary,
       scaffoldBackgroundColor: appColors.background,
       snackBarTheme: SnackBarThemeData(
         backgroundColor: appColors.error,
         behavior: SnackBarBehavior.floating,
       ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: appColors.background,
+        selectedItemColor: colorPrimary,
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: appColors.background,
+        brightness: Brightness.dark,
+        textTheme: TextTheme(
+          headline2: TextStyle(color: appColors.header),
+        ),
+      ),
+      dividerColor: appColors.divider,
     );
     return AppTheme(
       mode: mode,
@@ -44,22 +46,24 @@ class AppTheme {
     final mode = ThemeMode.dark;
     final appColors = AppColors.dark();
     final themeData = ThemeData.dark().copyWith(
-      appBarTheme: AppBarTheme(
-        backgroundColor: appColors.background,
-        brightness: Brightness.dark,
-        textTheme: TextTheme(
-          headline2: TextStyle(color: appColors.background),
-        ),
-      ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: appColors.background,
-        selectedItemColor: colorPrimary,
-      ),
+      primaryColor: appColors.primary,
       scaffoldBackgroundColor: appColors.background,
       snackBarTheme: SnackBarThemeData(
         backgroundColor: appColors.error,
         behavior: SnackBarBehavior.floating,
       ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: appColors.background,
+        selectedItemColor: colorPrimary,
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: appColors.background,
+        brightness: Brightness.dark,
+        textTheme: TextTheme(
+          headline2: TextStyle(color: appColors.header),
+        ),
+      ),
+      dividerColor: appColors.divider,
     );
     return AppTheme(
       mode: mode,

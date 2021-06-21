@@ -68,7 +68,7 @@ class _PostCardState extends State<PostCard> {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: .2,
+            width: .085,
           ),
         ),
       ),

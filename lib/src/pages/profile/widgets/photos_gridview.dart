@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class PhotosGridview extends StatefulWidget {
   final scrollController;
@@ -26,7 +27,7 @@ class _PhotosGridviewState extends State<PhotosGridview> {
       child: GridView.builder(
         physics: ClampingScrollPhysics(),
         controller: widget.scrollController,
-        padding: EdgeInsets.symmetric(horizontal: 10.0),
+        padding: EdgeInsets.symmetric(horizontal: 1.25.w),
         gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
           crossAxisSpacing: 4.0,

@@ -33,12 +33,11 @@ class _HomePageState extends State<HomePage> {
           onTap: () => Get.offAndToNamed(Routes.ROOT),
           child: Text(
             'Whoru',
-            style: TextStyle(
-              color: Theme.of(context).textTheme.headline2.color,
-              fontFamily: FontFamily.lobster,
-              fontWeight: FontWeight.w400,
-              fontSize: 20.sp,
-            ),
+            style: Theme.of(context).textTheme.headline2.copyWith(
+                  fontFamily: FontFamily.lobster,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20.sp,
+                ),
           ),
         ),
         actions: [

@@ -38,33 +38,43 @@ class _NavigationState extends State<Navigation> {
         child: FloatingActionButton(
           child: Icon(
             AntDesign.message1,
-            color: Colors.white,
-            size: 20.sp,
+            color: mCL,
+            size: 22.sp,
           ),
           onPressed: () => setState(() => currentPage = 2),
           backgroundColor: colorPrimary,
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 10.0,
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.black.withOpacity(.65)
-            : Colors.grey.shade100,
-        elevation: .0,
-        child: Padding(
-          padding: EdgeInsets.only(top: 2.0.h),
-          child: Row(
-            children: [
-              _buildItemBottomBar(Feather.home, 0),
-              _buildItemBottomBar(Feather.search, 1),
-              SizedBox(width: 18.w),
-              _buildItemBottomBar(Feather.activity, 3),
-              _buildItemBottomAccount(
-                'https://avatars.githubusercontent.com/u/60530946?v=4',
-                4,
-              ),
-            ],
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(50.0),
+        ),
+        child: BottomAppBar(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          shape: CircularNotchedRectangle(),
+          notchMargin: 6.sp,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.black.withOpacity(.65)
+              : Colors.black.withOpacity(.085),
+          elevation: .0,
+          child: Container(
+            padding: EdgeInsets.only(
+              top: 2.25.h,
+              right: 3.w,
+              left: 3.w,
+            ),
+            child: Row(
+              children: [
+                _buildItemBottomBar(Feather.home, 0),
+                _buildItemBottomBar(Feather.search, 1),
+                SizedBox(width: 16.w),
+                _buildItemBottomBar(Feather.activity, 3),
+                _buildItemBottomAccount(
+                  'https://avatars.githubusercontent.com/u/60530946?v=4',
+                  4,
+                ),
+              ],
+            ),
           ),
         ),
       ),
