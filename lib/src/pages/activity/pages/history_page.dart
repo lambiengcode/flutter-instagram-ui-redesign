@@ -37,6 +37,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       time: chats[index].time,
                       notification: chats[index].notification,
                       blurHash: chats[index].blurHash,
+                      isLast: index == chats.length - 1,
                     ),
                   );
                 },

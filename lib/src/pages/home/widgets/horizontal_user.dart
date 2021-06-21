@@ -26,7 +26,6 @@ class _HorizontalUserState extends State<HorizontalUser> {
               Text(
                 'Maybe you know',
                 style: TextStyle(
-                  color: colorDarkGrey,
                   fontSize: _size.width / 26.0,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Lato',
@@ -52,9 +51,6 @@ class _HorizontalUserState extends State<HorizontalUser> {
         Container(
           height: _size.width * .48,
           width: _size.width,
-          decoration: BoxDecoration(
-            color: mCM,
-          ),
           child: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (overscroll) {
               overscroll.disallowGlow();
@@ -79,7 +75,6 @@ class _HorizontalUserState extends State<HorizontalUser> {
         Divider(
           height: 1.2,
           thickness: 1.2,
-          color: mCM,
         ),
       ],
     );

@@ -27,17 +27,14 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
           width: _size.width * .38,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.0),
-            color: mC,
             boxShadow: [
               BoxShadow(
-                color: mCD,
-                offset: Offset(2, 2),
-                blurRadius: 2,
+                offset: Offset(1, 1),
+                blurRadius: 1,
               ),
               BoxShadow(
-                color: mCL,
-                offset: Offset(-10, -10),
-                blurRadius: 10,
+                offset: Offset(-1, -1),
+                blurRadius: 1,
               ),
             ],
           ),
@@ -110,16 +107,16 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                       width: _size.width * .38,
                       alignment: Alignment.center,
                       child: Container(
-                        height: _size.height * .06,
-                        width: _size.height * .06,
+                        height: _size.width * .115,
+                        width: _size.width * .115,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: mC,
                         ),
                         alignment: Alignment.center,
                         child: Container(
-                          height: _size.height * .05,
-                          width: _size.height * .05,
+                          height: _size.width * .1,
+                          width: _size.width * .1,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                           ),
@@ -135,10 +132,10 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 6.0),
                     Text(
                       widget.fullName,
                       style: TextStyle(
-                        color: colorTitle,
                         fontSize: _size.width / 32.5,
                         fontFamily: 'Lato',
                         fontWeight: FontWeight.w600,
@@ -148,7 +145,6 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                     Text(
                       'You maybe know him',
                       style: TextStyle(
-                        color: colorDarkGrey,
                         fontSize: _size.width / 36.0,
                         fontFamily: 'Lato',
                         fontWeight: FontWeight.w400,

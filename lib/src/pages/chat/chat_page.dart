@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
-import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/chat/widgets/message_card.dart';
-
-import '../../common/styles.dart';
+import 'package:whoru/src/routes/app_pages.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -26,7 +25,6 @@ class _ChatPageState extends State<ChatPage> {
     final _size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        color: mC,
         height: _size.height,
         width: _size.width,
         padding: EdgeInsets.only(left: 16.0, right: 10.0),
@@ -41,7 +39,6 @@ class _ChatPageState extends State<ChatPage> {
                   'Messages',
                   style: TextStyle(
                     fontSize: _size.width / 16.8,
-                    color: colorTitle,
                     fontFamily: 'Lato-Bold',
                   ),
                 ),
@@ -50,23 +47,19 @@ class _ChatPageState extends State<ChatPage> {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: mC,
                     boxShadow: [
                       BoxShadow(
-                        color: mCD,
-                        offset: Offset(2, 2),
-                        blurRadius: 2,
+                        offset: Offset(1, 1),
+                        blurRadius: 1,
                       ),
                       BoxShadow(
-                        color: mCL,
-                        offset: Offset(-2, -2),
+                        offset: Offset(-1, -1),
                         blurRadius: 2,
                       ),
                     ],
                   ),
                   child: Icon(
                     Feather.search,
-                    color: colorDarkGrey,
                     size: _size.width / 20.5,
                   ),
                 ),
@@ -102,7 +95,8 @@ class _ChatPageState extends State<ChatPage> {
                                     itemCount: 1,
                                     itemBuilder: (context, index) {
                                       return GestureDetector(
-                                        onTap: () => Get.toNamed('/room'),
+                                        onTap: () =>
+                                            Get.toNamed(Routes.CHAT_ROOM),
                                         child: MessageCard(
                                           pendingMessage:
                                               chats[3].pendingMessage,
@@ -112,6 +106,7 @@ class _ChatPageState extends State<ChatPage> {
                                           time: chats[3].time,
                                           notification: chats[3].notification,
                                           blurHash: chats[3].blurHash,
+                                          isLast: false,
                                         ),
                                       );
                                     },
@@ -124,7 +119,7 @@ class _ChatPageState extends State<ChatPage> {
                             : Column(
                                 children: [
                                   GestureDetector(
-                                    onTap: () => Get.toNamed('/room'),
+                                    onTap: () => Get.toNamed(Routes.CHAT_ROOM),
                                     child: MessageCard(
                                       pendingMessage:
                                           chats[index - 2].pendingMessage,
@@ -135,6 +130,7 @@ class _ChatPageState extends State<ChatPage> {
                                       notification:
                                           chats[index - 2].notification,
                                       blurHash: chats[index - 2].blurHash,
+                                      isLast: index == chats.length + 1,
                                     ),
                                   )
                                 ],
@@ -150,14 +146,12 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _buildTitle(context, title) {
-    final _size = MediaQuery.of(context).size;
     return Row(
       children: [
         Text(
           title,
           style: TextStyle(
-            color: colorDarkGrey,
-            fontSize: _size.width / 26.5,
+            fontSize: 12.sp,
             fontWeight: FontWeight.w600,
             fontFamily: 'Lato',
           ),
@@ -168,8 +162,7 @@ class _ChatPageState extends State<ChatPage> {
                 padding: EdgeInsets.only(bottom: 2.0),
                 child: Icon(
                   LineAwesomeIcons.thumb_tack,
-                  color: fCD,
-                  size: _size.width / 22.5,
+                  size: 12.sp,
                 ),
               )
             : Container(),
