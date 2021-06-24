@@ -38,18 +38,18 @@ class SizerUtil {
     // Sets ScreenType
     if (kIsWeb) {
       deviceType = DeviceType.web;
-    } else if (Platform.isAndroid || Platform.isIOS) {
+    } else if (GetPlatform.isAndroid || GetPlatform.isIOS) {
       if ((orientation == Orientation.portrait && width < 600) ||
           (orientation == Orientation.landscape && height < 600)) {
         deviceType = DeviceType.mobile;
       } else {
         deviceType = DeviceType.tablet;
       }
-    } else if (Platform.isMacOS) {
+    } else if (GetPlatform.isMacOS) {
       deviceType = DeviceType.mac;
-    } else if (Platform.isWindows) {
+    } else if (GetPlatform.isWindows) {
       deviceType = DeviceType.windows;
-    } else if (Platform.isLinux) {
+    } else if (GetPlatform.isLinux) {
       deviceType = DeviceType.linux;
     } else {
       deviceType = DeviceType.fuchsia;

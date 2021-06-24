@@ -30,6 +30,7 @@ class AppTheme {
         brightness: Brightness.dark,
         textTheme: TextTheme(
           headline2: TextStyle(color: appColors.header),
+          bodyText1: TextStyle(color: appColors.header),
         ),
       ),
       dividerColor: appColors.divider,
@@ -61,6 +62,7 @@ class AppTheme {
         brightness: Brightness.dark,
         textTheme: TextTheme(
           headline2: TextStyle(color: appColors.header),
+          bodyText1: TextStyle(color: appColors.header),
         ),
       ),
       dividerColor: appColors.divider,

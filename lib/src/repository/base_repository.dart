@@ -1,8 +1,10 @@
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'dart:convert' as convert;
-import 'package:whoru/src/app.dart';
 import 'dart:async';
 import 'package:whoru/src/common/routes.dart';
+import 'package:whoru/src/providers/account_provider.dart';
 
 class BaseRepository {
   Future<http.Response> postRoute(String gateway, Object body) async {
@@ -48,7 +50,8 @@ class BaseRepository {
 
   Map<String, String> getHeaders() {
     return {
-      'authorization': 'Bearer ${App.token}',
+      'Authorization':
+          'Bearer ${Provider.of<AccountProvider>(Get.context, listen: false).accessToken}',
     };
   }
 

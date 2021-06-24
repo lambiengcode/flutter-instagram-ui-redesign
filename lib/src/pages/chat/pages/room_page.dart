@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/data/content_chat.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
 import 'package:whoru/src/pages/chat/widgets/content_chat_card.dart';
 import 'package:whoru/src/pages/chat/widgets/input_chat.dart';
-
-import '../../../common/styles.dart';
 
 class RoomPage extends StatefulWidget {
   @override
@@ -15,7 +14,7 @@ class RoomPage extends StatefulWidget {
 }
 
 class _RoomPageState extends State<RoomPage> {
-  var roomController = Get.put(RoomController());
+  var roomController = Get.put(RoomController(), permanent: true);
 
   @override
   void initState() {

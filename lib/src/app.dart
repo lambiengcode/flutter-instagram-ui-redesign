@@ -1,14 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:whoru/src/pages/auth/auth_page.dart';
 import 'package:whoru/src/pages/navigation/navigation.dart';
 import 'package:whoru/src/pages/splash/splash_page.dart';
+import 'package:whoru/src/providers/account_provider.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 
 class App extends StatefulWidget {
   static bool firstCome = true;
-  static String token;
   @override
   State<StatefulWidget> createState() => _AppState();
 }
@@ -20,7 +21,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   String points = '.';
 
   void startTimmer() {
-    var oneSec = Duration(seconds: 1);
+    var oneSec = Duration(milliseconds: 400);
     _timmerInstance = Timer.periodic(
       oneSec,
       (Timer timer) => setState(
@@ -52,7 +53,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return _countDown != 0 && App.firstCome
         ? SplashPage(points: points)
-        : App.token != null
+        : Provider.of<AccountProvider>(context).accessToken != null
             ? AuthenticationPage()
             : Navigation();
   }
