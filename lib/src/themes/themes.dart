@@ -33,6 +33,7 @@ class AppTheme {
           bodyText1: TextStyle(color: appColors.header),
         ),
       ),
+      buttonColor: appColors.primary,
       dividerColor: appColors.divider,
     );
     return AppTheme(
@@ -65,6 +66,7 @@ class AppTheme {
           bodyText1: TextStyle(color: appColors.header),
         ),
       ),
+      buttonColor: appColors.primary,
       dividerColor: appColors.divider,
     );
     return AppTheme(

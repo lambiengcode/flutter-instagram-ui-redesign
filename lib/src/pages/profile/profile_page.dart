@@ -5,6 +5,7 @@ import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/profile/pages/end_drawer.dart';
 import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
 import 'package:whoru/src/pages/profile/widgets/posts_listsview.dart';
+import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -264,10 +265,11 @@ class _ProfilePageState extends State<ProfilePage>
       child: Container(
         padding: EdgeInsets.all(16.0),
         alignment: Alignment.center,
-        decoration: nMbox,
+        decoration: AppDecoration.buttonActionBorder(context).boxDecoration,
         child: Icon(
           icon,
           size: _size.width / 22.5,
+          color: Theme.of(context).buttonColor,
         ),
       ),
     );

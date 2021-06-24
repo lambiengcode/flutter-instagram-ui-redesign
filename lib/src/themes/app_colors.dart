@@ -9,8 +9,7 @@ class AppColors {
     @required this.disabled,
     @required this.error,
     @required this.divider,
-    @required this.signIn,
-    @required this.signOut,
+    @required this.button,
   });
 
   factory AppColors.light() {
@@ -22,8 +21,7 @@ class AppColors {
       disabled: Colors.black12,
       error: Color(0xffff7466),
       divider: Colors.black26,
-      signIn: Color(0xff4285f4),
-      signOut: Color(0xffc53829),
+      button: Color(0xFF657786),
     );
   }
 
@@ -36,8 +34,7 @@ class AppColors {
       disabled: Colors.white12,
       error: Color(0xffff5544),
       divider: Colors.white24,
-      signIn: Color(0xff4285f4),
-      signOut: Color(0xffc53829),
+      button: Colors.white,
     );
   }
 
@@ -48,7 +45,5 @@ class AppColors {
   final Color error;
   final Color divider;
   final Color header;
-
-  final Color signIn;
-  final Color signOut;
+  final Color button;
 }
