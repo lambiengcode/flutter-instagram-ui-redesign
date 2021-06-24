@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class EndDrawer extends StatefulWidget {
   @override
@@ -10,10 +11,8 @@ class EndDrawer extends StatefulWidget {
 class _EndDrawerState extends State<EndDrawer> {
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Container(
-      color: mC,
-      height: _size.height,
+      height: 100.h,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -25,28 +24,28 @@ class _EndDrawerState extends State<EndDrawer> {
                   context,
                   'Activities',
                   Feather.activity,
-                  colorDarkGrey,
+                  null,
                 ),
                 _buildDividerTransparant(context),
                 _buildLine(
                   context,
                   'Statistic',
                   Feather.pie_chart,
-                  colorDarkGrey,
+                  null,
                 ),
                 _buildDividerTransparant(context),
                 _buildLine(
                   context,
                   'Term & Privacy',
                   Feather.help_circle,
-                  colorDarkGrey,
+                  null,
                 ),
                 _buildDividerTransparant(context),
                 _buildLine(
                   context,
                   'About',
                   Feather.info,
-                  colorDarkGrey,
+                  null,
                 ),
                 _buildDivider(context),
                 _buildLine(
@@ -66,7 +65,7 @@ class _EndDrawerState extends State<EndDrawer> {
               'v1.0.0 - Whoru',
               style: TextStyle(
                 color: fCL,
-                fontSize: _size.width / 36.5,
+                fontSize: 8.sp,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -77,7 +76,6 @@ class _EndDrawerState extends State<EndDrawer> {
   }
 
   Widget _buildLine(context, title, icon, color) {
-    final _size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.only(left: 12.0, right: 8.0),
       child: Row(
@@ -85,7 +83,7 @@ class _EndDrawerState extends State<EndDrawer> {
         children: [
           Icon(
             icon,
-            size: _size.width / 18.5,
+            size: 12.sp,
             color: color,
           ),
           SizedBox(width: 10.0),
@@ -94,9 +92,9 @@ class _EndDrawerState extends State<EndDrawer> {
             child: Text(
               title,
               style: TextStyle(
-                color: color,
-                fontSize: _size.width / 26.5,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w500,
+                color: color,
               ),
             ),
           ),
@@ -109,9 +107,8 @@ class _EndDrawerState extends State<EndDrawer> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12.8),
       child: Divider(
-        color: mC,
-        thickness: .24,
-        height: .24,
+        thickness: .25,
+        height: .25,
         indent: 8.0,
         endIndent: 2.0,
       ),
@@ -122,9 +119,8 @@ class _EndDrawerState extends State<EndDrawer> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12.8),
       child: Divider(
-        color: mCH,
-        thickness: .24,
-        height: .24,
+        thickness: .25,
+        height: .25,
         indent: 8.0,
         endIndent: 2.0,
       ),

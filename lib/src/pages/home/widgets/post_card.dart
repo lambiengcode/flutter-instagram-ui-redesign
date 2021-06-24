@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
@@ -9,11 +8,13 @@ import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/home/controllers/post_controller.dart';
 import 'package:whoru/src/pages/home/widgets/image_body_post.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class PostCard extends StatefulWidget {
   final String idPost;
-  PostCard({this.idPost});
+  PostCard({@required this.idPost});
   @override
   State<StatefulWidget> createState() => _PostCardState();
 }
@@ -63,12 +64,11 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 18.0),
+      padding: EdgeInsets.symmetric(vertical: 1.5.h),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: mCH,
-            width: .2,
+            width: .085,
           ),
         ),
       ),
@@ -83,9 +83,8 @@ class _PostCardState extends State<PostCard> {
   }
 
   Widget _buildHeader(context) {
-    final _size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.only(left: 12.0, right: 6.0),
+      padding: EdgeInsets.only(left: 2.w, right: 1.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -93,8 +92,7 @@ class _PostCardState extends State<PostCard> {
           IconButton(
             icon: Icon(
               Feather.more_horizontal,
-              color: colorDarkGrey,
-              size: _size.width / 16.0,
+              size: 20.sp,
             ),
             onPressed: () => null,
           )
@@ -104,27 +102,25 @@ class _PostCardState extends State<PostCard> {
   }
 
   Widget _buildBody(context) {
-    final _size = MediaQuery.of(context).size;
     return Container(
       alignment: Alignment.topLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: images.length == 0 ? 16.0 : 12.0),
+          SizedBox(height: images.length == 0 ? 2.2.h : 1.5.h),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.0),
+            padding: EdgeInsets.symmetric(horizontal: 2.5.w),
             child: Text(
               'Adding a few more photos to my portfolio. Need a photographer? Get in touch!',
               style: TextStyle(
-                color: colorTitle,
-                fontSize: _size.width / 26.0,
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Lato',
+                fontSize: 11.5.sp,
+                fontFamily: FontFamily.lato,
               ),
               textAlign: TextAlign.start,
+              maxLines: 2,
             ),
           ),
-          SizedBox(height: images.length == 0 ? .0 : 14.0),
+          SizedBox(height: images.length == 0 ? .0 : 1.5.h),
           images.length == 0
               ? Container()
               : GestureDetector(
@@ -141,20 +137,19 @@ class _PostCardState extends State<PostCard> {
                         controller.countDown != 0 &&
                                 controller.idPost == widget.idPost
                             ? Container(
-                                height: images.length == 1
-                                    ? _size.height * .42
-                                    : _size.height * .38,
-                                width: _size.width,
+                                height: images.length == 1 ? 42.h : 38.h,
+                                width: 100.w,
                                 color: Colors.black26,
                                 child: Lottie.asset(
-                                    'assets/lottie/favourite.json'),
+                                  'assets/lottie/favourite.json',
+                                ),
                               )
                             : Container(),
                       ],
                     ),
                   ),
                 ),
-          SizedBox(height: images.length == 0 ? 16.0 : 20.0),
+          SizedBox(height: images.length == 0 ? 3.h : 2.h),
         ],
       ),
     );
@@ -188,13 +183,13 @@ class _PostCardState extends State<PostCard> {
                 likeBuilder: (bool isLiked) {
                   return Icon(
                     Feather.heart,
-                    color: liked ? colorHigh : colorDarkGrey,
+                    color: liked ? colorHigh : null,
                     size: _size.width / 20.0,
                   );
                 },
                 likeCount: likeCount,
                 countBuilder: (int count, bool isLiked, String text) {
-                  var color = isLiked ? colorHigh : colorDarkGrey;
+                  var color = isLiked ? colorHigh : null;
                   Widget result;
                   result = Text(
                     text,
@@ -249,7 +244,6 @@ class _PostCardState extends State<PostCard> {
             SizedBox(width: images.length == 0 ? 4.0 : 8.0),
             Icon(
               icon,
-              color: color,
               size: _size.width / 20.0,
             ),
             SizedBox(width: 6.0),
@@ -258,7 +252,6 @@ class _PostCardState extends State<PostCard> {
                 : Text(
                     value.toString(),
                     style: TextStyle(
-                      color: color,
                       fontSize: _size.width / 28.5,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Lato',
@@ -295,7 +288,6 @@ class _PostCardState extends State<PostCard> {
             Text(
               'lambiengcode',
               style: TextStyle(
-                color: colorTitle,
                 fontSize: _size.width / 24.0,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'Lato',
@@ -305,7 +297,6 @@ class _PostCardState extends State<PostCard> {
             Text(
               '2m ago',
               style: TextStyle(
-                color: colorDarkGrey,
                 fontSize: _size.width / 28.5,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Lato',

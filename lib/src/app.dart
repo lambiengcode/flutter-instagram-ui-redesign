@@ -44,7 +44,6 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
-    themeService.switchStatusColor(true);
     super.initState();
     startTimmer();
   }

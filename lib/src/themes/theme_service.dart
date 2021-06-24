@@ -22,4 +22,24 @@ class ThemeService {
               : Brightness.light,
     ));
   }
+
+  final storageKey = 'isDarkMode';
+
+  ThemeMode getThemeMode() {
+    switchStatusColor(true);
+    return ThemeMode.dark;
+  }
+
+  // bool isSavedDarkMode() {
+  //   return _getStorage.read(storageKey) ?? false;
+  // }
+
+  // void saveThemeMode(bool isDarkMode) {
+  //   _getStorage.write(storageKey, isDarkMode);
+  // }
+
+  void changeThemeMode() {
+    // Get.changeThemeMode(isSavedDarkMode() ? ThemeMode.light : ThemeMode.dark);
+    // saveThemeMode(!isSavedDarkMode());
+  }
 }

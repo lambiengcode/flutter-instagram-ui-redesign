@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class MessageCard extends StatefulWidget {
   final int pendingMessage;
@@ -11,6 +12,7 @@ class MessageCard extends StatefulWidget {
   final String lastMessage;
   final String time;
   final bool notification;
+  final bool isLast;
   MessageCard({
     this.pendingMessage,
     this.fullName,
@@ -19,6 +21,7 @@ class MessageCard extends StatefulWidget {
     this.time,
     this.urlToImage,
     this.blurHash,
+    @required this.isLast,
   });
   @override
   State<StatefulWidget> createState() => _MessageCardState();
@@ -27,9 +30,7 @@ class MessageCard extends StatefulWidget {
 class _MessageCardState extends State<MessageCard> {
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Container(
-      color: mC,
       child: Column(
         children: [
           Container(
@@ -40,8 +41,8 @@ class _MessageCardState extends State<MessageCard> {
                   child: Row(
                     children: [
                       Container(
-                        height: _size.width * .14,
-                        width: _size.width * .14,
+                        height: 14.w,
+                        width: 14.w,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(1000.0),
                           child: BlurHash(
@@ -60,8 +61,7 @@ class _MessageCardState extends State<MessageCard> {
                           Text(
                             widget.fullName,
                             style: TextStyle(
-                              color: colorTitle,
-                              fontSize: _size.width / 24.5,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Lato',
                             ),
@@ -73,8 +73,7 @@ class _MessageCardState extends State<MessageCard> {
                                 TextSpan(
                                   text: widget.lastMessage,
                                   style: TextStyle(
-                                    fontSize: _size.width / 28.5,
-                                    color: colorDarkGrey,
+                                    fontSize: 10.5.sp,
                                     fontWeight: widget.pendingMessage == 0
                                         ? FontWeight.w500
                                         : FontWeight.w600,
@@ -84,8 +83,7 @@ class _MessageCardState extends State<MessageCard> {
                                 TextSpan(
                                   text: '\t\t•\t',
                                   style: TextStyle(
-                                    fontSize: _size.width / 40.0,
-                                    color: fCL,
+                                    fontSize: 11.sp,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Lato',
                                   ),
@@ -93,8 +91,7 @@ class _MessageCardState extends State<MessageCard> {
                                 TextSpan(
                                   text: widget.time,
                                   style: TextStyle(
-                                    fontSize: _size.width / 32.5,
-                                    color: fCL,
+                                    fontSize: 9.5.sp,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Lato',
                                   ),
@@ -112,8 +109,7 @@ class _MessageCardState extends State<MessageCard> {
                         margin: EdgeInsets.only(right: 10.0),
                         child: Icon(
                           Feather.bell_off,
-                          color: colorDarkGrey,
-                          size: _size.width / 20.0,
+                          size: 18.sp,
                         ),
                       )
                     : widget.pendingMessage == 0
@@ -131,7 +127,7 @@ class _MessageCardState extends State<MessageCard> {
                             child: Text(
                               widget.pendingMessage.toString(),
                               style: TextStyle(
-                                fontSize: _size.width / 32.5,
+                                fontSize: 10.sp,
                                 color: mCL,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: 'Lato',
@@ -141,13 +137,14 @@ class _MessageCardState extends State<MessageCard> {
               ],
             ),
           ),
-          Divider(
-            color: mCH,
-            thickness: .2,
-            height: .2,
-            indent: _size.width * .16,
-            endIndent: 12.0,
-          ),
+          widget.isLast
+              ? Container()
+              : Divider(
+                  thickness: .2,
+                  height: .2,
+                  indent: 14.w,
+                  endIndent: 12.0,
+                ),
         ],
       ),
     );

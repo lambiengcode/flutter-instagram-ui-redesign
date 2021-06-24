@@ -89,7 +89,6 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
                 ? widget.fullName.substring(0, 8) + '..'
                 : widget.fullName,
             style: TextStyle(
-              color: colorTitle,
               fontSize: _size.width / 32.0,
               fontWeight: FontWeight.w600,
               fontFamily: 'Lato',
