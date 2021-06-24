@@ -16,11 +16,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  ScrollController _scrollController = new ScrollController();
+  ScrollController _scrollController;
 
   @override
   void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(_listenScrollListener);
     super.initState();
+  }
+
+  _listenScrollListener() {
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      // scroll to top
+    }
+    if (_scrollController.offset <=
+            _scrollController.position.minScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      // scroll down
+    }
   }
 
   @override
@@ -33,7 +48,7 @@ class _HomePageState extends State<HomePage> {
           onTap: () => Get.offAndToNamed(Routes.ROOT),
           child: Text(
             'Whoru',
-            style: Theme.of(context).textTheme.headline2.copyWith(
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
                   fontFamily: FontFamily.lobster,
                   fontWeight: FontWeight.w400,
                   fontSize: 20.sp,

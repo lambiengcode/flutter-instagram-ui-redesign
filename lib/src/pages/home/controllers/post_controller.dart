@@ -10,7 +10,6 @@ class PostController extends GetxController {
 
   initialCount() {
     countDown = 0;
-    update();
   }
 
   void startTimmer(String id) {

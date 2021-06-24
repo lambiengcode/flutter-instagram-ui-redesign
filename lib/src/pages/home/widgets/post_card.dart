@@ -25,14 +25,9 @@ class _PostCardState extends State<PostCard> {
   List<String> images = [];
   List<String> blurHashs = [];
   bool liked = false;
-  int likeCount = 797;
+  int likeCount = 888;
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
-    /// send your request here
-    // final bool success= await sendRequest();
-
-    /// if failed, you can do nothing
-    // return success? !isLiked:isLiked;
     if (liked == false) {
       postController.startTimmer(widget.idPost);
       postController.favouritePost(widget.idPost);
