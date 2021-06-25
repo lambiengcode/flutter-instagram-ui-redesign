@@ -7,6 +7,7 @@ import 'package:whoru/src/data/content_chat.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
 import 'package:whoru/src/pages/chat/widgets/content_chat_card.dart';
 import 'package:whoru/src/pages/chat/widgets/input_chat.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class RoomPage extends StatefulWidget {
   @override
@@ -50,14 +51,13 @@ class _RoomPageState extends State<RoomPage> {
         },
         child: Scaffold(
           appBar: AppBar(
+            brightness: Theme.of(context).brightness,
             toolbarHeight: _size.width * .16,
-            backgroundColor: mC,
             elevation: 2.0,
             leading: IconButton(
               onPressed: () => Get.back(),
               icon: Icon(
                 Feather.arrow_left,
-                color: colorTitle,
                 size: _size.width / 15.0,
               ),
             ),
@@ -75,16 +75,16 @@ class _RoomPageState extends State<RoomPage> {
                   ),
                   alignment: Alignment.bottomRight,
                   child: Container(
-                    height: 15.0,
-                    width: 15.0,
+                    height: 8.5.sp,
+                    width: 8.5.sp,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: mC,
                     ),
                     alignment: Alignment.center,
                     child: Container(
-                      height: 10.0,
-                      width: 10.0,
+                      height: 6.5.sp,
+                      width: 6.5.sp,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: colorActive,
@@ -99,8 +99,7 @@ class _RoomPageState extends State<RoomPage> {
                     Text(
                       chats[4].fullName,
                       style: TextStyle(
-                        color: colorTitle,
-                        fontSize: _size.width / 24.0,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                         fontFamily: 'Lato',
                       ),
@@ -108,12 +107,11 @@ class _RoomPageState extends State<RoomPage> {
                     SizedBox(height: 2.5),
                     Text(
                       'Online',
-                      style: TextStyle(
-                        color: colorDarkGrey,
-                        fontSize: _size.width / 30.0,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Lato',
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                            fontSize: _size.width / 30.0,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Lato',
+                          ),
                     ),
                   ],
                 ),
@@ -132,7 +130,6 @@ class _RoomPageState extends State<RoomPage> {
               VerticalDivider(
                 width: .25,
                 thickness: .25,
-                color: mCH,
                 indent: 12.0,
                 endIndent: 8.0,
               ),
@@ -140,14 +137,12 @@ class _RoomPageState extends State<RoomPage> {
                 onPressed: () => print('more'),
                 icon: Icon(
                   Feather.more_vertical,
-                  color: colorTitle,
                   size: _size.width / 16.0,
                 ),
               ),
             ],
           ),
           body: Container(
-            color: mCM,
             child: Stack(
               children: [
                 Column(

@@ -20,7 +20,6 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
 
   @override
   void initState() {
-    themeService.switchStatusColor(false);
     super.initState();
   }
 

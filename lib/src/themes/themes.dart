@@ -29,8 +29,9 @@ class AppTheme {
         backgroundColor: appColors.background,
         brightness: Brightness.dark,
         textTheme: TextTheme(
+          headline1: TextStyle(color: appColors.header),
           headline2: TextStyle(color: appColors.header),
-          bodyText1: TextStyle(color: appColors.header),
+          bodyText1: TextStyle(color: appColors.contentText1),
         ),
       ),
       buttonColor: appColors.primary,
@@ -62,8 +63,9 @@ class AppTheme {
         backgroundColor: appColors.background,
         brightness: Brightness.dark,
         textTheme: TextTheme(
+          headline1: TextStyle(color: appColors.header),
           headline2: TextStyle(color: appColors.header),
-          bodyText1: TextStyle(color: appColors.header),
+          bodyText1: TextStyle(color: appColors.contentText1),
         ),
       ),
       buttonColor: appColors.primary,

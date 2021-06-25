@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       padding: EdgeInsets.all(14.sp),
       alignment: Alignment.center,
-      decoration: AppDecoration.buttonActionCircle(context).boxDecoration,
+      decoration: AppDecoration.buttonActionCircle(context).decoration,
       child: Icon(
         icon,
         size: 12.5.sp,

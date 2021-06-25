@@ -47,7 +47,7 @@ class _ChatPageState extends State<ChatPage> {
                   padding: EdgeInsets.all(16.0),
                   alignment: Alignment.center,
                   decoration:
-                      AppDecoration.buttonActionCircle(context).boxDecoration,
+                      AppDecoration.buttonActionCircle(context).decoration,
                   child: Icon(
                     Feather.search,
                     size: _size.width / 20.5,

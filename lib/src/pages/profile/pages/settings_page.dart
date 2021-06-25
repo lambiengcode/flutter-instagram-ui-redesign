@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/profile/widgets/bottom_settings.dart';
+import 'package:whoru/src/themes/font_family.dart';
+import 'package:whoru/src/themes/theme_service.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -13,6 +15,12 @@ class _SettingsPageState extends State<SettingsPage> {
   List<String> valueOfTheme = ['Light', 'Dark'];
   List<String> valueOfLanguage = ['English', 'Vietnamese'];
   List<String> valueOfNotification = ['On', 'Off'];
+
+  @override
+  void initState() {
+    super.initState();
+    ThemeService().switchStatusColor();
+  }
 
   void showSettingBottomSheet(List data) {
     showModalBottomSheet(
@@ -36,29 +44,27 @@ class _SettingsPageState extends State<SettingsPage> {
     final _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: mC,
+        brightness: Theme.of(context).brightness,
         elevation: .0,
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
             Feather.arrow_left,
-            color: colorTitle,
             size: _size.width / 15.0,
+            color: Theme.of(context).textTheme.bodyText1.color,
           ),
           onPressed: () => Get.back(),
         ),
         title: Text(
           'Settings',
-          style: TextStyle(
-            color: colorTitle,
-            fontSize: _size.width / 20.0,
-            fontFamily: 'Lato',
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                fontFamily: FontFamily.lato,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+              ),
         ),
       ),
       body: Container(
-        color: mC,
         child: Column(
           children: [
             SizedBox(height: 16.0),
@@ -67,21 +73,18 @@ class _SettingsPageState extends State<SettingsPage> {
               'Theme',
               Feather.sun,
               'Light',
-              colorDarkGrey,
             ),
             _buildLineSetting(
               context,
               'Language',
               Feather.globe,
               'English',
-              colorDarkGrey,
             ),
             _buildLineSetting(
               context,
               'Notifications',
               Feather.bell,
               'On',
-              colorCompleted,
             ),
           ],
         ),
@@ -89,13 +92,13 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildLineSetting(context, title, icon, value, color) {
+  Widget _buildLineSetting(context, title, icon, value) {
     final _size = MediaQuery.of(context).size;
 
     return GestureDetector(
       onTap: () {
         if (title == 'Theme') {
-          showSettingBottomSheet(valueOfTheme);
+          ThemeService().changeThemeMode();
         } else if (title == 'Language') {
           showSettingBottomSheet(valueOfLanguage);
         } else {
@@ -110,11 +113,9 @@ class _SettingsPageState extends State<SettingsPage> {
           bottom: 20.0,
         ),
         decoration: BoxDecoration(
-          color: mC,
           border: Border(
             bottom: BorderSide(
-              color: mCH,
-              width: .25,
+              width: .2,
             ),
           ),
         ),
@@ -126,7 +127,6 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Icon(
                   icon,
-                  color: colorDarkGrey,
                   size: _size.width / 18.0,
                 ),
                 SizedBox(width: 12.0),
@@ -135,7 +135,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: Text(
                     title,
                     style: TextStyle(
-                      color: colorDarkGrey,
                       fontSize: _size.width / 24.5,
                       fontWeight: FontWeight.w600,
                     ),
@@ -146,9 +145,11 @@ class _SettingsPageState extends State<SettingsPage> {
             Text(
               value,
               style: TextStyle(
-                color: color,
                 fontSize: _size.width / 26.0,
                 fontWeight: FontWeight.w600,
+                color: title == 'Notifications'
+                    ? Theme.of(context).primaryColor
+                    : null,
               ),
             ),
           ],

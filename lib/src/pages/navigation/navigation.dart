@@ -59,9 +59,9 @@ class _NavigationState extends State<Navigation> {
           elevation: .0,
           child: Container(
             padding: EdgeInsets.only(
-              top: 2.25.h,
-              right: 3.w,
-              left: 3.w,
+              top: 12.sp,
+              right: 12.sp,
+              left: 12.sp,
             ),
             child: Row(
               children: [
@@ -93,7 +93,7 @@ class _NavigationState extends State<Navigation> {
         child: Container(
           child: Icon(
             icon,
-            size: 6.25.w,
+            size: 18.sp,
             color: index == currentPage ? colorPrimary : null,
           ),
         ),
@@ -110,8 +110,8 @@ class _NavigationState extends State<Navigation> {
           });
         },
         child: Container(
-          height: 22.sp,
-          width: 22.sp,
+          height: 20.sp,
+          width: 20.sp,
           decoration: BoxDecoration(
             border: Border.all(
               width: currentPage == index ? 2.0 : .0,

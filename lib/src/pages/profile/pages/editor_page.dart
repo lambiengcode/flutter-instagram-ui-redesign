@@ -25,6 +25,7 @@ class _EditorPageState extends State<EditorPage> {
     return GetBuilder<EditorController>(
       builder: (controller) => Scaffold(
         appBar: AppBar(
+          brightness: Theme.of(context).brightness,
           backgroundColor: mC,
           elevation: .0,
           centerTitle: true,

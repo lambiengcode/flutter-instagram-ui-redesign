@@ -73,8 +73,8 @@ class _HorizontalUserState extends State<HorizontalUser> {
           ),
         ),
         Divider(
-          height: 1.2,
-          thickness: 1.2,
+          height: .25,
+          thickness: .25,
         ),
       ],
     );
