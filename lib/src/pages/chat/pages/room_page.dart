@@ -77,7 +77,15 @@ class _RoomPageState extends State<RoomPage> {
             toolbarHeight: _size.width * .16,
             elevation: 2.0,
             leading: IconButton(
-              onPressed: () => Get.back(),
+              onPressed: () {
+                if (roomController.showEmojiPicker) {
+                  roomController.hideEmojiContainer();
+                } else if (roomController.textFieldFocus.hasFocus) {
+                  roomController.hideKeyboard();
+                } else {
+                  Get.back();
+                }
+              },
               icon: Icon(
                 Feather.arrow_left,
                 size: _size.width / 15.0,

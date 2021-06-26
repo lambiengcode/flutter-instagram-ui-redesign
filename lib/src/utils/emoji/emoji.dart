@@ -1,11 +1,13 @@
-import 'dart:io';
+library emoji_picker;
 
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math';
-import './emoji_list.dart' as emojiList;
+import 'package:whoru/src/utils/emoji/emoji_list.dart' as emojiList;
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// All the possible categories that [Emoji] can be put into
 ///
@@ -20,6 +22,8 @@ enum Category {
   TRAVEL,
   ACTIVITIES,
   OBJECTS,
+  SYMBOLS,
+  FLAGS
 }
 
 /// Enum to alter the keyboard button style
@@ -65,6 +69,8 @@ class EmojiPicker extends StatefulWidget {
   /// The color of the keyboard page indicator
   Color indicatorColor;
 
+  Color progressIndicatorColor;
+
   Color _defaultBgColor = Color.fromRGBO(242, 242, 242, 1);
 
   /// A list of keywords that are used to provide the user with recommended emojis in [Category.RECOMMENDED]
@@ -99,6 +105,7 @@ class EmojiPicker extends StatefulWidget {
     this.selectedCategory,
     this.bgColor,
     this.indicatorColor = Colors.blue,
+    this.progressIndicatorColor = Colors.blue,
     this.recommendKeywords,
     this.numRecommended = 10,
     this.noRecommendationsText = "No Recommendations",
@@ -166,10 +173,10 @@ class CategoryIcon {
 
   CategoryIcon({@required this.icon, this.color, this.selectedColor}) {
     if (this.color == null) {
-      this.color = Colors.black.withOpacity(.16);
+      this.color = Color.fromRGBO(211, 211, 211, 1);
     }
     if (this.selectedColor == null) {
-      this.selectedColor = Color(0xFF2C3D50);
+      this.selectedColor = Color.fromRGBO(178, 178, 178, 1);
     }
   }
 }
@@ -203,16 +210,23 @@ class CategoryIcons {
   /// Icon for [Category.OBJECTS]
   CategoryIcon objectIcon;
 
-  CategoryIcons({
-    this.recommendationIcon,
-    this.recentIcon,
-    this.smileyIcon,
-    this.animalIcon,
-    this.foodIcon,
-    this.travelIcon,
-    this.activityIcon,
-    this.objectIcon,
-  }) {
+  /// Icon for [Category.SYMBOLS]
+  CategoryIcon symbolIcon;
+
+  /// Icon for [Category.FLAGS]
+  CategoryIcon flagIcon;
+
+  CategoryIcons(
+      {this.recommendationIcon,
+      this.recentIcon,
+      this.smileyIcon,
+      this.animalIcon,
+      this.foodIcon,
+      this.travelIcon,
+      this.activityIcon,
+      this.objectIcon,
+      this.symbolIcon,
+      this.flagIcon}) {
     if (recommendationIcon == null) {
       recommendationIcon = CategoryIcon(icon: Icons.search);
     }
@@ -236,6 +250,12 @@ class CategoryIcons {
     }
     if (objectIcon == null) {
       objectIcon = CategoryIcon(icon: Icons.lightbulb_outline);
+    }
+    if (symbolIcon == null) {
+      symbolIcon = CategoryIcon(icon: Icons.euro_symbol);
+    }
+    if (flagIcon == null) {
+      flagIcon = CategoryIcon(icon: Icons.flag);
     }
   }
 }
@@ -261,7 +281,7 @@ class Emoji {
 class _EmojiPickerState extends State<EmojiPicker> {
   static const platform = const MethodChannel("emoji_picker");
 
-  List<Widget> pages = [];
+  List<Widget> pages = new List();
   int recommendedPagesNum;
   int recentPagesNum;
   int smileyPagesNum;
@@ -270,9 +290,11 @@ class _EmojiPickerState extends State<EmojiPicker> {
   int travelPagesNum;
   int activityPagesNum;
   int objectPagesNum;
-  List<String> allNames = [];
-  List<String> allEmojis = [];
-  List<String> recentEmojis = [];
+  int symbolPagesNum;
+  int flagPagesNum;
+  List<String> allNames = new List();
+  List<String> allEmojis = new List();
+  List<String> recentEmojis = new List();
 
   Map<String, String> smileyMap = new Map();
   Map<String, String> animalMap = new Map();
@@ -280,6 +302,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
   Map<String, String> travelMap = new Map();
   Map<String, String> activityMap = new Map();
   Map<String, String> objectMap = new Map();
+  Map<String, String> symbolMap = new Map();
+  Map<String, String> flagMap = new Map();
 
   bool loaded = false;
 
@@ -307,10 +331,26 @@ class _EmojiPickerState extends State<EmojiPicker> {
     }
   }
 
+  Future<Map<String, String>> _getFiltered(Map<String, String> emoji) async {
+    if (Platform.isAndroid) {
+      Map<String, String> filtered;
+      try {
+        var temp =
+            await platform.invokeMethod("checkAvailability", {'emoji': emoji});
+        filtered = Map<String, String>.from(temp);
+      } on PlatformException catch (_) {
+        filtered = null;
+      }
+      return filtered;
+    } else {
+      return emoji;
+    }
+  }
+
   Future<List<String>> getRecentEmojis() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final key = "recents";
-    recentEmojis = prefs.getStringList(key) ?? [];
+    recentEmojis = prefs.getStringList(key) ?? new List();
     return recentEmojis;
   }
 
@@ -326,27 +366,52 @@ class _EmojiPickerState extends State<EmojiPicker> {
     });
   }
 
-  Future<Map<String, String>> getAvailableEmojis(
-      Map<String, String> map) async {
-    Map<String, String> newMap = Map<String, String>();
+  Future<Map<String, String>> getAvailableEmojis(Map<String, String> map,
+      {@required String title}) async {
+    Map<String, String> newMap;
 
-    for (String key in map.keys) {
-      bool isAvailable = await _isEmojiAvailable(map[key]);
-      if (isAvailable) {
-        newMap[key] = map[key];
-      }
+    newMap = await restoreFilteredEmojis(title);
+
+    if (newMap != null) {
+      return newMap;
     }
+
+    newMap = await _getFiltered(map);
+
+    await cacheFilteredEmojis(title, newMap);
 
     return newMap;
   }
 
+  Future<void> cacheFilteredEmojis(
+      String title, Map<String, String> emojis) async {
+    final prefs = await SharedPreferences.getInstance();
+    String emojiJson = jsonEncode(emojis);
+    prefs.setString(title, emojiJson);
+    return;
+  }
+
+  Future<Map<String, String>> restoreFilteredEmojis(String title) async {
+    final prefs = await SharedPreferences.getInstance();
+    String emojiJson = prefs.getString(title);
+    if (emojiJson == null) {
+      return null;
+    }
+    Map<String, String> emojis =
+        Map<String, String>.from(jsonDecode(emojiJson));
+    return emojis;
+  }
+
   Future updateEmojis() async {
-    smileyMap = await getAvailableEmojis(emojiList.smileys);
-    animalMap = await getAvailableEmojis(emojiList.animals);
-    foodMap = await getAvailableEmojis(emojiList.foods);
-    travelMap = await getAvailableEmojis(emojiList.travel);
-    activityMap = await getAvailableEmojis(emojiList.activities);
-    objectMap = await getAvailableEmojis(emojiList.objects);
+    smileyMap = await getAvailableEmojis(emojiList.smileys, title: 'smileys');
+    animalMap = await getAvailableEmojis(emojiList.animals, title: 'animals');
+    foodMap = await getAvailableEmojis(emojiList.foods, title: 'foods');
+    travelMap = await getAvailableEmojis(emojiList.travel, title: 'travel');
+    activityMap =
+        await getAvailableEmojis(emojiList.activities, title: 'activities');
+    objectMap = await getAvailableEmojis(emojiList.objects, title: 'objects');
+    symbolMap = await getAvailableEmojis(emojiList.symbols, title: 'symbols');
+    flagMap = await getAvailableEmojis(emojiList.flags, title: 'flags');
 
     allNames.addAll(smileyMap.keys);
     allNames.addAll(animalMap.keys);
@@ -354,6 +419,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
     allNames.addAll(travelMap.keys);
     allNames.addAll(activityMap.keys);
     allNames.addAll(objectMap.keys);
+    allNames.addAll(symbolMap.keys);
+    allNames.addAll(flagMap.keys);
 
     allEmojis.addAll(smileyMap.values);
     allEmojis.addAll(animalMap.values);
@@ -361,10 +428,12 @@ class _EmojiPickerState extends State<EmojiPicker> {
     allEmojis.addAll(travelMap.values);
     allEmojis.addAll(activityMap.values);
     allEmojis.addAll(objectMap.values);
+    allEmojis.addAll(symbolMap.values);
+    allEmojis.addAll(flagMap.values);
 
     recommendedPagesNum = 0;
-    List<_Recommended> recommendedEmojis = [];
-    List<Widget> recommendedPages = [];
+    List<_Recommended> recommendedEmojis = new List();
+    List<Widget> recommendedPages = new List();
 
     if (widget.recommendKeywords != null) {
       allNames.forEach((name) {
@@ -560,7 +629,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
       }
     }
 
-    List<Widget> recentPages = [];
+    List<Widget> recentPages = new List();
     recentPagesNum = 1;
     recentPages.add(recentPage());
 
@@ -568,7 +637,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (smileyMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> smileyPages = [];
+    List<Widget> smileyPages = new List();
 
     for (var i = 0; i < smileyPagesNum; i++) {
       smileyPages.add(Container(
@@ -642,7 +711,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (animalMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> animalPages = [];
+    List<Widget> animalPages = new List();
 
     for (var i = 0; i < animalPagesNum; i++) {
       animalPages.add(Container(
@@ -716,7 +785,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (foodMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> foodPages = [];
+    List<Widget> foodPages = new List();
 
     for (var i = 0; i < foodPagesNum; i++) {
       foodPages.add(Container(
@@ -790,7 +859,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (travelMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> travelPages = [];
+    List<Widget> travelPages = new List();
 
     for (var i = 0; i < travelPagesNum; i++) {
       travelPages.add(Container(
@@ -864,7 +933,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (activityMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> activityPages = [];
+    List<Widget> activityPages = new List();
 
     for (var i = 0; i < activityPagesNum; i++) {
       activityPages.add(Container(
@@ -940,7 +1009,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (objectMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> objectPages = [];
+    List<Widget> objectPages = new List();
 
     for (var i = 0; i < objectPagesNum; i++) {
       objectPages.add(Container(
@@ -1010,6 +1079,154 @@ class _EmojiPickerState extends State<EmojiPicker> {
       ));
     }
 
+    symbolPagesNum =
+        (symbolMap.values.toList().length / (widget.rows * widget.columns))
+            .ceil();
+
+    List<Widget> symbolPages = new List();
+
+    for (var i = 0; i < symbolPagesNum; i++) {
+      symbolPages.add(Container(
+        color: widget.bgColor,
+        child: GridView.count(
+          shrinkWrap: true,
+          primary: true,
+          crossAxisCount: widget.columns,
+          children: List.generate(widget.rows * widget.columns, (index) {
+            if (index + (widget.columns * widget.rows * i) <
+                symbolMap.values.toList().length) {
+              switch (widget.buttonMode) {
+                case ButtonMode.MATERIAL:
+                  return Center(
+                      child: FlatButton(
+                    padding: EdgeInsets.all(0),
+                    child: Center(
+                      child: Text(
+                        symbolMap.values.toList()[
+                            index + (widget.columns * widget.rows * i)],
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                    onPressed: () {
+                      widget.onEmojiSelected(
+                          Emoji(
+                              name: symbolMap.keys.toList()[
+                                  index + (widget.columns * widget.rows * i)],
+                              emoji: symbolMap.values.toList()[
+                                  index + (widget.columns * widget.rows * i)]),
+                          widget.selectedCategory);
+                    },
+                  ));
+                  break;
+                case ButtonMode.CUPERTINO:
+                  return Center(
+                      child: CupertinoButton(
+                    pressedOpacity: 0.4,
+                    padding: EdgeInsets.all(0),
+                    child: Center(
+                      child: Text(
+                        symbolMap.values.toList()[
+                            index + (widget.columns * widget.rows * i)],
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                    onPressed: () {
+                      widget.onEmojiSelected(
+                          Emoji(
+                              name: symbolMap.keys.toList()[
+                                  index + (widget.columns * widget.rows * i)],
+                              emoji: symbolMap.values.toList()[
+                                  index + (widget.columns * widget.rows * i)]),
+                          widget.selectedCategory);
+                    },
+                  ));
+                  break;
+                default:
+                  return Container();
+                  break;
+              }
+            } else {
+              return Container();
+            }
+          }),
+        ),
+      ));
+    }
+
+    flagPagesNum =
+        (flagMap.values.toList().length / (widget.rows * widget.columns))
+            .ceil();
+
+    List<Widget> flagPages = new List();
+
+    for (var i = 0; i < flagPagesNum; i++) {
+      flagPages.add(Container(
+        color: widget.bgColor,
+        child: GridView.count(
+          shrinkWrap: true,
+          primary: true,
+          crossAxisCount: widget.columns,
+          children: List.generate(widget.rows * widget.columns, (index) {
+            if (index + (widget.columns * widget.rows * i) <
+                flagMap.values.toList().length) {
+              switch (widget.buttonMode) {
+                case ButtonMode.MATERIAL:
+                  return Center(
+                      child: FlatButton(
+                    padding: EdgeInsets.all(0),
+                    child: Center(
+                      child: Text(
+                        flagMap.values.toList()[
+                            index + (widget.columns * widget.rows * i)],
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                    onPressed: () {
+                      widget.onEmojiSelected(
+                          Emoji(
+                              name: flagMap.keys.toList()[
+                                  index + (widget.columns * widget.rows * i)],
+                              emoji: flagMap.values.toList()[
+                                  index + (widget.columns * widget.rows * i)]),
+                          widget.selectedCategory);
+                    },
+                  ));
+                  break;
+                case ButtonMode.CUPERTINO:
+                  return Center(
+                      child: CupertinoButton(
+                    pressedOpacity: 0.4,
+                    padding: EdgeInsets.all(0),
+                    child: Center(
+                      child: Text(
+                        flagMap.values.toList()[
+                            index + (widget.columns * widget.rows * i)],
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                    onPressed: () {
+                      widget.onEmojiSelected(
+                          Emoji(
+                              name: flagMap.keys.toList()[
+                                  index + (widget.columns * widget.rows * i)],
+                              emoji: flagMap.values.toList()[
+                                  index + (widget.columns * widget.rows * i)]),
+                          widget.selectedCategory);
+                    },
+                  ));
+                  break;
+                default:
+                  return Container();
+                  break;
+              }
+            } else {
+              return Container();
+            }
+          }),
+        ),
+      ));
+    }
+
     pages.addAll(recommendedPages);
     pages.addAll(recentPages);
     pages.addAll(smileyPages);
@@ -1018,11 +1235,13 @@ class _EmojiPickerState extends State<EmojiPicker> {
     pages.addAll(travelPages);
     pages.addAll(activityPages);
     pages.addAll(objectPages);
+    pages.addAll(symbolPages);
+    pages.addAll(flagPages);
 
     getRecentEmojis().then((_) {
       pages.removeAt(recommendedPagesNum);
       pages.insert(recommendedPagesNum, recentPage());
-      setState(() {});
+      if (mounted) setState(() {});
     });
   }
 
@@ -1106,6 +1325,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
       height: MediaQuery.of(context).size.width /
           (widget.recommendKeywords == null ? 9 : 10),
       child: Container(
+        color: widget.bgColor,
         child: Center(
           child: Icon(
             categoryIcon.icon,
@@ -1162,6 +1382,27 @@ class _EmojiPickerState extends State<EmojiPicker> {
                 foodPagesNum +
                 travelPagesNum +
                 activityPagesNum +
+                recentPagesNum +
+                recommendedPagesNum);
+      } else if (widget.selectedCategory == Category.SYMBOLS) {
+        pageController = PageController(
+            initialPage: smileyPagesNum +
+                animalPagesNum +
+                foodPagesNum +
+                travelPagesNum +
+                activityPagesNum +
+                objectPagesNum +
+                recentPagesNum +
+                recommendedPagesNum);
+      } else if (widget.selectedCategory == Category.FLAGS) {
+        pageController = PageController(
+            initialPage: smileyPagesNum +
+                animalPagesNum +
+                foodPagesNum +
+                travelPagesNum +
+                activityPagesNum +
+                objectPagesNum +
+                symbolPagesNum +
                 recentPagesNum +
                 recommendedPagesNum);
       }
@@ -1228,6 +1469,19 @@ class _EmojiPickerState extends State<EmojiPicker> {
                           objectPagesNum +
                           recommendedPagesNum) {
                     widget.selectedCategory = Category.OBJECTS;
+                  } else if (index <
+                      recentPagesNum +
+                          smileyPagesNum +
+                          animalPagesNum +
+                          foodPagesNum +
+                          travelPagesNum +
+                          activityPagesNum +
+                          objectPagesNum +
+                          symbolPagesNum +
+                          recommendedPagesNum) {
+                    widget.selectedCategory = Category.SYMBOLS;
+                  } else {
+                    widget.selectedCategory = Category.FLAGS;
                   }
                 }),
           ),
@@ -1249,6 +1503,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                       Category.TRAVEL,
                       Category.ACTIVITIES,
                       Category.OBJECTS,
+                      Category.SYMBOLS,
+                      Category.FLAGS
                     ], [
                       recommendedPagesNum,
                       recentPagesNum,
@@ -1258,15 +1514,15 @@ class _EmojiPickerState extends State<EmojiPicker> {
                       travelPagesNum,
                       activityPagesNum,
                       objectPagesNum,
+                      symbolPagesNum,
+                      flagPagesNum
                     ]),
                     widget.selectedCategory,
                     widget.indicatorColor),
               )),
           Container(
               height: 50,
-              decoration: BoxDecoration(
-                color: widget.bgColor,
-              ),
+              color: widget.bgColor,
               child: Row(
                 children: <Widget>[
                   widget.recommendKeywords != null
@@ -1281,8 +1537,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                       ? Colors.black12
                                       : Colors.transparent,
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(25.0))),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(0))),
                                   child: Center(
                                     child: Icon(
                                       widget.categoryIcons.recommendationIcon
@@ -1351,7 +1607,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0))),
+                                    BorderRadius.all(Radius.circular(0))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.recentIcon.icon,
@@ -1378,8 +1634,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.RECENT
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(25.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.recentIcon.icon,
@@ -1414,7 +1669,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0))),
+                                    BorderRadius.all(Radius.circular(0))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.smileyIcon.icon,
@@ -1441,8 +1696,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.SMILEYS
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(25.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.smileyIcon.icon,
@@ -1477,7 +1731,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0))),
+                                    BorderRadius.all(Radius.circular(0))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.animalIcon.icon,
@@ -1505,8 +1759,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.ANIMALS
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(25.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.animalIcon.icon,
@@ -1542,7 +1795,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0))),
+                                    BorderRadius.all(Radius.circular(0))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.foodIcon.icon,
@@ -1570,8 +1823,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.FOODS
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(25.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.foodIcon.icon,
@@ -1607,7 +1859,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0))),
+                                    BorderRadius.all(Radius.circular(0))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.travelIcon.icon,
@@ -1637,8 +1889,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.TRAVEL
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(25.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.travelIcon.icon,
@@ -1677,7 +1928,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                     : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0))),
+                                    BorderRadius.all(Radius.circular(0))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.activityIcon.icon,
@@ -1710,8 +1961,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 widget.selectedCategory == Category.ACTIVITIES
                                     ? Colors.black12
                                     : Colors.transparent,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(25.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.activityIcon.icon,
@@ -1751,7 +2001,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0))),
+                                    BorderRadius.all(Radius.circular(0))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.objectIcon.icon,
@@ -1783,8 +2033,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.OBJECTS
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(25.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.objectIcon.icon,
@@ -1811,6 +2060,154 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             },
                           ),
                   ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width /
+                        (widget.recommendKeywords == null ? 9 : 10),
+                    height: MediaQuery.of(context).size.width /
+                        (widget.recommendKeywords == null ? 9 : 10),
+                    child: widget.buttonMode == ButtonMode.MATERIAL
+                        ? FlatButton(
+                            padding: EdgeInsets.all(0),
+                            color: widget.selectedCategory == Category.SYMBOLS
+                                ? Colors.black12
+                                : Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0))),
+                            child: Center(
+                              child: Icon(
+                                widget.categoryIcons.symbolIcon.icon,
+                                size: 22,
+                                color:
+                                    widget.selectedCategory == Category.SYMBOLS
+                                        ? widget.categoryIcons.symbolIcon
+                                            .selectedColor
+                                        : widget.categoryIcons.symbolIcon.color,
+                              ),
+                            ),
+                            onPressed: () {
+                              if (widget.selectedCategory == Category.SYMBOLS) {
+                                return;
+                              }
+
+                              pageController.jumpToPage(recentPagesNum +
+                                  smileyPagesNum +
+                                  animalPagesNum +
+                                  foodPagesNum +
+                                  activityPagesNum +
+                                  travelPagesNum +
+                                  objectPagesNum +
+                                  recommendedPagesNum);
+                            },
+                          )
+                        : CupertinoButton(
+                            pressedOpacity: 0.4,
+                            padding: EdgeInsets.all(0),
+                            color: widget.selectedCategory == Category.SYMBOLS
+                                ? Colors.black12
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            child: Center(
+                              child: Icon(
+                                widget.categoryIcons.symbolIcon.icon,
+                                size: 22,
+                                color:
+                                    widget.selectedCategory == Category.SYMBOLS
+                                        ? widget.categoryIcons.symbolIcon
+                                            .selectedColor
+                                        : widget.categoryIcons.symbolIcon.color,
+                              ),
+                            ),
+                            onPressed: () {
+                              if (widget.selectedCategory == Category.SYMBOLS) {
+                                return;
+                              }
+
+                              pageController.jumpToPage(recentPagesNum +
+                                  smileyPagesNum +
+                                  animalPagesNum +
+                                  foodPagesNum +
+                                  activityPagesNum +
+                                  travelPagesNum +
+                                  objectPagesNum +
+                                  recommendedPagesNum);
+                            },
+                          ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width /
+                        (widget.recommendKeywords == null ? 9 : 10),
+                    height: MediaQuery.of(context).size.width /
+                        (widget.recommendKeywords == null ? 9 : 10),
+                    child: widget.buttonMode == ButtonMode.MATERIAL
+                        ? FlatButton(
+                            padding: EdgeInsets.all(0),
+                            color: widget.selectedCategory == Category.FLAGS
+                                ? Colors.black12
+                                : Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0))),
+                            child: Center(
+                              child: Icon(
+                                widget.categoryIcons.flagIcon.icon,
+                                size: 22,
+                                color: widget.selectedCategory == Category.FLAGS
+                                    ? widget
+                                        .categoryIcons.flagIcon.selectedColor
+                                    : widget.categoryIcons.flagIcon.color,
+                              ),
+                            ),
+                            onPressed: () {
+                              if (widget.selectedCategory == Category.FLAGS) {
+                                return;
+                              }
+
+                              pageController.jumpToPage(recentPagesNum +
+                                  smileyPagesNum +
+                                  animalPagesNum +
+                                  foodPagesNum +
+                                  activityPagesNum +
+                                  travelPagesNum +
+                                  objectPagesNum +
+                                  symbolPagesNum +
+                                  recommendedPagesNum);
+                            },
+                          )
+                        : CupertinoButton(
+                            pressedOpacity: 0.4,
+                            padding: EdgeInsets.all(0),
+                            color: widget.selectedCategory == Category.FLAGS
+                                ? Colors.black12
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            child: Center(
+                              child: Icon(
+                                widget.categoryIcons.flagIcon.icon,
+                                size: 22,
+                                color: widget.selectedCategory == Category.FLAGS
+                                    ? widget
+                                        .categoryIcons.flagIcon.selectedColor
+                                    : widget.categoryIcons.flagIcon.color,
+                              ),
+                            ),
+                            onPressed: () {
+                              if (widget.selectedCategory == Category.FLAGS) {
+                                return;
+                              }
+
+                              pageController.jumpToPage(recentPagesNum +
+                                  smileyPagesNum +
+                                  animalPagesNum +
+                                  foodPagesNum +
+                                  activityPagesNum +
+                                  travelPagesNum +
+                                  objectPagesNum +
+                                  symbolPagesNum +
+                                  recommendedPagesNum);
+                            },
+                          ),
+                  ),
                 ],
               ))
         ],
@@ -1825,12 +2222,15 @@ class _EmojiPickerState extends State<EmojiPicker> {
             child: Container(
               color: widget.bgColor,
               child: Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      widget.progressIndicatorColor),
+                ),
               ),
             ),
           ),
           Container(
-            height: 4,
+            height: 6,
             width: MediaQuery.of(context).size.width,
             color: widget.bgColor,
             padding: EdgeInsets.only(top: 4, left: 2, right: 2),
@@ -1839,7 +2239,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
             ),
           ),
           Container(
-            height: 50.0,
+            height: 50,
             child: Row(
               children: <Widget>[
                 widget.recommendKeywords != null
@@ -1852,6 +2252,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                 defaultButton(widget.categoryIcons.travelIcon),
                 defaultButton(widget.categoryIcons.activityIcon),
                 defaultButton(widget.categoryIcons.objectIcon),
+                defaultButton(widget.categoryIcons.symbolIcon),
+                defaultButton(widget.categoryIcons.flagIcon),
               ],
             ),
           )
@@ -1929,6 +2331,31 @@ class _ProgressPainter extends CustomPainter {
                       pages[Category.FOODS] +
                       pages[Category.TRAVEL] +
                       pages[Category.ACTIVITIES]) *
+                  actualPageWidth)) /
+          actualPageWidth;
+    } else if (selectedCategory == Category.SYMBOLS) {
+      offsetInPages = (pageController.offset -
+              ((pages[Category.RECOMMENDED] +
+                      pages[Category.RECENT] +
+                      pages[Category.SMILEYS] +
+                      pages[Category.ANIMALS] +
+                      pages[Category.FOODS] +
+                      pages[Category.TRAVEL] +
+                      pages[Category.ACTIVITIES] +
+                      pages[Category.OBJECTS]) *
+                  actualPageWidth)) /
+          actualPageWidth;
+    } else if (selectedCategory == Category.FLAGS) {
+      offsetInPages = (pageController.offset -
+              ((pages[Category.RECOMMENDED] +
+                      pages[Category.RECENT] +
+                      pages[Category.SMILEYS] +
+                      pages[Category.ANIMALS] +
+                      pages[Category.FOODS] +
+                      pages[Category.TRAVEL] +
+                      pages[Category.ACTIVITIES] +
+                      pages[Category.OBJECTS] +
+                      pages[Category.SYMBOLS]) *
                   actualPageWidth)) /
           actualPageWidth;
     }

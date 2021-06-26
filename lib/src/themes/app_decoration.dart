@@ -69,7 +69,7 @@ class AppDecoration {
     } else {
       return AppDecoration(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(radius),
           color: mC,
           boxShadow: [
             BoxShadow(
@@ -123,13 +123,13 @@ class AppDecoration {
           borderRadius: BorderRadius.circular(
             30.0,
           ),
-          color: colorBlack.withOpacity(.8),
+          color: Colors.black.withOpacity(.4),
           boxShadow: [
             BoxShadow(
-              color: colorBlack.withOpacity(.45),
-              offset: Offset(3, 3),
-              blurRadius: 3,
-              spreadRadius: -3,
+              color: colorBlack.withOpacity(.5),
+              offset: Offset(2, 2),
+              blurRadius: 2,
+              spreadRadius: -2,
             ),
           ],
         ),
@@ -144,9 +144,9 @@ class AppDecoration {
           boxShadow: [
             BoxShadow(
               color: mCL,
-              offset: Offset(3, 3),
-              blurRadius: 3,
-              spreadRadius: -3,
+              offset: Offset(2, 2),
+              blurRadius: 2,
+              spreadRadius: -2,
             ),
           ],
         ),
