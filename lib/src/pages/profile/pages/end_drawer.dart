@@ -60,11 +60,10 @@ class _EndDrawerState extends State<EndDrawer> {
           ),
           Container(
             padding: EdgeInsets.only(left: 12.0, right: 8.0),
-            margin: EdgeInsets.only(bottom: 10.0),
+            margin: EdgeInsets.only(bottom: 70.sp),
             child: Text(
               'v1.0.0 - Whoru',
               style: TextStyle(
-                color: fCL,
                 fontSize: 8.sp,
                 fontWeight: FontWeight.w400,
               ),

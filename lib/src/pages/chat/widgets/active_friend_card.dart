@@ -28,8 +28,8 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
           Stack(
             children: [
               Container(
-                height: 50.sp,
-                width: 50.sp,
+                height: 48.sp,
+                width: 48.sp,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
@@ -39,8 +39,8 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
                 ),
                 alignment: Alignment.center,
                 child: Container(
-                  height: 48.sp,
-                  width: 48.sp,
+                  height: 46.sp,
+                  width: 46.sp,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(1000.0),
                     child: BlurHash(
@@ -53,8 +53,8 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
                 ),
               ),
               Container(
-                height: 50.sp,
-                width: 50.sp,
+                height: 48.sp,
+                width: 48.sp,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(

@@ -46,11 +46,11 @@ class AppDecoration {
     }
   }
 
-  factory AppDecoration.buttonActionBorder(context) {
+  factory AppDecoration.buttonActionBorder(context, radius) {
     if (Theme.of(context).brightness == Brightness.dark) {
       return AppDecoration(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(radius),
           color: colorBlack.withOpacity(.75),
           boxShadow: [
             BoxShadow(

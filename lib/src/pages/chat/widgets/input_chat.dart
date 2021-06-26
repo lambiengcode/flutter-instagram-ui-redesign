@@ -36,23 +36,22 @@ class _ChatInputState extends State<ChatInput> {
   Widget build(BuildContext context) {
     return GetBuilder<RoomController>(
       builder: (controller) => Container(
-        padding: EdgeInsets.all(
-          4.0,
+        padding: EdgeInsets.only(
+          bottom: 12.0,
         ),
-        margin: EdgeInsets.fromLTRB(
-          24.0,
-          16.0,
-          24.0,
-          24.0,
-        ),
-        decoration: AppDecoration.inputChatDecoration(context).decoration,
+        margin: EdgeInsets.only(top: 16.0),
         child: Column(
           children: <Widget>[
-            chatControls(controller),
+            Container(
+              decoration: AppDecoration.inputChatDecoration(context).decoration,
+              margin: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(vertical: 4.0),
+              child: chatControls(controller),
+            ),
+            SizedBox(height: 16.0),
             controller.showEmojiPicker
                 ? Container(
                     alignment: Alignment.center,
-                    margin: EdgeInsets.only(top: 8.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
@@ -72,9 +71,9 @@ class _ChatInputState extends State<ChatInput> {
     final _size = MediaQuery.of(context).size;
     return EmojiPicker(
       bgColor: Colors.transparent,
-      indicatorColor: Colors.white38,
+      indicatorColor: Theme.of(context).textTheme.bodyText1.color,
       rows: 3,
-      columns: 7,
+      columns: 9,
       onEmojiSelected: (emoji, category) {
         setState(() {
           isWriting = true;
@@ -84,7 +83,7 @@ class _ChatInputState extends State<ChatInput> {
       },
       recommendKeywords: ["face", "happy", "party", "sad", "dog", "smile"],
       numRecommended: 40,
-      buttonMode: ButtonMode.MATERIAL,
+      buttonMode: ButtonMode.CUPERTINO,
       noRecommendationsStyle: TextStyle(
         color: colorPrimary,
         fontSize: _size.width / 26.0,

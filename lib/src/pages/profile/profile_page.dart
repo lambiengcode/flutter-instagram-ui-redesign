@@ -268,7 +268,7 @@ class _ProfilePageState extends State<ProfilePage>
       child: Container(
         padding: EdgeInsets.all(16.0),
         alignment: Alignment.center,
-        decoration: AppDecoration.buttonActionBorder(context).decoration,
+        decoration: AppDecoration.buttonActionBorder(context, 15.0).decoration,
         child: Icon(
           icon,
           size: _size.width / 22.5,

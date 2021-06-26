@@ -65,7 +65,7 @@ class _ChatPageState extends State<ChatPage> {
                 },
                 child: ListView.builder(
                   physics: ClampingScrollPhysics(),
-                  padding: EdgeInsets.only(top: .0),
+                  padding: EdgeInsets.only(bottom: 65.sp),
                   itemCount: chats.length + 2,
                   itemBuilder: (context, index) {
                     return index == 0
