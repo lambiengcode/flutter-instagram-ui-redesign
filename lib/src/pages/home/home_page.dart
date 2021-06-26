@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.builder(
                   controller: _scrollController,
                   physics: ClampingScrollPhysics(),
-                  padding: EdgeInsets.only(top: .0),
+                  padding: EdgeInsets.only(bottom: 65.sp),
                   itemCount: 12,
                   itemBuilder: (context, index) {
                     return index == 0

@@ -19,14 +19,14 @@ class ThemeService {
 
   ThemeMode getThemeMode() {
     switchStatusColor();
-    return ThemeMode.dark;
+    return isSavedDarkMode() ? ThemeMode.dark : ThemeMode.light;
   }
 
   bool isSavedDarkMode() {
     return _getStorage.read(storageKey) ?? false;
   }
 
-  void saveThemeMode(bool isDarkMode) {
+  void saveThemeMode(bool isDarkMode) async {
     _getStorage.write(storageKey, isDarkMode);
   }
 

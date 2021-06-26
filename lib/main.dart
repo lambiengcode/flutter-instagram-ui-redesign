@@ -22,7 +22,7 @@ void main() async {
       child: Sizer(
         builder: (context, orientation, deviceType) {
           return GetMaterialApp(
-            //showPerformanceOverlay: true,
+            // showPerformanceOverlay: true,
             title: 'Whoru',
             enableLog: true,
             debugShowCheckedModeBanner: false,
