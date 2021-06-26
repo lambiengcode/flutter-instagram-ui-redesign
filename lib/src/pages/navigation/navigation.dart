@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:get/utils.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
@@ -31,11 +34,13 @@ class _NavigationState extends State<Navigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
         height: 46.sp,
         width: 46.sp,
         child: FloatingActionButton(
+          elevation: .0,
           child: Icon(
             AntDesign.message1,
             color: mCL,
@@ -49,31 +54,35 @@ class _NavigationState extends State<Navigation> {
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(50.0),
         ),
-        child: BottomAppBar(
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          shape: CircularNotchedRectangle(),
-          notchMargin: 6.sp,
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.black.withOpacity(.65)
-              : Colors.black.withOpacity(.085),
-          elevation: .0,
-          child: Container(
-            padding: EdgeInsets.only(
-              top: 2.25.h,
-              right: 3.w,
-              left: 3.w,
-            ),
-            child: Row(
-              children: [
-                _buildItemBottomBar(Feather.home, 0),
-                _buildItemBottomBar(Feather.search, 1),
-                SizedBox(width: 16.w),
-                _buildItemBottomBar(Feather.activity, 3),
-                _buildItemBottomAccount(
-                  'https://avatars.githubusercontent.com/u/60530946?v=4',
-                  4,
-                ),
-              ],
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: BottomAppBar(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            shape: CircularNotchedRectangle(),
+            notchMargin: 6.sp,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.black
+                : Colors.black.withOpacity(.25),
+            elevation: .0,
+            child: Container(
+              padding: EdgeInsets.fromLTRB(
+                12.sp,
+                15.sp,
+                12.sp,
+                GetPlatform.isAndroid ? 15.sp : 0.sp,
+              ),
+              child: Row(
+                children: [
+                  _buildItemBottomBar(Feather.home, 0),
+                  _buildItemBottomBar(Feather.search, 1),
+                  SizedBox(width: 16.w),
+                  _buildItemBottomBar(Feather.activity, 3),
+                  _buildItemBottomAccount(
+                    'https://avatars.githubusercontent.com/u/60530946?v=4',
+                    4,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -91,10 +100,15 @@ class _NavigationState extends State<Navigation> {
           });
         },
         child: Container(
+          color: Colors.transparent,
           child: Icon(
             icon,
-            size: 6.25.w,
-            color: index == currentPage ? colorPrimary : null,
+            size: 18.8.sp,
+            color: index == currentPage
+                ? colorPrimary
+                : Theme.of(context).brightness == Brightness.dark
+                    ? null
+                    : mC,
           ),
         ),
       ),
@@ -110,12 +124,13 @@ class _NavigationState extends State<Navigation> {
           });
         },
         child: Container(
-          height: 22.sp,
-          width: 22.sp,
+          height: 20.5.sp,
+          width: 20.5.sp,
           decoration: BoxDecoration(
+            color: Colors.transparent,
             border: Border.all(
               width: currentPage == index ? 2.0 : .0,
-              color: colorPrimary,
+              color: currentPage == index ? colorPrimary : Colors.transparent,
             ),
             shape: BoxShape.circle,
             image: DecorationImage(

@@ -21,8 +21,8 @@ class EditorController extends GetxController {
   }
 
   chooseImage(int index) {
-    imagesChoosen.contains(images[index])
-        ? imagesChoosen.add(images[index])
-        : print('haha');
+    if (!imagesChoosen.contains(images[index])) {
+      imagesChoosen.add(images[index]);
+    }
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
+import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/utils/emoji/emoji.dart';
 
 class ChatInput extends StatefulWidget {
@@ -44,20 +45,7 @@ class _ChatInputState extends State<ChatInput> {
           24.0,
           24.0,
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            30.0,
-          ),
-          color: mCD,
-          boxShadow: [
-            BoxShadow(
-              color: mCL,
-              offset: Offset(3, 3),
-              blurRadius: 3,
-              spreadRadius: -3,
-            ),
-          ],
-        ),
+        decoration: AppDecoration.inputChatDecoration(context).decoration,
         child: Column(
           children: <Widget>[
             chatControls(controller),

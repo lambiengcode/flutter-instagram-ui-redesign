@@ -33,6 +33,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        brightness: Theme.of(context).brightness,
         backgroundColor: Colors.transparent,
         elevation: .0,
         centerTitle: true,

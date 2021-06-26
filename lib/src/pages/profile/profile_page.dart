@@ -5,7 +5,10 @@ import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/profile/pages/end_drawer.dart';
 import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
 import 'package:whoru/src/pages/profile/widgets/posts_listsview.dart';
+import 'package:whoru/src/routes/app_pages.dart';
+import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -49,6 +52,7 @@ class _ProfilePageState extends State<ProfilePage>
       ),
       endDrawerEnableOpenDragGesture: true,
       appBar: AppBar(
+        brightness: Theme.of(context).brightness,
         backgroundColor: Colors.transparent,
         elevation: .0,
         centerTitle: true,
@@ -249,13 +253,13 @@ class _ProfilePageState extends State<ProfilePage>
       onTap: () {
         switch (title) {
           case 'Edit Profile':
-            Get.toNamed('/editProfile');
+            Get.toNamed(Routes.EDIT_PROFILE);
             break;
           case 'Editor':
-            Get.toNamed('/editor');
+            Get.toNamed(Routes.EDIT_PHOTO);
             break;
           case 'File Transfer':
-            Get.toNamed('/room');
+            Get.toNamed(Routes.CHAT_ROOM);
             break;
           default:
             break;
@@ -264,10 +268,11 @@ class _ProfilePageState extends State<ProfilePage>
       child: Container(
         padding: EdgeInsets.all(16.0),
         alignment: Alignment.center,
-        decoration: nMbox,
+        decoration: AppDecoration.buttonActionBorder(context).decoration,
         child: Icon(
           icon,
           size: _size.width / 22.5,
+          color: Theme.of(context).buttonColor,
         ),
       ),
     );
@@ -298,14 +303,8 @@ class _ProfilePageState extends State<ProfilePage>
                 child: Column(
                   children: <Widget>[
                     Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 1,
-                          ),
-                        ],
-                      ),
+                      decoration:
+                          AppDecoration.tabBarDecoration(context).decoration,
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -343,15 +342,16 @@ class _ProfilePageState extends State<ProfilePage>
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
                     Expanded(
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: _pages.map((Widget tab) {
-                          return tab;
-                        }).toList(),
+                      child: Container(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        padding: EdgeInsets.only(top: 5.sp),
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: _pages.map((Widget tab) {
+                            return tab;
+                          }).toList(),
+                        ),
                       ),
                     ),
                   ],

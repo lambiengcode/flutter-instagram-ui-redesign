@@ -77,7 +77,9 @@ class _ContentChatCardState extends State<ContentChatCard> {
             ? Colors.white.withOpacity(.04)
             : isMe
                 ? colorPrimary
-                : mC,
+                : Theme.of(context).brightness == Brightness.dark
+                    ? colorBlack.withOpacity(.75)
+                    : mC,
         borderRadius: widget.image != ''
             ? BorderRadius.all(Radius.circular(8.0))
             : BorderRadius.all(Radius.circular(30.0)),
@@ -85,14 +87,18 @@ class _ContentChatCardState extends State<ContentChatCard> {
             ? null
             : [
                 BoxShadow(
-                  color: mCD,
-                  offset: Offset(8, 8),
-                  blurRadius: 8,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.black
+                      : mCD,
+                  offset: Offset(4, 4),
+                  blurRadius: 4,
                 ),
                 BoxShadow(
-                  color: mCL,
-                  offset: Offset(-6, -6),
-                  blurRadius: 6,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? colorBlack.withOpacity(.45)
+                      : mCL,
+                  offset: Offset(-3, -3),
+                  blurRadius: 3,
                 ),
               ],
       ),
@@ -115,7 +121,7 @@ class _ContentChatCardState extends State<ContentChatCard> {
                     ? '${widget.content.replaceAll('username', 'You')}'
                     : '${widget.content.replaceAll('username', '')}',
             style: TextStyle(
-              color: isMe ? mCL : colorBlack,
+              color: isMe ? mCL : null,
               fontSize: _size.width / 26.0,
               fontWeight: FontWeight.w400,
               fontFamily: 'Lato',

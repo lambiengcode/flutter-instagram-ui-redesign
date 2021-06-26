@@ -29,10 +29,12 @@ class AppTheme {
         backgroundColor: appColors.background,
         brightness: Brightness.dark,
         textTheme: TextTheme(
+          headline1: TextStyle(color: appColors.header),
           headline2: TextStyle(color: appColors.header),
-          bodyText1: TextStyle(color: appColors.header),
+          bodyText1: TextStyle(color: appColors.contentText1),
         ),
       ),
+      buttonColor: appColors.primary,
       dividerColor: appColors.divider,
     );
     return AppTheme(
@@ -61,10 +63,12 @@ class AppTheme {
         backgroundColor: appColors.background,
         brightness: Brightness.dark,
         textTheme: TextTheme(
+          headline1: TextStyle(color: appColors.header),
           headline2: TextStyle(color: appColors.header),
-          bodyText1: TextStyle(color: appColors.header),
+          bodyText1: TextStyle(color: appColors.contentText1),
         ),
       ),
+      buttonColor: appColors.primary,
       dividerColor: appColors.divider,
     );
     return AppTheme(

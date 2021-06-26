@@ -7,6 +7,7 @@ import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/chat/widgets/message_card.dart';
 import 'package:whoru/src/routes/app_pages.dart';
+import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class ChatPage extends StatefulWidget {
@@ -45,22 +46,12 @@ class _ChatPageState extends State<ChatPage> {
                 Container(
                   padding: EdgeInsets.all(16.0),
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 1,
-                      ),
-                      BoxShadow(
-                        offset: Offset(-1, -1),
-                        blurRadius: 2,
-                      ),
-                    ],
-                  ),
+                  decoration:
+                      AppDecoration.buttonActionCircle(context).decoration,
                   child: Icon(
                     Feather.search,
                     size: _size.width / 20.5,
+                    color: Theme.of(context).buttonColor,
                   ),
                 ),
               ],
