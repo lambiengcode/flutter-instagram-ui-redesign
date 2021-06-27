@@ -98,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return GestureDetector(
       onTap: () {
         if (title == 'Theme') {
-          ThemeService().changeThemeMode();
+          // ThemeService().changeThemeMode();
         } else if (title == 'Language') {
           showSettingBottomSheet(valueOfLanguage);
         } else {

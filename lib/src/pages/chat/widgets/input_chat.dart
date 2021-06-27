@@ -60,18 +60,18 @@ class _ChatInputState extends State<ChatInput> {
             controller.showEmojiPicker
                 ? Column(
                     children: [
-                      Container(
-                        height: 26.sp,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: categories.length,
-                          itemBuilder: (context, index) => listCategoriesMedia(
-                            context,
-                            index,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 2.sp),
+                      // Container(
+                      //   height: 26.sp,
+                      //   child: ListView.builder(
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemCount: categories.length,
+                      //     itemBuilder: (context, index) => listCategoriesMedia(
+                      //       context,
+                      //       index,
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(height: 2.sp),
                       Container(
                         alignment: Alignment.center,
                         child: Column(

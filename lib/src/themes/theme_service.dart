@@ -19,7 +19,7 @@ class ThemeService {
 
   ThemeMode getThemeMode() {
     switchStatusColor();
-    return isSavedDarkMode() ? ThemeMode.dark : ThemeMode.light;
+    return ThemeMode.dark;
   }
 
   bool isSavedDarkMode() {
