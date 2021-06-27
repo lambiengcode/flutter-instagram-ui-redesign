@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/utils.dart';
@@ -7,6 +6,7 @@ import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
 import 'package:whoru/src/pages/profile/profile_page.dart';
+import 'package:whoru/src/pages/search/search_page.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -20,7 +20,7 @@ class _NavigationState extends State<Navigation> {
   int currentPage = 0;
   var _pages = [
     HomePage(),
-    Container(),
+    SearchPage(),
     ChatPage(),
     Container(),
     ProfilePage(),
@@ -55,7 +55,12 @@ class _NavigationState extends State<Navigation> {
           top: Radius.circular(50.0),
         ),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          filter: ImageFilter.blur(
+            sigmaX:
+                Theme.of(context).brightness == Brightness.dark ? .25 : 10.0,
+            sigmaY:
+                Theme.of(context).brightness == Brightness.dark ? .25 : 10.0,
+          ),
           child: BottomAppBar(
             clipBehavior: Clip.antiAliasWithSaveLayer,
             shape: CircularNotchedRectangle(),

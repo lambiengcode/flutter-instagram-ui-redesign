@@ -98,12 +98,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildActionHome(context, title, icon) {
     return Container(
-      padding: EdgeInsets.all(14.sp),
+      padding: EdgeInsets.all(13.sp),
       alignment: Alignment.center,
       decoration: AppDecoration.buttonActionCircle(context).decoration,
       child: Icon(
         icon,
-        size: 12.5.sp,
+        size: 14.sp,
         color: Theme.of(context).buttonColor,
       ),
     );

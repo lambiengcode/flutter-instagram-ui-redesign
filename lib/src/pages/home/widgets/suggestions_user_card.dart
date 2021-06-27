@@ -26,7 +26,8 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
       children: [
         Container(
           width: _size.width * .38,
-          decoration: AppDecoration.buttonActionBorder(context).decoration,
+          decoration:
+              AppDecoration.buttonActionBorder(context, 15.0).decoration,
           margin: EdgeInsets.only(
             left: 10.0,
             right: 4.0,

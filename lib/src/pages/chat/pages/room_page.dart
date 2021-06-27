@@ -24,10 +24,32 @@ class _RoomPageState extends State<RoomPage> {
   }
 
   @override
+  void dispose() {
+    if (roomController.showEmojiPicker) {
+      roomController.hideEmojiContainer();
+    } else if (roomController.textFieldFocus.hasFocus) {
+      roomController.hideKeyboard();
+    }
+    super.dispose();
+  }
+
+  Future<bool> _onWillPop() async {
+    if (roomController.showEmojiPicker) {
+      roomController.hideEmojiContainer();
+      return false;
+    } else if (roomController.textFieldFocus.hasFocus) {
+      roomController.hideKeyboard();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: _onWillPop,
       child: GestureDetector(
         onHorizontalDragEnd: (dragEndDetails) {
           if (dragEndDetails.primaryVelocity < 0) {
@@ -55,7 +77,15 @@ class _RoomPageState extends State<RoomPage> {
             toolbarHeight: _size.width * .16,
             elevation: 2.0,
             leading: IconButton(
-              onPressed: () => Get.back(),
+              onPressed: () {
+                if (roomController.showEmojiPicker) {
+                  roomController.hideEmojiContainer();
+                } else if (roomController.textFieldFocus.hasFocus) {
+                  roomController.hideKeyboard();
+                } else {
+                  Get.back();
+                }
+              },
               icon: Icon(
                 Feather.arrow_left,
                 size: _size.width / 15.0,

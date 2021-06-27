@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_decoration.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -30,29 +31,14 @@ class _SearchPageState extends State<SearchPage>
     return Scaffold(
       appBar: AppBar(
         brightness: Theme.of(context).brightness,
-        backgroundColor: mC,
         elevation: .0,
         toolbarHeight: 55.0,
         title: GestureDetector(
           onTap: () {},
           child: Container(
             height: 48.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
-              color: mC,
-              boxShadow: [
-                BoxShadow(
-                  color: mCD,
-                  offset: Offset(3, 3),
-                  blurRadius: 3,
-                ),
-                BoxShadow(
-                  color: mCL,
-                  offset: Offset(-2, -2),
-                  blurRadius: 2,
-                ),
-              ],
-            ),
+            decoration:
+                AppDecoration.buttonActionBorder(context, 8.0).decoration,
             padding: EdgeInsets.only(
               left: 24.0,
             ),
@@ -62,15 +48,13 @@ class _SearchPageState extends State<SearchPage>
                 Icon(
                   Feather.search,
                   size: _size.width / 23.5,
-                  color: fCL,
                 ),
                 SizedBox(
                   width: 12.5,
                 ),
                 Text(
-                  'Search',
+                  'Search...',
                   style: TextStyle(
-                    color: fCL,
                     fontSize: _size.width / 26.0,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Lato',
@@ -85,7 +69,6 @@ class _SearchPageState extends State<SearchPage>
             onPressed: () => null,
             icon: Icon(
               Feather.maximize,
-              color: colorDarkGrey,
               size: _size.width / 16.0,
             ),
           ),
@@ -93,20 +76,10 @@ class _SearchPageState extends State<SearchPage>
         ],
       ),
       body: Container(
-        color: mC,
         child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                color: mC,
-                boxShadow: [
-                  BoxShadow(
-                    color: mCD,
-                    offset: Offset(4, 4),
-                    blurRadius: 4,
-                  ),
-                ],
-              ),
+              // decoration: AppDecoration.tabBarDecoration(context).decoration,
               child: Column(
                 children: <Widget>[
                   SizedBox(
@@ -116,7 +89,8 @@ class _SearchPageState extends State<SearchPage>
                     controller: _tabController,
                     labelColor: colorPrimary,
                     indicatorColor: colorPrimary,
-                    unselectedLabelColor: colorDarkGrey,
+                    unselectedLabelColor:
+                        Theme.of(context).textTheme.bodyText1.color,
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorWeight: 2.5,
                     labelStyle: TextStyle(

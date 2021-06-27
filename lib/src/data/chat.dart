@@ -68,4 +68,24 @@ List<Chat> chats = [
     notification: true,
     blurHash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
   ),
+  Chat(
+    image:
+        'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8bW9kZWx8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    fullName: 'Harold Nguyen',
+    lastMessage: 'Fuck bitch!!!',
+    time: '3h',
+    pendingMessage: 4,
+    notification: false,
+    blurHash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
+  ),
+  Chat(
+    image:
+        'https://images.unsplash.com/photo-1508606572321-901ea443707f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDJ8fG1vZGVsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    fullName: 'Material',
+    lastMessage: 'Do u want me?',
+    time: '1d',
+    pendingMessage: 0,
+    notification: true,
+    blurHash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
+  ),
 ];
