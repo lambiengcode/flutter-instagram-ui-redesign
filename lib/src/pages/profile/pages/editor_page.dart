@@ -35,7 +35,7 @@ class _EditorPageState extends State<EditorPage> {
             onPressed: () => Get.back(),
           ),
           title: Text(
-            'My Gallary',
+            '0 / 10',
             style: TextStyle(
               fontSize: _size.width / 20.0,
               fontFamily: 'Lato',
@@ -53,6 +53,7 @@ class _EditorPageState extends State<EditorPage> {
           ],
         ),
         body: Container(
+          padding: EdgeInsets.only(top: 4.0),
           child: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (overscroll) {
               overscroll.disallowGlow();

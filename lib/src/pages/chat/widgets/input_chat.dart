@@ -196,7 +196,7 @@ class _ChatInputState extends State<ChatInput> {
                     });
                   },
                   style: TextStyle(
-                    color: Colors.grey.shade800,
+                    color: Theme.of(context).textTheme.bodyText1.color,
                     fontSize: _size.width / 26.0,
                   ),
                   controller: controller.textFieldController,
@@ -212,7 +212,11 @@ class _ChatInputState extends State<ChatInput> {
                     ),
                     hintText: 'Type message...',
                     hintStyle: TextStyle(
-                      color: colorDarkGrey,
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .color
+                          .withOpacity(.85),
                       fontSize: _size.width / 26.5,
                       fontWeight: FontWeight.w400,
                       fontFamily: 'Lato',

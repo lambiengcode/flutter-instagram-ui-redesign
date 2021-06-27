@@ -54,7 +54,7 @@ class _EndDrawerState extends State<EndDrawer> {
                   Feather.log_out,
                   colorPrimary,
                 ),
-                _buildDividerTransparant(context),
+                // _buildDividerTransparant(context),
               ],
             ),
           ),
@@ -62,7 +62,7 @@ class _EndDrawerState extends State<EndDrawer> {
             padding: EdgeInsets.only(left: 12.0, right: 8.0),
             margin: EdgeInsets.only(bottom: 70.sp),
             child: Text(
-              'v1.0.0 - Whoru',
+              '1.0.0 - Whoru',
               style: TextStyle(
                 fontSize: 8.sp,
                 fontWeight: FontWeight.w400,
@@ -106,8 +106,8 @@ class _EndDrawerState extends State<EndDrawer> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12.8),
       child: Divider(
-        thickness: .25,
-        height: .25,
+        thickness: .1,
+        height: .1,
         indent: 8.0,
         endIndent: 2.0,
       ),
@@ -118,8 +118,8 @@ class _EndDrawerState extends State<EndDrawer> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12.8),
       child: Divider(
-        thickness: .25,
-        height: .25,
+        thickness: .12,
+        height: .12,
         indent: 8.0,
         endIndent: 2.0,
       ),

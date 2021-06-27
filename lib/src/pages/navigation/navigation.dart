@@ -52,7 +52,7 @@ class _NavigationState extends State<Navigation> {
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(50.0),
+          top: Radius.circular(40.0),
         ),
         child: BackdropFilter(
           filter: ImageFilter.blur(
