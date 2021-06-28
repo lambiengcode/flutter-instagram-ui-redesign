@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:whoru/src/common/routes.dart';
 import 'dart:convert' as convert;
 import 'dart:async';
-import 'package:whoru/src/providers/account_provider.dart';
+
+import 'package:whoru/src/providers/user_provider.dart';
 
 class BaseRepository {
   var dio = diox.Dio(diox.BaseOptions(
@@ -18,7 +19,8 @@ class BaseRepository {
     var response = await dio.download(
       url,
       path,
-      onReceiveProgress: onReceive,
+      options: getOptions(),
+      onReceiveProgress: onReceive(),
     );
     return response;
   }
@@ -31,7 +33,8 @@ class BaseRepository {
     var response = await dio.post(
       gateway,
       data: formData,
-      onSendProgress: onSend,
+      options: getOptions(),
+      onSendProgress: onSend(),
     );
     return response;
   }
@@ -49,6 +52,7 @@ class BaseRepository {
     var response = await dio.put(
       gateway,
       data: body,
+      options: getOptions(),
     );
     printEndpoint('PUT', gateway);
     return response;
@@ -57,6 +61,7 @@ class BaseRepository {
   Future<diox.Response<dynamic>> getRoute(String gateway, String params) async {
     var response = await dio.get(
       gateway + params,
+      options: getOptions(),
     );
     printEndpoint('GET', gateway);
     printResponse(response);
@@ -68,16 +73,19 @@ class BaseRepository {
     var response = await dio.delete(
       gateway,
       data: body,
+      options: getOptions(),
     );
     printEndpoint('DELETE', gateway);
     return response;
   }
 
-  Map<String, String> getHeaders() {
-    return {
-      'Authorization':
-          'Bearer ${Provider.of<AccountProvider>(getx.Get.context, listen: false).accessToken}',
-    };
+  diox.Options getOptions() {
+    return diox.Options(
+      headers: {
+        'Authorization':
+            'Bearer ${Provider.of<UserProvider>(getx.Get.context, listen: false).user.accessToken}',
+      },
+    );
   }
 
   printEndpoint(String method, String endpoint) {

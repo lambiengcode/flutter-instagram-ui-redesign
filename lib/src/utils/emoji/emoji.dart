@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'dart:math';
 import 'package:whoru/src/utils/emoji/emoji_list.dart' as emojiList;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -279,9 +278,7 @@ class Emoji {
 }
 
 class _EmojiPickerState extends State<EmojiPicker> {
-  static const platform = const MethodChannel("emoji_picker");
-
-  List<Widget> pages = new List();
+  List<Widget> pages = [];
   int recommendedPagesNum;
   int recentPagesNum;
   int smileyPagesNum;
@@ -292,9 +289,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
   int objectPagesNum;
   int symbolPagesNum;
   int flagPagesNum;
-  List<String> allNames = new List();
-  List<String> allEmojis = new List();
-  List<String> recentEmojis = new List();
+  List<String> allNames = [];
+  List<String> allEmojis = [];
+  List<String> recentEmojis = [];
 
   Map<String, String> smileyMap = new Map();
   Map<String, String> animalMap = new Map();
@@ -316,20 +313,20 @@ class _EmojiPickerState extends State<EmojiPicker> {
     });
   }
 
-  Future<bool> _isEmojiAvailable(String emoji) async {
-    if (Platform.isAndroid) {
-      bool isAvailable;
-      try {
-        isAvailable =
-            await platform.invokeMethod("isAvailable", {"emoji": emoji});
-      } on PlatformException catch (_) {
-        isAvailable = false;
-      }
-      return isAvailable;
-    } else {
-      return true;
-    }
-  }
+  // Future<bool> _isEmojiAvailable(String emoji) async {
+  //   if (Platform.isAndroid) {
+  //     bool isAvailable;
+  //     try {
+  //       isAvailable =
+  //           await platform.invokeMethod("isAvailable", {"emoji": emoji});
+  //     } on PlatformException catch (_) {
+  //       isAvailable = false;
+  //     }
+  //     return isAvailable;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 
   Future<Map<String, String>> _getFiltered(Map<String, String> emoji) async {
     if (Platform.isAndroid) {
@@ -342,7 +339,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
   Future<List<String>> getRecentEmojis() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final key = "recents";
-    recentEmojis = prefs.getStringList(key) ?? new List();
+    recentEmojis = prefs.getStringList(key) ?? [];
     return recentEmojis;
   }
 
@@ -424,8 +421,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
     allEmojis.addAll(flagMap.values);
 
     recommendedPagesNum = 0;
-    List<_Recommended> recommendedEmojis = new List();
-    List<Widget> recommendedPages = new List();
+    List<_Recommended> recommendedEmojis = [];
+    List<Widget> recommendedPages = [];
 
     if (widget.recommendKeywords != null) {
       allNames.forEach((name) {
@@ -545,8 +542,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                   switch (widget.buttonMode) {
                     case ButtonMode.MATERIAL:
                       return Center(
-                          child: FlatButton(
-                        padding: EdgeInsets.all(0),
+                          child: TextButton(
                         child: Center(
                           child: Text(
                             recommendedEmojis[
@@ -621,7 +617,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
       }
     }
 
-    List<Widget> recentPages = new List();
+    List<Widget> recentPages = [];
     recentPagesNum = 1;
     recentPages.add(recentPage());
 
@@ -629,7 +625,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (smileyMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> smileyPages = new List();
+    List<Widget> smileyPages = [];
 
     for (var i = 0; i < smileyPagesNum; i++) {
       smileyPages.add(Container(
@@ -647,8 +643,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
               switch (widget.buttonMode) {
                 case ButtonMode.MATERIAL:
                   return Center(
-                      child: FlatButton(
-                    padding: EdgeInsets.all(0),
+                      child: TextButton(
                     child: Center(
                       child: Text(
                         emojiTxt,
@@ -703,7 +698,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (animalMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> animalPages = new List();
+    List<Widget> animalPages = [];
 
     for (var i = 0; i < animalPagesNum; i++) {
       animalPages.add(Container(
@@ -718,8 +713,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
               switch (widget.buttonMode) {
                 case ButtonMode.MATERIAL:
                   return Center(
-                      child: FlatButton(
-                    padding: EdgeInsets.all(0),
+                      child: TextButton(
                     child: Center(
                       child: Text(
                         animalMap.values.toList()[
@@ -777,7 +771,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (foodMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> foodPages = new List();
+    List<Widget> foodPages = [];
 
     for (var i = 0; i < foodPagesNum; i++) {
       foodPages.add(Container(
@@ -792,8 +786,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
               switch (widget.buttonMode) {
                 case ButtonMode.MATERIAL:
                   return Center(
-                      child: FlatButton(
-                    padding: EdgeInsets.all(0),
+                      child: TextButton(
                     child: Center(
                       child: Text(
                         foodMap.values.toList()[
@@ -851,7 +844,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (travelMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> travelPages = new List();
+    List<Widget> travelPages = [];
 
     for (var i = 0; i < travelPagesNum; i++) {
       travelPages.add(Container(
@@ -866,8 +859,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
               switch (widget.buttonMode) {
                 case ButtonMode.MATERIAL:
                   return Center(
-                      child: FlatButton(
-                    padding: EdgeInsets.all(0),
+                      child: TextButton(
                     child: Center(
                       child: Text(
                         travelMap.values.toList()[
@@ -925,7 +917,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (activityMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> activityPages = new List();
+    List<Widget> activityPages = [];
 
     for (var i = 0; i < activityPagesNum; i++) {
       activityPages.add(Container(
@@ -943,8 +935,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
               switch (widget.buttonMode) {
                 case ButtonMode.MATERIAL:
                   return Center(
-                      child: FlatButton(
-                    padding: EdgeInsets.all(0),
+                      child: TextButton(
                     child: Center(
                       child: Text(
                         activityMap.values.toList()[
@@ -1001,7 +992,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (objectMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> objectPages = new List();
+    List<Widget> objectPages = [];
 
     for (var i = 0; i < objectPagesNum; i++) {
       objectPages.add(Container(
@@ -1016,8 +1007,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
               switch (widget.buttonMode) {
                 case ButtonMode.MATERIAL:
                   return Center(
-                      child: FlatButton(
-                    padding: EdgeInsets.all(0),
+                      child: TextButton(
                     child: Center(
                       child: Text(
                         objectMap.values.toList()[
@@ -1075,7 +1065,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (symbolMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> symbolPages = new List();
+    List<Widget> symbolPages = [];
 
     for (var i = 0; i < symbolPagesNum; i++) {
       symbolPages.add(Container(
@@ -1090,8 +1080,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
               switch (widget.buttonMode) {
                 case ButtonMode.MATERIAL:
                   return Center(
-                      child: FlatButton(
-                    padding: EdgeInsets.all(0),
+                      child: TextButton(
                     child: Center(
                       child: Text(
                         symbolMap.values.toList()[
@@ -1149,7 +1138,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
         (flagMap.values.toList().length / (widget.rows * widget.columns))
             .ceil();
 
-    List<Widget> flagPages = new List();
+    List<Widget> flagPages = [];
 
     for (var i = 0; i < flagPagesNum; i++) {
       flagPages.add(Container(
@@ -1164,8 +1153,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
               switch (widget.buttonMode) {
                 case ButtonMode.MATERIAL:
                   return Center(
-                      child: FlatButton(
-                    padding: EdgeInsets.all(0),
+                      child: TextButton(
                     child: Center(
                       child: Text(
                         flagMap.values.toList()[
@@ -1250,8 +1238,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                 switch (widget.buttonMode) {
                   case ButtonMode.MATERIAL:
                     return Center(
-                        child: FlatButton(
-                      padding: EdgeInsets.all(0),
+                        child: TextButton(
                       child: Center(
                         child: Text(
                           allEmojis[allNames.indexOf(recentEmojis[index])],
