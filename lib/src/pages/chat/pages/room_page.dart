@@ -99,9 +99,8 @@ class _RoomPageState extends State<RoomPage> {
                   roomController.hideKeyboard();
                 } else if (roomController.showEmojiPicker) {
                   roomController.hideEmojiContainer();
-                } else {
-                  Get.back();
                 }
+                Get.back();
               },
               icon: Icon(
                 Feather.arrow_left,

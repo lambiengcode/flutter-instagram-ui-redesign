@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/theme_service.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -36,9 +38,9 @@ class _SearchPageState extends State<SearchPage>
         title: GestureDetector(
           onTap: () {},
           child: Container(
-            height: 48.0,
+            height: 36.5.sp,
             decoration:
-                AppDecoration.buttonActionBorder(context, 8.0).decoration,
+                AppDecoration.buttonActionBorder(context, 6.0).decoration,
             padding: EdgeInsets.only(
               left: 24.0,
             ),
@@ -47,15 +49,19 @@ class _SearchPageState extends State<SearchPage>
               children: [
                 Icon(
                   Feather.search,
-                  size: _size.width / 23.5,
+                  size: 14.sp,
                 ),
                 SizedBox(
-                  width: 12.5,
+                  width: 8.sp,
                 ),
                 Text(
                   'Search...',
                   style: TextStyle(
-                    fontSize: _size.width / 26.0,
+                    color:
+                        Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                              ThemeService().isSavedDarkMode() ? .95 : .65,
+                            ),
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Lato',
                   ),
@@ -69,7 +75,7 @@ class _SearchPageState extends State<SearchPage>
             onPressed: () => null,
             icon: Icon(
               Feather.maximize,
-              size: _size.width / 16.0,
+              size: 18.sp,
             ),
           ),
           SizedBox(width: 4.0),
@@ -89,18 +95,21 @@ class _SearchPageState extends State<SearchPage>
                     controller: _tabController,
                     labelColor: colorPrimary,
                     indicatorColor: colorPrimary,
-                    unselectedLabelColor:
-                        Theme.of(context).textTheme.bodyText1.color,
+                    unselectedLabelColor: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .color
+                        .withOpacity(.88),
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorWeight: 2.5,
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: _size.width / 26.5,
+                      fontSize: 11.sp,
                       fontFamily: 'Lato',
                     ),
                     unselectedLabelStyle: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: _size.width / 28.5,
+                      fontSize: 10.sp,
                       fontFamily: 'Lato',
                     ),
                     tabs: [
