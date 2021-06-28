@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:whoru/src/pages/auth/auth_page.dart';
 import 'package:whoru/src/pages/navigation/navigation.dart';
 import 'package:whoru/src/pages/splash/splash_page.dart';
-import 'package:whoru/src/providers/account_provider.dart';
+import 'package:whoru/src/providers/user_provider.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 
 class App extends StatefulWidget {
@@ -53,7 +53,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return _countDown != 0 && App.firstCome
         ? SplashPage(points: points)
-        : Provider.of<AccountProvider>(context).accessToken != null
+        : Provider.of<UserProvider>(context).user != null
             ? AuthenticationPage()
             : Navigation();
   }

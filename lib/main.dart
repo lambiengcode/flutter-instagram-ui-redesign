@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:whoru/src/lang/translation_service.dart';
-import 'package:whoru/src/providers/account_provider.dart';
+import 'package:whoru/src/providers/user_provider.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/themes/themes.dart';
@@ -15,8 +15,8 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<AccountProvider>(
-          create: (_) => AccountProvider(),
+        ChangeNotifierProvider<UserProvider>(
+          create: (_) => UserProvider(),
         ),
       ],
       child: Sizer(
