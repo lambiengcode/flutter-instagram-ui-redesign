@@ -49,6 +49,10 @@ class _SearchPageState extends State<SearchPage>
                 Icon(
                   Feather.search,
                   size: 14.sp,
+                  color:
+                      Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                            ThemeService().isSavedDarkMode() ? .88 : .65,
+                          ),
                 ),
                 SizedBox(
                   width: 8.sp,
@@ -75,6 +79,9 @@ class _SearchPageState extends State<SearchPage>
             icon: Icon(
               Feather.maximize,
               size: 18.sp,
+              color: Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                    ThemeService().isSavedDarkMode() ? .88 : .65,
+                  ),
             ),
           ),
           SizedBox(width: 4.0),
@@ -94,11 +101,10 @@ class _SearchPageState extends State<SearchPage>
                     controller: _tabController,
                     labelColor: colorPrimary,
                     indicatorColor: colorPrimary,
-                    unselectedLabelColor: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .color
-                        .withOpacity(.88),
+                    unselectedLabelColor:
+                        Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                              ThemeService().isSavedDarkMode() ? .88 : .65,
+                            ),
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorWeight: 2.5,
                     labelStyle: TextStyle(

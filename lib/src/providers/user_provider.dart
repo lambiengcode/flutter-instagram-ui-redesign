@@ -9,4 +9,8 @@ class UserProvider extends ChangeNotifier {
   void loginMapUser(Map<String, dynamic> data) {
     _user = User.fromMap(data);
   }
+
+  void logout() {
+    _user = null;
+  }
 }

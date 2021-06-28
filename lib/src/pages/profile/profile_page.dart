@@ -7,6 +7,7 @@ import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
 import 'package:whoru/src/pages/profile/widgets/posts_listsview.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -25,13 +26,8 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     super.initState();
     _tabController = new TabController(length: 3, vsync: this, initialIndex: 0);
-    if (Get.height / Get.width > 2.0) {
-      min = .425;
-      initial = .425;
-    } else {
-      min = .365;
-      initial = .365;
-    }
+    min = (100.h - 335.sp) / 100.h;
+    initial = min;
   }
 
   void _openEndDrawer() {
@@ -40,12 +36,11 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Scaffold(
       key: _scaffoldKey,
       extendBodyBehindAppBar: true,
       endDrawer: Container(
-        width: _size.width * .58,
+        width: 60.w,
         child: Drawer(
           child: EndDrawer(),
         ),
@@ -60,15 +55,15 @@ class _ProfilePageState extends State<ProfilePage>
           icon: Icon(
             Feather.settings,
             color: mCM,
-            size: _size.width / 16.0,
+            size: 18.sp,
           ),
           onPressed: () => Get.toNamed('/settings'),
         ),
         title: Text(
-          'Me',
+          '',
           style: TextStyle(
             color: mCM,
-            fontSize: _size.width / 22.5,
+            fontSize: 12.sp,
             fontFamily: 'Lato',
             fontWeight: FontWeight.bold,
           ),
@@ -78,65 +73,54 @@ class _ProfilePageState extends State<ProfilePage>
             icon: Icon(
               Feather.align_justify,
               color: mCM,
-              size: _size.width / 16.0,
+              size: 18.sp,
             ),
             onPressed: () => _openEndDrawer(),
           ),
         ],
       ),
       body: Container(
-        height: _size.height,
-        width: _size.width,
+        height: 100.h,
+        width: 100.w,
         child: Stack(
           children: [
             Column(
               children: [
-                // Container(
-                //   child: ProgressiveImage(
-                //     placeholder: ,
-                //     thumbnail: NetworkImage(
-                //         'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797'),
-                //     image: NetworkImage(
-                //         'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797'),
-                //     width: _size.width,
-                //     height: _size.height * .265,
-                //   ),
-                // ),
                 Container(
-                  width: _size.width,
-                  height: _size.height * .265,
+                  width: 300.sp,
+                  height: 168.75.sp,
                   child: BlurHash(
-                    hash: "L79ZK77eC+of+G8^VXz;Ty^lb^2?",
+                    hash: "L27B7e4n~WIU?bofD%xu4.t7RjRj",
                     image:
                         'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797',
                     imageFit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(height: _size.height * .018),
+                SizedBox(height: 13.5.sp),
                 Row(
                   children: [
                     _buildTitleFollow(context, 'Follower', '104k'),
-                    SizedBox(width: _size.width * .2),
+                    SizedBox(width: 6.w),
                     _buildTitleFollow(context, 'Following', '10k'),
                   ],
                 ),
-                SizedBox(height: _size.height * .03),
+                SizedBox(height: 20.sp),
                 Text(
                   'Đào Hồng Vinh - Dev',
                   style: TextStyle(
-                    fontSize: _size.width / 21.5,
+                    fontSize: 12.sp,
                     fontFamily: 'Lato',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 SizedBox(height: 8.0),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: _size.width * .1),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   alignment: Alignment.center,
                   child: Text(
                     'Mobile App Developer (lambiengcode)',
                     style: TextStyle(
-                      fontSize: _size.width / 26.0,
+                      fontSize: 11.sp,
                       fontFamily: 'Lato',
                       fontWeight: FontWeight.w400,
                     ),
@@ -146,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage>
                 SizedBox(height: 16.0),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: _size.width * .15,
+                    horizontal: 15.w,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,14 +161,14 @@ class _ProfilePageState extends State<ProfilePage>
               ],
             ),
             Positioned(
-              top: _size.height * .186,
+              top: 118.75.sp,
               left: 0,
               child: Container(
-                width: _size.width,
+                width: 100.w,
                 alignment: Alignment.center,
                 child: Container(
-                  height: _size.height * .152,
-                  width: _size.height * .152,
+                  height: 100.sp,
+                  width: 100.sp,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
@@ -194,8 +178,8 @@ class _ProfilePageState extends State<ProfilePage>
                   ),
                   alignment: Alignment.center,
                   child: Container(
-                    height: _size.height * .132,
-                    width: _size.height * .132,
+                    height: 88.sp,
+                    width: 88.sp,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
@@ -215,7 +199,6 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   Widget _buildTitleFollow(context, title, value) {
-    final _size = MediaQuery.of(context).size;
     return Expanded(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -227,16 +210,21 @@ class _ProfilePageState extends State<ProfilePage>
                 TextSpan(
                   text: '$value\n',
                   style: TextStyle(
-                    fontSize: _size.width / 24.0,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
+                    color: Theme.of(context).textTheme.bodyText1.color,
                   ),
                 ),
                 TextSpan(
                   text: title,
                   style: TextStyle(
-                    fontSize: _size.width / 28.5,
+                    fontSize: 10.5.sp,
                     fontWeight: FontWeight.w400,
-                    fontFamily: 'Lato',
+                    color: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .color
+                        .withOpacity(.8),
                   ),
                 ),
               ],
@@ -253,7 +241,7 @@ class _ProfilePageState extends State<ProfilePage>
       onTap: () {
         switch (title) {
           case 'Edit Profile':
-            Get.toNamed(Routes.EDIT_PROFILE);
+            // Get.toNamed(Routes.EDIT_PROFILE);
             break;
           case 'Editor':
             Get.toNamed(Routes.EDIT_PHOTO);
@@ -318,7 +306,9 @@ class _ProfilePageState extends State<ProfilePage>
                                 .textTheme
                                 .bodyText1
                                 .color
-                                .withOpacity(.88),
+                                .withOpacity(
+                                  ThemeService().isSavedDarkMode() ? .88 : .65,
+                                ),
                             indicatorSize: TabBarIndicatorSize.tab,
                             indicatorWeight: 2.5,
                             labelStyle: TextStyle(

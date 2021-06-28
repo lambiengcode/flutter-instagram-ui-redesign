@@ -93,8 +93,6 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildLineSetting(context, title, icon, value) {
-    final _size = MediaQuery.of(context).size;
-
     return GestureDetector(
       onTap: () {
         if (title == 'Theme') {
@@ -115,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              width: .2,
+              width: .04,
             ),
           ),
         ),
@@ -127,15 +125,15 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Icon(
                   icon,
-                  size: _size.width / 18.0,
+                  size: 18.sp,
                 ),
-                SizedBox(width: 12.0),
+                SizedBox(width: 10.sp),
                 Padding(
                   padding: EdgeInsets.only(top: 1.2),
                   child: Text(
                     title,
                     style: TextStyle(
-                      fontSize: _size.width / 24.5,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -145,7 +143,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Text(
               value,
               style: TextStyle(
-                fontSize: _size.width / 26.0,
+                fontSize: 11.sp,
                 fontWeight: FontWeight.w600,
                 color: title == 'Notifications'
                     ? Theme.of(context).primaryColor
