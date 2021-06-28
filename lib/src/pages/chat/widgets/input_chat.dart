@@ -20,7 +20,12 @@ class ChatInput extends StatefulWidget {
 }
 
 class _ChatInputState extends State<ChatInput> {
-  List<String> categories = ['Emoji', 'Sticker', 'Photo', 'Gif'];
+  List<IconData> categories = [
+    FontAwesome5Solid.smile_beam,
+    FontAwesome5Solid.sticky_note,
+    FontAwesome5Solid.star,
+    FontAwesome5Solid.camera_retro,
+  ];
   String message = "";
   int maxLines = 1;
   bool isWriting = false;
@@ -48,7 +53,7 @@ class _ChatInputState extends State<ChatInput> {
           children: <Widget>[
             Container(
               margin: EdgeInsets.symmetric(
-                  horizontal: controller.showEmojiPicker ? .0 : 20.0),
+                  horizontal: controller.showEmojiPicker ? .0 : 16.sp),
               decoration: AppDecoration.inputChatDecoration(context).decoration,
               padding: EdgeInsets.symmetric(
                 vertical: 2.sp,
@@ -56,22 +61,23 @@ class _ChatInputState extends State<ChatInput> {
               ),
               child: chatControls(controller),
             ),
-            SizedBox(height: controller.showEmojiPicker ? 8.sp : 14.sp),
+            SizedBox(height: controller.showEmojiPicker ? 10.sp : 14.sp),
             controller.showEmojiPicker
                 ? Column(
                     children: [
-                      // Container(
-                      //   height: 26.sp,
-                      //   child: ListView.builder(
-                      //     scrollDirection: Axis.horizontal,
-                      //     itemCount: categories.length,
-                      //     itemBuilder: (context, index) => listCategoriesMedia(
-                      //       context,
-                      //       index,
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(height: 2.sp),
+                      Container(
+                        height: 26.sp,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            listCategoriesMedia(context, 0),
+                            listCategoriesMedia(context, 1),
+                            listCategoriesMedia(context, 2),
+                            listCategoriesMedia(context, 3),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 4.sp),
                       Container(
                         alignment: Alignment.center,
                         child: Column(
@@ -92,11 +98,12 @@ class _ChatInputState extends State<ChatInput> {
   }
 
   Widget emojiContainer(controller) {
-    final _size = MediaQuery.of(context).size;
     return EmojiPicker(
       bgColor: Colors.transparent,
-      indicatorColor:
-          Theme.of(context).textTheme.bodyText1.color.withOpacity(.4),
+      indicatorColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(
+            ThemeService().isSavedDarkMode() ? .65 : .1,
+          ),
+      progressIndicatorColor: colorPrimary,
       rows: 3,
       columns: 9,
       onEmojiSelected: (emoji, category) {
@@ -111,13 +118,13 @@ class _ChatInputState extends State<ChatInput> {
       buttonMode: ButtonMode.CUPERTINO,
       noRecommendationsStyle: TextStyle(
         color: colorPrimary,
-        fontSize: _size.width / 26.0,
+        fontSize: 8.5.sp,
         fontWeight: FontWeight.w400,
         fontFamily: 'Lato',
       ),
       noRecentsStyle: TextStyle(
         color: colorPrimary,
-        fontSize: _size.width / 26.0,
+        fontSize: 8.5.sp,
         fontWeight: FontWeight.w400,
         fontFamily: 'Lato',
       ),
@@ -126,7 +133,7 @@ class _ChatInputState extends State<ChatInput> {
 
   Widget listCategoriesMedia(context, index) {
     return GestureDetector(
-      onTap: () => print(categories[index]),
+      // onTap: () => print(categories[index]),
       child: Container(
         margin: EdgeInsets.only(
           bottom: 1.25.sp,
@@ -134,26 +141,23 @@ class _ChatInputState extends State<ChatInput> {
           left: 6.sp,
           right: 2.sp,
         ),
-        padding: EdgeInsets.symmetric(horizontal: 22.sp),
+        padding: EdgeInsets.symmetric(horizontal: 24.sp, vertical: 6.0),
         decoration: AppDecoration.buttonActionBorder(context, 30.0).decoration,
         alignment: Alignment.center,
-        child: Text(
+        child: Icon(
           categories[index],
-          style: TextStyle(
-            fontSize: 10.5.sp,
-            color: index == 0
-                ? colorPrimary
-                : Theme.of(context).textTheme.bodyText1.color.withOpacity(
-                      ThemeService().isSavedDarkMode() ? 1 : .6,
-                    ),
-          ),
+          color: index == 0
+              ? colorPrimary
+              : Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                    ThemeService().isSavedDarkMode() ? .95 : .6,
+                  ),
+          size: 14.sp,
         ),
       ),
     );
   }
 
   Widget chatControls(controller) {
-    final _size = MediaQuery.of(context).size;
     setWritingTo(bool val) {
       setState(() {
         isWriting = val;
@@ -196,8 +200,8 @@ class _ChatInputState extends State<ChatInput> {
                     });
                   },
                   style: TextStyle(
-                    color: Colors.grey.shade800,
-                    fontSize: _size.width / 26.0,
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                    fontSize: 12.sp,
                   ),
                   controller: controller.textFieldController,
                   focusNode: controller.textFieldFocus,
@@ -212,8 +216,14 @@ class _ChatInputState extends State<ChatInput> {
                     ),
                     hintText: 'Type message...',
                     hintStyle: TextStyle(
-                      color: colorDarkGrey,
-                      fontSize: _size.width / 26.5,
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .color
+                          .withOpacity(
+                            ThemeService().isSavedDarkMode() ? .85 : .65,
+                          ),
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
                       fontFamily: 'Lato',
                     ),

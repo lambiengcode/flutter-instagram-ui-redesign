@@ -35,6 +35,7 @@ dependencies:
   lottie: ^1.0.1 
   emoji_picker: ^0.1.0
   like_button: ^2.0.2
+  dio: ^4.0.0
   
   # Local database
   shared_preferences:
@@ -44,6 +45,7 @@ dependencies:
   provider: ^5.0.0
   flutter_bloc: ^7.0.1
   get: ^4.1.4
+  flutter_simple_dependency_injection: ^2.0.0
 
   # Photo library
   flutter_blurhash: ^0.6.0

@@ -1529,8 +1529,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                       ? Colors.black12
                                       : Colors.transparent,
                                   shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(0))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(1000))),
                                   child: Center(
                                     child: Icon(
                                       widget.categoryIcons.recommendationIcon
@@ -1561,7 +1561,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                       ? Colors.black12
                                       : Colors.transparent,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(0)),
+                                      BorderRadius.all(Radius.circular(1000)),
                                   child: Center(
                                     child: Icon(
                                       widget.categoryIcons.recommendationIcon
@@ -1599,7 +1599,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
+                                    BorderRadius.all(Radius.circular(1000))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.recentIcon.icon,
@@ -1626,7 +1626,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.RECENT
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1000)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.recentIcon.icon,
@@ -1661,7 +1662,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
+                                    BorderRadius.all(Radius.circular(1000))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.smileyIcon.icon,
@@ -1688,7 +1689,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.SMILEYS
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1000)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.smileyIcon.icon,
@@ -1723,7 +1725,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
+                                    BorderRadius.all(Radius.circular(1000))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.animalIcon.icon,
@@ -1751,7 +1753,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.ANIMALS
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1000)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.animalIcon.icon,
@@ -1787,7 +1790,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
+                                    BorderRadius.all(Radius.circular(1000))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.foodIcon.icon,
@@ -1815,7 +1818,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.FOODS
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1000)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.foodIcon.icon,
@@ -1851,7 +1855,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
+                                    BorderRadius.all(Radius.circular(1000))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.travelIcon.icon,
@@ -1881,7 +1885,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.TRAVEL
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1000)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.travelIcon.icon,
@@ -1920,7 +1925,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                     : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
+                                    BorderRadius.all(Radius.circular(1000))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.activityIcon.icon,
@@ -1953,7 +1958,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 widget.selectedCategory == Category.ACTIVITIES
                                     ? Colors.black12
                                     : Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1000)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.activityIcon.icon,
@@ -1993,7 +1999,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
+                                    BorderRadius.all(Radius.circular(1000))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.objectIcon.icon,
@@ -2025,7 +2031,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.OBJECTS
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1000)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.objectIcon.icon,
@@ -2065,7 +2072,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
+                                    BorderRadius.all(Radius.circular(1000))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.symbolIcon.icon,
@@ -2098,7 +2105,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.SYMBOLS
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1000)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.symbolIcon.icon,
@@ -2139,7 +2147,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                                 : Colors.transparent,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
+                                    BorderRadius.all(Radius.circular(1000))),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.flagIcon.icon,
@@ -2172,7 +2180,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             color: widget.selectedCategory == Category.FLAGS
                                 ? Colors.black12
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1000)),
                             child: Center(
                               child: Icon(
                                 widget.categoryIcons.flagIcon.icon,

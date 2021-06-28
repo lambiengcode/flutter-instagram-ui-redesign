@@ -314,7 +314,11 @@ class _ProfilePageState extends State<ProfilePage>
                             controller: _tabController,
                             labelColor: colorPrimary,
                             indicatorColor: colorPrimary,
-                            unselectedLabelColor: colorDarkGrey,
+                            unselectedLabelColor: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .color
+                                .withOpacity(.88),
                             indicatorSize: TabBarIndicatorSize.tab,
                             indicatorWeight: 2.5,
                             labelStyle: TextStyle(

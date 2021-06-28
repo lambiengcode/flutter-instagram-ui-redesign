@@ -47,7 +47,7 @@ class AppColors {
       error: Color(0xffff5544),
       divider: Colors.white24,
       button: Colors.white,
-      contentText1: mC,
+      contentText1: mCL,
     );
   }
 }

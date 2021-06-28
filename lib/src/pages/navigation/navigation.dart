@@ -52,7 +52,7 @@ class _NavigationState extends State<Navigation> {
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(50.0),
+          top: Radius.circular(40.0),
         ),
         child: BackdropFilter(
           filter: ImageFilter.blur(
@@ -64,12 +64,15 @@ class _NavigationState extends State<Navigation> {
           child: BottomAppBar(
             clipBehavior: Clip.antiAliasWithSaveLayer,
             shape: CircularNotchedRectangle(),
-            notchMargin: 6.sp,
+            notchMargin: 5.sp,
             color: Theme.of(context).brightness == Brightness.dark
                 ? Colors.black
                 : Colors.black.withOpacity(.25),
             elevation: .0,
             child: Container(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black
+                  : Colors.black.withOpacity(.25),
               padding: EdgeInsets.fromLTRB(
                 12.sp,
                 15.sp,
@@ -92,7 +95,10 @@ class _NavigationState extends State<Navigation> {
           ),
         ),
       ),
-      body: _pages[currentPage],
+      body: Container(
+        margin: EdgeInsets.only(bottom: 32.sp),
+        child: _pages[currentPage],
+      ),
     );
   }
 

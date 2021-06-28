@@ -25,20 +25,29 @@ class _RoomPageState extends State<RoomPage> {
 
   @override
   void dispose() {
-    if (roomController.showEmojiPicker) {
+    if (roomController.showEmojiPicker &&
+        roomController.textFieldFocus.hasFocus) {
       roomController.hideEmojiContainer();
+      roomController.hideKeyboard();
     } else if (roomController.textFieldFocus.hasFocus) {
       roomController.hideKeyboard();
+    } else if (roomController.showEmojiPicker) {
+      roomController.hideEmojiContainer();
     }
     super.dispose();
   }
 
   Future<bool> _onWillPop() async {
-    if (roomController.showEmojiPicker) {
+    if (roomController.showEmojiPicker &&
+        roomController.textFieldFocus.hasFocus) {
       roomController.hideEmojiContainer();
+      roomController.hideKeyboard();
       return false;
     } else if (roomController.textFieldFocus.hasFocus) {
       roomController.hideKeyboard();
+      return false;
+    } else if (roomController.showEmojiPicker) {
+      roomController.hideEmojiContainer();
       return false;
     } else {
       return true;
@@ -55,10 +64,14 @@ class _RoomPageState extends State<RoomPage> {
           if (dragEndDetails.primaryVelocity < 0) {
             // Go to customize chat room
           } else if (dragEndDetails.primaryVelocity > 0) {
-            if (roomController.showEmojiPicker) {
+            if (roomController.showEmojiPicker &&
+                roomController.textFieldFocus.hasFocus) {
               roomController.hideEmojiContainer();
+              roomController.hideKeyboard();
             } else if (roomController.textFieldFocus.hasFocus) {
               roomController.hideKeyboard();
+            } else if (roomController.showEmojiPicker) {
+              roomController.hideEmojiContainer();
             } else {
               Get.back();
             }
@@ -78,13 +91,16 @@ class _RoomPageState extends State<RoomPage> {
             elevation: 2.0,
             leading: IconButton(
               onPressed: () {
-                if (roomController.showEmojiPicker) {
+                if (roomController.showEmojiPicker &&
+                    roomController.textFieldFocus.hasFocus) {
                   roomController.hideEmojiContainer();
+                  roomController.hideKeyboard();
                 } else if (roomController.textFieldFocus.hasFocus) {
                   roomController.hideKeyboard();
-                } else {
-                  Get.back();
+                } else if (roomController.showEmojiPicker) {
+                  roomController.hideEmojiContainer();
                 }
+                Get.back();
               },
               icon: Icon(
                 Feather.arrow_left,
