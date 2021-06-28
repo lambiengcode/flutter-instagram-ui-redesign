@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:get/utils.dart';
 import 'package:whoru/src/common/styles.dart';
 import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
@@ -52,7 +51,7 @@ class _NavigationState extends State<Navigation> {
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(40.0),
+          top: Radius.circular(42.0),
         ),
         child: BackdropFilter(
           filter: ImageFilter.blur(
@@ -61,44 +60,42 @@ class _NavigationState extends State<Navigation> {
             sigmaY:
                 Theme.of(context).brightness == Brightness.dark ? .25 : 10.0,
           ),
-          child: BottomAppBar(
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            shape: CircularNotchedRectangle(),
-            notchMargin: 5.sp,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.black
-                : Colors.black.withOpacity(.25),
-            elevation: .0,
-            child: Container(
+          child: Container(
+            color: Colors.transparent,
+            child: BottomAppBar(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              shape: CircularNotchedRectangle(),
+              notchMargin: 5.sp,
               color: Theme.of(context).brightness == Brightness.dark
                   ? Colors.black
                   : Colors.black.withOpacity(.25),
-              padding: EdgeInsets.fromLTRB(
-                12.sp,
-                15.sp,
-                12.sp,
-                GetPlatform.isAndroid ? 15.sp : 0.sp,
-              ),
-              child: Row(
-                children: [
-                  _buildItemBottomBar(Feather.home, 0),
-                  _buildItemBottomBar(Feather.search, 1),
-                  SizedBox(width: 16.w),
-                  _buildItemBottomBar(Feather.activity, 3),
-                  _buildItemBottomAccount(
-                    'https://avatars.githubusercontent.com/u/60530946?v=4',
-                    4,
-                  ),
-                ],
+              elevation: .0,
+              child: Container(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black
+                    : Colors.transparent,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 16.0,
+                ),
+                child: Row(
+                  children: [
+                    _buildItemBottomBar(Feather.home, 0),
+                    _buildItemBottomBar(Feather.search, 1),
+                    SizedBox(width: 16.w),
+                    _buildItemBottomBar(Feather.activity, 3),
+                    _buildItemBottomAccount(
+                      'https://avatars.githubusercontent.com/u/60530946?v=4',
+                      4,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.only(bottom: 32.sp),
-        child: _pages[currentPage],
-      ),
+      body: _pages[currentPage],
     );
   }
 

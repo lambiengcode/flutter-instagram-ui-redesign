@@ -59,7 +59,7 @@ class _StrangerPageState extends State<StrangerPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 48.0),
+                margin: EdgeInsets.only(bottom: 140),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -7,6 +7,7 @@ import 'package:whoru/src/data/content_chat.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
 import 'package:whoru/src/pages/chat/widgets/content_chat_card.dart';
 import 'package:whoru/src/pages/chat/widgets/input_chat.dart';
+import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class RoomPage extends StatefulWidget {
@@ -105,6 +106,9 @@ class _RoomPageState extends State<RoomPage> {
               icon: Icon(
                 Feather.arrow_left,
                 size: _size.width / 15.0,
+                color: Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                      ThemeService().isSavedDarkMode() ? .88 : .65,
+                    ),
               ),
             ),
             title: Row(
@@ -148,6 +152,7 @@ class _RoomPageState extends State<RoomPage> {
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                         fontFamily: 'Lato',
+                        color: Theme.of(context).textTheme.bodyText1.color,
                       ),
                     ),
                     SizedBox(height: 2.5),
@@ -184,6 +189,10 @@ class _RoomPageState extends State<RoomPage> {
                 icon: Icon(
                   Feather.more_vertical,
                   size: _size.width / 16.0,
+                  color:
+                      Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                            ThemeService().isSavedDarkMode() ? .88 : .65,
+                          ),
                 ),
               ),
             ],

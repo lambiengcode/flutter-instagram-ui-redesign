@@ -133,7 +133,7 @@ class _ChatInputState extends State<ChatInput> {
 
   Widget listCategoriesMedia(context, index) {
     return GestureDetector(
-      // onTap: () => print(categories[index]),
+      onTap: () => print(index),
       child: Container(
         margin: EdgeInsets.only(
           bottom: 1.25.sp,

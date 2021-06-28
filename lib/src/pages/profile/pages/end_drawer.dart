@@ -13,6 +13,7 @@ class _EndDrawerState extends State<EndDrawer> {
   Widget build(BuildContext context) {
     return Container(
       height: 100.h,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
