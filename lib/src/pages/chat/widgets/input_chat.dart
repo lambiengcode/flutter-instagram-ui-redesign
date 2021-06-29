@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/theme_service.dart';
@@ -105,7 +105,7 @@ class _ChatInputState extends State<ChatInput> {
           ),
       progressIndicatorColor: colorPrimary,
       rows: 3,
-      columns: 9,
+      columns: 10,
       onEmojiSelected: (emoji, category) {
         setState(() {
           isWriting = true;
@@ -118,13 +118,13 @@ class _ChatInputState extends State<ChatInput> {
       buttonMode: ButtonMode.CUPERTINO,
       noRecommendationsStyle: TextStyle(
         color: colorPrimary,
-        fontSize: 8.5.sp,
+        fontSize: 11.sp,
         fontWeight: FontWeight.w400,
         fontFamily: 'Lato',
       ),
       noRecentsStyle: TextStyle(
         color: colorPrimary,
-        fontSize: 8.5.sp,
+        fontSize: 11.sp,
         fontWeight: FontWeight.w400,
         fontFamily: 'Lato',
       ),
@@ -149,7 +149,7 @@ class _ChatInputState extends State<ChatInput> {
           color: index == 0
               ? colorPrimary
               : Theme.of(context).textTheme.bodyText1.color.withOpacity(
-                    ThemeService().isSavedDarkMode() ? .95 : .6,
+                    ThemeService().isSavedDarkMode() ? 1 : .55,
                   ),
           size: 14.sp,
         ),

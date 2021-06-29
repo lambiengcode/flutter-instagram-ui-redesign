@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 
 class ContentChatCard extends StatefulWidget {
   final String id;
@@ -135,7 +134,7 @@ class _ContentChatCardState extends State<ContentChatCard> {
   getImage() {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.0),
+        borderRadius: BorderRadius.circular(6.0),
         image: DecorationImage(
           image: NetworkImage(widget.image),
           fit: BoxFit.cover,

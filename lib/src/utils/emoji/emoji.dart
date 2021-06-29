@@ -1300,15 +1300,15 @@ class _EmojiPickerState extends State<EmojiPicker> {
   Widget defaultButton(CategoryIcon categoryIcon) {
     return SizedBox(
       width: MediaQuery.of(context).size.width /
-          (widget.recommendKeywords == null ? 9 : 10),
+          (widget.recommendKeywords == null ? 10 : 11),
       height: MediaQuery.of(context).size.width /
-          (widget.recommendKeywords == null ? 9 : 10),
+          (widget.recommendKeywords == null ? 10 : 11),
       child: Container(
         color: widget.bgColor,
         child: Center(
           child: Icon(
             categoryIcon.icon,
-            size: 22,
+            size: 20,
             color: categoryIcon.color,
           ),
         ),
@@ -1466,9 +1466,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
           ),
           Container(
               color: widget.bgColor,
-              height: 6,
+              height: 4,
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.only(top: 4, bottom: 0, right: 2, left: 2),
+              padding: EdgeInsets.only(top: 6, right: 2, left: 2),
               child: CustomPaint(
                 painter: _ProgressPainter(
                     context,
@@ -1501,13 +1501,15 @@ class _EmojiPickerState extends State<EmojiPicker> {
               )),
           Container(
               height: 50,
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
               color: widget.bgColor,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   widget.recommendKeywords != null
                       ? SizedBox(
-                          width: MediaQuery.of(context).size.width / 10,
-                          height: MediaQuery.of(context).size.width / 10,
+                          width: MediaQuery.of(context).size.width / 11,
+                          height: MediaQuery.of(context).size.width / 11,
                           child: widget.buttonMode == ButtonMode.MATERIAL
                               ? FlatButton(
                                   padding: EdgeInsets.all(0),
@@ -1575,9 +1577,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
                       : Container(),
                   SizedBox(
                     width: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     height: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     child: widget.buttonMode == ButtonMode.MATERIAL
                         ? FlatButton(
                             padding: EdgeInsets.all(0),
@@ -1638,9 +1640,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     height: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     child: widget.buttonMode == ButtonMode.MATERIAL
                         ? FlatButton(
                             padding: EdgeInsets.all(0),
@@ -1701,9 +1703,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     height: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     child: widget.buttonMode == ButtonMode.MATERIAL
                         ? FlatButton(
                             padding: EdgeInsets.all(0),
@@ -1766,9 +1768,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     height: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     child: widget.buttonMode == ButtonMode.MATERIAL
                         ? FlatButton(
                             padding: EdgeInsets.all(0),
@@ -1831,9 +1833,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     height: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     child: widget.buttonMode == ButtonMode.MATERIAL
                         ? FlatButton(
                             padding: EdgeInsets.all(0),
@@ -1900,9 +1902,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     height: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     child: widget.buttonMode == ButtonMode.MATERIAL
                         ? FlatButton(
                             padding: EdgeInsets.all(0),
@@ -1975,9 +1977,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     height: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     child: widget.buttonMode == ButtonMode.MATERIAL
                         ? FlatButton(
                             padding: EdgeInsets.all(0),
@@ -2048,9 +2050,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     height: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     child: widget.buttonMode == ButtonMode.MATERIAL
                         ? FlatButton(
                             padding: EdgeInsets.all(0),
@@ -2123,9 +2125,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     height: MediaQuery.of(context).size.width /
-                        (widget.recommendKeywords == null ? 9 : 10),
+                        (widget.recommendKeywords == null ? 10 : 11),
                     child: widget.buttonMode == ButtonMode.MATERIAL
                         ? FlatButton(
                             padding: EdgeInsets.all(0),
@@ -2218,7 +2220,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
             ),
           ),
           Container(
-            height: 6,
+            height: 4,
             width: MediaQuery.of(context).size.width,
             color: widget.bgColor,
             padding: EdgeInsets.only(top: 4, left: 2, right: 2),
@@ -2228,7 +2230,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
           ),
           Container(
             height: 50,
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 widget.recommendKeywords != null
                     ? defaultButton(widget.categoryIcons.recommendationIcon)
