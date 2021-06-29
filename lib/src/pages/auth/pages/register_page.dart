@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/widgets/loading.dart';
 
 class SignupPage extends StatefulWidget {

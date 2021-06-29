@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/theme_service.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -26,33 +29,17 @@ class _SearchPageState extends State<SearchPage>
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         brightness: Theme.of(context).brightness,
-        backgroundColor: mC,
         elevation: .0,
         toolbarHeight: 55.0,
         title: GestureDetector(
           onTap: () {},
           child: Container(
-            height: 48.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
-              color: mC,
-              boxShadow: [
-                BoxShadow(
-                  color: mCD,
-                  offset: Offset(3, 3),
-                  blurRadius: 3,
-                ),
-                BoxShadow(
-                  color: mCL,
-                  offset: Offset(-2, -2),
-                  blurRadius: 2,
-                ),
-              ],
-            ),
+            height: 36.5.sp,
+            decoration:
+                AppDecoration.buttonActionBorder(context, 6.0).decoration,
             padding: EdgeInsets.only(
               left: 24.0,
             ),
@@ -61,17 +48,23 @@ class _SearchPageState extends State<SearchPage>
               children: [
                 Icon(
                   Feather.search,
-                  size: _size.width / 23.5,
-                  color: fCL,
+                  size: 14.sp,
+                  color:
+                      Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                            ThemeService().isSavedDarkMode() ? .88 : .65,
+                          ),
                 ),
                 SizedBox(
-                  width: 12.5,
+                  width: 8.sp,
                 ),
                 Text(
-                  'Search',
+                  'Search...',
                   style: TextStyle(
-                    color: fCL,
-                    fontSize: _size.width / 26.0,
+                    color:
+                        Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                              ThemeService().isSavedDarkMode() ? .95 : .65,
+                            ),
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Lato',
                   ),
@@ -85,28 +78,20 @@ class _SearchPageState extends State<SearchPage>
             onPressed: () => null,
             icon: Icon(
               Feather.maximize,
-              color: colorDarkGrey,
-              size: _size.width / 16.0,
+              size: 18.sp,
+              color: Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                    ThemeService().isSavedDarkMode() ? .88 : .65,
+                  ),
             ),
           ),
           SizedBox(width: 4.0),
         ],
       ),
       body: Container(
-        color: mC,
         child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                color: mC,
-                boxShadow: [
-                  BoxShadow(
-                    color: mCD,
-                    offset: Offset(4, 4),
-                    blurRadius: 4,
-                  ),
-                ],
-              ),
+              // decoration: AppDecoration.tabBarDecoration(context).decoration,
               child: Column(
                 children: <Widget>[
                   SizedBox(
@@ -116,17 +101,20 @@ class _SearchPageState extends State<SearchPage>
                     controller: _tabController,
                     labelColor: colorPrimary,
                     indicatorColor: colorPrimary,
-                    unselectedLabelColor: colorDarkGrey,
+                    unselectedLabelColor:
+                        Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                              ThemeService().isSavedDarkMode() ? .88 : .65,
+                            ),
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorWeight: 2.5,
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: _size.width / 26.5,
+                      fontSize: 11.sp,
                       fontFamily: 'Lato',
                     ),
                     unselectedLabelStyle: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: _size.width / 28.5,
+                      fontSize: 10.sp,
                       fontFamily: 'Lato',
                     ),
                     tabs: [

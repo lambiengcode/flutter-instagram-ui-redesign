@@ -7,6 +7,7 @@ import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/home/widgets/horizontal_user.dart';
 import 'package:whoru/src/pages/home/widgets/post_card.dart';
 import 'package:whoru/src/routes/app_pages.dart';
+import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         child: Column(
           children: [
-            SizedBox(height: .3.h),
+            SizedBox(height: 5.sp),
             Expanded(
               child: NotificationListener<OverscrollIndicatorNotification>(
                 onNotification: (overscroll) {
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.builder(
                   controller: _scrollController,
                   physics: ClampingScrollPhysics(),
-                  padding: EdgeInsets.only(top: .0),
+                  padding: EdgeInsets.only(bottom: 69.sp),
                   itemCount: 12,
                   itemBuilder: (context, index) {
                     return index == 0
@@ -97,24 +98,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildActionHome(context, title, icon) {
     return Container(
-      padding: EdgeInsets.all(3.5.w),
+      padding: EdgeInsets.all(13.sp),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(1, 1),
-            blurRadius: 1,
-          ),
-          BoxShadow(
-            offset: Offset(-1, -1),
-            blurRadius: 1,
-          ),
-        ],
-      ),
+      decoration: AppDecoration.buttonActionCircle(context).decoration,
       child: Icon(
         icon,
-        size: 5.w,
+        size: 14.sp,
+        color: Theme.of(context).buttonColor,
       ),
     );
   }
@@ -124,7 +114,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           Container(
-            height: 22.w,
+            height: 65.sp,
             width: 100.w,
             padding: EdgeInsets.only(right: 2.w),
             child: NotificationListener<OverscrollIndicatorNotification>(

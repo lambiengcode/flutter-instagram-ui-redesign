@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -31,6 +31,7 @@ class _MessageCardState extends State<MessageCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         children: [
           Container(
@@ -72,29 +73,43 @@ class _MessageCardState extends State<MessageCard> {
                               children: [
                                 TextSpan(
                                   text: widget.lastMessage,
-                                  style: TextStyle(
-                                    fontSize: 10.5.sp,
-                                    fontWeight: widget.pendingMessage == 0
-                                        ? FontWeight.w500
-                                        : FontWeight.w600,
-                                    fontFamily: 'Lato',
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      .copyWith(
+                                        fontSize: 10.5.sp,
+                                        fontWeight: widget.pendingMessage == 0
+                                            ? FontWeight.w500
+                                            : FontWeight.w600,
+                                        fontFamily: 'Lato',
+                                      ),
                                 ),
                                 TextSpan(
                                   text: '\t\t•\t',
-                                  style: TextStyle(
-                                    fontSize: 11.sp,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Lato',
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            .color
+                                            .withOpacity(.6),
+                                        fontSize: 9.5.sp,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Lato',
+                                      ),
                                 ),
                                 TextSpan(
                                   text: widget.time,
-                                  style: TextStyle(
-                                    fontSize: 9.5.sp,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Lato',
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      .copyWith(
+                                        fontSize: 9.5.sp,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Lato',
+                                      ),
                                 ),
                               ],
                             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/profile/widgets/bottom_pick_image.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
@@ -33,6 +33,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        brightness: Theme.of(context).brightness,
         backgroundColor: Colors.transparent,
         elevation: .0,
         centerTitle: true,

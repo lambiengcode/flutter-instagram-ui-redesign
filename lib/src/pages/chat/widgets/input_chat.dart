@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
+import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/emoji/emoji.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class ChatInput extends StatefulWidget {
   final Color color;
@@ -17,6 +20,12 @@ class ChatInput extends StatefulWidget {
 }
 
 class _ChatInputState extends State<ChatInput> {
+  List<IconData> categories = [
+    FontAwesome5Solid.smile_beam,
+    FontAwesome5Solid.sticky_note,
+    FontAwesome5Solid.star,
+    FontAwesome5Solid.camera_retro,
+  ];
   String message = "";
   int maxLines = 1;
   bool isWriting = false;
@@ -35,43 +44,51 @@ class _ChatInputState extends State<ChatInput> {
   Widget build(BuildContext context) {
     return GetBuilder<RoomController>(
       builder: (controller) => Container(
-        padding: EdgeInsets.all(
-          4.0,
-        ),
-        margin: EdgeInsets.fromLTRB(
-          24.0,
-          16.0,
-          24.0,
-          24.0,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            30.0,
-          ),
-          color: mCD,
-          boxShadow: [
-            BoxShadow(
-              color: mCL,
-              offset: Offset(3, 3),
-              blurRadius: 3,
-              spreadRadius: -3,
-            ),
-          ],
-        ),
+        decoration: controller.showEmojiPicker
+            ? AppDecoration.inputChatDecoration(context).decoration
+            : null,
+        padding: EdgeInsets.only(bottom: 12.0),
+        margin: EdgeInsets.only(top: 16.0),
         child: Column(
           children: <Widget>[
-            chatControls(controller),
+            Container(
+              margin: EdgeInsets.symmetric(
+                  horizontal: controller.showEmojiPicker ? .0 : 16.sp),
+              decoration: AppDecoration.inputChatDecoration(context).decoration,
+              padding: EdgeInsets.symmetric(
+                vertical: 2.sp,
+                horizontal: controller.showEmojiPicker ? 8.sp : .0,
+              ),
+              child: chatControls(controller),
+            ),
+            SizedBox(height: controller.showEmojiPicker ? 10.sp : 14.sp),
             controller.showEmojiPicker
-                ? Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(top: 8.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        // 2 button : Icons & Sticker
-                        emojiContainer(controller),
-                      ],
-                    ),
+                ? Column(
+                    children: [
+                      Container(
+                        height: 26.sp,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            listCategoriesMedia(context, 0),
+                            listCategoriesMedia(context, 1),
+                            listCategoriesMedia(context, 2),
+                            listCategoriesMedia(context, 3),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 4.sp),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            // 2 button : Icons & Sticker
+                            emojiContainer(controller),
+                          ],
+                        ),
+                      ),
+                    ],
                   )
                 : Container(),
           ],
@@ -80,13 +97,15 @@ class _ChatInputState extends State<ChatInput> {
     );
   }
 
-  emojiContainer(controller) {
-    final _size = MediaQuery.of(context).size;
+  Widget emojiContainer(controller) {
     return EmojiPicker(
       bgColor: Colors.transparent,
-      indicatorColor: Colors.white38,
+      indicatorColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(
+            ThemeService().isSavedDarkMode() ? .65 : .1,
+          ),
+      progressIndicatorColor: colorPrimary,
       rows: 3,
-      columns: 7,
+      columns: 10,
       onEmojiSelected: (emoji, category) {
         setState(() {
           isWriting = true;
@@ -96,24 +115,49 @@ class _ChatInputState extends State<ChatInput> {
       },
       recommendKeywords: ["face", "happy", "party", "sad", "dog", "smile"],
       numRecommended: 40,
-      buttonMode: ButtonMode.MATERIAL,
+      buttonMode: ButtonMode.CUPERTINO,
       noRecommendationsStyle: TextStyle(
         color: colorPrimary,
-        fontSize: _size.width / 26.0,
+        fontSize: 11.sp,
         fontWeight: FontWeight.w400,
         fontFamily: 'Lato',
       ),
       noRecentsStyle: TextStyle(
         color: colorPrimary,
-        fontSize: _size.width / 26.0,
+        fontSize: 11.sp,
         fontWeight: FontWeight.w400,
         fontFamily: 'Lato',
       ),
     );
   }
 
+  Widget listCategoriesMedia(context, index) {
+    return GestureDetector(
+      onTap: () => print(index),
+      child: Container(
+        margin: EdgeInsets.only(
+          bottom: 1.25.sp,
+          top: 1.sp,
+          left: 6.sp,
+          right: 2.sp,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 24.sp, vertical: 6.0),
+        decoration: AppDecoration.buttonActionBorder(context, 30.0).decoration,
+        alignment: Alignment.center,
+        child: Icon(
+          categories[index],
+          color: index == 0
+              ? colorPrimary
+              : Theme.of(context).textTheme.bodyText1.color.withOpacity(
+                    ThemeService().isSavedDarkMode() ? 1 : .55,
+                  ),
+          size: 14.sp,
+        ),
+      ),
+    );
+  }
+
   Widget chatControls(controller) {
-    final _size = MediaQuery.of(context).size;
     setWritingTo(bool val) {
       setState(() {
         isWriting = val;
@@ -123,6 +167,7 @@ class _ChatInputState extends State<ChatInput> {
     return Container(
       child: Row(
         children: <Widget>[
+          SizedBox(width: 4.sp),
           IconButton(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -138,9 +183,9 @@ class _ChatInputState extends State<ChatInput> {
               }
             },
             icon: Icon(
-              FontAwesome5Solid.smile,
+              FontAwesome5Solid.meteor,
               color: widget.color.withOpacity(.95),
-              size: _size.width / 16.8,
+              size: 18.sp,
             ),
           ),
           Expanded(
@@ -155,8 +200,8 @@ class _ChatInputState extends State<ChatInput> {
                     });
                   },
                   style: TextStyle(
-                    color: Colors.grey.shade800,
-                    fontSize: _size.width / 26.0,
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                    fontSize: 12.sp,
                   ),
                   controller: controller.textFieldController,
                   focusNode: controller.textFieldFocus,
@@ -164,15 +209,21 @@ class _ChatInputState extends State<ChatInput> {
                   maxLines: maxLines,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(
-                      left: 8.0,
+                      left: 4.0,
                       right: 40.0,
                       bottom: 4.0,
                       top: 4.0,
                     ),
                     hintText: 'Type message...',
                     hintStyle: TextStyle(
-                      color: colorDarkGrey,
-                      fontSize: _size.width / 26.5,
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .color
+                          .withOpacity(
+                            ThemeService().isSavedDarkMode() ? .85 : .65,
+                          ),
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
                       fontFamily: 'Lato',
                     ),
@@ -210,7 +261,7 @@ class _ChatInputState extends State<ChatInput> {
               ? IconButton(
                   icon: Icon(
                     Icons.mic,
-                    size: _size.width / 15.5,
+                    size: 20.sp,
                     color: widget.color.withOpacity(.95),
                   ),
                   onPressed: () async {},
@@ -219,13 +270,11 @@ class _ChatInputState extends State<ChatInput> {
                   icon: Icon(
                     Feather.send,
                     color: widget.color.withOpacity(.95),
-                    size: _size.width / 16.5,
+                    size: 20.sp,
                   ),
                   onPressed: () {},
                 ),
-          SizedBox(
-            width: 4.0,
-          ),
+          SizedBox(width: 4.sp),
         ],
       ),
     );

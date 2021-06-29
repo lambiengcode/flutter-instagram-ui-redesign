@@ -1,9 +1,11 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
 import 'package:whoru/src/pages/profile/profile_page.dart';
+import 'package:whoru/src/pages/search/search_page.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -17,7 +19,7 @@ class _NavigationState extends State<Navigation> {
   int currentPage = 0;
   var _pages = [
     HomePage(),
-    Container(),
+    SearchPage(),
     ChatPage(),
     Container(),
     ProfilePage(),
@@ -31,11 +33,13 @@ class _NavigationState extends State<Navigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
         height: 46.sp,
         width: 46.sp,
         child: FloatingActionButton(
+          elevation: .0,
           child: Icon(
             AntDesign.message1,
             color: mCL,
@@ -47,33 +51,43 @@ class _NavigationState extends State<Navigation> {
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(50.0),
+          top: Radius.circular(42.0),
         ),
-        child: BottomAppBar(
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          shape: CircularNotchedRectangle(),
-          notchMargin: 6.sp,
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.black.withOpacity(.65)
-              : Colors.black.withOpacity(.085),
-          elevation: .0,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 2.0,
+            sigmaY: 2.0,
+          ),
           child: Container(
-            padding: EdgeInsets.only(
-              top: 2.25.h,
-              right: 3.w,
-              left: 3.w,
-            ),
-            child: Row(
-              children: [
-                _buildItemBottomBar(Feather.home, 0),
-                _buildItemBottomBar(Feather.search, 1),
-                SizedBox(width: 16.w),
-                _buildItemBottomBar(Feather.activity, 3),
-                _buildItemBottomAccount(
-                  'https://avatars.githubusercontent.com/u/60530946?v=4',
-                  4,
+            color: Colors.transparent,
+            child: BottomAppBar(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              shape: CircularNotchedRectangle(),
+              notchMargin: 5.sp,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black.withOpacity(.5)
+                  : Colors.black.withOpacity(.2),
+              elevation: 2.0,
+              child: Container(
+                color: Colors.transparent,
+                padding: EdgeInsets.only(
+                  top: 16.sp,
+                  left: 10.sp,
+                  right: 10.sp,
                 ),
-              ],
+                child: Row(
+                  children: [
+                    _buildItemBottomBar(Feather.home, 0),
+                    _buildItemBottomBar(Feather.search, 1),
+                    SizedBox(width: 16.w),
+                    _buildItemBottomBar(Feather.activity, 3),
+                    _buildItemBottomAccount(
+                      'https://avatars.githubusercontent.com/u/60530946?v=4',
+                      4,
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -91,10 +105,15 @@ class _NavigationState extends State<Navigation> {
           });
         },
         child: Container(
+          color: Colors.transparent,
           child: Icon(
             icon,
-            size: 6.25.w,
-            color: index == currentPage ? colorPrimary : null,
+            size: 20.sp,
+            color: index == currentPage
+                ? colorPrimary
+                : Theme.of(context).brightness == Brightness.dark
+                    ? null
+                    : mC,
           ),
         ),
       ),
@@ -110,12 +129,13 @@ class _NavigationState extends State<Navigation> {
           });
         },
         child: Container(
-          height: 22.sp,
-          width: 22.sp,
+          height: 20.5.sp,
+          width: 20.5.sp,
           decoration: BoxDecoration(
+            color: Colors.transparent,
             border: Border.all(
               width: currentPage == index ? 2.0 : .0,
-              color: colorPrimary,
+              color: currentPage == index ? colorPrimary : Colors.transparent,
             ),
             shape: BoxShape.circle,
             image: DecorationImage(

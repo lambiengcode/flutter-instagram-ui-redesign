@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
 class SuggestionsUserCard extends StatefulWidget {
@@ -25,19 +26,8 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
       children: [
         Container(
           width: _size.width * .38,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(1, 1),
-                blurRadius: 1,
-              ),
-              BoxShadow(
-                offset: Offset(-1, -1),
-                blurRadius: 1,
-              ),
-            ],
-          ),
+          decoration:
+              AppDecoration.buttonActionBorder(context, 15.0).decoration,
           margin: EdgeInsets.only(
             left: 10.0,
             right: 4.0,

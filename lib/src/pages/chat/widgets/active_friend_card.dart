@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class ActiveFriendCard extends StatefulWidget {
   final String blurHash;
@@ -18,9 +19,8 @@ class ActiveFriendCard extends StatefulWidget {
 class _ActivevFriendCardState extends State<ActiveFriendCard> {
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(right: 12.8),
+      margin: EdgeInsets.only(right: 8.sp),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -28,8 +28,8 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
           Stack(
             children: [
               Container(
-                height: _size.width * .16,
-                width: _size.width * .16,
+                height: 48.sp,
+                width: 48.sp,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
@@ -39,8 +39,8 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
                 ),
                 alignment: Alignment.center,
                 child: Container(
-                  height: _size.width * .14,
-                  width: _size.width * .14,
+                  height: 46.sp,
+                  width: 46.sp,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(1000.0),
                     child: BlurHash(
@@ -53,8 +53,8 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
                 ),
               ),
               Container(
-                height: _size.width * .16,
-                width: _size.width * .16,
+                height: 48.sp,
+                width: 48.sp,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
@@ -64,16 +64,17 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
                 ),
                 alignment: Alignment.bottomRight,
                 child: Container(
-                  height: _size.width / 22.5,
-                  width: _size.width / 22.5,
+                  height: 12.sp,
+                  width: 12.sp,
+                  margin: EdgeInsets.only(bottom: 1.sp),
                   decoration: BoxDecoration(
                     color: mC,
                     shape: BoxShape.circle,
                   ),
                   alignment: Alignment.center,
                   child: Container(
-                    height: _size.width / 28.5,
-                    width: _size.width / 28.5,
+                    height: 9.2.sp,
+                    width: 9.2.sp,
                     decoration: BoxDecoration(
                       color: colorActive,
                       shape: BoxShape.circle,
@@ -83,13 +84,13 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
               ),
             ],
           ),
-          SizedBox(height: 6.0),
+          SizedBox(height: 3.sp),
           Text(
             widget.fullName.length > 10
                 ? widget.fullName.substring(0, 8) + '..'
                 : widget.fullName,
             style: TextStyle(
-              fontSize: _size.width / 32.0,
+              fontSize: 9.sp,
               fontWeight: FontWeight.w600,
               fontFamily: 'Lato',
             ),
