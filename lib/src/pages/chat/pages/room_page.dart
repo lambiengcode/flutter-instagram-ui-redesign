@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/data/content_chat.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';

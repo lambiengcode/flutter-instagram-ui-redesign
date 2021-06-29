@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 

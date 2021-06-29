@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
-import '../../common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 
 class SplashPage extends StatefulWidget {
   final String points;

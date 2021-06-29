@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:lottie/lottie.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/app_decoration.dart';
 
 class StrangerPage extends StatefulWidget {
   @override
@@ -48,7 +49,9 @@ class _StrangerPageState extends State<StrangerPage> {
                       margin: EdgeInsets.only(right: 16.0, top: 16.0),
                       padding: EdgeInsets.all(16.5),
                       alignment: Alignment.center,
-                      decoration: nMbox,
+                      decoration:
+                          AppDecoration.buttonActionBorder(context, 15.0)
+                              .decoration,
                       child: Icon(
                         Feather.settings,
                         color: colorDarkGrey,
@@ -98,7 +101,7 @@ class _StrangerPageState extends State<StrangerPage> {
       child: Container(
         padding: EdgeInsets.all(_size.width / 18.0),
         alignment: Alignment.center,
-        decoration: nMboxCategoryOff,
+        decoration: AppDecoration.buttonActionBorder(context, 15.0).decoration,
         child: Icon(
           icon,
           color: color,

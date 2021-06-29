@@ -7,8 +7,7 @@ import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/activity/pages/find_page.dart';
 import 'package:whoru/src/pages/activity/pages/history_page.dart';
 import 'package:whoru/src/pages/activity/pages/stranger_page.dart';
-
-import '../../common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 
 class ActivityPage extends StatefulWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 
 class DividerLine extends StatelessWidget {
   @override

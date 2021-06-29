@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/home/widgets/suggestions_user_card.dart';
-
-import '../../../common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 
 class HorizontalUser extends StatefulWidget {
   @override

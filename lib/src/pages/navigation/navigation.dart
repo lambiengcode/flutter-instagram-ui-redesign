@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
 import 'package:whoru/src/pages/profile/profile_page.dart';
@@ -55,10 +55,8 @@ class _NavigationState extends State<Navigation> {
         ),
         child: BackdropFilter(
           filter: ImageFilter.blur(
-            sigmaX:
-                Theme.of(context).brightness == Brightness.dark ? .25 : 10.0,
-            sigmaY:
-                Theme.of(context).brightness == Brightness.dark ? .25 : 10.0,
+            sigmaX: 2.0,
+            sigmaY: 2.0,
           ),
           child: Container(
             color: Colors.transparent,
@@ -67,16 +65,15 @@ class _NavigationState extends State<Navigation> {
               shape: CircularNotchedRectangle(),
               notchMargin: 5.sp,
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.black
-                  : Colors.black.withOpacity(.25),
-              elevation: .0,
+                  ? Colors.black.withOpacity(.5)
+                  : Colors.black.withOpacity(.2),
+              elevation: 2.0,
               child: Container(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.black
-                    : Colors.transparent,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 16.0,
+                color: Colors.transparent,
+                padding: EdgeInsets.only(
+                  top: 16.sp,
+                  left: 10.sp,
+                  right: 10.sp,
                 ),
                 child: Row(
                   children: [
@@ -111,7 +108,7 @@ class _NavigationState extends State<Navigation> {
           color: Colors.transparent,
           child: Icon(
             icon,
-            size: 18.8.sp,
+            size: 20.sp,
             color: index == currentPage
                 ? colorPrimary
                 : Theme.of(context).brightness == Brightness.dark

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:whoru/src/common/styles.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/profile/pages/end_drawer.dart';
 import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
 import 'package:whoru/src/pages/profile/widgets/posts_listsview.dart';
@@ -100,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage>
                 Row(
                   children: [
                     _buildTitleFollow(context, 'Follower', '104k'),
-                    SizedBox(width: 6.w),
+                    SizedBox(width: 24.w),
                     _buildTitleFollow(context, 'Following', '10k'),
                   ],
                 ),
@@ -113,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage>
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                SizedBox(height: 6.sp),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
                   alignment: Alignment.center,
@@ -127,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage>
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 14.sp),
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 15.w,
