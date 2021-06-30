@@ -52,6 +52,7 @@ dependencies:
   blurhash: ^0.2.1 
   photo_manager: ^1.2.2
   image_picker: ^0.8.0
+  cached_network_image: ^3.0.0
 
   # Map library
   location: ^4.2.3

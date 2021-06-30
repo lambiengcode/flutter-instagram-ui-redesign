@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:whoru/src/themes/app_colors.dart';
@@ -8,6 +9,7 @@ import 'package:whoru/src/pages/profile/profile_page.dart';
 import 'package:whoru/src/pages/search/search_page.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
+import 'package:whoru/src/widgets/image_widget.dart';
 
 class Navigation extends StatefulWidget {
   @override
@@ -34,61 +36,36 @@ class _NavigationState extends State<Navigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        height: 46.sp,
-        width: 46.sp,
-        child: FloatingActionButton(
-          elevation: .0,
-          child: Icon(
-            AntDesign.message1,
-            color: mCL,
-            size: 22.sp,
+      bottomNavigationBar: BottomAppBar(
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        color: Theme.of(context).scaffoldBackgroundColor,
+        elevation: .0,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 16.sp,
+            bottom: 14.sp,
+            left: 8.sp,
+            right: 8.sp,
           ),
-          onPressed: () => setState(() => currentPage = 2),
-          backgroundColor: colorPrimary,
-        ),
-      ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(42.0),
-        ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 2.0,
-            sigmaY: 2.0,
-          ),
-          child: Container(
-            color: Colors.transparent,
-            child: BottomAppBar(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              shape: CircularNotchedRectangle(),
-              notchMargin: 5.sp,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.black.withOpacity(.5)
-                  : Colors.black.withOpacity(.2),
-              elevation: 2.0,
-              child: Container(
-                color: Colors.transparent,
-                padding: EdgeInsets.only(
-                  top: 16.sp,
-                  left: 10.sp,
-                  right: 10.sp,
-                ),
-                child: Row(
-                  children: [
-                    _buildItemBottomBar(Feather.home, 0),
-                    _buildItemBottomBar(Feather.search, 1),
-                    SizedBox(width: 16.w),
-                    _buildItemBottomBar(Feather.activity, 3),
-                    _buildItemBottomAccount(
-                      'https://avatars.githubusercontent.com/u/60530946?v=4',
-                      4,
-                    ),
-                  ],
-                ),
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: Theme.of(context).dividerColor,
+                width: .35,
               ),
             ),
+          ),
+          child: Row(
+            children: [
+              _buildItemBottomBar(Feather.home, 0, 'Home'),
+              _buildItemBottomBar(Feather.search, 1, 'Search'),
+              _buildItemBottomBar(Feather.inbox, 2, 'Message'),
+              _buildItemBottomBar(Feather.activity, 3, 'Discover'),
+              _buildItemBottomAccount(
+                'https://avatars.githubusercontent.com/u/60530946?v=4',
+                4,
+              ),
+            ],
           ),
         ),
       ),
@@ -96,7 +73,7 @@ class _NavigationState extends State<Navigation> {
     );
   }
 
-  Widget _buildItemBottomBar(icon, index) {
+  Widget _buildItemBottomBar(icon, index, title) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
@@ -111,39 +88,50 @@ class _NavigationState extends State<Navigation> {
             size: 20.sp,
             color: index == currentPage
                 ? colorPrimary
-                : Theme.of(context).brightness == Brightness.dark
-                    ? null
-                    : mC,
+                : Theme.of(context).textTheme.bodyText1.color.withOpacity(.85),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildItemBottomAccount(url, index) {
+  Widget _buildItemBottomAccount(
+    urlToImage,
+    index,
+  ) {
     return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            currentPage = index;
-          });
-        },
-        child: Container(
-          height: 20.5.sp,
-          width: 20.5.sp,
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            border: Border.all(
-              width: currentPage == index ? 2.0 : .0,
-              color: currentPage == index ? colorPrimary : Colors.transparent,
-            ),
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: NetworkImage(url),
-              fit: BoxFit.contain,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                currentPage = index;
+              });
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color:
+                      currentPage == index ? colorPrimary : Colors.transparent,
+                  width: 1.8.sp,
+                ),
+                shape: BoxShape.circle,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: CachedNetworkImage(
+                  height: 20.sp,
+                  width: 20.sp,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => PlaceHolderImage(),
+                  errorWidget: (context, url, error) => ErrorLoadingImage(),
+                  imageUrl: urlToImage,
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
