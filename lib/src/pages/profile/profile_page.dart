@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
@@ -21,6 +22,7 @@ class _ProfilePageState extends State<ProfilePage>
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TabController _tabController;
   double min = 0, initial = 0, max = 0.88;
+  String title = '';
 
   @override
   void initState() {
@@ -52,28 +54,32 @@ class _ProfilePageState extends State<ProfilePage>
         elevation: .0,
         centerTitle: true,
         leading: IconButton(
+          splashColor: colorPrimary,
+          splashRadius: 5.0,
           icon: Icon(
             Feather.settings,
-            color: mCM,
-            size: 18.sp,
+            color: mCL,
+            size: 18.5.sp,
           ),
           onPressed: () => Get.toNamed('/settings'),
         ),
         title: Text(
-          '',
+          title,
           style: TextStyle(
             color: mCM,
-            fontSize: 12.sp,
-            fontFamily: 'Lato',
+            fontSize: 13.5.sp,
+            fontFamily: 'FreeSans',
             fontWeight: FontWeight.bold,
           ),
         ),
         actions: [
           IconButton(
+            splashColor: colorPrimary,
+            splashRadius: 5.0,
             icon: Icon(
-              Feather.align_justify,
-              color: mCM,
-              size: 18.sp,
+              Feather.list,
+              color: mCL,
+              size: 20.sp,
             ),
             onPressed: () => _openEndDrawer(),
           ),
@@ -99,9 +105,9 @@ class _ProfilePageState extends State<ProfilePage>
                 SizedBox(height: 13.5.sp),
                 Row(
                   children: [
-                    _buildTitleFollow(context, 'Follower', '104k'),
+                    _buildTitleFollow(context, 'Follower', '554'),
                     SizedBox(width: 24.w),
-                    _buildTitleFollow(context, 'Following', '10k'),
+                    _buildTitleFollow(context, 'Following', '208'),
                   ],
                 ),
                 SizedBox(height: 20.sp),
@@ -109,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage>
                   'Đào Hồng Vinh - Dev',
                   style: TextStyle(
                     fontSize: 12.sp,
-                    fontFamily: 'Lato',
+                    fontFamily: 'FreeSans',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -121,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage>
                     'Mobile App Developer (lambiengcode)',
                     style: TextStyle(
                       fontSize: 11.sp,
-                      fontFamily: 'Lato',
+                      fontFamily: 'FreeSans',
                       fontWeight: FontWeight.w400,
                     ),
                     textAlign: TextAlign.center,
@@ -267,8 +273,6 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   Widget _scrollMyFeet(context) {
-    final _size = MediaQuery.of(context).size;
-
     return DraggableScrollableSheet(
       minChildSize: min,
       maxChildSize: max,
@@ -280,79 +284,95 @@ class _ProfilePageState extends State<ProfilePage>
           Container(),
         ];
 
-        return AnimatedBuilder(
-          animation: scrollController,
-          builder: (context, child) {
-            return ClipRRect(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(24.0),
-              ),
-              child: Container(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      decoration:
-                          AppDecoration.tabBarDecoration(context).decoration,
-                      child: Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 4.0,
-                          ),
-                          TabBar(
-                            controller: _tabController,
-                            labelColor: colorPrimary,
-                            indicatorColor: colorPrimary,
-                            unselectedLabelColor: Theme.of(context)
-                                .textTheme
-                                .bodyText1
-                                .color
-                                .withOpacity(
-                                  ThemeService().isSavedDarkMode() ? .88 : .65,
+        return NotificationListener<DraggableScrollableNotification>(
+          onNotification: (notification) {
+            if (notification.extent < (100.h - 200.sp) / 100.h) {
+              setState(() {
+                title = '';
+              });
+            } else {
+              setState(() {
+                title = 'Đào Hồng Vinh';
+              });
+            }
+            return;
+          },
+          child: AnimatedBuilder(
+            animation: scrollController,
+            builder: (context, child) {
+              return ClipRRect(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(24.0),
+                ),
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        decoration:
+                            AppDecoration.tabBarDecoration(context).decoration,
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 4.0,
+                            ),
+                            TabBar(
+                              controller: _tabController,
+                              labelColor: colorPrimary,
+                              indicatorColor: colorPrimary,
+                              unselectedLabelColor: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1
+                                  .color
+                                  .withOpacity(
+                                    ThemeService().isSavedDarkMode()
+                                        ? .88
+                                        : .65,
+                                  ),
+                              indicatorSize: TabBarIndicatorSize.tab,
+                              indicatorWeight: 2.5,
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 11.5.sp,
+                                fontFamily: 'FreeSans',
+                              ),
+                              unselectedLabelStyle: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 11.sp,
+                                fontFamily: 'FreeSans',
+                              ),
+                              tabs: [
+                                Tab(
+                                  text: 'Photos',
                                 ),
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            indicatorWeight: 2.5,
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: _size.width / 26.5,
-                              fontFamily: 'Lato',
+                                Tab(
+                                  text: 'Posts',
+                                ),
+                                Tab(
+                                  text: 'Videos',
+                                ),
+                              ],
                             ),
-                            unselectedLabelStyle: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: _size.width / 28.5,
-                              fontFamily: 'Lato',
-                            ),
-                            tabs: [
-                              Tab(
-                                text: 'Photos',
-                              ),
-                              Tab(
-                                text: 'Posts',
-                              ),
-                              Tab(
-                                text: 'Info',
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        padding: EdgeInsets.only(top: 5.sp),
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: _pages.map((Widget tab) {
-                            return tab;
-                          }).toList(),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Container(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          padding: EdgeInsets.only(top: 5.sp),
+                          child: TabBarView(
+                            controller: _tabController,
+                            children: _pages.map((Widget tab) {
+                              return tab;
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         );
       },
     );
