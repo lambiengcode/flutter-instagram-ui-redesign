@@ -1392,10 +1392,11 @@ class _EmojiPickerState extends State<EmojiPicker> {
 
       return Column(
         children: <Widget>[
-          SizedBox(
+          Container(
             height: (MediaQuery.of(context).size.width / widget.columns) *
                 widget.rows,
             width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.symmetric(horizontal: 6.0),
             child: PageView(
                 children: pages,
                 controller: pageController,

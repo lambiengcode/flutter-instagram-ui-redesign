@@ -167,7 +167,7 @@ class _ChatInputState extends State<ChatInput> {
     return Container(
       child: Row(
         children: <Widget>[
-          SizedBox(width: 4.sp),
+          SizedBox(width: 6.sp),
           IconButton(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -185,7 +185,7 @@ class _ChatInputState extends State<ChatInput> {
             icon: Icon(
               FontAwesome5Solid.meteor,
               color: widget.color.withOpacity(.95),
-              size: 18.sp,
+              size: 16.sp,
             ),
           ),
           Expanded(
@@ -274,7 +274,7 @@ class _ChatInputState extends State<ChatInput> {
                   ),
                   onPressed: () {},
                 ),
-          SizedBox(width: 4.sp),
+          SizedBox(width: 6.sp),
         ],
       ),
     );

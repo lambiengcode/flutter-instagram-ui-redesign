@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 import 'package:lottie/lottie.dart';
@@ -64,6 +64,7 @@ class _PostCardState extends State<PostCard> {
         border: Border(
           bottom: BorderSide(
             width: .085,
+            color: Theme.of(context).dividerColor,
           ),
         ),
       ),
@@ -86,8 +87,8 @@ class _PostCardState extends State<PostCard> {
           _buildInfoWritter(context),
           IconButton(
             icon: Icon(
-              Feather.more_horizontal,
-              size: 20.sp,
+              PhosphorIcons.dots_three,
+              size: 25.sp,
             ),
             onPressed: () => null,
           )
@@ -151,7 +152,6 @@ class _PostCardState extends State<PostCard> {
   }
 
   Widget _buildBottom(context) {
-    final _size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
@@ -159,14 +159,14 @@ class _PostCardState extends State<PostCard> {
         children: [
           Row(
             children: [
-              SizedBox(width: 6.0),
+              SizedBox(width: 4.sp),
               LikeButton(
                 key: _globalKey,
                 isLiked: liked,
                 likeCountAnimationType: likeCount < 1000
                     ? LikeCountAnimationType.part
                     : LikeCountAnimationType.none,
-                size: _size.width / 20.0,
+                size: 18.sp,
                 circleColor: CircleColor(
                   start: Color(0xff00ddff),
                   end: Color(0xff0099cc),
@@ -177,9 +177,9 @@ class _PostCardState extends State<PostCard> {
                 ),
                 likeBuilder: (bool isLiked) {
                   return Icon(
-                    Feather.heart,
+                    liked ? PhosphorIcons.heart_fill : PhosphorIcons.heart,
                     color: liked ? colorHigh : null,
-                    size: _size.width / 20.0,
+                    size: 18.sp,
                   );
                 },
                 likeCount: likeCount,
@@ -190,7 +190,7 @@ class _PostCardState extends State<PostCard> {
                     text,
                     style: TextStyle(
                       color: color,
-                      fontSize: _size.width / 28.5,
+                      fontSize: 10.5.sp,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Lato',
                     ),
@@ -198,14 +198,14 @@ class _PostCardState extends State<PostCard> {
 
                   return result;
                 },
-                likeCountPadding: EdgeInsets.only(left: 8.0),
+                likeCountPadding: EdgeInsets.only(left: 6.sp),
                 onTap: onLikeButtonTapped,
               ),
               SizedBox(width: 16.0),
               _buildActionButton(
                 context,
                 'Comment',
-                Feather.message_circle,
+                PhosphorIcons.chat_teardrop_dots,
                 colorDarkGrey,
                 '229',
               ),
@@ -214,7 +214,7 @@ class _PostCardState extends State<PostCard> {
           _buildActionButton(
             context,
             'Share',
-            Feather.upload,
+            PhosphorIcons.share,
             colorDarkGrey,
             null,
           ),
@@ -224,7 +224,6 @@ class _PostCardState extends State<PostCard> {
   }
 
   Widget _buildActionButton(context, title, icon, color, value) {
-    final _size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         if (title == 'Like') {
@@ -236,18 +235,18 @@ class _PostCardState extends State<PostCard> {
       child: Container(
         child: Row(
           children: [
-            SizedBox(width: images.length == 0 ? 4.0 : 8.0),
+            SizedBox(width: images.length == 0 ? 2.sp : 4.sp),
             Icon(
               icon,
-              size: _size.width / 20.0,
+              size: 18.sp,
             ),
-            SizedBox(width: 6.0),
+            SizedBox(width: 4.sp),
             title == 'Share'
                 ? Container()
                 : Text(
                     value.toString(),
                     style: TextStyle(
-                      fontSize: _size.width / 28.5,
+                      fontSize: 10.5.sp,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Lato',
                     ),

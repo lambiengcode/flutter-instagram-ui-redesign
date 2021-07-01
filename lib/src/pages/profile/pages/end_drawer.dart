@@ -11,66 +11,51 @@ class EndDrawer extends StatefulWidget {
 class _EndDrawerState extends State<EndDrawer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100.h,
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Expanded(
-            child: ListView(
-              children: [
-                SizedBox(height: 24.0),
-                _buildLine(
-                  context,
-                  'Activities',
-                  Feather.activity,
-                  null,
-                ),
-                _buildDividerTransparant(context),
-                _buildLine(
-                  context,
-                  'Statistic',
-                  Feather.pie_chart,
-                  null,
-                ),
-                _buildDividerTransparant(context),
-                _buildLine(
-                  context,
-                  'Term & Privacy',
-                  Feather.help_circle,
-                  null,
-                ),
-                _buildDividerTransparant(context),
-                _buildLine(
-                  context,
-                  'About',
-                  Feather.info,
-                  null,
-                ),
-                _buildDivider(context),
-                _buildLine(
-                  context,
-                  'Logout',
-                  Feather.log_out,
-                  colorPrimary,
-                ),
-                // _buildDividerTransparant(context),
-              ],
+    return SafeArea(
+      child: Container(
+        height: 100.h,
+        color: Colors.transparent,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildLine(
+              context,
+              'Activities',
+              Feather.activity,
+              null,
             ),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 12.0, right: 8.0),
-            margin: EdgeInsets.only(bottom: 70.sp),
-            child: Text(
-              '1.0.0 - Whoru',
-              style: TextStyle(
-                fontSize: 8.sp,
-                fontWeight: FontWeight.w400,
-              ),
+            _buildDividerTransparant(context),
+            _buildLine(
+              context,
+              'Statistic',
+              Feather.pie_chart,
+              null,
             ),
-          ),
-        ],
+            _buildDividerTransparant(context),
+            _buildLine(
+              context,
+              'Term & Privacy',
+              Feather.help_circle,
+              null,
+            ),
+            _buildDividerTransparant(context),
+            _buildLine(
+              context,
+              'About',
+              Feather.info,
+              null,
+            ),
+            _buildDivider(context),
+            _buildLine(
+              context,
+              'Logout',
+              Feather.log_out,
+              colorPrimary,
+            ),
+            SizedBox(height: 15.h),
+          ],
+        ),
       ),
     );
   }
@@ -83,7 +68,7 @@ class _EndDrawerState extends State<EndDrawer> {
         children: [
           Icon(
             icon,
-            size: 12.sp,
+            size: 14.sp,
             color: color,
           ),
           SizedBox(width: 10.0),
@@ -109,8 +94,8 @@ class _EndDrawerState extends State<EndDrawer> {
       child: Divider(
         thickness: .1,
         height: .1,
-        indent: 8.0,
-        endIndent: 2.0,
+        indent: 8.sp,
+        endIndent: 10.w,
       ),
     );
   }
@@ -121,8 +106,8 @@ class _EndDrawerState extends State<EndDrawer> {
       child: Divider(
         thickness: .12,
         height: .12,
-        indent: 8.0,
-        endIndent: 2.0,
+        indent: 8.sp,
+        endIndent: 10.w,
       ),
     );
   }

@@ -77,7 +77,7 @@ class _ContentChatCardState extends State<ContentChatCard> {
             : isMe
                 ? colorPrimary
                 : Theme.of(context).brightness == Brightness.dark
-                    ? colorBlack.withOpacity(.75)
+                    ? colorPrimaryBlack
                     : mC,
         borderRadius: widget.image != ''
             ? BorderRadius.all(Radius.circular(8.0))
@@ -87,23 +87,23 @@ class _ContentChatCardState extends State<ContentChatCard> {
             : [
                 BoxShadow(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.black
+                      ? Colors.black.withOpacity(.8)
                       : mCD,
-                  offset: Offset(4, 4),
-                  blurRadius: 4,
+                  offset: Offset(2, 2),
+                  blurRadius: 2,
                 ),
                 BoxShadow(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? colorBlack.withOpacity(.45)
+                      ? colorBlack.withOpacity(.35)
                       : mCL,
-                  offset: Offset(-3, -3),
-                  blurRadius: 3,
+                  offset: Offset(-2, -2),
+                  blurRadius: 2,
                 ),
               ],
       ),
       child: Padding(
         padding: widget.image != ''
-            ? EdgeInsets.all(1.5)
+            ? EdgeInsets.all(.5)
             : EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
         child: widget.image != '' ? getImage() : getMessage(),
       ),

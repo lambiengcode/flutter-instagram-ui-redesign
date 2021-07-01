@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
@@ -57,9 +57,17 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          _buildActionHome(context, 'Camera', Feather.camera),
-          SizedBox(width: 4.w),
-          _buildActionHome(context, 'Camera', Feather.list),
+          _buildActionHome(
+            context,
+            'Camera',
+            PhosphorIcons.camera,
+          ),
+          SizedBox(width: 8.sp),
+          _buildActionHome(
+            context,
+            'Notifications',
+            PhosphorIcons.bell_simple,
+          ),
           SizedBox(width: 2.w),
         ],
       ),
@@ -98,12 +106,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildActionHome(context, title, icon) {
     return Container(
-      padding: EdgeInsets.all(13.sp),
+      padding: EdgeInsets.all(11.25.sp),
       alignment: Alignment.center,
       decoration: AppDecoration.buttonActionCircle(context).decoration,
       child: Icon(
         icon,
-        size: 14.sp,
+        size: 17.25.sp,
         color: Theme.of(context).buttonColor,
       ),
     );
@@ -116,7 +124,6 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 65.sp,
             width: 100.w,
-            padding: EdgeInsets.only(right: 2.w),
             child: NotificationListener<OverscrollIndicatorNotification>(
               onNotification: (overscroll) {
                 overscroll.disallowGlow();

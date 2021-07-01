@@ -32,14 +32,15 @@ class _SearchPageState extends State<SearchPage>
     return Scaffold(
       appBar: AppBar(
         brightness: Theme.of(context).brightness,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: .0,
-        toolbarHeight: 55.0,
+        toolbarHeight: 42.sp,
         title: GestureDetector(
           onTap: () {},
           child: Container(
-            height: 36.5.sp,
+            height: 36.sp,
             decoration:
-                AppDecoration.buttonActionBorder(context, 6.0).decoration,
+                AppDecoration.buttonActionBorder(context, 4.0).decoration,
             padding: EdgeInsets.only(
               left: 24.0,
             ),
@@ -48,7 +49,7 @@ class _SearchPageState extends State<SearchPage>
               children: [
                 Icon(
                   Feather.search,
-                  size: 14.sp,
+                  size: 13.25.sp,
                   color:
                       Theme.of(context).textTheme.bodyText1.color.withOpacity(
                             ThemeService().isSavedDarkMode() ? .88 : .65,
@@ -91,7 +92,8 @@ class _SearchPageState extends State<SearchPage>
         child: Column(
           children: [
             Container(
-              // decoration: AppDecoration.tabBarDecoration(context).decoration,
+              decoration:
+                  AppDecoration.tabBarDecorationSecond(context).decoration,
               child: Column(
                 children: <Widget>[
                   SizedBox(

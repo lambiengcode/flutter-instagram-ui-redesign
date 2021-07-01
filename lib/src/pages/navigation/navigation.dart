@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
@@ -12,6 +12,8 @@ import 'package:whoru/src/utils/sizer/sizer.dart';
 import 'package:whoru/src/widgets/image_widget.dart';
 
 class Navigation extends StatefulWidget {
+  final int initialIndex;
+  Navigation({this.initialIndex = 0});
   @override
   State<StatefulWidget> createState() => _NavigationState();
 }
@@ -30,6 +32,7 @@ class _NavigationState extends State<Navigation> {
   @override
   void initState() {
     super.initState();
+    currentPage = widget.initialIndex;
   }
 
   @override
@@ -43,24 +46,44 @@ class _NavigationState extends State<Navigation> {
         child: Container(
           padding: EdgeInsets.only(
             top: 16.sp,
-            bottom: 12.sp,
-            left: 8.sp,
-            right: 8.sp,
+            bottom: 11.5.sp,
+            left: 6.5.sp,
+            right: 6.5.sp,
           ),
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(
                 color: Theme.of(context).dividerColor,
-                width: .35,
+                width: .2,
               ),
             ),
           ),
           child: Row(
             children: [
-              _buildItemBottomBar(Feather.home, 0, 'Home'),
-              _buildItemBottomBar(Feather.search, 1, 'Search'),
-              _buildItemBottomBar(Feather.inbox, 2, 'Message'),
-              _buildItemBottomBar(Feather.activity, 3, 'Discover'),
+              _buildItemBottomBar(
+                PhosphorIcons.house,
+                PhosphorIcons.house_fill,
+                0,
+                'Home',
+              ),
+              _buildItemBottomBar(
+                PhosphorIcons.magnifying_glass,
+                PhosphorIcons.magnifying_glass_fill,
+                1,
+                'Search',
+              ),
+              _buildItemBottomBar(
+                PhosphorIcons.chats_teardrop,
+                PhosphorIcons.chats_teardrop_fill,
+                2,
+                'Message',
+              ),
+              _buildItemBottomBar(
+                PhosphorIcons.broadcast,
+                PhosphorIcons.broadcast_fill,
+                3,
+                'Discover',
+              ),
               _buildItemBottomAccount(
                 'https://avatars.githubusercontent.com/u/60530946?v=4',
                 4,
@@ -73,7 +96,7 @@ class _NavigationState extends State<Navigation> {
     );
   }
 
-  Widget _buildItemBottomBar(icon, index, title) {
+  Widget _buildItemBottomBar(inActiveIcon, activeIcon, index, title) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
@@ -84,11 +107,11 @@ class _NavigationState extends State<Navigation> {
         child: Container(
           color: Colors.transparent,
           child: Icon(
-            icon,
-            size: 20.sp,
+            index == currentPage ? activeIcon : inActiveIcon,
+            size: 22.25.sp,
             color: index == currentPage
                 ? colorPrimary
-                : Theme.of(context).textTheme.bodyText1.color.withOpacity(.95),
+                : Theme.of(context).textTheme.bodyText1.color,
           ),
         ),
       ),

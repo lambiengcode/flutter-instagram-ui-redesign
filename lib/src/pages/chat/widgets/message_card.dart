@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
@@ -123,7 +123,7 @@ class _MessageCardState extends State<MessageCard> {
                     ? Container(
                         margin: EdgeInsets.only(right: 10.0),
                         child: Icon(
-                          Feather.bell_off,
+                          PhosphorIcons.bell_simple_slash,
                           size: 18.sp,
                         ),
                       )
