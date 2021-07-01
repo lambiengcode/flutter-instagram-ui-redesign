@@ -16,7 +16,7 @@ class RoomPage extends StatefulWidget {
 }
 
 class _RoomPageState extends State<RoomPage> {
-  var roomController = Get.put(RoomController(), permanent: true);
+  var roomController = Get.put(RoomController());
 
   @override
   void initState() {

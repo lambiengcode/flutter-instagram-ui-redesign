@@ -43,7 +43,7 @@ class _NavigationState extends State<Navigation> {
         child: Container(
           padding: EdgeInsets.only(
             top: 16.sp,
-            bottom: 14.sp,
+            bottom: 12.sp,
             left: 8.sp,
             right: 8.sp,
           ),
@@ -88,7 +88,7 @@ class _NavigationState extends State<Navigation> {
             size: 20.sp,
             color: index == currentPage
                 ? colorPrimary
-                : Theme.of(context).textTheme.bodyText1.color.withOpacity(.85),
+                : Theme.of(context).textTheme.bodyText1.color.withOpacity(.95),
           ),
         ),
       ),
@@ -100,38 +100,42 @@ class _NavigationState extends State<Navigation> {
     index,
   ) {
     return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                currentPage = index;
-              });
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color:
-                      currentPage == index ? colorPrimary : Colors.transparent,
-                  width: 1.8.sp,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        child: Container(
+          color: Colors.transparent,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: currentPage == index
+                        ? colorPrimary
+                        : Colors.transparent,
+                    width: 1.8.sp,
+                  ),
+                  shape: BoxShape.circle,
                 ),
-                shape: BoxShape.circle,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: CachedNetworkImage(
-                  height: 20.sp,
-                  width: 20.sp,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => PlaceHolderImage(),
-                  errorWidget: (context, url, error) => ErrorLoadingImage(),
-                  imageUrl: urlToImage,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: CachedNetworkImage(
+                    height: 20.sp,
+                    width: 20.sp,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => PlaceHolderImage(),
+                    errorWidget: (context, url, error) => ErrorLoadingImage(),
+                    imageUrl: urlToImage,
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

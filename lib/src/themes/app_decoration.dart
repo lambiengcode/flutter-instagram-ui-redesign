@@ -13,13 +13,13 @@ class AppDecoration {
           boxShadow: [
             BoxShadow(
               color: Colors.black,
-              offset: Offset(2, 2),
-              blurRadius: 2,
+              offset: Offset(1, 1),
+              blurRadius: 1,
             ),
             BoxShadow(
               color: colorBlack.withOpacity(.45),
-              offset: Offset(-2, -2),
-              blurRadius: 2,
+              offset: Offset(-1.5, -1.5),
+              blurRadius: 1.5,
             ),
           ],
         ),
