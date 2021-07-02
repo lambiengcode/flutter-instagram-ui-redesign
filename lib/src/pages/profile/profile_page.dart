@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/themes/app_colors.dart';
@@ -26,11 +25,17 @@ class _ProfilePageState extends State<ProfilePage>
   TabController _tabController;
   double min = 0, initial = 0, max = 0.88;
   String title = '';
+  bool isShowDrawer = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(length: 3, vsync: this, initialIndex: 0);
+    _advancedDrawerController.addListener(() {
+      setState(() {
+        isShowDrawer = _advancedDrawerController.value.visible;
+      });
+    });
     min = (100.h - 335.sp) / 100.h;
     initial = min;
   }
@@ -59,11 +64,11 @@ class _ProfilePageState extends State<ProfilePage>
             splashColor: colorPrimary,
             splashRadius: 5.0,
             icon: Icon(
-              PhosphorIcons.sliders_horizontal,
+              PhosphorIcons.music_notes_simple,
               color: mCL,
               size: 22.5.sp,
             ),
-            onPressed: () => Get.toNamed('/settings'),
+            onPressed: () => Get.toNamed(Routes.SETTINGS),
           ),
           title: Text(
             title,
@@ -76,10 +81,9 @@ class _ProfilePageState extends State<ProfilePage>
           ),
           actions: [
             IconButton(
-              splashColor: colorPrimary,
-              splashRadius: 5.0,
+              splashRadius: 10.0,
               icon: Icon(
-                PhosphorIcons.rows,
+                isShowDrawer ? PhosphorIcons.columns : PhosphorIcons.rows,
                 color: mCL,
                 size: 22.5.sp,
               ),
@@ -146,22 +150,22 @@ class _ProfilePageState extends State<ProfilePage>
                         _buildActionProfile(
                           context,
                           'Edit Profile',
-                          Feather.clipboard,
+                          PhosphorIcons.clipboard,
                         ),
                         _buildActionProfile(
                           context,
                           'Scan',
-                          Feather.maximize,
+                          PhosphorIcons.qr_code,
                         ),
                         _buildActionProfile(
                           context,
                           'Editor',
-                          Feather.image,
+                          PhosphorIcons.crop,
                         ),
                         _buildActionProfile(
                           context,
                           'File Transfer',
-                          Feather.mail,
+                          PhosphorIcons.chats,
                         ),
                       ],
                     ),
@@ -245,7 +249,6 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   Widget _buildActionProfile(context, title, icon) {
-    final _size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         switch (title) {
@@ -263,12 +266,12 @@ class _ProfilePageState extends State<ProfilePage>
         }
       },
       child: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(10.sp),
         alignment: Alignment.center,
-        decoration: AppDecoration.buttonActionBorder(context, 12.sp).decoration,
+        decoration: AppDecoration.buttonActionBorder(context, 10.sp).decoration,
         child: Icon(
           icon,
-          size: _size.width / 22.5,
+          size: 18.sp,
           color: Theme.of(context).buttonColor,
         ),
       ),

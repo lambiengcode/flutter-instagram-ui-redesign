@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/theme_service.dart';
@@ -34,6 +35,7 @@ class _SearchPageState extends State<SearchPage>
         brightness: Theme.of(context).brightness,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: .0,
+        automaticallyImplyLeading: false,
         toolbarHeight: 42.sp,
         title: GestureDetector(
           onTap: () {},
@@ -41,9 +43,7 @@ class _SearchPageState extends State<SearchPage>
             height: 36.sp,
             decoration:
                 AppDecoration.buttonActionBorder(context, 4.0).decoration,
-            padding: EdgeInsets.only(
-              left: 24.0,
-            ),
+            padding: EdgeInsets.only(left: 20.sp),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -78,14 +78,14 @@ class _SearchPageState extends State<SearchPage>
           IconButton(
             onPressed: () => null,
             icon: Icon(
-              Feather.maximize,
-              size: 18.sp,
+              PhosphorIcons.qr_code,
+              size: 24.sp,
               color: Theme.of(context).textTheme.bodyText1.color.withOpacity(
                     ThemeService().isSavedDarkMode() ? .88 : .65,
                   ),
             ),
           ),
-          SizedBox(width: 4.0),
+          SizedBox(width: 2.sp),
         ],
       ),
       body: Container(

@@ -101,23 +101,17 @@ flutter:
 
     - family: Lobster
       fonts:
-        - asset: assets/fonts/Lobster-Regular.ttf
-
-    - family: Raleway
-      fonts:
-        - asset: assets/fonts/Raleway-Regular.ttf
-
-    - family: Raleway-Bold
-      fonts:
-        - asset: assets/fonts/Raleway-Bold.ttf
+        - asset: assets/fonts/Lobster/Lobster-Regular.ttf
 
     - family: Lato
       fonts:
-        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato/Lato-Regular.ttf
+        - asset: assets/fonts/Lato/Lato-Bold.ttf
 
-    - family: Lato-Bold
+    - family: Helvetica
       fonts:
-        - asset: assets/fonts/Lato-Bold.ttf
+        - asset: assets/fonts/Helvetica/Helvetica-Regular.ttf
+        - asset: assets/fonts/Helvetica/Helvetica-Italic.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

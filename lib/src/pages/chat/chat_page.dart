@@ -8,6 +8,7 @@ import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/chat/widgets/message_card.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class ChatPage extends StatefulWidget {
@@ -39,7 +40,7 @@ class _ChatPageState extends State<ChatPage> {
                   'Messages',
                   style: TextStyle(
                     fontSize: 18.sp,
-                    fontFamily: 'Lato-Bold',
+                    fontFamily: 'Lato',
                   ),
                 ),
                 Container(
@@ -141,9 +142,9 @@ class _ChatPageState extends State<ChatPage> {
         Text(
           title,
           style: TextStyle(
-            fontSize: 12.sp,
+            fontSize: 11.5.sp,
             fontWeight: FontWeight.w600,
-            fontFamily: 'Lato',
+            fontFamily: FontFamily.helvetica,
           ),
         ),
         SizedBox(width: 12.0),

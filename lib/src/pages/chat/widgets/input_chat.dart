@@ -100,9 +100,7 @@ class _ChatInputState extends State<ChatInput> {
   Widget emojiContainer(controller) {
     return EmojiPicker(
       bgColor: Colors.transparent,
-      indicatorColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(
-            ThemeService().isSavedDarkMode() ? .65 : .1,
-          ),
+      indicatorColor: Theme.of(context).dividerColor,
       progressIndicatorColor: colorPrimary,
       rows: 3,
       columns: 10,
@@ -116,15 +114,16 @@ class _ChatInputState extends State<ChatInput> {
       recommendKeywords: ["face", "happy", "party", "sad", "dog", "smile"],
       numRecommended: 40,
       buttonMode: ButtonMode.CUPERTINO,
+      noRecentsText: 'Bạn chưa từng gửi emoji',
       noRecommendationsStyle: TextStyle(
         color: colorPrimary,
-        fontSize: 11.sp,
+        fontSize: 10.sp,
         fontWeight: FontWeight.w400,
         fontFamily: 'Lato',
       ),
       noRecentsStyle: TextStyle(
         color: colorPrimary,
-        fontSize: 11.sp,
+        fontSize: 10.sp,
         fontWeight: FontWeight.w400,
         fontFamily: 'Lato',
       ),

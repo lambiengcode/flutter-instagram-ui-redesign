@@ -44,12 +44,9 @@ class _NavigationState extends State<Navigation> {
         color: Theme.of(context).scaffoldBackgroundColor,
         elevation: .0,
         child: Container(
-          padding: EdgeInsets.only(
-            top: 16.sp,
-            bottom: 11.5.sp,
-            left: 6.5.sp,
-            right: 6.5.sp,
-          ),
+          height: 50.sp,
+          padding: EdgeInsets.symmetric(horizontal: 6.5.sp),
+          alignment: Alignment.center,
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(
@@ -68,7 +65,7 @@ class _NavigationState extends State<Navigation> {
               ),
               _buildItemBottomBar(
                 PhosphorIcons.magnifying_glass,
-                PhosphorIcons.magnifying_glass_fill,
+                PhosphorIcons.magnifying_glass_bold,
                 1,
                 'Search',
               ),
@@ -104,15 +101,30 @@ class _NavigationState extends State<Navigation> {
             currentPage = index;
           });
         },
-        child: Container(
-          color: Colors.transparent,
-          child: Icon(
-            index == currentPage ? activeIcon : inActiveIcon,
-            size: 22.25.sp,
-            color: index == currentPage
-                ? colorPrimary
-                : Theme.of(context).textTheme.bodyText1.color,
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              color: Colors.transparent,
+              child: Icon(
+                index == currentPage ? activeIcon : inActiveIcon,
+                size: 22.25.sp,
+                color: index == currentPage
+                    ? colorPrimary
+                    : Theme.of(context).textTheme.bodyText1.color,
+              ),
+            ),
+            SizedBox(height: 2.5.sp),
+            Container(
+              height: 4.sp,
+              width: 4.sp,
+              decoration: BoxDecoration(
+                color: index == 3 ? colorPrimary : Colors.transparent,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -131,29 +143,45 @@ class _NavigationState extends State<Navigation> {
         },
         child: Container(
           color: Colors.transparent,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: currentPage == index
+                            ? colorPrimary
+                            : Colors.transparent,
+                        width: 1.8.sp,
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: CachedNetworkImage(
+                        height: 20.sp,
+                        width: 20.sp,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => PlaceHolderImage(),
+                        errorWidget: (context, url, error) =>
+                            ErrorLoadingImage(),
+                        imageUrl: urlToImage,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 2.5.sp),
               Container(
+                height: 4.sp,
+                width: 4.sp,
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: currentPage == index
-                        ? colorPrimary
-                        : Colors.transparent,
-                    width: 1.8.sp,
-                  ),
+                  color: index == 3 ? colorPrimary : Colors.transparent,
                   shape: BoxShape.circle,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12.0),
-                  child: CachedNetworkImage(
-                    height: 20.sp,
-                    width: 20.sp,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => PlaceHolderImage(),
-                    errorWidget: (context, url, error) => ErrorLoadingImage(),
-                    imageUrl: urlToImage,
-                  ),
                 ),
               ),
             ],

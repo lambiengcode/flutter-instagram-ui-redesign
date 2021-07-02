@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -63,8 +64,10 @@ class _MessageCardState extends State<MessageCard> {
                             widget.fullName,
                             style: TextStyle(
                               fontSize: 12.sp,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Lato',
+                              fontWeight: widget.pendingMessage == 0
+                                  ? FontWeight.w500
+                                  : FontWeight.bold,
+                              fontFamily: FontFamily.helvetica,
                             ),
                           ),
                           SizedBox(height: 6.0),
@@ -80,12 +83,12 @@ class _MessageCardState extends State<MessageCard> {
                                         fontSize: 10.5.sp,
                                         fontWeight: widget.pendingMessage == 0
                                             ? FontWeight.w500
-                                            : FontWeight.w600,
-                                        fontFamily: 'Lato',
+                                            : FontWeight.bold,
+                                        fontFamily: FontFamily.helvetica,
                                       ),
                                 ),
                                 TextSpan(
-                                  text: '\t\t•\t',
+                                  text: '\t\t•\t\t',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText1
@@ -97,7 +100,7 @@ class _MessageCardState extends State<MessageCard> {
                                             .withOpacity(.6),
                                         fontSize: 9.5.sp,
                                         fontWeight: FontWeight.w400,
-                                        fontFamily: 'Lato',
+                                        fontFamily: FontFamily.helvetica,
                                       ),
                                 ),
                                 TextSpan(
@@ -108,7 +111,7 @@ class _MessageCardState extends State<MessageCard> {
                                       .copyWith(
                                         fontSize: 9.5.sp,
                                         fontWeight: FontWeight.w400,
-                                        fontFamily: 'Lato',
+                                        fontFamily: FontFamily.helvetica,
                                       ),
                                 ),
                               ],
@@ -145,7 +148,7 @@ class _MessageCardState extends State<MessageCard> {
                                 fontSize: 10.sp,
                                 color: mCL,
                                 fontWeight: FontWeight.w600,
-                                fontFamily: 'Lato',
+                                fontFamily: FontFamily.helvetica,
                               ),
                             ),
                           ),

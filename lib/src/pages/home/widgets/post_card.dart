@@ -110,7 +110,8 @@ class _PostCardState extends State<PostCard> {
               'Adding a few more photos to my portfolio. Need a photographer? Get in touch!',
               style: TextStyle(
                 fontSize: 11.5.sp,
-                fontFamily: FontFamily.lato,
+                fontFamily: FontFamily.helvetica,
+                fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.start,
               maxLines: 2,
@@ -258,12 +259,11 @@ class _PostCardState extends State<PostCard> {
   }
 
   Widget _buildInfoWritter(context) {
-    final _size = MediaQuery.of(context).size;
     return Row(
       children: [
         Container(
-          height: _size.width * .115,
-          width: _size.width * .115,
+          height: 32.sp,
+          width: 32.sp,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(1000.0),
             child: BlurHash(
@@ -282,18 +282,18 @@ class _PostCardState extends State<PostCard> {
             Text(
               'lambiengcode',
               style: TextStyle(
-                fontSize: _size.width / 24.0,
+                fontSize: 12.25.sp,
+                fontFamily: FontFamily.helvetica,
                 fontWeight: FontWeight.w600,
-                fontFamily: 'Lato',
               ),
             ),
-            SizedBox(height: 2.5),
+            SizedBox(height: 2.sp),
             Text(
               '2m ago',
               style: TextStyle(
-                fontSize: _size.width / 28.5,
+                fontSize: 10.sp,
+                fontFamily: FontFamily.helvetica,
                 fontWeight: FontWeight.w500,
-                fontFamily: 'Lato',
               ),
             ),
           ],

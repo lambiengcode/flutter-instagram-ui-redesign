@@ -1396,7 +1396,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
             height: (MediaQuery.of(context).size.width / widget.columns) *
                 widget.rows,
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 6.0),
+            padding: EdgeInsets.symmetric(horizontal: 6.5),
             child: PageView(
                 children: pages,
                 controller: pageController,
@@ -1467,9 +1467,9 @@ class _EmojiPickerState extends State<EmojiPicker> {
           ),
           Container(
               color: widget.bgColor,
-              height: 4,
+              height: 5,
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.only(top: 6, right: 2, left: 2),
+              padding: EdgeInsets.only(top: 4, bottom: 0, right: 2, left: 2),
               child: CustomPaint(
                 painter: _ProgressPainter(
                     context,
@@ -2221,7 +2221,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
             ),
           ),
           Container(
-            height: 4,
+            height: 5,
             width: MediaQuery.of(context).size.width,
             color: widget.bgColor,
             padding: EdgeInsets.only(top: 4, left: 2, right: 2),
