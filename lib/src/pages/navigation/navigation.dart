@@ -101,30 +101,33 @@ class _NavigationState extends State<Navigation> {
             currentPage = index;
           });
         },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              color: Colors.transparent,
-              child: Icon(
-                index == currentPage ? activeIcon : inActiveIcon,
-                size: 22.25.sp,
-                color: index == currentPage
-                    ? colorPrimary
-                    : Theme.of(context).textTheme.bodyText1.color,
+        child: Container(
+          color: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                color: Colors.transparent,
+                child: Icon(
+                  index == currentPage ? activeIcon : inActiveIcon,
+                  size: 22.25.sp,
+                  color: index == currentPage
+                      ? colorPrimary
+                      : Theme.of(context).textTheme.bodyText1.color,
+                ),
               ),
-            ),
-            SizedBox(height: 2.5.sp),
-            Container(
-              height: 4.sp,
-              width: 4.sp,
-              decoration: BoxDecoration(
-                color: index == 3 ? colorPrimary : Colors.transparent,
-                shape: BoxShape.circle,
+              SizedBox(height: 2.5.sp),
+              Container(
+                height: 4.sp,
+                width: 4.sp,
+                decoration: BoxDecoration(
+                  color: index == 3 ? colorPrimary : Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

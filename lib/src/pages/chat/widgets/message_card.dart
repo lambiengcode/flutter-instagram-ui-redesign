@@ -64,10 +64,11 @@ class _MessageCardState extends State<MessageCard> {
                             widget.fullName,
                             style: TextStyle(
                               fontSize: 12.sp,
-                              fontWeight: widget.pendingMessage == 0
-                                  ? FontWeight.w500
-                                  : FontWeight.bold,
-                              fontFamily: FontFamily.helvetica,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: widget.pendingMessage == 0
+                                  ? FontFamily.lato
+                                  : FontFamily.lato_bold,
+                              wordSpacing: .01,
                             ),
                           ),
                           SizedBox(height: 6.0),
@@ -81,10 +82,11 @@ class _MessageCardState extends State<MessageCard> {
                                       .bodyText1
                                       .copyWith(
                                         fontSize: 10.5.sp,
-                                        fontWeight: widget.pendingMessage == 0
-                                            ? FontWeight.w500
-                                            : FontWeight.bold,
-                                        fontFamily: FontFamily.helvetica,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: widget.pendingMessage == 0
+                                            ? FontFamily.lato
+                                            : FontFamily.lato_bold,
+                                        wordSpacing: .01,
                                       ),
                                 ),
                                 TextSpan(
@@ -100,7 +102,7 @@ class _MessageCardState extends State<MessageCard> {
                                             .withOpacity(.6),
                                         fontSize: 9.5.sp,
                                         fontWeight: FontWeight.w400,
-                                        fontFamily: FontFamily.helvetica,
+                                        fontFamily: FontFamily.lato,
                                       ),
                                 ),
                                 TextSpan(
@@ -111,7 +113,7 @@ class _MessageCardState extends State<MessageCard> {
                                       .copyWith(
                                         fontSize: 9.5.sp,
                                         fontWeight: FontWeight.w400,
-                                        fontFamily: FontFamily.helvetica,
+                                        fontFamily: FontFamily.lato,
                                       ),
                                 ),
                               ],

@@ -40,7 +40,8 @@ class _ChatPageState extends State<ChatPage> {
                   'Messages',
                   style: TextStyle(
                     fontSize: 18.sp,
-                    fontFamily: 'Lato',
+                    fontFamily: FontFamily.lato,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Container(
@@ -144,13 +145,13 @@ class _ChatPageState extends State<ChatPage> {
           style: TextStyle(
             fontSize: 11.5.sp,
             fontWeight: FontWeight.w600,
-            fontFamily: FontFamily.helvetica,
+            fontFamily: FontFamily.lato,
           ),
         ),
-        SizedBox(width: 12.0),
+        SizedBox(width: 6.sp),
         title == 'Pinned'
             ? Padding(
-                padding: EdgeInsets.only(bottom: 2.0),
+                padding: EdgeInsets.only(bottom: 1.sp),
                 child: Icon(
                   LineAwesomeIcons.thumb_tack,
                   size: 12.sp,
