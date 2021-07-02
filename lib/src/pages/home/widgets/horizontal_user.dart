@@ -14,7 +14,6 @@ class HorizontalUser extends StatefulWidget {
 class _HorizontalUserState extends State<HorizontalUser> {
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Column(
       children: [
         SizedBox(height: 8.sp),

@@ -107,11 +107,16 @@ class _PostCardState extends State<PostCard> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 2.5.w),
             child: Text(
-              'Adding a few more photos to my portfolio. Need a photographer? Get in touch!',
+              'lambiengcode: adding a few more photos to my portfolio. Need a photographer? Get in touch!',
               style: TextStyle(
-                fontSize: 11.5.sp,
+                fontSize: 11.sp,
                 fontFamily: FontFamily.helvetica,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .color
+                    .withOpacity(.75),
               ),
               textAlign: TextAlign.start,
               maxLines: 2,
@@ -282,12 +287,12 @@ class _PostCardState extends State<PostCard> {
             Text(
               'lambiengcode',
               style: TextStyle(
-                fontSize: 12.25.sp,
+                fontSize: 12.45.sp,
                 fontFamily: FontFamily.helvetica,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 2.sp),
+            SizedBox(height: 1.85.sp),
             Text(
               '2m ago',
               style: TextStyle(

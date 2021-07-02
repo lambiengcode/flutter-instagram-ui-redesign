@@ -3,6 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -67,7 +68,7 @@ class _SearchPageState extends State<SearchPage>
                             ),
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
-                    fontFamily: 'Lato',
+                    fontFamily: FontFamily.lato,
                   ),
                 ),
               ],
@@ -112,12 +113,12 @@ class _SearchPageState extends State<SearchPage>
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 11.sp,
-                      fontFamily: 'Lato',
+                      fontFamily: FontFamily.lato,
                     ),
                     unselectedLabelStyle: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 10.sp,
-                      fontFamily: 'Lato',
+                      fontFamily: FontFamily.lato,
                     ),
                     tabs: [
                       Tab(

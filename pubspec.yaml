@@ -106,12 +106,18 @@ flutter:
     - family: Lato
       fonts:
         - asset: assets/fonts/Lato/Lato-Regular.ttf
+        
+    - family: Lato-Bold
+      fonts:
         - asset: assets/fonts/Lato/Lato-Bold.ttf
 
     - family: Helvetica
       fonts:
         - asset: assets/fonts/Helvetica/Helvetica-Regular.ttf
-        - asset: assets/fonts/Helvetica/Helvetica-Italic.ttf
+
+    - family: Helvetica-Bold
+      fonts:
+        - asset: assets/fonts/Helvetica/Helvetica-Bold.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
