@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/profile/pages/end_drawer.dart';
@@ -11,6 +11,7 @@ import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
+import 'package:whoru/src/utils/slide_drawer/flutter_advanced_drawer.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -20,185 +21,191 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _advancedDrawerController = AdvancedDrawerController();
   TabController _tabController;
   double min = 0, initial = 0, max = 0.88;
   String title = '';
+  bool isShowDrawer = false;
 
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(length: 3, vsync: this, initialIndex: 0);
+    _advancedDrawerController.addListener(() {
+      setState(() {
+        isShowDrawer = _advancedDrawerController.value.visible;
+      });
+    });
     min = (100.h - 335.sp) / 100.h;
     initial = min;
   }
 
-  void _openEndDrawer() {
-    _scaffoldKey.currentState.openEndDrawer();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      extendBodyBehindAppBar: true,
-      endDrawer: Container(
-        width: 60.w,
-        child: Drawer(
-          child: EndDrawer(),
-        ),
-      ),
-      endDrawerEnableOpenDragGesture: true,
-      appBar: AppBar(
-        brightness: Theme.of(context).brightness,
-        backgroundColor: Colors.transparent,
-        elevation: .0,
-        centerTitle: true,
-        leading: IconButton(
-          splashColor: colorPrimary,
-          splashRadius: 5.0,
-          icon: Icon(
-            Feather.settings,
-            color: mCL,
-            size: 18.5.sp,
-          ),
-          onPressed: () => Get.toNamed('/settings'),
-        ),
-        title: Text(
-          title,
-          style: TextStyle(
-            color: mCM,
-            fontSize: 13.5.sp,
-            fontFamily: 'FreeSans',
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [
-          IconButton(
+    return AdvancedDrawer(
+      backdropColor:
+          ThemeService().isSavedDarkMode() ? colorBlack.withOpacity(.45) : mCM,
+      animationCurve: Curves.easeInToLinear,
+      animationDuration: Duration(milliseconds: 300),
+      animateChildDecoration: true,
+      openRatio: .6,
+      rtlOpening: true,
+      drawer: Container(width: 100.w, child: EndDrawer()),
+      controller: _advancedDrawerController,
+      child: Scaffold(
+        key: _scaffoldKey,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          brightness: Theme.of(context).brightness,
+          backgroundColor: Colors.transparent,
+          elevation: .0,
+          centerTitle: true,
+          leading: IconButton(
             splashColor: colorPrimary,
             splashRadius: 5.0,
             icon: Icon(
-              Feather.list,
+              PhosphorIcons.music_notes_simple,
               color: mCL,
-              size: 20.sp,
+              size: 22.5.sp,
             ),
-            onPressed: () => _openEndDrawer(),
+            onPressed: () => Get.toNamed(Routes.SETTINGS),
           ),
-        ],
-      ),
-      body: Container(
-        height: 100.h,
-        width: 100.w,
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Container(
-                  width: 300.sp,
-                  height: 168.75.sp,
-                  child: BlurHash(
-                    hash: "L27B7e4n~WIU?bofD%xu4.t7RjRj",
-                    image:
-                        'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797',
-                    imageFit: BoxFit.cover,
-                  ),
-                ),
-                SizedBox(height: 13.5.sp),
-                Row(
-                  children: [
-                    _buildTitleFollow(context, 'Follower', '554'),
-                    SizedBox(width: 24.w),
-                    _buildTitleFollow(context, 'Following', '208'),
-                  ],
-                ),
-                SizedBox(height: 20.sp),
-                Text(
-                  'Đào Hồng Vinh - Dev',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontFamily: 'FreeSans',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 6.sp),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Mobile App Developer (lambiengcode)',
-                    style: TextStyle(
-                      fontSize: 11.sp,
-                      fontFamily: 'FreeSans',
-                      fontWeight: FontWeight.w400,
+          title: Text(
+            title,
+            style: TextStyle(
+              color: mCM,
+              fontSize: 13.5.sp,
+              fontFamily: 'FreeSans',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          actions: [
+            IconButton(
+              splashRadius: 10.0,
+              icon: Icon(
+                isShowDrawer ? PhosphorIcons.columns : PhosphorIcons.rows,
+                color: mCL,
+                size: 22.5.sp,
+              ),
+              onPressed: () => _advancedDrawerController.toggleDrawer(),
+            ),
+          ],
+        ),
+        body: Container(
+          height: 100.h,
+          width: 100.w,
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Container(
+                    width: 300.sp,
+                    height: 168.75.sp,
+                    child: BlurHash(
+                      hash: "L27B7e4n~WIU?bofD%xu4.t7RjRj",
+                      image:
+                          'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797',
+                      imageFit: BoxFit.cover,
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                ),
-                SizedBox(height: 14.sp),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 15.w,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  SizedBox(height: 13.5.sp),
+                  Row(
                     children: [
-                      _buildActionProfile(
-                        context,
-                        'Edit Profile',
-                        Feather.clipboard,
-                      ),
-                      _buildActionProfile(
-                        context,
-                        'Scan',
-                        Feather.maximize,
-                      ),
-                      _buildActionProfile(
-                        context,
-                        'Editor',
-                        Feather.image,
-                      ),
-                      _buildActionProfile(
-                        context,
-                        'File Transfer',
-                        Feather.mail,
-                      ),
+                      _buildTitleFollow(context, 'Follower', '554'),
+                      SizedBox(width: 24.w),
+                      _buildTitleFollow(context, 'Following', '208'),
                     ],
                   ),
-                ),
-              ],
-            ),
-            Positioned(
-              top: 118.75.sp,
-              left: 0,
-              child: Container(
-                width: 100.w,
-                alignment: Alignment.center,
-                child: Container(
-                  height: 100.sp,
-                  width: 100.sp,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: colorPrimary,
-                      width: 3.5,
+                  SizedBox(height: 20.sp),
+                  Text(
+                    'Đào Hồng Vinh - Dev',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontFamily: 'FreeSans',
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
+                  SizedBox(height: 6.sp),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Mobile App Developer (lambiengcode)',
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontFamily: 'Lato',
+                        fontWeight: FontWeight.w400,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(height: 14.sp),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 15.w,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildActionProfile(
+                          context,
+                          'Edit Profile',
+                          PhosphorIcons.clipboard,
+                        ),
+                        _buildActionProfile(
+                          context,
+                          'Scan',
+                          PhosphorIcons.qr_code,
+                        ),
+                        _buildActionProfile(
+                          context,
+                          'Editor',
+                          PhosphorIcons.crop,
+                        ),
+                        _buildActionProfile(
+                          context,
+                          'File Transfer',
+                          PhosphorIcons.chats,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                top: 118.75.sp,
+                left: 0,
+                child: Container(
+                  width: 100.w,
                   alignment: Alignment.center,
                   child: Container(
-                    height: 88.sp,
-                    width: 88.sp,
+                    height: 100.sp,
+                    width: 100.sp,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage('images/avt.jpg'),
-                        fit: BoxFit.cover,
+                      border: Border.all(
+                        color: colorPrimary,
+                        width: 3.5,
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    child: Container(
+                      height: 88.sp,
+                      width: 88.sp,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage('images/avt.jpg'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            _scrollMyFeet(context),
-          ],
+              _scrollMyFeet(context),
+            ],
+          ),
         ),
       ),
     );
@@ -242,7 +249,6 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   Widget _buildActionProfile(context, title, icon) {
-    final _size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         switch (title) {
@@ -260,12 +266,12 @@ class _ProfilePageState extends State<ProfilePage>
         }
       },
       child: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(10.sp),
         alignment: Alignment.center,
-        decoration: AppDecoration.buttonActionBorder(context, 15.0).decoration,
+        decoration: AppDecoration.buttonActionBorder(context, 10.sp).decoration,
         child: Icon(
           icon,
-          size: _size.width / 22.5,
+          size: 18.sp,
           color: Theme.of(context).buttonColor,
         ),
       ),
@@ -308,13 +314,11 @@ class _ProfilePageState extends State<ProfilePage>
                   child: Column(
                     children: <Widget>[
                       Container(
+                        padding: EdgeInsets.only(top: 2.5.sp),
                         decoration:
                             AppDecoration.tabBarDecoration(context).decoration,
                         child: Column(
                           children: <Widget>[
-                            SizedBox(
-                              height: 4.0,
-                            ),
                             TabBar(
                               controller: _tabController,
                               labelColor: colorPrimary,
@@ -332,13 +336,13 @@ class _ProfilePageState extends State<ProfilePage>
                               indicatorWeight: 2.5,
                               labelStyle: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                fontSize: 11.5.sp,
-                                fontFamily: 'FreeSans',
+                                fontSize: 11.sp,
+                                fontFamily: 'Lato',
                               ),
                               unselectedLabelStyle: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                fontSize: 11.sp,
-                                fontFamily: 'FreeSans',
+                                fontSize: 10.25.sp,
+                                fontFamily: 'Lato',
                               ),
                               tabs: [
                                 Tab(

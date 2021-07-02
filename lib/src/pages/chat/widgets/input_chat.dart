@@ -100,9 +100,7 @@ class _ChatInputState extends State<ChatInput> {
   Widget emojiContainer(controller) {
     return EmojiPicker(
       bgColor: Colors.transparent,
-      indicatorColor: Theme.of(context).textTheme.bodyText1.color.withOpacity(
-            ThemeService().isSavedDarkMode() ? .65 : .1,
-          ),
+      indicatorColor: Theme.of(context).dividerColor,
       progressIndicatorColor: colorPrimary,
       rows: 3,
       columns: 10,
@@ -116,15 +114,16 @@ class _ChatInputState extends State<ChatInput> {
       recommendKeywords: ["face", "happy", "party", "sad", "dog", "smile"],
       numRecommended: 40,
       buttonMode: ButtonMode.CUPERTINO,
+      noRecentsText: 'Bạn chưa từng gửi emoji',
       noRecommendationsStyle: TextStyle(
         color: colorPrimary,
-        fontSize: 11.sp,
+        fontSize: 10.sp,
         fontWeight: FontWeight.w400,
         fontFamily: 'Lato',
       ),
       noRecentsStyle: TextStyle(
         color: colorPrimary,
-        fontSize: 11.sp,
+        fontSize: 10.sp,
         fontWeight: FontWeight.w400,
         fontFamily: 'Lato',
       ),
@@ -167,7 +166,7 @@ class _ChatInputState extends State<ChatInput> {
     return Container(
       child: Row(
         children: <Widget>[
-          SizedBox(width: 4.sp),
+          SizedBox(width: 6.sp),
           IconButton(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -185,7 +184,7 @@ class _ChatInputState extends State<ChatInput> {
             icon: Icon(
               FontAwesome5Solid.meteor,
               color: widget.color.withOpacity(.95),
-              size: 18.sp,
+              size: 16.sp,
             ),
           ),
           Expanded(
@@ -274,7 +273,7 @@ class _ChatInputState extends State<ChatInput> {
                   ),
                   onPressed: () {},
                 ),
-          SizedBox(width: 4.sp),
+          SizedBox(width: 6.sp),
         ],
       ),
     );

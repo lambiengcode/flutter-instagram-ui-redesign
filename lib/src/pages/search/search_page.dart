@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/theme_service.dart';
@@ -32,23 +33,23 @@ class _SearchPageState extends State<SearchPage>
     return Scaffold(
       appBar: AppBar(
         brightness: Theme.of(context).brightness,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: .0,
-        toolbarHeight: 55.0,
+        automaticallyImplyLeading: false,
+        toolbarHeight: 42.sp,
         title: GestureDetector(
           onTap: () {},
           child: Container(
-            height: 36.5.sp,
+            height: 36.sp,
             decoration:
-                AppDecoration.buttonActionBorder(context, 6.0).decoration,
-            padding: EdgeInsets.only(
-              left: 24.0,
-            ),
+                AppDecoration.buttonActionBorder(context, 4.0).decoration,
+            padding: EdgeInsets.only(left: 20.sp),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Icon(
                   Feather.search,
-                  size: 14.sp,
+                  size: 13.25.sp,
                   color:
                       Theme.of(context).textTheme.bodyText1.color.withOpacity(
                             ThemeService().isSavedDarkMode() ? .88 : .65,
@@ -77,21 +78,22 @@ class _SearchPageState extends State<SearchPage>
           IconButton(
             onPressed: () => null,
             icon: Icon(
-              Feather.maximize,
-              size: 18.sp,
+              PhosphorIcons.qr_code,
+              size: 24.sp,
               color: Theme.of(context).textTheme.bodyText1.color.withOpacity(
                     ThemeService().isSavedDarkMode() ? .88 : .65,
                   ),
             ),
           ),
-          SizedBox(width: 4.0),
+          SizedBox(width: 2.sp),
         ],
       ),
       body: Container(
         child: Column(
           children: [
             Container(
-              // decoration: AppDecoration.tabBarDecoration(context).decoration,
+              decoration:
+                  AppDecoration.tabBarDecorationSecond(context).decoration,
               child: Column(
                 children: <Widget>[
                   SizedBox(

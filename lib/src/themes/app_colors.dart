@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-var colorBlack = Color(0xFF14171A);
+var colorBlack = Color(0xFF121212);
+var colorPrimaryBlack = Color(0xFF14171A);
 var colorDarkGrey = Color(0xFF657786);
 var colorPrimary = Color(0xFF1DA1F2);
 var colorTitle = Color(0xFF2C3D50);
@@ -45,12 +46,12 @@ class AppColors {
 
   factory AppColors.light() {
     return AppColors(
-      header: Color(0xff121212),
+      header: colorBlack,
       primary: Color(0xFF1DA1F2),
       background: mC,
-      accent: Color(0xff17c063),
+      accent: Color(0xFF17c063),
       disabled: Colors.black12,
-      error: Color(0xffff7466),
+      error: Color(0xFFFF7466),
       divider: Colors.black26,
       button: Color(0xFF657786),
       contentText1: colorDarkGrey,
@@ -61,10 +62,10 @@ class AppColors {
     return AppColors(
       header: Colors.white,
       primary: Color(0xFF1DA1F2),
-      background: Color(0xff121212),
-      accent: Color(0xff17c063),
+      background: Color(0xFF14171A),
+      accent: Color(0xFF17c063),
       disabled: Colors.white12,
-      error: Color(0xffff5544),
+      error: Color(0xFFFF5544),
       divider: Colors.white24,
       button: Colors.white,
       contentText1: mCL,
