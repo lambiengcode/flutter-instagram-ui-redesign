@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:whoru/src/app.dart';
+import 'package:whoru/src/pages/calling/pages/incomming_call_page.dart';
 import 'package:whoru/src/pages/chat/pages/room_page.dart';
 import 'package:whoru/src/pages/profile/pages/edit_profile_page.dart';
 import 'package:whoru/src/pages/profile/pages/editor_page.dart';
@@ -20,6 +21,12 @@ class AppPages {
     GetPage(
       name: Routes.CHAT_ROOM,
       page: () => RoomPage(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: Routes.INCOMMING_CALL,
+      page: () => IncommingCallPage(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 250),
     ),

@@ -46,6 +46,48 @@ class AppDecoration {
     }
   }
 
+  factory AppDecoration.buttonActionCircleCall(context) {
+    if (Theme.of(context).brightness == Brightness.dark) {
+      return AppDecoration(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: colorPrimaryBlack,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(.8),
+              offset: Offset(1, 1),
+              blurRadius: 1,
+            ),
+            BoxShadow(
+              color: colorBlack.withOpacity(.35),
+              offset: Offset(-2, -2),
+              blurRadius: 2,
+            ),
+          ],
+        ),
+      );
+    } else {
+      return AppDecoration(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: mC.withOpacity(.1),
+          boxShadow: [
+            BoxShadow(
+              color: mCM.withOpacity(.1),
+              offset: Offset(.5, .5),
+              blurRadius: .5,
+            ),
+            BoxShadow(
+              color: mCL.withOpacity(.01),
+              offset: Offset(-1, -1),
+              blurRadius: .5,
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   factory AppDecoration.buttonActionBorder(context, radius) {
     if (Theme.of(context).brightness == Brightness.dark) {
       return AppDecoration(
