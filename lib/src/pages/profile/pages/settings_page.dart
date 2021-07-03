@@ -4,6 +4,7 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/pages/profile/widgets/bottom_settings.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
@@ -14,9 +15,9 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  List<String> valueOfTheme = ['Light', 'Dark'];
+  bool _notifications = false;
+  bool _fingerprint = true;
   List<String> valueOfLanguage = ['English', 'Vietnamese'];
-  List<String> valueOfNotification = ['On', 'Off'];
 
   @override
   void initState() {
@@ -103,8 +104,6 @@ class _SettingsPageState extends State<SettingsPage> {
       onTap: () {
         if (title == 'Language') {
           showSettingBottomSheet(valueOfLanguage);
-        } else {
-          showSettingBottomSheet(valueOfNotification);
         }
       },
       child: Container(
@@ -144,12 +143,21 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ],
             ),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 11.sp,
-                fontWeight: FontWeight.w600,
-              ),
+            FlutterSwitch(
+              width: 42.sp,
+              height: 22.sp,
+              value: title == 'Notifications' ? _notifications : _fingerprint,
+              toggleSize: 15.sp,
+              activeColor: colorPrimary,
+              onToggle: (val) {
+                setState(() {
+                  if (title == 'Notifications') {
+                    _notifications = val;
+                  } else {
+                    _fingerprint = val;
+                  }
+                });
+              },
             ),
           ],
         ),

@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:get/get.dart';
+import 'package:whoru/src/pages/calling/pages/incomming_call_page.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
@@ -33,6 +35,30 @@ class _NavigationState extends State<Navigation> {
   void initState() {
     super.initState();
     currentPage = widget.initialIndex;
+    // Open for Design
+    // Future.delayed(
+    //   Duration(seconds: 2),
+    //   () => Get.toNamed(Routes.INCOMMING_CALL),
+    // );
+  }
+
+  showIncommingCallBottomSheet() {
+    Get.bottomSheet(
+      ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 30.0,
+            sigmaY: 30.0,
+          ),
+          child: IncommingCallPage(),
+        ),
+      ),
+      isScrollControlled: true,
+      isDismissible: false,
+      enableDrag: false,
+      backgroundColor:
+          Theme.of(context).scaffoldBackgroundColor.withOpacity(.15),
+    );
   }
 
   @override
@@ -44,7 +70,7 @@ class _NavigationState extends State<Navigation> {
         color: Theme.of(context).scaffoldBackgroundColor,
         elevation: .0,
         child: Container(
-          height: 50.sp,
+          height: 52.sp,
           padding: EdgeInsets.symmetric(horizontal: 6.5.sp),
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -100,18 +126,21 @@ class _NavigationState extends State<Navigation> {
           setState(() {
             currentPage = index;
           });
+          if (index == 0) {
+            // showIncommingCallBottomSheet();
+          }
         },
         child: Container(
           color: Colors.transparent,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 color: Colors.transparent,
                 child: Icon(
                   index == currentPage ? activeIcon : inActiveIcon,
-                  size: 22.25.sp,
+                  size: 21.5.sp,
                   color: index == currentPage
                       ? colorPrimary
                       : Theme.of(context).textTheme.bodyText1.color,
@@ -148,7 +177,7 @@ class _NavigationState extends State<Navigation> {
           color: Colors.transparent,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -288,16 +288,16 @@ class _PostCardState extends State<PostCard> {
               'lambiengcode',
               style: TextStyle(
                 fontSize: 12.45.sp,
-                fontFamily: FontFamily.helvetica,
+                fontFamily: FontFamily.lato,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 1.85.sp),
+            SizedBox(height: 2.15.sp),
             Text(
               '2m ago',
               style: TextStyle(
                 fontSize: 10.sp,
-                fontFamily: FontFamily.helvetica,
+                fontFamily: FontFamily.lato,
                 fontWeight: FontWeight.w500,
               ),
             ),
