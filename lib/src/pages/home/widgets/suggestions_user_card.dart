@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class SuggestionsUserCard extends StatefulWidget {
   final String blurHash;
@@ -21,20 +23,19 @@ class SuggestionsUserCard extends StatefulWidget {
 class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Stack(
       children: [
         Container(
-          width: _size.width * .38,
+          width: 114.sp,
           decoration:
               AppDecoration.buttonActionBorder(context, 15.0).decoration,
           margin: EdgeInsets.only(
-            left: 10.0,
-            right: 4.0,
-            bottom: 16.0,
-            top: 6.0,
+            left: 8.sp,
+            right: 2.sp,
+            bottom: 12.sp,
+            top: 4.sp,
           ),
-          padding: EdgeInsets.only(bottom: 12.0),
+          padding: EdgeInsets.only(bottom: 10.sp),
           child: Stack(
             children: [
               Column(
@@ -42,7 +43,7 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    height: _size.width * .16,
+                    height: 48.sp,
                     child: ClipRRect(
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(16.0),
@@ -58,11 +59,13 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                   GestureDetector(
                     onTap: () => print('follow'),
                     child: Container(
-                      width: _size.width * .38,
+                      width: 114.sp,
                       alignment: Alignment.center,
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 26.5, vertical: 5.0),
+                          horizontal: 20.sp,
+                          vertical: 4.sp,
+                        ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30.0),
                           color: colorPrimary,
@@ -78,9 +81,9 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                           'Follow',
                           style: TextStyle(
                             color: mCL,
-                            fontSize: _size.width / 35.0,
+                            fontSize: 8.5.sp,
                             fontWeight: FontWeight.w600,
-                            fontFamily: 'Lato',
+                            fontFamily: FontFamily.lato,
                           ),
                         ),
                       ),
@@ -89,24 +92,24 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                 ],
               ),
               Positioned(
-                top: _size.width * .1,
+                top: 30.sp,
                 left: 0,
                 child: Column(
                   children: [
                     Container(
-                      width: _size.width * .38,
+                      width: 114.sp,
                       alignment: Alignment.center,
                       child: Container(
-                        height: _size.width * .115,
-                        width: _size.width * .115,
+                        height: 34.5.sp,
+                        width: 34.5.sp,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: mC,
+                          color: Theme.of(context).scaffoldBackgroundColor,
                         ),
                         alignment: Alignment.center,
                         child: Container(
-                          height: _size.width * .1,
-                          width: _size.width * .1,
+                          height: 30.sp,
+                          width: 30.sp,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                           ),
@@ -122,12 +125,12 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 6.0),
+                    SizedBox(height: 4.sp),
                     Text(
                       widget.fullName,
                       style: TextStyle(
-                        fontSize: _size.width / 32.5,
-                        fontFamily: 'Lato',
+                        fontSize: 9.5.sp,
+                        fontFamily: FontFamily.lato,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -135,8 +138,8 @@ class _SuggestionsUserCardState extends State<SuggestionsUserCard> {
                     Text(
                       'You maybe know him',
                       style: TextStyle(
-                        fontSize: _size.width / 36.0,
-                        fontFamily: 'Lato',
+                        fontSize: 8.sp,
+                        fontFamily: FontFamily.lato,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

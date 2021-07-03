@@ -16,7 +16,7 @@ class RoomPage extends StatefulWidget {
 }
 
 class _RoomPageState extends State<RoomPage> {
-  var roomController = Get.put(RoomController(), permanent: true);
+  var roomController = Get.put(RoomController());
 
   @override
   void initState() {
@@ -129,7 +129,7 @@ class _RoomPageState extends State<RoomPage> {
                     width: 8.5.sp,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: mC,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                     ),
                     alignment: Alignment.center,
                     child: Container(

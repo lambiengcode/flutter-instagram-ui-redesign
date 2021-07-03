@@ -1,6 +1,9 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:get/get.dart';
+import 'package:whoru/src/pages/calling/pages/incomming_call_page.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/chat/chat_page.dart';
 import 'package:whoru/src/pages/home/home_page.dart';
@@ -8,8 +11,11 @@ import 'package:whoru/src/pages/profile/profile_page.dart';
 import 'package:whoru/src/pages/search/search_page.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
+import 'package:whoru/src/widgets/image_widget.dart';
 
 class Navigation extends StatefulWidget {
+  final int initialIndex;
+  Navigation({this.initialIndex = 0});
   @override
   State<StatefulWidget> createState() => _NavigationState();
 }
@@ -28,67 +34,84 @@ class _NavigationState extends State<Navigation> {
   @override
   void initState() {
     super.initState();
+    currentPage = widget.initialIndex;
+    // Open for Design
+    // Future.delayed(
+    //   Duration(seconds: 2),
+    //   () => Get.toNamed(Routes.INCOMMING_CALL),
+    // );
+  }
+
+  showIncommingCallBottomSheet() {
+    Get.bottomSheet(
+      ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 30.0,
+            sigmaY: 30.0,
+          ),
+          child: IncommingCallPage(),
+        ),
+      ),
+      isScrollControlled: true,
+      isDismissible: false,
+      enableDrag: false,
+      backgroundColor:
+          Theme.of(context).scaffoldBackgroundColor.withOpacity(.15),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        height: 46.sp,
-        width: 46.sp,
-        child: FloatingActionButton(
-          elevation: .0,
-          child: Icon(
-            AntDesign.message1,
-            color: mCL,
-            size: 22.sp,
-          ),
-          onPressed: () => setState(() => currentPage = 2),
-          backgroundColor: colorPrimary,
-        ),
-      ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(42.0),
-        ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 2.0,
-            sigmaY: 2.0,
-          ),
-          child: Container(
-            color: Colors.transparent,
-            child: BottomAppBar(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              shape: CircularNotchedRectangle(),
-              notchMargin: 5.sp,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.black.withOpacity(.5)
-                  : Colors.black.withOpacity(.2),
-              elevation: 2.0,
-              child: Container(
-                color: Colors.transparent,
-                padding: EdgeInsets.only(
-                  top: 16.sp,
-                  left: 10.sp,
-                  right: 10.sp,
-                ),
-                child: Row(
-                  children: [
-                    _buildItemBottomBar(Feather.home, 0),
-                    _buildItemBottomBar(Feather.search, 1),
-                    SizedBox(width: 16.w),
-                    _buildItemBottomBar(Feather.activity, 3),
-                    _buildItemBottomAccount(
-                      'https://avatars.githubusercontent.com/u/60530946?v=4',
-                      4,
-                    ),
-                  ],
-                ),
+      bottomNavigationBar: BottomAppBar(
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        color: Theme.of(context).scaffoldBackgroundColor,
+        elevation: .0,
+        child: Container(
+          height: 52.sp,
+          padding: EdgeInsets.symmetric(horizontal: 6.5.sp),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: Theme.of(context).dividerColor,
+                width: .2,
               ),
             ),
+          ),
+          child: Row(
+            children: [
+              _buildItemBottomBar(
+                PhosphorIcons.house,
+                PhosphorIcons.house_fill,
+                0,
+                'Home',
+              ),
+              _buildItemBottomBar(
+                PhosphorIcons.magnifying_glass,
+                PhosphorIcons.magnifying_glass_bold,
+                1,
+                'Search',
+              ),
+              _buildItemBottomBar(
+                PhosphorIcons.chats_teardrop,
+                PhosphorIcons.chats_teardrop_fill,
+                2,
+                'Message',
+              ),
+              _buildItemBottomBar(
+                PhosphorIcons.broadcast,
+                PhosphorIcons.broadcast_fill,
+                3,
+                'Discover',
+              ),
+              _buildItemBottomAccount(
+                'https://avatars.githubusercontent.com/u/60530946?v=4',
+                4,
+              ),
+            ],
           ),
         ),
       ),
@@ -96,7 +119,53 @@ class _NavigationState extends State<Navigation> {
     );
   }
 
-  Widget _buildItemBottomBar(icon, index) {
+  Widget _buildItemBottomBar(inActiveIcon, activeIcon, index, title) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            currentPage = index;
+          });
+          if (index == 0) {
+            // showIncommingCallBottomSheet();
+          }
+        },
+        child: Container(
+          color: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                color: Colors.transparent,
+                child: Icon(
+                  index == currentPage ? activeIcon : inActiveIcon,
+                  size: 21.5.sp,
+                  color: index == currentPage
+                      ? colorPrimary
+                      : Theme.of(context).textTheme.bodyText1.color,
+                ),
+              ),
+              SizedBox(height: 2.5.sp),
+              Container(
+                height: 4.sp,
+                width: 4.sp,
+                decoration: BoxDecoration(
+                  color: index == 3 ? colorPrimary : Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildItemBottomAccount(
+    urlToImage,
+    index,
+  ) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
@@ -106,42 +175,48 @@ class _NavigationState extends State<Navigation> {
         },
         child: Container(
           color: Colors.transparent,
-          child: Icon(
-            icon,
-            size: 20.sp,
-            color: index == currentPage
-                ? colorPrimary
-                : Theme.of(context).brightness == Brightness.dark
-                    ? null
-                    : mC,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildItemBottomAccount(url, index) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            currentPage = index;
-          });
-        },
-        child: Container(
-          height: 20.5.sp,
-          width: 20.5.sp,
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            border: Border.all(
-              width: currentPage == index ? 2.0 : .0,
-              color: currentPage == index ? colorPrimary : Colors.transparent,
-            ),
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: NetworkImage(url),
-              fit: BoxFit.contain,
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: currentPage == index
+                            ? colorPrimary
+                            : Colors.transparent,
+                        width: 1.8.sp,
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: CachedNetworkImage(
+                        height: 20.sp,
+                        width: 20.sp,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => PlaceHolderImage(),
+                        errorWidget: (context, url, error) =>
+                            ErrorLoadingImage(),
+                        imageUrl: urlToImage,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 2.5.sp),
+              Container(
+                height: 4.sp,
+                width: 4.sp,
+                decoration: BoxDecoration(
+                  color: index == 3 ? colorPrimary : Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ],
           ),
         ),
       ),

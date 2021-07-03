@@ -84,7 +84,7 @@ List<Chat> chats = [
     fullName: 'Material',
     lastMessage: 'Do u want me?',
     time: '1d',
-    pendingMessage: 0,
+    pendingMessage: 4,
     notification: true,
     blurHash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
   ),

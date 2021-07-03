@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/pages/profile/widgets/bottom_settings.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
@@ -12,9 +15,9 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  List<String> valueOfTheme = ['Light', 'Dark'];
+  bool _notifications = false;
+  bool _fingerprint = true;
   List<String> valueOfLanguage = ['English', 'Vietnamese'];
-  List<String> valueOfNotification = ['On', 'Off'];
 
   @override
   void initState() {
@@ -68,22 +71,26 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           children: [
             SizedBox(height: 16.0),
-            _buildLineSetting(
+            _buildLineSettingToggle(
               context,
-              'Theme',
-              Feather.sun,
-              'Light',
+              'Dark Mode',
             ),
             _buildLineSetting(
               context,
               'Language',
-              Feather.globe,
+              PhosphorIcons.translate_fill,
               'English',
             ),
             _buildLineSetting(
               context,
               'Notifications',
-              Feather.bell,
+              PhosphorIcons.bell_simple,
+              'On',
+            ),
+            _buildLineSetting(
+              context,
+              'Fingerprint',
+              PhosphorIcons.fingerprint_fill,
               'On',
             ),
           ],
@@ -95,20 +102,16 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _buildLineSetting(context, title, icon, value) {
     return GestureDetector(
       onTap: () {
-        if (title == 'Theme') {
-          ThemeService().changeThemeMode();
-        } else if (title == 'Language') {
+        if (title == 'Language') {
           showSettingBottomSheet(valueOfLanguage);
-        } else {
-          showSettingBottomSheet(valueOfNotification);
         }
       },
       child: Container(
         padding: EdgeInsets.only(
-          left: 16.0,
-          right: 18.0,
-          top: 20.0,
-          bottom: 20.0,
+          left: 12.sp,
+          right: 8.sp,
+          top: 18.sp,
+          bottom: 18.sp,
         ),
         decoration: BoxDecoration(
           border: Border(
@@ -127,7 +130,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   icon,
                   size: 18.sp,
                 ),
-                SizedBox(width: 10.sp),
+                SizedBox(width: 12.sp),
                 Padding(
                   padding: EdgeInsets.only(top: 1.2),
                   child: Text(
@@ -140,18 +143,102 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ],
             ),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 11.sp,
-                fontWeight: FontWeight.w600,
-                color: title == 'Notifications'
-                    ? Theme.of(context).primaryColor
-                    : null,
-              ),
+            FlutterSwitch(
+              width: 42.sp,
+              height: 22.sp,
+              value: title == 'Notifications' ? _notifications : _fingerprint,
+              toggleSize: 15.sp,
+              activeColor: colorPrimary,
+              onToggle: (val) {
+                setState(() {
+                  if (title == 'Notifications') {
+                    _notifications = val;
+                  } else {
+                    _fingerprint = val;
+                  }
+                });
+              },
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildLineSettingToggle(context, title) {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 12.sp,
+        right: 8.sp,
+        top: 18.sp,
+        bottom: 18.sp,
+      ),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            width: .04,
+          ),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(
+                ThemeService().isSavedDarkMode()
+                    ? PhosphorIcons.moon_stars_fill
+                    : PhosphorIcons.moon_stars,
+                size: 18.sp,
+                color:
+                    ThemeService().isSavedDarkMode() ? Color(0xFFFFDF5D) : null,
+              ),
+              SizedBox(width: 12.sp),
+              Padding(
+                padding: EdgeInsets.only(top: 1.2),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          FlutterSwitch(
+            width: 45.sp,
+            height: 25.sp,
+            toggleSize: 15.sp,
+            value: ThemeService().isSavedDarkMode(),
+            borderRadius: 30.0,
+            padding: 2.sp,
+            activeToggleColor: Color(0xFF6E40C9),
+            inactiveToggleColor: Color(0xFF2F363D),
+            activeSwitchBorder: Border.all(
+              color: Color(0xFF3C1E70),
+              width: 2.5.sp,
+            ),
+            inactiveSwitchBorder: Border.all(
+              color: Color(0xFFD1D5DA),
+              width: 3.5.sp,
+            ),
+            activeColor: Color(0xFF271052),
+            inactiveColor: Colors.white,
+            activeIcon: Icon(
+              Icons.nightlight_round,
+              color: Color(0xFFF8E3A1),
+            ),
+            inactiveIcon: Icon(
+              Icons.wb_sunny,
+              color: Color(0xFFFFDF5D),
+            ),
+            onToggle: (val) {
+              ThemeService().changeThemeMode();
+            },
+          ),
+        ],
       ),
     );
   }

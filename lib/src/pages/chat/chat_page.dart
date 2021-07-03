@@ -8,6 +8,7 @@ import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/chat/widgets/message_card.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class ChatPage extends StatefulWidget {
@@ -23,40 +24,40 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        height: _size.height,
-        width: _size.width,
-        padding: EdgeInsets.only(left: 16.0, right: 10.0),
+        height: 100.h,
+        width: 100.w,
+        padding: EdgeInsets.only(left: 12.sp, right: 8.sp),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: _size.height / 19.5),
+            SizedBox(height: 38.sp),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Messages',
                   style: TextStyle(
-                    fontSize: _size.width / 16.8,
-                    fontFamily: 'Lato-Bold',
+                    fontSize: 18.sp,
+                    fontFamily: FontFamily.lato,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(12.5.sp),
                   alignment: Alignment.center,
                   decoration:
                       AppDecoration.buttonActionCircle(context).decoration,
                   child: Icon(
                     Feather.search,
-                    size: _size.width / 20.5,
+                    size: 17.5,
                     color: Theme.of(context).buttonColor,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 4.0),
+            SizedBox(height: 5.sp),
             Expanded(
               child: NotificationListener<OverscrollIndicatorNotification>(
                 onNotification: (overscroll) {
@@ -65,7 +66,7 @@ class _ChatPageState extends State<ChatPage> {
                 },
                 child: ListView.builder(
                   physics: ClampingScrollPhysics(),
-                  padding: EdgeInsets.only(bottom: 69.sp),
+                  padding: EdgeInsets.only(bottom: 80.sp),
                   itemCount: chats.length + 2,
                   itemBuilder: (context, index) {
                     return index == 0
@@ -142,15 +143,15 @@ class _ChatPageState extends State<ChatPage> {
         Text(
           title,
           style: TextStyle(
-            fontSize: 12.sp,
+            fontSize: 11.5.sp,
             fontWeight: FontWeight.w600,
-            fontFamily: 'Lato',
+            fontFamily: FontFamily.lato,
           ),
         ),
-        SizedBox(width: 12.0),
+        SizedBox(width: 6.sp),
         title == 'Pinned'
             ? Padding(
-                padding: EdgeInsets.only(bottom: 2.0),
+                padding: EdgeInsets.only(bottom: 1.sp),
                 child: Icon(
                   LineAwesomeIcons.thumb_tack,
                   size: 12.sp,

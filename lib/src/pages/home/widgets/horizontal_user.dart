@@ -3,6 +3,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/home/widgets/suggestions_user_card.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/font_family.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class HorizontalUser extends StatefulWidget {
   @override
@@ -12,22 +14,21 @@ class HorizontalUser extends StatefulWidget {
 class _HorizontalUserState extends State<HorizontalUser> {
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Column(
       children: [
-        SizedBox(height: 10.0),
+        SizedBox(height: 8.sp),
         Container(
-          margin: EdgeInsets.symmetric(vertical: 8.0),
-          padding: EdgeInsets.only(left: 12.0, right: 6.0),
+          margin: EdgeInsets.symmetric(vertical: 6.sp),
+          padding: EdgeInsets.only(left: 10.sp, right: 4.sp),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Maybe you know',
                 style: TextStyle(
-                  fontSize: _size.width / 26.0,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
-                  fontFamily: 'Lato',
+                  fontFamily: FontFamily.lato,
                 ),
               ),
               // Text(
@@ -42,14 +43,14 @@ class _HorizontalUserState extends State<HorizontalUser> {
               Icon(
                 Feather.list,
                 color: colorPrimary,
-                size: _size.width / 18.0,
+                size: 16.sp,
               ),
             ],
           ),
         ),
         Container(
-          height: _size.width * .48,
-          width: _size.width,
+          height: 144.sp,
+          width: 100.w,
           child: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (overscroll) {
               overscroll.disallowGlow();
@@ -57,7 +58,7 @@ class _HorizontalUserState extends State<HorizontalUser> {
             },
             child: ListView.builder(
               physics: ClampingScrollPhysics(),
-              padding: EdgeInsets.only(right: 16.0),
+              padding: EdgeInsets.only(right: 12.sp),
               scrollDirection: Axis.horizontal,
               itemCount: chats.length,
               itemBuilder: (context, index) {
