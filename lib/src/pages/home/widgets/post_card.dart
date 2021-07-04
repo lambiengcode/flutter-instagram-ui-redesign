@@ -110,13 +110,7 @@ class _PostCardState extends State<PostCard> {
               'lambiengcode: adding a few more photos to my portfolio. Need a photographer? Get in touch!',
               style: TextStyle(
                 fontSize: 11.sp,
-                fontFamily: FontFamily.helvetica,
-                fontWeight: FontWeight.w600,
-                color: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .color
-                    .withOpacity(.75),
+                fontWeight: FontWeight.w400,
               ),
               textAlign: TextAlign.start,
               maxLines: 2,

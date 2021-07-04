@@ -36,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage>
         isShowDrawer = _advancedDrawerController.value.visible;
       });
     });
-    min = (100.h - 335.sp) / 100.h;
+    min = (100.h - 370.sp) / 100.h;
     initial = min;
   }
 
