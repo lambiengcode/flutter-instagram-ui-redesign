@@ -4,10 +4,10 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 import 'package:lottie/lottie.dart';
+import 'package:whoru/src/pages/home/widgets/carousel_image.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/home/controllers/post_controller.dart';
-import 'package:whoru/src/pages/home/widgets/image_body_post.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
@@ -22,8 +22,7 @@ class PostCard extends StatefulWidget {
 class _PostCardState extends State<PostCard> {
   final postController = Get.put(PostController());
   final GlobalKey<LikeButtonState> _globalKey = GlobalKey<LikeButtonState>();
-  List<String> images = [];
-  List<String> blurHashs = [];
+  List<Chat> localImage = [];
   bool liked = false;
   int likeCount = 888;
 
@@ -47,11 +46,8 @@ class _PostCardState extends State<PostCard> {
   void initState() {
     super.initState();
     postController.initialCount();
-    chats.forEach((e) {
-      images.add(e.image);
-      blurHashs.add(e.blurHash);
-    });
-    images.shuffle();
+    localImage.addAll(chats);
+    localImage.shuffle();
     liked = postController.isFavourite(widget.idPost);
     if (postController.isFavourite(widget.idPost)) likeCount++;
   }
@@ -103,7 +99,7 @@ class _PostCardState extends State<PostCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: images.length == 0 ? 2.2.h : 1.5.h),
+          SizedBox(height: 1.5.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 2.5.w),
             child: Text(
@@ -116,36 +112,31 @@ class _PostCardState extends State<PostCard> {
               maxLines: 2,
             ),
           ),
-          SizedBox(height: images.length == 0 ? .0 : 1.5.h),
-          images.length == 0
-              ? Container()
-              : GestureDetector(
-                  onDoubleTap: () {
-                    _globalKey.currentState.onTap();
-                  },
-                  child: GetBuilder<PostController>(
-                    builder: (controller) => Stack(
-                      children: [
-                        ImageBodyPost(
-                          images: images.sublist(0, 5),
-                          blurHashs: blurHashs,
-                        ),
-                        controller.countDown != 0 &&
-                                controller.idPost == widget.idPost
-                            ? Container(
-                                height: images.length == 1 ? 42.h : 38.h,
-                                width: 100.w,
-                                color: Colors.black26,
-                                child: Lottie.asset(
-                                  'assets/lottie/favourite.json',
-                                ),
-                              )
-                            : Container(),
-                      ],
-                    ),
-                  ),
-                ),
-          SizedBox(height: images.length == 0 ? 3.h : 2.h),
+          SizedBox(height: 1.5.h),
+          GestureDetector(
+            onDoubleTap: () {
+              _globalKey.currentState.onTap();
+            },
+            child: GetBuilder<PostController>(
+              builder: (controller) => Stack(
+                children: [
+                  CarouselImage(imageList: localImage),
+                  controller.countDown != 0 &&
+                          controller.idPost == widget.idPost
+                      ? Container(
+                          height: 42.h,
+                          width: 100.w,
+                          color: Colors.black26,
+                          child: Lottie.asset(
+                            'assets/lottie/favourite.json',
+                          ),
+                        )
+                      : Container(),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 2.h),
         ],
       ),
     );
@@ -235,7 +226,7 @@ class _PostCardState extends State<PostCard> {
       child: Container(
         child: Row(
           children: [
-            SizedBox(width: images.length == 0 ? 2.sp : 4.sp),
+            SizedBox(width: 4.sp),
             Icon(
               icon,
               size: 18.sp,
@@ -266,8 +257,8 @@ class _PostCardState extends State<PostCard> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(1000.0),
             child: BlurHash(
-              hash: chats[0].blurHash,
-              image: chats[0].image,
+              hash: localImage[0].blurHash,
+              image: localImage[0].image,
               imageFit: BoxFit.cover,
               color: colorPrimary,
             ),
@@ -279,7 +270,7 @@ class _PostCardState extends State<PostCard> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'lambiengcode',
+              localImage[0].fullName,
               style: TextStyle(
                 fontSize: 12.45.sp,
                 fontFamily: FontFamily.lato,
