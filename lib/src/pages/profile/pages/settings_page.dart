@@ -15,8 +15,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool _notifications = false;
-  bool _fingerprint = true;
+  bool _notifications = true;
+  bool _fingerprint = false;
   List<String> valueOfLanguage = ['English', 'Vietnamese'];
 
   @override
@@ -44,7 +44,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         brightness: Theme.of(context).brightness,
@@ -53,7 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
         leading: IconButton(
           icon: Icon(
             Feather.arrow_left,
-            size: _size.width / 15.0,
+            size: 20.sp,
             color: Theme.of(context).textTheme.bodyText1.color,
           ),
           onPressed: () => Get.back(),
@@ -75,23 +74,21 @@ class _SettingsPageState extends State<SettingsPage> {
               context,
               'Dark Mode',
             ),
-            _buildLineSetting(
+            _buildLineSettingWithValue(
               context,
               'Language',
               PhosphorIcons.translate_fill,
               'English',
             ),
-            _buildLineSetting(
+            _buildLineSettingWithToggle(
               context,
               'Notifications',
               PhosphorIcons.bell_simple,
-              'On',
             ),
-            _buildLineSetting(
+            _buildLineSettingWithToggle(
               context,
               'Fingerprint',
               PhosphorIcons.fingerprint_fill,
-              'On',
             ),
           ],
         ),
@@ -99,7 +96,72 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildLineSetting(context, title, icon, value) {
+  Widget _buildLineSettingWithValue(context, title, icon, value) {
+    return GestureDetector(
+      onTap: () {
+        if (title == 'Language') {
+          showSettingBottomSheet(valueOfLanguage);
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.only(
+          left: 12.sp,
+          right: 8.sp,
+          top: 18.sp,
+          bottom: 18.sp,
+        ),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              width: .04,
+            ),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  icon,
+                  size: 18.sp,
+                ),
+                SizedBox(width: 12.sp),
+                Padding(
+                  padding: EdgeInsets.only(top: 1.2),
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  value,
+                  style: TextStyle(
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                  ),
+                ),
+                SizedBox(width: 4.sp),
+                Icon(PhosphorIcons.caret_right, size: 16.sp),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLineSettingWithToggle(context, title, icon) {
     return GestureDetector(
       onTap: () {
         if (title == 'Language') {

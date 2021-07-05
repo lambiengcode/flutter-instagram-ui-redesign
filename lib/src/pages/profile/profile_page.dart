@@ -36,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage>
         isShowDrawer = _advancedDrawerController.value.visible;
       });
     });
-    min = (100.h - 370.sp) / 100.h;
+    min = (100.h - 380.sp) / 100.h;
     initial = min;
   }
 
@@ -255,6 +255,9 @@ class _ProfilePageState extends State<ProfilePage>
           case 'Edit Profile':
             // Get.toNamed(Routes.EDIT_PROFILE);
             break;
+          case 'Scan':
+            Get.toNamed(Routes.QR_SCAN);
+            break;
           case 'Editor':
             Get.toNamed(Routes.EDIT_PHOTO);
             break;
@@ -314,7 +317,7 @@ class _ProfilePageState extends State<ProfilePage>
                   child: Column(
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(top: 2.5.sp),
+                        padding: EdgeInsets.only(top: 5.sp),
                         decoration:
                             AppDecoration.tabBarDecoration(context).decoration,
                         child: Column(

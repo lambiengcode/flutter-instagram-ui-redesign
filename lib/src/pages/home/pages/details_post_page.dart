@@ -8,15 +8,15 @@ import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
-class DetailsPostScreen extends StatefulWidget {
+class DetailsPostPage extends StatefulWidget {
   final String idPost;
   final String author;
-  DetailsPostScreen({@required this.idPost, @required this.author});
+  DetailsPostPage({@required this.idPost, @required this.author});
   @override
-  State<StatefulWidget> createState() => _DetailsPostScreenState();
+  State<StatefulWidget> createState() => _DetailsPostPageState();
 }
 
-class _DetailsPostScreenState extends State<DetailsPostScreen> {
+class _DetailsPostPageState extends State<DetailsPostPage> {
   final postController = Get.put(PostController());
   ScrollController scrollController = ScrollController();
   bool liked = false;
@@ -55,7 +55,7 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
           icon: Icon(
             Feather.arrow_left,
             color: Theme.of(context).textTheme.bodyText1.color,
-            size: 18.sp,
+            size: 20.sp,
           ),
         ),
         centerTitle: false,
@@ -76,9 +76,10 @@ class _DetailsPostScreenState extends State<DetailsPostScreen> {
               color: liked
                   ? colorHigh
                   : Theme.of(context).textTheme.bodyText1.color,
-              size: 18.sp,
+              size: 20.sp,
             ),
           ),
+          SizedBox(width: 2.sp),
         ],
       ),
       body: Container(

@@ -172,7 +172,8 @@ class _PostCardState extends State<PostCard> {
                       size: 18.sp,
                     );
                   },
-                  likeCount: likeCount,
+                  likeCount:
+                      _.isFavourite(widget.idPost) ? likeCount + 1 : likeCount,
                   countBuilder: (int count, bool isLiked, String text) {
                     var color = isLiked ? colorHigh : null;
                     Widget result;

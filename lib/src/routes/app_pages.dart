@@ -3,9 +3,10 @@ import 'package:whoru/src/app.dart';
 import 'package:whoru/src/helpers/view_image/view_image.dart';
 import 'package:whoru/src/pages/calling/pages/incomming_call_page.dart';
 import 'package:whoru/src/pages/chat/pages/room_page.dart';
-import 'package:whoru/src/pages/home/pages/details_post_screen.dart';
+import 'package:whoru/src/pages/home/pages/details_post_page.dart';
 import 'package:whoru/src/pages/profile/pages/edit_profile_page.dart';
 import 'package:whoru/src/pages/profile/pages/editor_page.dart';
+import 'package:whoru/src/pages/profile/pages/scan_qr_page.dart';
 import 'package:whoru/src/pages/profile/pages/settings_page.dart';
 part 'app_routes.dart';
 
@@ -22,7 +23,7 @@ class AppPages {
     // Home
     GetPage(
       name: Routes.DETAILS_POST,
-      page: () => DetailsPostScreen(
+      page: () => DetailsPostPage(
         idPost: Get.arguments['idPost'],
         author: Get.arguments['author'],
       ),
@@ -56,6 +57,12 @@ class AppPages {
     GetPage(
       name: Routes.SETTINGS,
       page: () => SettingsPage(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: Routes.QR_SCAN,
+      page: () => ScanQRPage(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 250),
     ),

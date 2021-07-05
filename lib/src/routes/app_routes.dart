@@ -16,6 +16,7 @@ abstract class Routes {
 
   // Profile Flow
   static const SETTINGS = '/settings';
+  static const QR_SCAN = '/qrScan';
   static const EDIT_PROFILE = '/editProfile';
   static const EDIT_PHOTO = '/editPhoto';
 }
