@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             'Camera',
             PhosphorIcons.camera,
           ),
-          SizedBox(width: 8.sp),
+          SizedBox(width: 6.sp),
           _buildActionHome(
             context,
             'Notifications',
@@ -84,12 +84,11 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.builder(
                   controller: _scrollController,
                   physics: ClampingScrollPhysics(),
-                  padding: EdgeInsets.only(bottom: 80.sp),
-                  itemCount: 12,
+                  itemCount: 100,
                   itemBuilder: (context, index) {
                     return index == 0
                         ? _buildActiveFriend(context)
-                        : index == 5
+                        : index % 10 == 0
                             ? HorizontalUser()
                             : PostCard(
                                 idPost: index.toString(),
@@ -106,12 +105,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildActionHome(context, title, icon) {
     return Container(
-      padding: EdgeInsets.all(11.25.sp),
+      margin: EdgeInsets.only(bottom: 2.sp),
+      padding: EdgeInsets.all(12.sp),
       alignment: Alignment.center,
       decoration: AppDecoration.buttonActionCircle(context).decoration,
       child: Icon(
         icon,
-        size: 17.25.sp,
+        size: 16.sp,
         color: Theme.of(context).buttonColor,
       ),
     );

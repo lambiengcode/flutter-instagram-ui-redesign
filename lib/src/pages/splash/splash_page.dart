@@ -67,32 +67,32 @@ class _SplashPageState extends State<SplashPage> {
                 ],
               ),
             ),
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: '@${DateTime.now().year} Develop by ',
-                    style: TextStyle(
-                      color: mC,
-                      fontFamily: 'Lato',
-                      fontSize: _size.width / 32.5,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  TextSpan(
-                    text: 'WANTED',
-                    style: TextStyle(
-                      color: mCL,
-                      fontFamily: 'Lato',
-                      fontSize: _size.width / 35.0,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 32.0),
+            // RichText(
+            //   textAlign: TextAlign.center,
+            //   text: TextSpan(
+            //     children: [
+            //       TextSpan(
+            //         text: '@${DateTime.now().year} Develop by ',
+            //         style: TextStyle(
+            //           color: mC,
+            //           fontFamily: 'Lato',
+            //           fontSize: _size.width / 32.5,
+            //           fontWeight: FontWeight.w400,
+            //         ),
+            //       ),
+            //       TextSpan(
+            //         text: 'WANTED',
+            //         style: TextStyle(
+            //           color: mCL,
+            //           fontFamily: 'Lato',
+            //           fontSize: _size.width / 35.0,
+            //           fontWeight: FontWeight.w600,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // SizedBox(height: 32.0),
           ],
         ),
       ),

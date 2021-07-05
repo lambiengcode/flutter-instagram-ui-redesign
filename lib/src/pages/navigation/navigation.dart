@@ -64,7 +64,6 @@ class _NavigationState extends State<Navigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       bottomNavigationBar: BottomAppBar(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         color: Theme.of(context).scaffoldBackgroundColor,
@@ -151,7 +150,7 @@ class _NavigationState extends State<Navigation> {
                 height: 4.sp,
                 width: 4.sp,
                 decoration: BoxDecoration(
-                  color: index == 3 ? colorPrimary : Colors.transparent,
+                  color: index == 2 ? colorPrimary : Colors.transparent,
                   shape: BoxShape.circle,
                 ),
               ),
