@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class SplashPage extends StatefulWidget {
   final String points;
@@ -12,12 +13,11 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         color: colorPrimary,
-        height: _size.height,
-        width: _size.width,
+        height: 100.h,
+        width: 100.w,
         child: Column(
           children: [
             Expanded(
@@ -26,11 +26,11 @@ class _SplashPageState extends State<SplashPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: _size.width * .5,
-                    width: _size.width * .5,
+                    height: 55.w,
+                    width: 55.w,
                     child: Lottie.asset('assets/lottie/splash_cat.json'),
                   ),
-                  SizedBox(height: 24.0),
+                  SizedBox(height: 20.sp),
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
@@ -40,13 +40,13 @@ class _SplashPageState extends State<SplashPage> {
                           style: TextStyle(
                             color: mCL,
                             fontFamily: 'Lobster',
-                            fontSize: _size.width / 18.8,
+                            fontSize: 14.sp,
                           ),
                         ),
                         TextSpan(
                           text: ' ',
                           style: TextStyle(
-                            fontSize: _size.width / 60.0,
+                            fontSize: 14.sp,
                             color: mCL,
                             fontWeight: FontWeight.w600,
                             fontFamily: 'Lato',
@@ -55,7 +55,7 @@ class _SplashPageState extends State<SplashPage> {
                         TextSpan(
                           text: widget.points,
                           style: TextStyle(
-                            fontSize: _size.width / 20.0,
+                            fontSize: 12.sp,
                             color: mCL,
                             fontWeight: FontWeight.w600,
                             fontFamily: 'Lato',
@@ -67,32 +67,32 @@ class _SplashPageState extends State<SplashPage> {
                 ],
               ),
             ),
-            // RichText(
-            //   textAlign: TextAlign.center,
-            //   text: TextSpan(
-            //     children: [
-            //       TextSpan(
-            //         text: '@${DateTime.now().year} Develop by ',
-            //         style: TextStyle(
-            //           color: mC,
-            //           fontFamily: 'Lato',
-            //           fontSize: _size.width / 32.5,
-            //           fontWeight: FontWeight.w400,
-            //         ),
-            //       ),
-            //       TextSpan(
-            //         text: 'WANTED',
-            //         style: TextStyle(
-            //           color: mCL,
-            //           fontFamily: 'Lato',
-            //           fontSize: _size.width / 35.0,
-            //           fontWeight: FontWeight.w600,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // SizedBox(height: 32.0),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: '@${DateTime.now().year} Develop by ',
+                    style: TextStyle(
+                      color: mC,
+                      fontFamily: 'Lato',
+                      fontSize: 8.5.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'WANTED',
+                    style: TextStyle(
+                      color: mCL,
+                      fontFamily: 'Lato',
+                      fontSize: 8.5.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 28.sp),
           ],
         ),
       ),

@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:whoru/src/data/chat.dart';
+import 'package:whoru/src/pages/home/controllers/post_controller.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
@@ -9,13 +11,19 @@ import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class CarouselImage extends StatefulWidget {
   final List<Chat> imageList;
+  final String idPost;
   final double minAspectRatio;
-  CarouselImage({@required this.imageList, @required this.minAspectRatio});
+  CarouselImage({
+    @required this.imageList,
+    @required this.minAspectRatio,
+    @required this.idPost,
+  });
   @override
   State<StatefulWidget> createState() => _CarouselImageState();
 }
 
 class _CarouselImageState extends State<CarouselImage> {
+  final postController = Get.put(PostController());
   int _currentIndex = 0;
   List<String> _urlToImages = [];
 
@@ -41,8 +49,11 @@ class _CarouselImageState extends State<CarouselImage> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            aspectRatio:
-                widget.minAspectRatio < .8 ? .8 : widget.minAspectRatio,
+            aspectRatio: (100.h / 100.w) < 16 / 9
+                ? 1.0
+                : widget.minAspectRatio < 1
+                    ? 1
+                    : widget.minAspectRatio,
             viewportFraction: 1,
             initialPage: 0,
             enableInfiniteScroll: true,
@@ -62,41 +73,58 @@ class _CarouselImageState extends State<CarouselImage> {
           items: widget.imageList.map((imgUrl) {
             return Builder(
               builder: (BuildContext context) {
-                return GestureDetector(
-                  onTap: () => Get.toNamed(Routes.VIEW_PHOTO,
-                      arguments: <String, dynamic>{
-                        'listPhoto': _urlToImages,
-                        'index': _currentIndex,
-                      }),
-                  child: Container(
-                    color: colorBlack,
-                    width: 100.w,
-                    child: BlurHash(
-                      decodingHeight: 1000,
-                      hash: imgUrl.blurHash,
-                      image: imgUrl.image,
-                      imageFit: BoxFit.fitWidth,
+                return Stack(
+                  children: [
+                    GestureDetector(
+                      onTap: () => Get.toNamed(Routes.VIEW_PHOTO,
+                          arguments: <String, dynamic>{
+                            'listPhoto': _urlToImages,
+                            'index': _currentIndex,
+                          }),
+                      child: Container(
+                        color: colorBlack,
+                        width: 100.w,
+                        child: BlurHash(
+                          hash: imgUrl.blurHash,
+                          image: imgUrl.image,
+                          imageFit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                  ),
+                    postController.countDown != 0 &&
+                            postController.idPost == widget.idPost
+                        ? Container(
+                            height: (100.h / 100.w) < 16 / 9
+                                ? 1.0 * 100.w
+                                : widget.minAspectRatio < 100.w
+                                    ? 100.w
+                                    : 100.w / widget.minAspectRatio,
+                            width: 100.w,
+                            color: Colors.black26,
+                            child: Lottie.asset(
+                              'assets/lottie/favourite.json',
+                            ),
+                          )
+                        : Container(),
+                  ],
                 );
               },
             );
           }).toList(),
         ),
         Positioned(
-          top: 8.sp,
-          right: 8.sp,
+          top: 3.5.sp,
+          right: 4.sp,
           child: Container(
             width: 100.w,
-            height: 350.sp,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 10.sp,
-                    vertical: 4.5.sp,
+                    horizontal: 11.sp,
+                    vertical: 5.sp,
                   ),
                   decoration: BoxDecoration(
                     color: colorBlack.withOpacity(.35),

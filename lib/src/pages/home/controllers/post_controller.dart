@@ -38,7 +38,7 @@ class PostController extends GetxController {
   }
 
   bool isFavourite(String id) {
-    return favourited.contains(id) ? true : false;
+    return favourited.contains(id);
   }
 
   @override

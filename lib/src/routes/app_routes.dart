@@ -5,6 +5,7 @@ abstract class Routes {
 
   // Home
   static const HOME = '/home';
+  static const DETAILS_POST = '/detailsPost';
   static const VIEW_PHOTO = '/viewPhoto';
 
   // Chat Flow

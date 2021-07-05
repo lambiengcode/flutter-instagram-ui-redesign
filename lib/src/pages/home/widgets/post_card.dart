@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
-import 'package:lottie/lottie.dart';
 import 'package:whoru/src/pages/home/widgets/carousel_image.dart';
+import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/home/controllers/post_controller.dart';
@@ -23,11 +23,10 @@ class _PostCardState extends State<PostCard> {
   final postController = Get.put(PostController());
   final GlobalKey<LikeButtonState> _globalKey = GlobalKey<LikeButtonState>();
   List<Chat> localImage = [];
-  bool liked = false;
   int likeCount = 888;
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
-    if (liked == false) {
+    if (isLiked == false) {
       postController.startTimmer(widget.idPost);
       postController.favouritePost(widget.idPost);
     } else {
@@ -35,8 +34,7 @@ class _PostCardState extends State<PostCard> {
     }
 
     setState(() {
-      liked = !liked;
-      liked ? likeCount++ : likeCount--;
+      isLiked ? likeCount-- : likeCount++;
     });
 
     return !isLiked;
@@ -48,7 +46,6 @@ class _PostCardState extends State<PostCard> {
     postController.initialCount();
     localImage.addAll(chats);
     localImage.shuffle();
-    liked = postController.isFavourite(widget.idPost);
     if (postController.isFavourite(widget.idPost)) likeCount++;
   }
 
@@ -59,7 +56,7 @@ class _PostCardState extends State<PostCard> {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: .085,
+            width: .2,
             color: Theme.of(context).dividerColor,
           ),
         ),
@@ -94,53 +91,49 @@ class _PostCardState extends State<PostCard> {
   }
 
   Widget _buildBody(context) {
-    return Container(
-      alignment: Alignment.topLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 1.5.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 2.5.w),
-            child: Text(
-              'lambiengcode: adding a few more photos to my portfolio. Need a photographer? Get in touch!',
-              style: TextStyle(
-                fontSize: 11.sp,
-                fontWeight: FontWeight.w400,
-              ),
-              textAlign: TextAlign.start,
-              maxLines: 2,
-            ),
-          ),
-          SizedBox(height: 1.5.h),
-          GestureDetector(
-            onDoubleTap: () {
-              _globalKey.currentState.onTap();
-            },
-            child: GetBuilder<PostController>(
-              builder: (controller) => Stack(
-                children: [
-                  CarouselImage(
-                    imageList: localImage,
-                    minAspectRatio: 0.8,
-                  ),
-                  controller.countDown != 0 &&
-                          controller.idPost == widget.idPost
-                      ? Container(
-                          height: 40.h,
-                          width: 100.w,
-                          color: Colors.black26,
-                          child: Lottie.asset(
-                            'assets/lottie/favourite.json',
-                          ),
-                        )
-                      : Container(),
-                ],
+    return GestureDetector(
+      onTap: () => Get.toNamed(Routes.DETAILS_POST, arguments: {
+        'idPost': widget.idPost,
+        'author': localImage[0].fullName,
+      }),
+      child: Container(
+        alignment: Alignment.topLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 1.5.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2.5.w),
+              child: Text(
+                'lambiengcode: adding a few more photos to my portfolio. Need a photographer? Get in touch!',
+                style: TextStyle(
+                  fontSize: 11.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.start,
+                maxLines: 2,
               ),
             ),
-          ),
-          SizedBox(height: 2.h),
-        ],
+            SizedBox(height: 1.5.h),
+            GestureDetector(
+              onDoubleTap: () {
+                _globalKey.currentState.onTap();
+              },
+              child: GetBuilder<PostController>(
+                builder: (controller) => Stack(
+                  children: [
+                    CarouselImage(
+                      imageList: localImage,
+                      minAspectRatio: 0.8,
+                      idPost: widget.idPost,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 2.h),
+          ],
+        ),
       ),
     );
   }
@@ -154,46 +147,50 @@ class _PostCardState extends State<PostCard> {
           Row(
             children: [
               SizedBox(width: 4.sp),
-              LikeButton(
-                key: _globalKey,
-                isLiked: liked,
-                likeCountAnimationType: likeCount < 1000
-                    ? LikeCountAnimationType.part
-                    : LikeCountAnimationType.none,
-                size: 18.sp,
-                circleColor: CircleColor(
-                  start: Color(0xff00ddff),
-                  end: Color(0xff0099cc),
-                ),
-                bubblesColor: BubblesColor(
-                  dotPrimaryColor: colorHigh,
-                  dotSecondaryColor: colorHigh,
-                ),
-                likeBuilder: (bool isLiked) {
-                  return Icon(
-                    liked ? PhosphorIcons.heart_fill : PhosphorIcons.heart,
-                    color: liked ? colorHigh : null,
-                    size: 18.sp,
-                  );
-                },
-                likeCount: likeCount,
-                countBuilder: (int count, bool isLiked, String text) {
-                  var color = isLiked ? colorHigh : null;
-                  Widget result;
-                  result = Text(
-                    text,
-                    style: TextStyle(
-                      color: color,
-                      fontSize: 10.5.sp,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Lato',
-                    ),
-                  );
+              GetBuilder<PostController>(
+                builder: (_) => LikeButton(
+                  key: _globalKey,
+                  isLiked: _.isFavourite(widget.idPost),
+                  likeCountAnimationType: likeCount < 1000
+                      ? LikeCountAnimationType.part
+                      : LikeCountAnimationType.none,
+                  size: 18.sp,
+                  circleColor: CircleColor(
+                    start: Color(0xff00ddff),
+                    end: Color(0xff0099cc),
+                  ),
+                  bubblesColor: BubblesColor(
+                    dotPrimaryColor: colorHigh,
+                    dotSecondaryColor: colorHigh,
+                  ),
+                  likeBuilder: (bool isLiked) {
+                    return Icon(
+                      _.isFavourite(widget.idPost)
+                          ? PhosphorIcons.heart_fill
+                          : PhosphorIcons.heart,
+                      color: _.isFavourite(widget.idPost) ? colorHigh : null,
+                      size: 18.sp,
+                    );
+                  },
+                  likeCount: likeCount,
+                  countBuilder: (int count, bool isLiked, String text) {
+                    var color = isLiked ? colorHigh : null;
+                    Widget result;
+                    result = Text(
+                      text,
+                      style: TextStyle(
+                        color: color,
+                        fontSize: 10.5.sp,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Lato',
+                      ),
+                    );
 
-                  return result;
-                },
-                likeCountPadding: EdgeInsets.only(left: 6.sp),
-                onTap: onLikeButtonTapped,
+                    return result;
+                  },
+                  likeCountPadding: EdgeInsets.only(left: 6.sp),
+                  onTap: onLikeButtonTapped,
+                ),
               ),
               SizedBox(width: 16.0),
               _buildActionButton(
@@ -220,9 +217,10 @@ class _PostCardState extends State<PostCard> {
   Widget _buildActionButton(context, title, icon, color, value) {
     return GestureDetector(
       onTap: () {
-        if (title == 'Like') {
-          setState(() {
-            liked = !liked;
+        if (title == 'Comment') {
+          Get.toNamed(Routes.DETAILS_POST, arguments: {
+            'idPost': widget.idPost,
+            'author': localImage[0].fullName,
           });
         }
       },
