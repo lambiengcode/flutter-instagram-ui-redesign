@@ -21,7 +21,7 @@ class BlurHash extends StatefulWidget {
     this.onReady,
     this.onStarted,
     this.needStream = false,
-    this.duration = const Duration(milliseconds: 1000),
+    this.duration = const Duration(milliseconds: 0),
     this.curve = Curves.easeOut,
   })  : assert(color != null),
         assert(hash != null),

@@ -120,11 +120,14 @@ class _PostCardState extends State<PostCard> {
             child: GetBuilder<PostController>(
               builder: (controller) => Stack(
                 children: [
-                  CarouselImage(imageList: localImage),
+                  CarouselImage(
+                    imageList: localImage,
+                    minAspectRatio: 0.8,
+                  ),
                   controller.countDown != 0 &&
                           controller.idPost == widget.idPost
                       ? Container(
-                          height: 42.h,
+                          height: 40.h,
                           width: 100.w,
                           color: Colors.black26,
                           child: Lottie.asset(

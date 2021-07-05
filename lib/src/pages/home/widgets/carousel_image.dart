@@ -9,7 +9,8 @@ import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class CarouselImage extends StatefulWidget {
   final List<Chat> imageList;
-  CarouselImage({@required this.imageList});
+  final double minAspectRatio;
+  CarouselImage({@required this.imageList, @required this.minAspectRatio});
   @override
   State<StatefulWidget> createState() => _CarouselImageState();
 }
@@ -40,8 +41,8 @@ class _CarouselImageState extends State<CarouselImage> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: 40.h,
-            aspectRatio: 1 / 1,
+            aspectRatio:
+                widget.minAspectRatio < .8 ? .8 : widget.minAspectRatio,
             viewportFraction: 1,
             initialPage: 0,
             enableInfiniteScroll: true,
@@ -68,11 +69,13 @@ class _CarouselImageState extends State<CarouselImage> {
                         'index': _currentIndex,
                       }),
                   child: Container(
+                    color: colorBlack,
                     width: 100.w,
                     child: BlurHash(
+                      decodingHeight: 1000,
                       hash: imgUrl.blurHash,
                       image: imgUrl.image,
-                      imageFit: BoxFit.cover,
+                      imageFit: BoxFit.fitWidth,
                     ),
                   ),
                 );
@@ -81,11 +84,11 @@ class _CarouselImageState extends State<CarouselImage> {
           }).toList(),
         ),
         Positioned(
-          top: 6.sp,
+          top: 8.sp,
+          right: 8.sp,
           child: Container(
             width: 100.w,
-            height: 40.h,
-            padding: EdgeInsets.only(right: 6.sp, bottom: 16.sp),
+            height: 350.sp,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -108,22 +111,22 @@ class _CarouselImageState extends State<CarouselImage> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: map<Widget>(widget.imageList, (index, url) {
-                    return Container(
-                      width: _currentIndex == index ? 4.sp : 2.sp,
-                      height: _currentIndex == index ? 4.sp : 2.sp,
-                      margin: EdgeInsets.symmetric(horizontal: 4.sp),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(40.0)),
-                        color: _currentIndex == index
-                            ? mCL
-                            : Colors.white.withOpacity(.9),
-                      ),
-                    );
-                  }),
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.end,
+                //   children: map<Widget>(widget.imageList, (index, url) {
+                //     return Container(
+                //       width: _currentIndex == index ? 4.sp : 2.sp,
+                //       height: _currentIndex == index ? 4.sp : 2.sp,
+                //       margin: EdgeInsets.symmetric(horizontal: 4.sp),
+                //       decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                //         color: _currentIndex == index
+                //             ? mCL
+                //             : Colors.white.withOpacity(.9),
+                //       ),
+                //     );
+                //   }),
+                // ),
               ],
             ),
           ),

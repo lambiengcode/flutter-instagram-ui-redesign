@@ -44,7 +44,6 @@ class _PageViewGalleryState extends State<PageViewGallery>
     return Scaffold(
       body: Center(
         child: Container(
-          padding: EdgeInsets.only(top: 30.sp),
           height: double.infinity,
           // constraints: BoxConstraints(maxWidth: 380),
           color: Colors.black,
@@ -56,16 +55,16 @@ class _PageViewGalleryState extends State<PageViewGallery>
                   String item = images[index];
                   return PhotoViewGalleryPageOptions(
                     imageProvider: NetworkImage(item),
-                    initialScale: PhotoViewComputedScale.contained * 1,
-                    minScale: PhotoViewComputedScale.contained * 1,
+                    initialScale: PhotoViewComputedScale.contained * 1.0,
+                    minScale: PhotoViewComputedScale.contained * 1.0,
                     maxScale: PhotoViewComputedScale.covered * 1.0,
                   );
                 },
                 itemCount: images.length,
                 loadingBuilder: (context, progress) => Center(
                   child: Container(
-                    width: 20.0,
-                    height: 20.0,
+                    width: 18.sp,
+                    height: 18.sp,
                     child: CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
                           Theme.of(context).primaryColor),
@@ -80,7 +79,7 @@ class _PageViewGalleryState extends State<PageViewGallery>
                 },
               ),
               Positioned(
-                top: 20,
+                top: 30.sp,
                 child: Container(
                   width: 100.w,
                   padding: EdgeInsets.only(right: 20.0),
