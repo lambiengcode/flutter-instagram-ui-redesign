@@ -70,15 +70,15 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           children: [
             SizedBox(height: 16.0),
-            _buildLineSettingToggle(
-              context,
-              'Dark Mode',
-            ),
             _buildLineSettingWithValue(
               context,
               'Language',
               PhosphorIcons.translate_fill,
               'English',
+            ),
+            _buildLineSettingToggle(
+              context,
+              'Dark Mode',
             ),
             _buildLineSettingWithToggle(
               context,
@@ -206,7 +206,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
             FlutterSwitch(
-              width: 42.sp,
+              width: 40.sp,
               height: 22.sp,
               value: title == 'Notifications' ? _notifications : _fingerprint,
               toggleSize: 15.sp,
@@ -270,32 +270,11 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
           FlutterSwitch(
-            width: 45.sp,
-            height: 25.sp,
-            toggleSize: 15.sp,
+            width: 40.sp,
+            height: 22.sp,
             value: ThemeService().isSavedDarkMode(),
-            borderRadius: 30.0,
-            padding: 2.sp,
-            activeToggleColor: Color(0xFF6E40C9),
-            inactiveToggleColor: Color(0xFF2F363D),
-            activeSwitchBorder: Border.all(
-              color: Color(0xFF3C1E70),
-              width: 2.5.sp,
-            ),
-            inactiveSwitchBorder: Border.all(
-              color: Color(0xFFD1D5DA),
-              width: 3.5.sp,
-            ),
-            activeColor: Color(0xFF271052),
-            inactiveColor: Colors.white,
-            activeIcon: Icon(
-              Icons.nightlight_round,
-              color: Color(0xFFF8E3A1),
-            ),
-            inactiveIcon: Icon(
-              Icons.wb_sunny,
-              color: Color(0xFFFFDF5D),
-            ),
+            toggleSize: 15.sp,
+            activeColor: colorPrimary,
             onToggle: (val) {
               ThemeService().changeThemeMode();
             },

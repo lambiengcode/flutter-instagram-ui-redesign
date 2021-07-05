@@ -33,10 +33,6 @@ class _PostCardState extends State<PostCard> {
       postController.unFavouritePost(widget.idPost);
     }
 
-    setState(() {
-      isLiked ? likeCount-- : likeCount++;
-    });
-
     return !isLiked;
   }
 
@@ -46,7 +42,6 @@ class _PostCardState extends State<PostCard> {
     postController.initialCount();
     localImage.addAll(chats);
     localImage.shuffle();
-    if (postController.isFavourite(widget.idPost)) likeCount++;
   }
 
   @override

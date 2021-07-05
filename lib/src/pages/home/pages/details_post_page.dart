@@ -19,27 +19,19 @@ class DetailsPostPage extends StatefulWidget {
 class _DetailsPostPageState extends State<DetailsPostPage> {
   final postController = Get.put(PostController());
   ScrollController scrollController = ScrollController();
-  bool liked = false;
 
   @override
   void initState() {
     super.initState();
-    liked = postController.isFavourite(widget.idPost);
   }
 
-  Future<bool> onLikeButtonTapped(bool isLiked) async {
+  void onLikeButtonTapped(liked) {
     if (liked == false) {
       postController.startTimmer(widget.idPost);
       postController.favouritePost(widget.idPost);
     } else {
       postController.unFavouritePost(widget.idPost);
     }
-
-    setState(() {
-      liked = !liked;
-    });
-
-    return !isLiked;
   }
 
   @override
@@ -69,14 +61,18 @@ class _DetailsPostPageState extends State<DetailsPostPage> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () => onLikeButtonTapped(liked),
-            icon: Icon(
-              liked ? PhosphorIcons.heart_fill : PhosphorIcons.heart,
-              color: liked
-                  ? colorHigh
-                  : Theme.of(context).textTheme.bodyText1.color,
-              size: 20.sp,
+          GetBuilder<PostController>(
+            builder: (_) => IconButton(
+              onPressed: () => onLikeButtonTapped(_.isFavourite(widget.idPost)),
+              icon: Icon(
+                _.isFavourite(widget.idPost)
+                    ? PhosphorIcons.heart_fill
+                    : PhosphorIcons.heart,
+                color: _.isFavourite(widget.idPost)
+                    ? colorHigh
+                    : Theme.of(context).textTheme.bodyText1.color,
+                size: 20.sp,
+              ),
             ),
           ),
           SizedBox(width: 2.sp),
