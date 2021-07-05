@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:whoru/src/app.dart';
+import 'package:whoru/src/helpers/view_image/view_image.dart';
 import 'package:whoru/src/pages/calling/pages/incomming_call_page.dart';
 import 'package:whoru/src/pages/chat/pages/room_page.dart';
 import 'package:whoru/src/pages/profile/pages/edit_profile_page.dart';
@@ -15,6 +16,16 @@ class AppPages {
     GetPage(
       name: Routes.ROOT,
       page: () => App(),
+    ),
+
+    // Home
+    GetPage(
+      name: Routes.VIEW_PHOTO,
+      page: () => PageViewGallery(
+          initImageList: Get.arguments['listPhoto'],
+          initPosition: Get.arguments['index']),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 250),
     ),
 
     // Chat Flow

@@ -26,7 +26,7 @@ List<Chat> chats = [
     time: '5m',
     pendingMessage: 2,
     notification: true,
-    blurHash: "L5H2EC=PM+yV0g-mq.wG9c010J}I",
+    blurHash: "LGI=0t9I~U4T^-9H-oMx0etPRjxu",
   ),
   Chat(
     image:

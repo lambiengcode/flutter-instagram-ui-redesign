@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:get/get.dart';
 
 class PostController extends GetxController {
@@ -15,7 +14,7 @@ class PostController extends GetxController {
   void startTimmer(String id) {
     idPost = id;
     countDown = 3;
-    var oneSec = Duration(milliseconds: 350);
+    var oneSec = Duration(milliseconds: 300);
     timmerInstance = Timer.periodic(
       oneSec,
       (Timer timer) {

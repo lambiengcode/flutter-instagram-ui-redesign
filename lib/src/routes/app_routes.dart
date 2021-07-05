@@ -2,7 +2,10 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   static const ROOT = '/root';
+
+  // Home
   static const HOME = '/home';
+  static const VIEW_PHOTO = '/viewPhoto';
 
   // Chat Flow
   static const CHAT_ROOM = '/chatRoom';
