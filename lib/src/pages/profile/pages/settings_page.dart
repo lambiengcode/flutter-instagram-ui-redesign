@@ -3,7 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:whoru/src/pages/profile/widgets/bottom_settings.dart';
+import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/theme_service.dart';
@@ -17,29 +17,11 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   bool _notifications = true;
   bool _fingerprint = false;
-  List<String> valueOfLanguage = ['English', 'Vietnamese'];
 
   @override
   void initState() {
     super.initState();
     ThemeService().switchStatusColor();
-  }
-
-  void showSettingBottomSheet(List data) {
-    showModalBottomSheet(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(20.0),
-        ),
-      ),
-      isScrollControlled: true,
-      context: context,
-      builder: (context) {
-        return BottomSettings(
-          values: data,
-        );
-      },
-    );
   }
 
   @override
@@ -61,34 +43,57 @@ class _SettingsPageState extends State<SettingsPage> {
           'Settings',
           style: Theme.of(context).textTheme.bodyText1.copyWith(
                 fontFamily: FontFamily.lato,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w600,
               ),
         ),
       ),
       body: Container(
         child: Column(
           children: [
-            SizedBox(height: 16.0),
+            _buildTitle(context, 'Features'),
             _buildLineSettingWithValue(
               context,
               'Language',
               PhosphorIcons.translate_fill,
               'English',
+              false,
             ),
             _buildLineSettingToggle(
               context,
               'Dark Mode',
+              false,
             ),
             _buildLineSettingWithToggle(
               context,
-              'Notifications',
-              PhosphorIcons.bell_simple,
+              'Floating Chat',
+              PhosphorIcons.chat_circle_dots,
+              false,
             ),
             _buildLineSettingWithToggle(
               context,
               'Fingerprint',
               PhosphorIcons.fingerprint_fill,
+              true,
+            ),
+            _buildTitle(context, 'Notifications'),
+            _buildLineSettingWithToggle(
+              context,
+              'Messages',
+              PhosphorIcons.chat_centered_dots,
+              false,
+            ),
+            _buildLineSettingWithToggle(
+              context,
+              'React Post',
+              PhosphorIcons.heart,
+              false,
+            ),
+            _buildLineSettingWithToggle(
+              context,
+              'Follow',
+              PhosphorIcons.user_circle_plus,
+              true,
             ),
           ],
         ),
@@ -96,11 +101,34 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildLineSettingWithValue(context, title, icon, value) {
+  Widget _buildTitle(context, title) {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 12.sp,
+        right: 8.sp,
+        top: 18.sp,
+        bottom: 4.sp,
+      ),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 12.sp,
+              fontFamily: FontFamily.lato_bold,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLineSettingWithValue(context, title, icon, value, isLast) {
     return GestureDetector(
       onTap: () {
         if (title == 'Language') {
-          showSettingBottomSheet(valueOfLanguage);
+          Get.toNamed(Routes.SETTINGS + Routes.CHOOSE_LANGUAGE);
         }
       },
       child: Container(
@@ -113,7 +141,9 @@ class _SettingsPageState extends State<SettingsPage> {
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              width: .04,
+              color:
+                  isLast ? Colors.transparent : Theme.of(context).dividerColor,
+              width: .1,
             ),
           ),
         ),
@@ -161,73 +191,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildLineSettingWithToggle(context, title, icon) {
-    return GestureDetector(
-      onTap: () {
-        if (title == 'Language') {
-          showSettingBottomSheet(valueOfLanguage);
-        }
-      },
-      child: Container(
-        padding: EdgeInsets.only(
-          left: 12.sp,
-          right: 8.sp,
-          top: 18.sp,
-          bottom: 18.sp,
-        ),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              width: .04,
-            ),
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  icon,
-                  size: 18.sp,
-                ),
-                SizedBox(width: 12.sp),
-                Padding(
-                  padding: EdgeInsets.only(top: 1.2),
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            FlutterSwitch(
-              width: 40.sp,
-              height: 22.sp,
-              value: title == 'Notifications' ? _notifications : _fingerprint,
-              toggleSize: 15.sp,
-              activeColor: colorPrimary,
-              onToggle: (val) {
-                setState(() {
-                  if (title == 'Notifications') {
-                    _notifications = val;
-                  } else {
-                    _fingerprint = val;
-                  }
-                });
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLineSettingToggle(context, title) {
+  Widget _buildLineSettingWithToggle(context, title, icon, isLast) {
     return Container(
       padding: EdgeInsets.only(
         left: 12.sp,
@@ -238,7 +202,68 @@ class _SettingsPageState extends State<SettingsPage> {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: .04,
+            color: isLast ? Colors.transparent : Theme.of(context).dividerColor,
+            width: .1,
+          ),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(
+                icon,
+                size: 18.sp,
+              ),
+              SizedBox(width: 12.sp),
+              Padding(
+                padding: EdgeInsets.only(top: 1.2),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          FlutterSwitch(
+            width: 40.sp,
+            height: 22.sp,
+            value: title == 'Notifications' ? _notifications : _fingerprint,
+            toggleSize: 15.sp,
+            activeColor: colorPrimary,
+            onToggle: (val) {
+              setState(() {
+                if (title == 'Notifications') {
+                  _notifications = val;
+                } else {
+                  _fingerprint = val;
+                }
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLineSettingToggle(context, title, isLast) {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 12.sp,
+        right: 8.sp,
+        top: 18.sp,
+        bottom: 18.sp,
+      ),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: isLast ? Colors.transparent : Theme.of(context).dividerColor,
+            width: .1,
           ),
         ),
       ),

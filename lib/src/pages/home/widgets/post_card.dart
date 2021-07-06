@@ -14,7 +14,8 @@ import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class PostCard extends StatefulWidget {
   final String idPost;
-  PostCard({@required this.idPost});
+  final bool isInDetails;
+  PostCard({@required this.idPost, this.isInDetails = false});
   @override
   State<StatefulWidget> createState() => _PostCardState();
 }
@@ -117,10 +118,16 @@ class _PostCardState extends State<PostCard> {
               child: GetBuilder<PostController>(
                 builder: (controller) => Stack(
                   children: [
-                    CarouselImage(
-                      imageList: localImage,
-                      minAspectRatio: 0.8,
-                      idPost: widget.idPost,
+                    GestureDetector(
+                      onTap: () {
+                        if (widget.isInDetails) {}
+                      },
+                      child: CarouselImage(
+                        imageList: localImage,
+                        minAspectRatio: 0.8,
+                        idPost: widget.idPost,
+                        isInDetails: widget.isInDetails,
+                      ),
                     ),
                   ],
                 ),
@@ -214,10 +221,14 @@ class _PostCardState extends State<PostCard> {
     return GestureDetector(
       onTap: () {
         if (title == 'Comment') {
-          Get.toNamed(Routes.DETAILS_POST, arguments: {
-            'idPost': widget.idPost,
-            'author': localImage[0].fullName,
-          });
+          if (widget.isInDetails) {
+            print('Scroll to end');
+          } else {
+            Get.toNamed(Routes.DETAILS_POST, arguments: {
+              'idPost': widget.idPost,
+              'author': localImage[0].fullName,
+            });
+          }
         }
       },
       child: Container(

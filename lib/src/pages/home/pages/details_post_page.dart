@@ -87,7 +87,10 @@ class _DetailsPostPageState extends State<DetailsPostPage> {
                 height: .25,
                 thickness: .25,
               ),
-              PostCard(idPost: widget.idPost),
+              PostCard(
+                idPost: widget.idPost,
+                isInDetails: true,
+              ),
 
               // Comment Widget Here
             ],

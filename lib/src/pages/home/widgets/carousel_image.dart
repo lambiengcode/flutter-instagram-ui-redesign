@@ -13,10 +13,12 @@ class CarouselImage extends StatefulWidget {
   final List<Chat> imageList;
   final String idPost;
   final double minAspectRatio;
+  final bool isInDetails;
   CarouselImage({
     @required this.imageList,
     @required this.minAspectRatio,
     @required this.idPost,
+    this.isInDetails = false,
   });
   @override
   State<StatefulWidget> createState() => _CarouselImageState();
@@ -76,11 +78,29 @@ class _CarouselImageState extends State<CarouselImage> {
                 return Stack(
                   children: [
                     GestureDetector(
-                      onTap: () => Get.toNamed(Routes.VIEW_PHOTO,
-                          arguments: <String, dynamic>{
-                            'listPhoto': _urlToImages,
-                            'index': _currentIndex,
-                          }),
+                      onLongPress: () => Get.toNamed(
+                        Routes.VIEW_PHOTO,
+                        arguments: <String, dynamic>{
+                          'listPhoto': _urlToImages,
+                          'index': _currentIndex,
+                        },
+                      ),
+                      onTap: () {
+                        if (widget.isInDetails) {
+                          Get.toNamed(
+                            Routes.VIEW_PHOTO,
+                            arguments: <String, dynamic>{
+                              'listPhoto': _urlToImages,
+                              'index': _currentIndex,
+                            },
+                          );
+                        } else {
+                          Get.toNamed(Routes.DETAILS_POST, arguments: {
+                            'idPost': widget.idPost,
+                            'author': widget.imageList[0].fullName,
+                          });
+                        }
+                      },
                       child: Container(
                         color: colorBlack,
                         width: 100.w,
