@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/services/others/language_service.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
@@ -64,7 +65,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
     );
   }
 
-  Widget _buildSelectionLanguage(context, title, value) {
+  Widget _buildSelectionLanguage(context, title, Language value) {
     return Padding(
       padding: EdgeInsets.only(bottom: 8.sp, left: 6.sp),
       child: Row(
@@ -79,6 +80,7 @@ class _ChooseLanguagePageState extends State<ChooseLanguagePage> {
                 setState(() {
                   _language = value;
                 });
+                LanguageService().changeLanguage(value);
               },
             ),
           ),

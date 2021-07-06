@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:whoru/src/lang/translation_service.dart';
 import 'package:whoru/src/providers/user_provider.dart';
 import 'package:whoru/src/routes/app_pages.dart';
+import 'package:whoru/src/services/others/language_service.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/themes/themes.dart';
 import 'package:whoru/src/utils/logger/logger.dart';
@@ -27,7 +28,7 @@ void main() async {
             enableLog: true,
             debugShowCheckedModeBanner: false,
             defaultTransition: Transition.native,
-            locale: TranslationService.locale,
+            locale: LanguageService().getLocale(),
             fallbackLocale: TranslationService.fallbackLocale,
             translations: TranslationService(),
             initialRoute: AppPages.INITIAL,
