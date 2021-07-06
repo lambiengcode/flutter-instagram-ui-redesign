@@ -84,11 +84,11 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.builder(
                   controller: _scrollController,
                   physics: ClampingScrollPhysics(),
-                  itemCount: 100,
+                  itemCount: 15,
                   itemBuilder: (context, index) {
                     return index == 0
                         ? _buildActiveFriend(context)
-                        : index % 10 == 0
+                        : index % 8 == 0
                             ? HorizontalUser()
                             : PostCard(
                                 idPost: index.toString(),

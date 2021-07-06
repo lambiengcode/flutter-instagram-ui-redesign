@@ -31,14 +31,16 @@ class PostController extends GetxController {
 
   favouritePost(String id) {
     favourited.add(id);
+    update();
   }
 
   unFavouritePost(String id) {
     favourited.removeAt(favourited.indexOf(id));
+    update();
   }
 
   bool isFavourite(String id) {
-    return favourited.contains(id) ? true : false;
+    return favourited.contains(id);
   }
 
   @override

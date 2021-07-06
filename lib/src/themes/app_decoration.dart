@@ -4,6 +4,36 @@ import 'package:whoru/src/themes/app_colors.dart';
 class AppDecoration {
   final BoxDecoration decoration;
   AppDecoration({@required this.decoration});
+  factory AppDecoration.containerOnlyShadowTop(context) {
+    if (Theme.of(context).brightness == Brightness.dark) {
+      return AppDecoration(
+        decoration: BoxDecoration(
+          color: colorPrimaryBlack,
+          boxShadow: [
+            BoxShadow(
+              color: colorBlack.withOpacity(.65),
+              offset: Offset(-4, -4),
+              blurRadius: 4,
+            ),
+          ],
+        ),
+      );
+    } else {
+      return AppDecoration(
+        decoration: BoxDecoration(
+          color: mC,
+          boxShadow: [
+            BoxShadow(
+              color: mCL,
+              offset: Offset(-2, -2),
+              blurRadius: 2,
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   factory AppDecoration.buttonActionCircle(context) {
     if (Theme.of(context).brightness == Brightness.dark) {
       return AppDecoration(
@@ -13,8 +43,8 @@ class AppDecoration {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(.8),
-              offset: Offset(1, 1),
-              blurRadius: 1,
+              offset: Offset(2, 2),
+              blurRadius: 2,
             ),
             BoxShadow(
               color: colorBlack.withOpacity(.35),
@@ -55,8 +85,8 @@ class AppDecoration {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(.8),
-              offset: Offset(1, 1),
-              blurRadius: 1,
+              offset: Offset(2, 2),
+              blurRadius: 2,
             ),
             BoxShadow(
               color: colorBlack.withOpacity(.35),
@@ -97,8 +127,8 @@ class AppDecoration {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(.8),
-              offset: Offset(1, 1),
-              blurRadius: 1,
+              offset: Offset(2, 2),
+              blurRadius: 2,
             ),
             BoxShadow(
               color: colorBlack.withOpacity(.35),
