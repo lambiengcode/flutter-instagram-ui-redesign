@@ -58,7 +58,7 @@ class _CarouselImageState extends State<CarouselImage> {
                     : widget.minAspectRatio,
             viewportFraction: 1,
             initialPage: 0,
-            enableInfiniteScroll: true,
+            enableInfiniteScroll: widget.imageList.length > 1,
             reverse: false,
             autoPlay: false,
             autoPlayInterval: Duration(seconds: 10),
@@ -141,24 +141,26 @@ class _CarouselImageState extends State<CarouselImage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 11.sp,
-                    vertical: 5.sp,
-                  ),
-                  decoration: BoxDecoration(
-                    color: colorBlack.withOpacity(.35),
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: Text(
-                    '${_currentIndex + 1} / ${widget.imageList.length}',
-                    style: TextStyle(
-                      fontSize: 8.5.sp,
-                      color: mC,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+                widget.imageList.length < 2
+                    ? Container()
+                    : Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 11.sp,
+                          vertical: 5.sp,
+                        ),
+                        decoration: BoxDecoration(
+                          color: colorBlack.withOpacity(.35),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        child: Text(
+                          '${_currentIndex + 1} / ${widget.imageList.length}',
+                          style: TextStyle(
+                            fontSize: 8.5.sp,
+                            color: mC,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.end,
                 //   children: map<Widget>(widget.imageList, (index, url) {

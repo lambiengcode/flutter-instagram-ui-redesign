@@ -7,6 +7,8 @@ import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class EndDrawer extends StatefulWidget {
+  final VoidCallback toggleDrawer;
+  EndDrawer({@required this.toggleDrawer});
   @override
   State<StatefulWidget> createState() => _EndDrawerState();
 }
@@ -109,6 +111,7 @@ class _EndDrawerState extends State<EndDrawer> {
   Widget _buildLine(context, title, icon, color) {
     return GestureDetector(
       onTap: () {
+        widget.toggleDrawer();
         if (title == 'Settings') {
           Get.toNamed(Routes.SETTINGS);
         }

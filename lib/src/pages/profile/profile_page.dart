@@ -50,7 +50,14 @@ class _ProfilePageState extends State<ProfilePage>
       animateChildDecoration: true,
       openRatio: .6,
       rtlOpening: true,
-      drawer: Container(width: 100.w, child: EndDrawer()),
+      drawer: Container(
+        width: 100.w,
+        child: EndDrawer(
+          toggleDrawer: () {
+            _advancedDrawerController.toggleDrawer();
+          },
+        ),
+      ),
       controller: _advancedDrawerController,
       child: Scaffold(
         key: _scaffoldKey,

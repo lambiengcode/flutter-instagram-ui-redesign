@@ -124,7 +124,7 @@ class _PostCardState extends State<PostCard> {
                       },
                       child: CarouselImage(
                         imageList: localImage,
-                        minAspectRatio: 0.8,
+                        minAspectRatio: 1.25,
                         idPost: widget.idPost,
                         isInDetails: widget.isInDetails,
                       ),

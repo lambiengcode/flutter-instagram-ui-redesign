@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/constants/language.dart';
 import 'package:whoru/src/services/others/language_service.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
-
-enum Language { english, vietnamese }
 
 class ChooseLanguagePage extends StatefulWidget {
   @override

@@ -39,19 +39,25 @@ class BaseRepository {
     return response;
   }
 
-  Future<diox.Response<dynamic>> postRoute(String gateway, Object body) async {
+  Future<diox.Response<dynamic>> postRoute(
+    String gateway,
+    Map<String, String> body,
+  ) async {
     var response = await dio.post(
       gateway,
-      data: body,
+      data: convert.jsonEncode(body),
     );
     printEndpoint('POST', gateway);
     return response;
   }
 
-  Future<diox.Response<dynamic>> putRoute(String gateway, Object body) async {
+  Future<diox.Response<dynamic>> putRoute(
+    String gateway,
+    Map<String, String> body,
+  ) async {
     var response = await dio.put(
       gateway,
-      data: body,
+      data: convert.jsonEncode(body),
       options: getOptions(),
     );
     printEndpoint('PUT', gateway);
@@ -69,10 +75,12 @@ class BaseRepository {
   }
 
   Future<diox.Response<dynamic>> deleteRoute(
-      String gateway, Object body) async {
+    String gateway,
+    Map<String, String> body,
+  ) async {
     var response = await dio.delete(
       gateway,
-      data: body,
+      data: convert.jsonEncode(body),
       options: getOptions(),
     );
     printEndpoint('DELETE', gateway);
@@ -84,6 +92,7 @@ class BaseRepository {
       headers: {
         'Authorization':
             'Bearer ${Provider.of<UserProvider>(getx.Get.context, listen: false).user.accessToken}',
+        'Content-Type': 'application/json',
       },
     );
   }
