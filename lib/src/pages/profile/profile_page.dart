@@ -8,6 +8,7 @@ import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
 import 'package:whoru/src/pages/profile/widgets/posts_listsview.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
@@ -36,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage>
         isShowDrawer = _advancedDrawerController.value.visible;
       });
     });
-    min = (100.h - 370.sp) / 100.h;
+    min = (100.h - 380.sp) / 100.h;
     initial = min;
   }
 
@@ -50,7 +51,14 @@ class _ProfilePageState extends State<ProfilePage>
       animateChildDecoration: true,
       openRatio: .6,
       rtlOpening: true,
-      drawer: Container(width: 100.w, child: EndDrawer()),
+      drawer: Container(
+        width: 100.w,
+        child: EndDrawer(
+          toggleDrawer: () {
+            _advancedDrawerController.toggleDrawer();
+          },
+        ),
+      ),
       controller: _advancedDrawerController,
       child: Scaffold(
         key: _scaffoldKey,
@@ -74,9 +82,9 @@ class _ProfilePageState extends State<ProfilePage>
             title,
             style: TextStyle(
               color: mCM,
-              fontSize: 13.5.sp,
-              fontFamily: 'FreeSans',
-              fontWeight: FontWeight.bold,
+              fontSize: 13.sp,
+              fontFamily: FontFamily.lato,
+              fontWeight: FontWeight.w600,
             ),
           ),
           actions: [
@@ -108,15 +116,15 @@ class _ProfilePageState extends State<ProfilePage>
                       imageFit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(height: 13.5.sp),
+                  SizedBox(height: 10.sp),
                   Row(
                     children: [
-                      _buildTitleFollow(context, 'Follower', '554'),
+                      _buildTitleFollow(context, 'Followers', '10.2w'),
                       SizedBox(width: 24.w),
-                      _buildTitleFollow(context, 'Following', '208'),
+                      _buildTitleFollow(context, 'Following', '2.1k'),
                     ],
                   ),
-                  SizedBox(height: 20.sp),
+                  SizedBox(height: 18.sp),
                   Text(
                     'Đào Hồng Vinh - Dev',
                     style: TextStyle(
@@ -150,7 +158,7 @@ class _ProfilePageState extends State<ProfilePage>
                         _buildActionProfile(
                           context,
                           'Edit Profile',
-                          PhosphorIcons.clipboard,
+                          PhosphorIcons.notepad,
                         ),
                         _buildActionProfile(
                           context,
@@ -213,34 +221,24 @@ class _ProfilePageState extends State<ProfilePage>
 
   Widget _buildTitleFollow(context, title, value) {
     return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: [
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: '$value\n',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).textTheme.bodyText1.color,
-                  ),
-                ),
-                TextSpan(
-                  text: title,
-                  style: TextStyle(
-                    fontSize: 10.5.sp,
-                    fontWeight: FontWeight.w400,
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .color
-                        .withOpacity(.8),
-                  ),
-                ),
-              ],
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 10.5.sp,
+              fontWeight: FontWeight.w400,
+              color:
+                  Theme.of(context).textTheme.bodyText1.color.withOpacity(.8),
+            ),
+          ),
+          SizedBox(height: 5.sp),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 12.5.sp,
+              fontWeight: FontWeight.w500,
+              color: Theme.of(context).textTheme.bodyText1.color,
             ),
           ),
         ],
@@ -254,6 +252,9 @@ class _ProfilePageState extends State<ProfilePage>
         switch (title) {
           case 'Edit Profile':
             // Get.toNamed(Routes.EDIT_PROFILE);
+            break;
+          case 'Scan':
+            Get.toNamed(Routes.QR_SCAN);
             break;
           case 'Editor':
             Get.toNamed(Routes.EDIT_PHOTO);
@@ -308,13 +309,13 @@ class _ProfilePageState extends State<ProfilePage>
             builder: (context, child) {
               return ClipRRect(
                 borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(24.0),
+                  top: Radius.circular(20.0),
                 ),
                 child: Container(
                   child: Column(
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(top: 2.5.sp),
+                        padding: EdgeInsets.only(top: 5.sp),
                         decoration:
                             AppDecoration.tabBarDecoration(context).decoration,
                         child: Column(

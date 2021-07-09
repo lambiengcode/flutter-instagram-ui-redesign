@@ -3,7 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:whoru/src/pages/profile/widgets/bottom_settings.dart';
+import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/theme_service.dart';
@@ -15,9 +15,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool _notifications = false;
-  bool _fingerprint = true;
-  List<String> valueOfLanguage = ['English', 'Vietnamese'];
+  bool _notifications = true;
+  bool _fingerprint = false;
 
   @override
   void initState() {
@@ -25,26 +24,8 @@ class _SettingsPageState extends State<SettingsPage> {
     ThemeService().switchStatusColor();
   }
 
-  void showSettingBottomSheet(List data) {
-    showModalBottomSheet(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(20.0),
-        ),
-      ),
-      isScrollControlled: true,
-      context: context,
-      builder: (context) {
-        return BottomSettings(
-          values: data,
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         brightness: Theme.of(context).brightness,
@@ -53,7 +34,7 @@ class _SettingsPageState extends State<SettingsPage> {
         leading: IconButton(
           icon: Icon(
             Feather.arrow_left,
-            size: _size.width / 15.0,
+            size: 20.sp,
             color: Theme.of(context).textTheme.bodyText1.color,
           ),
           onPressed: () => Get.back(),
@@ -62,61 +43,130 @@ class _SettingsPageState extends State<SettingsPage> {
           'Settings',
           style: Theme.of(context).textTheme.bodyText1.copyWith(
                 fontFamily: FontFamily.lato,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w600,
               ),
         ),
       ),
       body: Container(
-        child: Column(
-          children: [
-            SizedBox(height: 16.0),
-            _buildLineSettingToggle(
-              context,
-              'Dark Mode',
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (overscroll) {
+            overscroll.disallowGlow();
+            return true;
+          },
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: Column(
+              children: [
+                _buildTitle(context, 'Features'),
+                _buildLineSettingWithValue(
+                  context: context,
+                  title: 'Language',
+                  icon: PhosphorIcons.translate_fill,
+                  value: 'English',
+                ),
+                _buildLineSettingToggle(
+                  context: context,
+                  title: 'Dark Mode',
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'Floating Chat',
+                  icon: PhosphorIcons.chat_circle_dots,
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'Play audio in profile',
+                  icon: PhosphorIcons.music_notes,
+                  isLast: true,
+                ),
+                _buildTitle(context, 'Notifications'),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'Messages',
+                  icon: PhosphorIcons.chat_centered_dots,
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'React Post',
+                  icon: PhosphorIcons.heart,
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'Follow',
+                  icon: PhosphorIcons.user_circle_plus,
+                  isLast: true,
+                ),
+                _buildTitle(context, 'Security'),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'PIN',
+                  icon: PhosphorIcons.lock,
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'Fingerprint',
+                  icon: PhosphorIcons.fingerprint_fill,
+                  isLast: true,
+                ),
+                SizedBox(height: 20.sp),
+              ],
             ),
-            _buildLineSetting(
-              context,
-              'Language',
-              PhosphorIcons.translate_fill,
-              'English',
-            ),
-            _buildLineSetting(
-              context,
-              'Notifications',
-              PhosphorIcons.bell_simple,
-              'On',
-            ),
-            _buildLineSetting(
-              context,
-              'Fingerprint',
-              PhosphorIcons.fingerprint_fill,
-              'On',
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildLineSetting(context, title, icon, value) {
+  Widget _buildTitle(context, title) {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 12.sp,
+        right: 8.sp,
+        top: title == 'Features' ? 15.sp : 25.sp,
+        bottom: 4.sp,
+      ),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 12.sp,
+              fontFamily: FontFamily.lato_bold,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLineSettingWithValue({
+    context,
+    title,
+    icon,
+    value,
+    isLast = false,
+  }) {
     return GestureDetector(
       onTap: () {
         if (title == 'Language') {
-          showSettingBottomSheet(valueOfLanguage);
+          Get.toNamed(Routes.SETTINGS + Routes.CHOOSE_LANGUAGE);
         }
       },
       child: Container(
         padding: EdgeInsets.only(
           left: 12.sp,
           right: 8.sp,
-          top: 18.sp,
-          bottom: 18.sp,
+          top: 16.sp,
+          bottom: 16.sp,
         ),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              width: .04,
+              color:
+                  isLast ? Colors.transparent : Theme.of(context).dividerColor,
+              width: .1,
             ),
           ),
         ),
@@ -137,27 +187,26 @@ class _SettingsPageState extends State<SettingsPage> {
                     title,
                     style: TextStyle(
                       fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
               ],
             ),
-            FlutterSwitch(
-              width: 42.sp,
-              height: 22.sp,
-              value: title == 'Notifications' ? _notifications : _fingerprint,
-              toggleSize: 15.sp,
-              activeColor: colorPrimary,
-              onToggle: (val) {
-                setState(() {
-                  if (title == 'Notifications') {
-                    _notifications = val;
-                  } else {
-                    _fingerprint = val;
-                  }
-                });
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  value,
+                  style: TextStyle(
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                  ),
+                ),
+                SizedBox(width: 4.sp),
+                Icon(PhosphorIcons.caret_right, size: 16.sp),
+              ],
             ),
           ],
         ),
@@ -165,18 +214,84 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildLineSettingToggle(context, title) {
+  Widget _buildLineSettingWithToggle({
+    context,
+    title,
+    icon,
+    isLast = false,
+  }) {
     return Container(
       padding: EdgeInsets.only(
         left: 12.sp,
         right: 8.sp,
-        top: 18.sp,
-        bottom: 18.sp,
+        top: 16.sp,
+        bottom: 16.sp,
       ),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            width: .04,
+            color: isLast ? Colors.transparent : Theme.of(context).dividerColor,
+            width: .1,
+          ),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(
+                icon,
+                size: 18.sp,
+              ),
+              SizedBox(width: 12.sp),
+              Padding(
+                padding: EdgeInsets.only(top: 1.2),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          FlutterSwitch(
+            width: 40.sp,
+            height: 22.sp,
+            value: title == 'Notifications' ? _notifications : _fingerprint,
+            toggleSize: 15.sp,
+            activeColor: colorPrimary,
+            onToggle: (val) {
+              setState(() {
+                if (title == 'Notifications') {
+                  _notifications = val;
+                } else {
+                  _fingerprint = val;
+                }
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLineSettingToggle({context, title, isLast = false}) {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 12.sp,
+        right: 8.sp,
+        top: 16.sp,
+        bottom: 16.sp,
+      ),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: isLast ? Colors.transparent : Theme.of(context).dividerColor,
+            width: .1,
           ),
         ),
       ),
@@ -201,39 +316,18 @@ class _SettingsPageState extends State<SettingsPage> {
                   title,
                   style: TextStyle(
                     fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
             ],
           ),
           FlutterSwitch(
-            width: 45.sp,
-            height: 25.sp,
-            toggleSize: 15.sp,
+            width: 40.sp,
+            height: 22.sp,
             value: ThemeService().isSavedDarkMode(),
-            borderRadius: 30.0,
-            padding: 2.sp,
-            activeToggleColor: Color(0xFF6E40C9),
-            inactiveToggleColor: Color(0xFF2F363D),
-            activeSwitchBorder: Border.all(
-              color: Color(0xFF3C1E70),
-              width: 2.5.sp,
-            ),
-            inactiveSwitchBorder: Border.all(
-              color: Color(0xFFD1D5DA),
-              width: 3.5.sp,
-            ),
-            activeColor: Color(0xFF271052),
-            inactiveColor: Colors.white,
-            activeIcon: Icon(
-              Icons.nightlight_round,
-              color: Color(0xFFF8E3A1),
-            ),
-            inactiveIcon: Icon(
-              Icons.wb_sunny,
-              color: Color(0xFFFFDF5D),
-            ),
+            toggleSize: 15.sp,
+            activeColor: colorPrimary,
             onToggle: (val) {
               ThemeService().changeThemeMode();
             },
