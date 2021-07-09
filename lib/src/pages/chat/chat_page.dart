@@ -39,15 +39,14 @@ class _ChatPageState extends State<ChatPage> {
             size: 20.sp,
           ),
         ),
-        title: GestureDetector(
-          onTap: () => Get.offAndToNamed(Routes.ROOT),
-          child: Text('Inbox',
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyText1.color,
-                fontFamily: FontFamily.lato,
-                fontWeight: FontWeight.w600,
-                fontSize: 15.sp,
-              )),
+        title: Text(
+          'Inbox',
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyText1.color,
+            fontFamily: FontFamily.lato,
+            fontWeight: FontWeight.w600,
+            fontSize: 15.sp,
+          ),
         ),
         actions: [
           IconButton(
