@@ -6,6 +6,7 @@ import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/home/controllers/post_controller.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -107,7 +108,7 @@ class _CarouselImageState extends State<CarouselImage> {
                         child: BlurHash(
                           hash: imgUrl.blurHash,
                           image: imgUrl.image,
-                          imageFit: BoxFit.cover,
+                          imageFit: BoxFit.fitWidth,
                         ),
                       ),
                     ),
@@ -133,8 +134,8 @@ class _CarouselImageState extends State<CarouselImage> {
           }).toList(),
         ),
         Positioned(
-          top: 3.5.sp,
-          right: 4.sp,
+          top: 6.sp,
+          right: 6.sp,
           child: Container(
             width: 100.w,
             child: Column(
@@ -158,6 +159,7 @@ class _CarouselImageState extends State<CarouselImage> {
                             fontSize: 8.5.sp,
                             color: mC,
                             fontWeight: FontWeight.w600,
+                            fontFamily: FontFamily.lato,
                           ),
                         ),
                       ),

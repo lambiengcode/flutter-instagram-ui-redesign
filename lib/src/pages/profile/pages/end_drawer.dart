@@ -87,7 +87,13 @@ class _EndDrawerState extends State<EndDrawer> {
                         TextSpan(
                           text: '\t\t|\t\t',
                           style: TextStyle(
-                            color: null,
+                            color: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .color
+                                .withOpacity(.4),
+                            fontFamily: FontFamily.helvetica,
+                            fontSize: 10.sp,
                           ),
                         ),
                         TextSpan(

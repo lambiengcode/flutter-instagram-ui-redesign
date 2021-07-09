@@ -164,9 +164,6 @@ class AppDecoration {
     if (Theme.of(context).brightness == Brightness.dark) {
       return AppDecoration(
           decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30.0),
-        ),
         color: colorPrimaryBlack.withOpacity(.85),
         boxShadow: [
           BoxShadow(

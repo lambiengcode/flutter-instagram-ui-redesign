@@ -1,13 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/chat/widgets/message_card.dart';
 import 'package:whoru/src/routes/app_pages.dart';
-import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -25,39 +26,62 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        brightness: Theme.of(context).brightness,
+        elevation: .0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () => null,
+          icon: Icon(
+            Feather.plus_square,
+            color: colorPrimary,
+            size: 20.sp,
+          ),
+        ),
+        title: GestureDetector(
+          onTap: () => Get.offAndToNamed(Routes.ROOT),
+          child: Text('Inbox',
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyText1.color,
+                fontFamily: FontFamily.lato,
+                fontWeight: FontWeight.w600,
+                fontSize: 15.sp,
+              )),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () => null,
+            icon: Icon(
+              PhosphorIcons.video_camera,
+              color: Theme.of(context).textTheme.bodyText1.color,
+              size: 20.sp,
+            ),
+          ),
+          SizedBox(width: 2.sp),
+          IconButton(
+            onPressed: () => null,
+            icon: Icon(
+              PhosphorIcons.magnifying_glass,
+              color: Theme.of(context).textTheme.bodyText1.color,
+              size: 20.sp,
+            ),
+          ),
+          SizedBox(width: 2.sp),
+        ],
+      ),
       body: Container(
         height: 100.h,
         width: 100.w,
-        padding: EdgeInsets.only(left: 12.sp, right: 8.sp),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 38.sp),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Messages',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontFamily: FontFamily.lato,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(12.5.sp),
-                  alignment: Alignment.center,
-                  decoration:
-                      AppDecoration.buttonActionCircle(context).decoration,
-                  child: Icon(
-                    Feather.search,
-                    size: 17.5,
-                    color: Theme.of(context).buttonColor,
-                  ),
-                ),
-              ],
+            SizedBox(height: 2.sp),
+            Divider(
+              height: .35,
+              thickness: .35,
             ),
-            SizedBox(height: 5.sp),
+            SizedBox(height: 8.sp),
             Expanded(
               child: NotificationListener<OverscrollIndicatorNotification>(
                 onNotification: (overscroll) {
@@ -66,7 +90,7 @@ class _ChatPageState extends State<ChatPage> {
                 },
                 child: ListView.builder(
                   physics: ClampingScrollPhysics(),
-                  padding: EdgeInsets.all(.0),
+                  padding: EdgeInsets.only(left: 12.sp, right: 8.sp),
                   itemCount: chats.length + 2,
                   itemBuilder: (context, index) {
                     return index == 0
