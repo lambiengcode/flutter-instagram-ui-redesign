@@ -66,10 +66,12 @@ class _ScanQRPage extends State<ScanQRPage> {
                         Theme.of(context).textTheme.bodyText1.color,
                     data: 'profile - lambiengcode',
                     version: QrVersions.auto,
-                    size: 192.sp,
-                    gapless: false,
+                    size: 190.sp,
+                    gapless: true,
+                    errorCorrectionLevel: QrErrorCorrectLevel.M,
                     embeddedImage: NetworkImage(
-                        'https://avatars.githubusercontent.com/u/60530946?v=4'),
+                      'https://avatars.githubusercontent.com/u/60530946?v=4',
+                    ),
                     embeddedImageStyle: QrEmbeddedImageStyle(
                       size: Size(35.sp, 35.sp),
                     ),

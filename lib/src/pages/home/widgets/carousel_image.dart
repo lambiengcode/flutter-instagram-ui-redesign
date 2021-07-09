@@ -6,6 +6,7 @@ import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/home/controllers/post_controller.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -58,7 +59,7 @@ class _CarouselImageState extends State<CarouselImage> {
                     : widget.minAspectRatio,
             viewportFraction: 1,
             initialPage: 0,
-            enableInfiniteScroll: true,
+            enableInfiniteScroll: widget.imageList.length > 1,
             reverse: false,
             autoPlay: false,
             autoPlayInterval: Duration(seconds: 10),
@@ -107,7 +108,7 @@ class _CarouselImageState extends State<CarouselImage> {
                         child: BlurHash(
                           hash: imgUrl.blurHash,
                           image: imgUrl.image,
-                          imageFit: BoxFit.cover,
+                          imageFit: BoxFit.fitWidth,
                         ),
                       ),
                     ),
@@ -133,32 +134,35 @@ class _CarouselImageState extends State<CarouselImage> {
           }).toList(),
         ),
         Positioned(
-          top: 3.5.sp,
-          right: 4.sp,
+          top: 6.sp,
+          right: 6.sp,
           child: Container(
             width: 100.w,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 11.sp,
-                    vertical: 5.sp,
-                  ),
-                  decoration: BoxDecoration(
-                    color: colorBlack.withOpacity(.35),
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: Text(
-                    '${_currentIndex + 1} / ${widget.imageList.length}',
-                    style: TextStyle(
-                      fontSize: 8.5.sp,
-                      color: mC,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+                widget.imageList.length < 2
+                    ? Container()
+                    : Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 11.sp,
+                          vertical: 5.sp,
+                        ),
+                        decoration: BoxDecoration(
+                          color: colorBlack.withOpacity(.35),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        child: Text(
+                          '${_currentIndex + 1} / ${widget.imageList.length}',
+                          style: TextStyle(
+                            fontSize: 8.5.sp,
+                            color: mC,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: FontFamily.lato,
+                          ),
+                        ),
+                      ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.end,
                 //   children: map<Widget>(widget.imageList, (index, url) {

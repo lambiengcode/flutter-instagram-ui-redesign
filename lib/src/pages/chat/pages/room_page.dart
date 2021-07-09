@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/data/chat.dart';
@@ -172,26 +173,34 @@ class _RoomPageState extends State<RoomPage> {
               IconButton(
                 onPressed: () => print('more'),
                 icon: Icon(
-                  Feather.video,
+                  MaterialIcons.call,
                   color: colorPrimary,
-                  size: _size.width / 16.0,
+                  size: 18.sp,
                 ),
-              ),
-              SizedBox(width: 8.0),
-              VerticalDivider(
-                width: .25,
-                thickness: .25,
-                indent: 12.0,
-                endIndent: 8.0,
               ),
               IconButton(
                 onPressed: () => print('more'),
                 icon: Icon(
-                  Feather.more_vertical,
-                  size: _size.width / 16.0,
+                  PhosphorIcons.video_camera_fill,
+                  color: colorPrimary,
+                  size: 18.sp,
+                ),
+              ),
+              SizedBox(width: 8.0),
+              VerticalDivider(
+                width: .5,
+                thickness: .5,
+                indent: 12.sp,
+                endIndent: 10.sp,
+              ),
+              IconButton(
+                onPressed: () => print('more'),
+                icon: Icon(
+                  PhosphorIcons.dots_nine,
+                  size: 20.sp,
                   color:
                       Theme.of(context).textTheme.bodyText1.color.withOpacity(
-                            ThemeService().isSavedDarkMode() ? .88 : .65,
+                            ThemeService().isSavedDarkMode() ? 1 : .65,
                           ),
                 ),
               ),

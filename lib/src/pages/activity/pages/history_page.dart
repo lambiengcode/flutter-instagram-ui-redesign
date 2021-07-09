@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/pages/chat/widgets/message_card.dart';
+import 'package:whoru/src/routes/app_pages.dart';
 
 class HistoryPage extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 itemCount: chats.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: () => Get.toNamed('/room'),
+                    onTap: () => Get.toNamed(Routes.CHAT_ROOM),
                     child: MessageCard(
                       pendingMessage: chats[index].pendingMessage,
                       urlToImage: chats[index].image,

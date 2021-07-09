@@ -49,53 +49,70 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
       body: Container(
-        child: Column(
-          children: [
-            _buildTitle(context, 'Features'),
-            _buildLineSettingWithValue(
-              context,
-              'Language',
-              PhosphorIcons.translate_fill,
-              'English',
-              false,
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (overscroll) {
+            overscroll.disallowGlow();
+            return true;
+          },
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: Column(
+              children: [
+                _buildTitle(context, 'Features'),
+                _buildLineSettingWithValue(
+                  context: context,
+                  title: 'Language',
+                  icon: PhosphorIcons.translate_fill,
+                  value: 'English',
+                ),
+                _buildLineSettingToggle(
+                  context: context,
+                  title: 'Dark Mode',
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'Floating Chat',
+                  icon: PhosphorIcons.chat_circle_dots,
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'Play audio in profile',
+                  icon: PhosphorIcons.music_notes,
+                  isLast: true,
+                ),
+                _buildTitle(context, 'Notifications'),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'Messages',
+                  icon: PhosphorIcons.chat_centered_dots,
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'React Post',
+                  icon: PhosphorIcons.heart,
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'Follow',
+                  icon: PhosphorIcons.user_circle_plus,
+                  isLast: true,
+                ),
+                _buildTitle(context, 'Security'),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'PIN',
+                  icon: PhosphorIcons.lock,
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
+                  title: 'Fingerprint',
+                  icon: PhosphorIcons.fingerprint_fill,
+                  isLast: true,
+                ),
+                SizedBox(height: 20.sp),
+              ],
             ),
-            _buildLineSettingToggle(
-              context,
-              'Dark Mode',
-              false,
-            ),
-            _buildLineSettingWithToggle(
-              context,
-              'Floating Chat',
-              PhosphorIcons.chat_circle_dots,
-              false,
-            ),
-            _buildLineSettingWithToggle(
-              context,
-              'Fingerprint',
-              PhosphorIcons.fingerprint_fill,
-              true,
-            ),
-            _buildTitle(context, 'Notifications'),
-            _buildLineSettingWithToggle(
-              context,
-              'Messages',
-              PhosphorIcons.chat_centered_dots,
-              false,
-            ),
-            _buildLineSettingWithToggle(
-              context,
-              'React Post',
-              PhosphorIcons.heart,
-              false,
-            ),
-            _buildLineSettingWithToggle(
-              context,
-              'Follow',
-              PhosphorIcons.user_circle_plus,
-              true,
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -106,7 +123,7 @@ class _SettingsPageState extends State<SettingsPage> {
       padding: EdgeInsets.only(
         left: 12.sp,
         right: 8.sp,
-        top: 18.sp,
+        top: title == 'Features' ? 15.sp : 25.sp,
         bottom: 4.sp,
       ),
       child: Row(
@@ -124,7 +141,13 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildLineSettingWithValue(context, title, icon, value, isLast) {
+  Widget _buildLineSettingWithValue({
+    context,
+    title,
+    icon,
+    value,
+    isLast = false,
+  }) {
     return GestureDetector(
       onTap: () {
         if (title == 'Language') {
@@ -135,8 +158,8 @@ class _SettingsPageState extends State<SettingsPage> {
         padding: EdgeInsets.only(
           left: 12.sp,
           right: 8.sp,
-          top: 18.sp,
-          bottom: 18.sp,
+          top: 16.sp,
+          bottom: 16.sp,
         ),
         decoration: BoxDecoration(
           border: Border(
@@ -164,7 +187,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     title,
                     style: TextStyle(
                       fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
@@ -191,13 +214,18 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildLineSettingWithToggle(context, title, icon, isLast) {
+  Widget _buildLineSettingWithToggle({
+    context,
+    title,
+    icon,
+    isLast = false,
+  }) {
     return Container(
       padding: EdgeInsets.only(
         left: 12.sp,
         right: 8.sp,
-        top: 18.sp,
-        bottom: 18.sp,
+        top: 16.sp,
+        bottom: 16.sp,
       ),
       decoration: BoxDecoration(
         border: Border(
@@ -224,7 +252,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   title,
                   style: TextStyle(
                     fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
@@ -251,13 +279,13 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildLineSettingToggle(context, title, isLast) {
+  Widget _buildLineSettingToggle({context, title, isLast = false}) {
     return Container(
       padding: EdgeInsets.only(
         left: 12.sp,
         right: 8.sp,
-        top: 18.sp,
-        bottom: 18.sp,
+        top: 16.sp,
+        bottom: 16.sp,
       ),
       decoration: BoxDecoration(
         border: Border(
@@ -288,7 +316,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   title,
                   style: TextStyle(
                     fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
