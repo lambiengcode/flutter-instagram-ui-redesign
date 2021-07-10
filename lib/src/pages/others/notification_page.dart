@@ -5,12 +5,34 @@ import 'package:get/get.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
-class NearbyPage extends StatefulWidget {
+class NotificationPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _NearbyPageState();
+  State<StatefulWidget> createState() => _NotificationPageState();
 }
 
-class _NearbyPageState extends State<NearbyPage> {
+class _NotificationPageState extends State<NotificationPage> {
+  ScrollController _scrollController;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(_listenScrollListener);
+    super.initState();
+  }
+
+  _listenScrollListener() {
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      // scroll to top
+    }
+    if (_scrollController.offset <=
+            _scrollController.position.minScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      // scroll down
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +50,7 @@ class _NearbyPageState extends State<NearbyPage> {
           ),
         ),
         title: Text(
-          'Nearby',
+          'Notifications',
           style: TextStyle(
             color: Theme.of(context).textTheme.bodyText1.color,
             fontFamily: FontFamily.lato,
@@ -56,6 +78,22 @@ class _NearbyPageState extends State<NearbyPage> {
               thickness: .35,
             ),
             SizedBox(height: 8.sp),
+            Expanded(
+              child: NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (overscroll) {
+                  overscroll.disallowGlow();
+                  return true;
+                },
+                child: ListView.builder(
+                  controller: _scrollController,
+                  physics: ClampingScrollPhysics(),
+                  itemCount: 15,
+                  itemBuilder: (context, index) {
+                    return Container();
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),
