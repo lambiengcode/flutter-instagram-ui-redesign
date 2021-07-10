@@ -196,7 +196,7 @@ class _RoomPageState extends State<RoomPage> {
               IconButton(
                 onPressed: () => print('more'),
                 icon: Icon(
-                  PhosphorIcons.dots_nine,
+                  PhosphorIcons.squares_four,
                   size: 20.sp,
                   color:
                       Theme.of(context).textTheme.bodyText1.color.withOpacity(
