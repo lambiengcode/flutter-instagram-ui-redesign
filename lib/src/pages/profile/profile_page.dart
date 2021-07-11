@@ -111,6 +111,8 @@ class _ProfilePageState extends State<ProfilePage>
                     onTap: () => CustomImagePicker().openImagePicker(
                       context: context,
                       text: 'Thay đổi ảnh bìa',
+                      viewUrl:
+                          'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797',
                     ),
                     child: Container(
                       width: 300.sp,
@@ -194,6 +196,8 @@ class _ProfilePageState extends State<ProfilePage>
                   onTap: () => CustomImagePicker().openImagePicker(
                     context: context,
                     text: 'Thay đổi ảnh đại diện',
+                    viewUrl:
+                        'https://avatars.githubusercontent.com/u/60530946?v=4',
                   ),
                   child: Container(
                     width: 100.w,

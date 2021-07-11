@@ -21,4 +21,5 @@ abstract class Routes {
   static const QR_SCAN = '/qrScan';
   static const EDIT_PROFILE = '/editProfile';
   static const EDIT_PHOTO = '/editPhoto';
+  static const EDITOR_PRO = '/editorPro';
 }

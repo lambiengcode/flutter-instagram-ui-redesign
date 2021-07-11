@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/helpers/choose_image/crop_image.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/font_family.dart';
@@ -205,7 +206,14 @@ class _ImageEditorState extends State<ImageEditor> {
         ),
         actions: [
           IconButton(
-            onPressed: () => null,
+            onPressed: () async {
+              showAlertDialog(context);
+              await cropImageDataWithDartLibrary(
+                state: editorKey.currentState,
+              );
+              Get.back();
+              Get.back();
+            },
             icon: Icon(
               PhosphorIcons.check,
               color: colorPrimary,
@@ -228,7 +236,7 @@ class _ImageEditorState extends State<ImageEditor> {
                         extendedImageEditorKey: editorKey,
                         initEditorConfigHandler: (ExtendedImageState state) {
                           return EditorConfig(
-                            maxScale: 8.0,
+                            maxScale: 10.0,
                             cropRectPadding: const EdgeInsets.all(20.0),
                             hitTestSize: 20.0,
                             cropLayerPainter: _cropLayerPainter,
@@ -248,7 +256,7 @@ class _ImageEditorState extends State<ImageEditor> {
                         extendedImageEditorKey: editorKey,
                         initEditorConfigHandler: (ExtendedImageState state) {
                           return EditorConfig(
-                            maxScale: 8.0,
+                            maxScale: 10.0,
                             cropRectPadding: const EdgeInsets.all(20.0),
                             hitTestSize: 20.0,
                             cropLayerPainter: _cropLayerPainter,
@@ -260,13 +268,54 @@ class _ImageEditorState extends State<ImageEditor> {
                       ),
               ),
               Container(
-                padding: EdgeInsets.only(bottom: 16.sp, top: 8.sp),
+                height: 60.sp,
                 decoration:
                     AppDecoration.containerOnlyShadowTop(context).decoration,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                alignment: Alignment.center,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
                   children: [
+                    SizedBox(width: 12.sp),
+                    Column(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            editorKey.currentState.flip();
+                          },
+                          child: Icon(
+                            Icons.flip,
+                            size: 30,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                        Text(
+                          'Flip',
+                          style:
+                              TextStyle(color: Theme.of(context).primaryColor),
+                        )
+                      ],
+                    ),
+                    SizedBox(width: 12.sp),
+                    Column(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            editorKey.currentState.getCropRect();
+                          },
+                          child: Icon(
+                            Icons.flip,
+                            size: 30,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                        Text(
+                          'Flip',
+                          style:
+                              TextStyle(color: Theme.of(context).primaryColor),
+                        )
+                      ],
+                    ),
+                    SizedBox(width: 25.sp),
                     Column(
                       children: [
                         TextButton(
@@ -283,9 +332,7 @@ class _ImageEditorState extends State<ImageEditor> {
                         )
                       ],
                     ),
-                    SizedBox(
-                      width: 50,
-                    ),
+                    SizedBox(width: 25.sp),
                     Column(
                       children: [
                         TextButton(
@@ -302,11 +349,7 @@ class _ImageEditorState extends State<ImageEditor> {
                         )
                       ],
                     ),
-                    !widget.editAvatar
-                        ? SizedBox(
-                            width: 50,
-                          )
-                        : Container(),
+                    !widget.editAvatar ? SizedBox(width: 25.sp) : Container(),
                     !widget.editAvatar
                         ? Column(
                             children: [

@@ -3,6 +3,8 @@ PODS:
     - Flutter
   - emoji_picker (0.0.3):
     - Flutter
+  - firexcode (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_image_compress (0.0.1):
     - Flutter
@@ -33,6 +35,8 @@ PODS:
   - Mantle/extobjc (2.1.6)
   - path_provider (0.0.1):
     - Flutter
+  - "permission_handler (5.1.0+2)":
+    - Flutter
   - photo_manager (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -49,6 +53,7 @@ PODS:
 DEPENDENCIES:
   - blurhash (from `.symlinks/plugins/blurhash/ios`)
   - emoji_picker (from `.symlinks/plugins/emoji_picker/ios`)
+  - firexcode (from `.symlinks/plugins/firexcode/ios`)
   - Flutter (from `Flutter`)
   - flutter_image_compress (from `.symlinks/plugins/flutter_image_compress/ios`)
   - geocoder (from `.symlinks/plugins/geocoder/ios`)
@@ -56,6 +61,7 @@ DEPENDENCIES:
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - location (from `.symlinks/plugins/location/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -73,6 +79,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/blurhash/ios"
   emoji_picker:
     :path: ".symlinks/plugins/emoji_picker/ios"
+  firexcode:
+    :path: ".symlinks/plugins/firexcode/ios"
   Flutter:
     :path: Flutter
   flutter_image_compress:
@@ -87,6 +95,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/location/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
   photo_manager:
     :path: ".symlinks/plugins/photo_manager/ios"
   shared_preferences:
@@ -97,16 +107,18 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   blurhash: 84acbeea8839e88055fcb99b320c5ebf5f27ae3b
   emoji_picker: 0e868059aa18f9473d234f3d0701fbd4d5fd310c
+  firexcode: 2dad7a2185a735308cd4b6524e15287f00bdbec5
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_image_compress: 082f8daaf6c1b0c9fe798251c750ef0ecd98d7ae
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geocoder: 3cfab70531a0b367e917bafe82df4c30f6d4c45a
-  image_picker: e06f7a68f000bd36f552c1847e33cda96ed31f1f
+  image_picker: 50e7c7ff960e5f58faa4d1f4af84a771c671bc4a
   integration_test: 6eb66a19f7104200dcfdd62bc0077e1b09686e4f
   libwebp: e90b9c01d99205d03b6bb8f2c8c415e5a4ef66f0
   location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
   Mantle: 4c0ed6ce47c96eccc4dc3bb071deb3def0e2c3be
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
   photo_manager: 61cdd6835af271b9ad1bb533fccf71d5db02fff3
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
