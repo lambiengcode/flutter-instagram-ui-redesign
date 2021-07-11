@@ -13,17 +13,37 @@ import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class CustomImagePicker {
   final _picker = ImagePicker();
+  // File _image;
+
+  Future<void> getImageEditor() =>
+      Get.toNamed(Routes.EDITOR_PRO).then((geteditimage) {
+        if (geteditimage != null) {
+          // _image = geteditimage;
+        }
+      }).catchError((er) {
+        print(er);
+      });
 
   Widget _buildImageModalButton({context, index, icon, text, source}) {
     return GestureDetector(
       onTap: () async {
-        var image = await getImage(context: context, source: source);
-        if (image != null) {
-          // Go to editor pro
+        if (!source.toString().contains('http')) {
+          var image = await getImage(context: context, source: source);
           Get.back();
-          Get.toNamed(Routes.EDIT_PHOTO, arguments: File(image.path));
+          if (image != null) {
+            // Go to editor pro
+            // Get.toNamed(Routes.EDIT_PHOTO, arguments: File(image.path));
+            getImageEditor();
+          }
         } else {
           Get.back();
+          Get.toNamed(
+            Routes.VIEW_PHOTO,
+            arguments: <String, dynamic>{
+              'listPhoto': [source],
+              'index': 0,
+            },
+          );
         }
       },
       child: Container(
@@ -64,7 +84,8 @@ class CustomImagePicker {
     return await _picker.getImage(source: source, imageQuality: 90);
   }
 
-  Future openImagePicker({@required context, text = 'Chọn ảnh đại diện'}) {
+  Future openImagePicker(
+      {@required context, text = 'Chọn ảnh đại diện', @required viewUrl}) {
     return showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -108,6 +129,14 @@ class CustomImagePicker {
                   icon: PhosphorIcons.image_square,
                   text: 'Chọn ảnh có sẵn',
                   source: ImageSource.gallery,
+                ),
+                Divider(),
+                _buildImageModalButton(
+                  context: context,
+                  index: 0,
+                  icon: PhosphorIcons.eye,
+                  text: 'Xem ảnh đại diện',
+                  source: viewUrl,
                 ),
                 SizedBox(height: 22.sp),
               ],

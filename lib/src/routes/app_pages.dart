@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:whoru/src/app.dart';
 import 'package:whoru/src/helpers/choose_image/image_editor.dart';
+import 'package:whoru/src/helpers/editor_pro/image_editor_pro.dart';
 import 'package:whoru/src/helpers/view_image/view_image.dart';
 import 'package:whoru/src/pages/calling/pages/incomming_call_page.dart';
 import 'package:whoru/src/pages/chat/pages/room_page.dart';
@@ -91,6 +92,12 @@ class AppPages {
     GetPage(
       name: Routes.EDIT_PHOTO,
       page: () => ImageEditor(image: Get.arguments),
+      transition: Transition.zoom,
+      transitionDuration: Duration(milliseconds: 150),
+    ),
+    GetPage(
+      name: Routes.EDITOR_PRO,
+      page: () => ImageEditorPro(),
       transition: Transition.zoom,
       transitionDuration: Duration(milliseconds: 150),
     ),
