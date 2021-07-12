@@ -15,8 +15,10 @@ class CustomImagePicker {
   final _picker = ImagePicker();
   // File _image;
 
-  Future<void> getImageEditor() =>
-      Get.toNamed(Routes.EDITOR_PRO).then((geteditimage) {
+  Future<void> getImageEditor(File image) =>
+      Get.toNamed(Routes.EDITOR_PRO, arguments: {
+        'images': [image],
+      }).then((geteditimage) {
         if (geteditimage != null) {
           // _image = geteditimage;
         }
@@ -29,11 +31,12 @@ class CustomImagePicker {
       onTap: () async {
         if (!source.toString().contains('http')) {
           var image = await getImage(context: context, source: source);
+
           Get.back();
           if (image != null) {
             // Go to editor pro
             // Get.toNamed(Routes.EDIT_PHOTO, arguments: File(image.path));
-            getImageEditor();
+            getImageEditor(File(image.path));
           }
         } else {
           Get.back();
