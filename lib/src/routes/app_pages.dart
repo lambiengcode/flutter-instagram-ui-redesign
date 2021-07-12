@@ -97,7 +97,9 @@ class AppPages {
     ),
     GetPage(
       name: Routes.EDITOR_PRO,
-      page: () => ImageEditorPro(),
+      page: () => ImageEditorPro(
+        images: Get.arguments['images'],
+      ),
       transition: Transition.zoom,
       transitionDuration: Duration(milliseconds: 150),
     ),
