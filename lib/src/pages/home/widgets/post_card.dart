@@ -97,7 +97,7 @@ class _PostCardState extends State<PostCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 1.5.h),
+            SizedBox(height: 8.sp),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 2.5.w),
               child: Text(
@@ -110,7 +110,7 @@ class _PostCardState extends State<PostCard> {
                 maxLines: 2,
               ),
             ),
-            SizedBox(height: 1.5.h),
+            SizedBox(height: 8.sp),
             GestureDetector(
               onDoubleTap: () {
                 _globalKey.currentState.onTap();
@@ -133,7 +133,7 @@ class _PostCardState extends State<PostCard> {
                 ),
               ),
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 12.sp),
           ],
         ),
       ),

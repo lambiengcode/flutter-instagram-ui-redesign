@@ -50,6 +50,7 @@ class CustomImagePicker {
         }
       },
       child: Container(
+        color: Colors.transparent,
         padding: EdgeInsets.symmetric(vertical: 8.sp),
         child: Row(
           children: [
