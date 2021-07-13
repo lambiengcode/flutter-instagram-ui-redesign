@@ -116,7 +116,6 @@ class _ImageEditorProState extends State<ImageEditorPro> {
     widgetJson.clear();
     heightcontroler.clear();
     widthcontroler.clear();
-
     super.dispose();
   }
 
@@ -165,7 +164,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                 width: 100.w,
                 height: isVertical
                     ? (height.toDouble() / width.toDouble()) * 100.w
-                    : (width.toDouble() / height.toDouble()) * 100.w,
+                    : (width.toDouble() / height.toDouble()) * 100.h,
                 alignment: Alignment.center,
                 child: RotatedBox(
                   quarterTurns: rotateValue,
@@ -195,7 +194,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                                       100.w
                                                   : (width.toDouble() /
                                                           height.toDouble()) *
-                                                      100.w,
+                                                      100.h,
                                               child: BackdropFilter(
                                                 filter: ImageFilter.blur(
                                                   sigmaX: blurValue,
@@ -240,7 +239,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                   ? (height.toDouble() / width.toDouble()) *
                                       100.w
                                   : (width.toDouble() / height.toDouble()) *
-                                      100.w,
+                                      100.h,
                             ),
                             xStack.list(
                               widgetJson.asMap().entries.map((f) {
@@ -310,7 +309,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       width: 100.w,
                       height: isVertical
                           ? (height.toDouble() / width.toDouble()) * 100.w
-                          : (width.toDouble() / height.toDouble()) * 100.w,
+                          : (width.toDouble() / height.toDouble()) * 100.h,
                     ),
                   ),
                 ),
@@ -401,15 +400,16 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
-                      FontAwesomeIcons.eraser,
+                      Icons.clear_all_sharp,
                       color: mC,
-                      size: 14.sp,
+                      size: 16.sp,
                     ),
-                    SizedBox(height: 3.5.sp),
-                    Text('Eraser',
+                    SizedBox(height: 2.sp),
+                    Text('Clear',
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontFamily: FontFamily.lato,
+                          color: mC,
                         )),
                   ],
                 ),
@@ -541,7 +541,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
               GestureDetector(
                 onTap: () async {
                   screenshotController
-                      .capture(pixelRatio: widget.pixelRatio ?? 1.5)
+                      .capture(pixelRatio: width / height)
                       .then((binaryIntList) async {
                     //print("Capture Done");
 
@@ -552,6 +552,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                             DateTime.now().toString() +
                             '.jpg')
                         .create();
+                    print(file.path);
                     file.writeAsBytesSync(binaryIntList);
                     Navigator.pop(context, file);
                   }).catchError((onError) {
@@ -962,7 +963,7 @@ class _SignatState extends State<Signat> {
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() => print('Value changed'));
+    // _controller.addListener(() => print('Value changed'));
   }
 
   @override
