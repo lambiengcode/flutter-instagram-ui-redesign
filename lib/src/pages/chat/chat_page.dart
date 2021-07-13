@@ -89,7 +89,7 @@ class _ChatPageState extends State<ChatPage> {
                 },
                 child: ListView.builder(
                   physics: ClampingScrollPhysics(),
-                  padding: EdgeInsets.only(left: 12.sp, right: 8.sp),
+                  padding: EdgeInsets.all(0),
                   itemCount: chats.length + 2,
                   itemBuilder: (context, index) {
                     return index == 0
@@ -161,27 +161,30 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _buildTitle(context, title) {
-    return Row(
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 11.5.sp,
-            fontWeight: FontWeight.w600,
-            fontFamily: FontFamily.lato,
+    return Padding(
+      padding: EdgeInsets.only(left: 12.sp, right: 8.sp),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 11.5.sp,
+              fontWeight: FontWeight.w600,
+              fontFamily: FontFamily.lato,
+            ),
           ),
-        ),
-        SizedBox(width: 6.sp),
-        title == 'Pinned'
-            ? Padding(
-                padding: EdgeInsets.only(bottom: 1.sp),
-                child: Icon(
-                  LineAwesomeIcons.thumb_tack,
-                  size: 12.sp,
-                ),
-              )
-            : Container(),
-      ],
+          SizedBox(width: 6.sp),
+          title == 'Pinned'
+              ? Padding(
+                  padding: EdgeInsets.only(bottom: 1.sp),
+                  child: Icon(
+                    LineAwesomeIcons.thumb_tack,
+                    size: 12.sp,
+                  ),
+                )
+              : Container(),
+        ],
+      ),
     );
   }
 
@@ -191,6 +194,7 @@ class _ChatPageState extends State<ChatPage> {
       height: _size.width * .22,
       width: _size.width,
       child: ListView.builder(
+        padding: EdgeInsets.only(left: 12.sp, right: 8.sp),
         scrollDirection: Axis.horizontal,
         itemCount: chats.length - 1,
         itemBuilder: (context, index) {

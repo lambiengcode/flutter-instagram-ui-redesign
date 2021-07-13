@@ -99,15 +99,12 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   }
 
   initialOpenImage() async {
-    print('open image');
     var decodedImage = await decodeImageFromList(
         File(widget.images[widget.initialIndex].path).readAsBytesSync());
 
     setState(() {
       height = decodedImage.height;
       width = decodedImage.width;
-      print(height);
-      print(width);
       _image = File(widget.images[widget.initialIndex].path);
     });
   }
@@ -145,6 +142,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   double hueValue = 0;
   double brightnessValue = 0;
   double saturationValue = 0;
+  bool isVertical = true;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -153,140 +151,175 @@ class _ImageEditorProState extends State<ImageEditorPro> {
         controller: screenshotController,
         child: Column(
           children: [
-            SizedBox(height: 4.sp),
+            Container(
+              height: 5.sp,
+              color: colorPrimaryBlack,
+            ),
             Divider(
-              height: .35,
-              thickness: .35,
+              height: .2,
+              thickness: .2,
+              color: Colors.white12,
             ),
             Expanded(
-              child: RotatedBox(
-                quarterTurns: rotateValue,
-                child: imageFilterLatest(
-                  hue: hueValue,
-                  brightness: brightnessValue,
-                  saturation: saturationValue,
-                  child: RepaintBoundary(
-                      key: globalKey,
-                      child: xStack.list(
-                        [
-                          _image != null
-                              ? Transform(
-                                  alignment: Alignment.center,
-                                  transform: Matrix4.rotationY(flipValue),
-                                  child: ClipRect(
-                                    // <-- clips to the 200x200 [Container] below
+              child: Container(
+                width: 100.w,
+                height: isVertical
+                    ? (height.toDouble() / width.toDouble()) * 100.w
+                    : (width.toDouble() / height.toDouble()) * 100.w,
+                alignment: Alignment.center,
+                child: RotatedBox(
+                  quarterTurns: rotateValue,
+                  child: imageFilterLatest(
+                    hue: hueValue,
+                    brightness: brightnessValue,
+                    saturation: saturationValue,
+                    child: RepaintBoundary(
+                        key: globalKey,
+                        child: xStack.list(
+                          [
+                            _image != null
+                                ? Transform(
+                                    alignment: Alignment.topCenter,
+                                    transform: Matrix4.rotationY(flipValue),
+                                    child: ClipRect(
+                                      // <-- clips to the 200x200 [Container] below
 
-                                    child: _image.path
-                                        .decorationIFToFitHeight()
-                                        .xContainer(
-                                            padding: EdgeInsets.zero,
-                                            // alignment: Alignment.center,
-                                            width: width.toDouble(),
-                                            height: height.toDouble(),
-                                            child: BackdropFilter(
-                                              filter: ImageFilter.blur(
-                                                sigmaX: blurValue,
-                                                sigmaY: blurValue,
-                                              ),
-                                              child: Container(
-                                                color: colorValue
-                                                    .withOpacity(opacityValue),
-                                              ),
-                                            )),
-                                  ),
-                                )
+                                      child: _image.path
+                                          .decorationIFToFitHeight()
+                                          .xContainer(
+                                              padding: EdgeInsets.zero,
+                                              width: 100.w,
+                                              height: isVertical
+                                                  ? (height.toDouble() /
+                                                          width.toDouble()) *
+                                                      100.w
+                                                  : (width.toDouble() /
+                                                          height.toDouble()) *
+                                                      100.w,
+                                              child: BackdropFilter(
+                                                filter: ImageFilter.blur(
+                                                  sigmaX: blurValue,
+                                                  sigmaY: blurValue,
+                                                ),
+                                                child: Container(
+                                                  color: colorValue.withOpacity(
+                                                      opacityValue),
+                                                ),
+                                              )),
+                                    ),
+                                  )
 
-                              //  BackdropFilter(
-                              //     filter: ImageFilter.blur(
-                              //         sigmaX: 10.0, sigmaY: 10.0, tileMode: TileMode.clamp),
-                              //     child: Image.file(
-                              //       _image,
-                              //       height: height.toDouble(),
-                              //       width: width.toDouble(),
-                              //       fit: BoxFit.cover,
-                              //     ),
-                              //   )
-                              : Container(),
-                          Signat().xGesture(
-                            onPanUpdate: (DragUpdateDetails details) {
-                              setState(() {
-                                RenderBox object = context.findRenderObject();
-                                var _localPosition = object
-                                    .globalToLocal(details.globalPosition);
-                                _points = List.from(_points)
-                                  ..add(_localPosition);
-                              });
-                            },
-                            onPanEnd: (DragEndDetails details) {
-                              _points.add(null);
-                            },
-                          ).xContainer(padding: EdgeInsets.all(0.0)),
-                          xStack.list(
-                            widgetJson.asMap().entries.map((f) {
-                              return type[f.key] == 1
-                                  ? EmojiView(
-                                      left: offsets[f.key].dx,
-                                      top: offsets[f.key].dy,
-                                      ontap: () {
-                                        scaf.currentState
-                                            .showBottomSheet((context) {
-                                          return Sliders(
-                                            index: f.key,
-                                            mapValue: f.value,
-                                          );
-                                        });
-                                      },
-                                      onpanupdate: (details) {
-                                        setState(() {
-                                          offsets[f.key] = Offset(
-                                              offsets[f.key].dx +
-                                                  details.delta.dx,
-                                              offsets[f.key].dy +
-                                                  details.delta.dy);
-                                        });
-                                      },
-                                      mapJson: f.value,
-                                    )
-                                  : type[f.key] == 2
-                                      ? TextView(
-                                          left: offsets[f.key].dx,
-                                          top: offsets[f.key].dy,
-                                          ontap: () {
-                                            showModalBottomSheet(
-                                                shape: BorderRadius.only(
-                                                        topRight:
-                                                            Radius.circular(10),
-                                                        topLeft:
-                                                            Radius.circular(10))
-                                                    .xShapeBorder(),
-                                                context: context,
-                                                builder: (context) {
-                                                  return Sliders(
-                                                    index: f.key,
-                                                    mapValue: f.value,
-                                                  );
-                                                });
-                                          },
-                                          onpanupdate: (details) {
-                                            setState(() {
-                                              offsets[f.key] = Offset(
-                                                  offsets[f.key].dx +
-                                                      details.delta.dx,
-                                                  offsets[f.key].dy +
-                                                      details.delta.dy);
-                                            });
-                                          },
-                                          mapJson: f.value,
-                                        )
-                                      : Container();
-                            }).toList(),
-                          )
-                        ],
-                      )).toContainer(
-                    color: Colors.white,
+                                //  BackdropFilter(
+                                //     filter: ImageFilter.blur(
+                                //         sigmaX: 10.0, sigmaY: 10.0, tileMode: TileMode.clamp),
+                                //     child: Image.file(
+                                //       _image,
+                                //       height: height.toDouble(),
+                                //       width: width.toDouble(),
+                                //       fit: BoxFit.cover,
+                                //     ),
+                                //   )
+                                : Container(),
+                            Signat().xGesture(
+                              onPanUpdate: (DragUpdateDetails details) {
+                                setState(() {
+                                  RenderBox object = context.findRenderObject();
+                                  var _localPosition = object
+                                      .globalToLocal(details.globalPosition);
+                                  _points = List.from(_points)
+                                    ..add(_localPosition);
+                                });
+                              },
+                              onPanEnd: (DragEndDetails details) {
+                                _points.add(null);
+                              },
+                            ).xContainer(
+                              padding: EdgeInsets.all(0.0),
+                              width: 100.w,
+                              height: isVertical
+                                  ? (height.toDouble() / width.toDouble()) *
+                                      100.w
+                                  : (width.toDouble() / height.toDouble()) *
+                                      100.w,
+                            ),
+                            xStack.list(
+                              widgetJson.asMap().entries.map((f) {
+                                return type[f.key] == 1
+                                    ? EmojiView(
+                                        left: offsets[f.key].dx,
+                                        top: offsets[f.key].dy,
+                                        ontap: () {
+                                          scaf.currentState
+                                              .showBottomSheet((context) {
+                                            return Sliders(
+                                              index: f.key,
+                                              mapValue: f.value,
+                                            );
+                                          });
+                                        },
+                                        onpanupdate: (details) {
+                                          setState(() {
+                                            offsets[f.key] = Offset(
+                                                offsets[f.key].dx +
+                                                    details.delta.dx,
+                                                offsets[f.key].dy +
+                                                    details.delta.dy);
+                                          });
+                                        },
+                                        mapJson: f.value,
+                                      )
+                                    : type[f.key] == 2
+                                        ? TextView(
+                                            left: offsets[f.key].dx,
+                                            top: offsets[f.key].dy,
+                                            ontap: () {
+                                              showModalBottomSheet(
+                                                  shape: BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  10),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10))
+                                                      .xShapeBorder(),
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Sliders(
+                                                      index: f.key,
+                                                      mapValue: f.value,
+                                                    );
+                                                  });
+                                            },
+                                            onpanupdate: (details) {
+                                              setState(() {
+                                                offsets[f.key] = Offset(
+                                                    offsets[f.key].dx +
+                                                        details.delta.dx,
+                                                    offsets[f.key].dy +
+                                                        details.delta.dy);
+                                              });
+                                            },
+                                            mapJson: f.value,
+                                          )
+                                        : Container();
+                              }).toList(),
+                            )
+                          ],
+                        )).toContainer(
+                      color: colorPrimaryBlack,
+                      width: 100.w,
+                      height: isVertical
+                          ? (height.toDouble() / width.toDouble()) * 100.w
+                          : (width.toDouble() / height.toDouble()) * 100.w,
+                    ),
                   ),
                 ),
               ),
+            ),
+            Divider(
+              height: .2,
+              thickness: .2,
+              color: Colors.white12,
             ),
           ],
         ),
@@ -299,7 +332,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
               onPressed: () => Get.back(),
               icon: Icon(
                 Feather.arrow_left,
-                color: Theme.of(context).textTheme.bodyText1.color,
+                color: mC,
                 size: 20.sp,
               ),
             ),
@@ -421,6 +454,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontFamily: FontFamily.lato,
+                          color: mC,
                         )),
                   ],
                 ),
@@ -458,6 +492,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontFamily: FontFamily.lato,
+                          color: mC,
                         )),
                   ],
                 ),
@@ -497,6 +532,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontFamily: FontFamily.lato,
+                          color: mC,
                         )),
                   ],
                 ),
@@ -545,7 +581,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
             ],
             brightness: Brightness.dark,
             // backgroundColor: Colors.red,
-            backgroundColor: Colors.transparent,
+            backgroundColor: colorPrimaryBlack,
             elevation: .0,
           ),
           bottomNavigationBar: openbottomsheet
@@ -556,7 +592,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                 ).list(
                   <Widget>[
                     BottomBarContainer(
-                      colors: widget.bottomBarColor,
+                      colors: colorPrimaryBlack,
                       icons: Icons.flip,
                       ontap: () {
                         setState(() {
@@ -565,28 +601,45 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       },
                       title: 'Flip',
                     ),
+                    VerticalDivider(
+                      width: .1,
+                      thickness: .1,
+                      color: Colors.white12,
+                    ),
                     BottomBarContainer(
-                      colors: widget.bottomBarColor,
+                      colors: colorPrimaryBlack,
                       icons: Icons.rotate_left,
                       ontap: () {
                         setState(() {
                           rotateValue--;
+                          isVertical = !isVertical;
                         });
                       },
                       title: 'Left',
                     ),
+                    VerticalDivider(
+                      width: .1,
+                      thickness: .1,
+                      color: Colors.white12,
+                    ),
                     BottomBarContainer(
-                      colors: widget.bottomBarColor,
+                      colors: colorPrimaryBlack,
                       icons: Icons.rotate_right,
                       ontap: () {
                         setState(() {
                           rotateValue++;
+                          isVertical = !isVertical;
                         });
                       },
                       title: 'Right',
                     ),
+                    VerticalDivider(
+                      width: .1,
+                      thickness: .1,
+                      color: Colors.white12,
+                    ),
                     BottomBarContainer(
-                      colors: widget.bottomBarColor,
+                      colors: colorPrimaryBlack,
                       icons: Icons.blur_on,
                       ontap: () {
                         showModalBottomSheet(
@@ -701,8 +754,13 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       },
                       title: 'Blur',
                     ),
+                    VerticalDivider(
+                      width: .1,
+                      thickness: .1,
+                      color: Colors.white12,
+                    ),
                     BottomBarContainer(
-                      colors: widget.bottomBarColor,
+                      colors: colorPrimaryBlack,
                       icons: Icons.image_outlined,
                       ontap: () {
                         showModalBottomSheet(

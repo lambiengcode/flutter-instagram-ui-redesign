@@ -32,6 +32,7 @@ class _MessageCardState extends State<MessageCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left: 12.sp, right: 8.sp),
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         children: [
