@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/helpers/choose_image/custom_image_picker.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/profile/pages/end_drawer.dart';
 import 'package:whoru/src/pages/profile/widgets/photos_gridview.dart';
@@ -106,20 +107,28 @@ class _ProfilePageState extends State<ProfilePage>
             children: [
               Column(
                 children: [
-                  Container(
-                    width: 300.sp,
-                    height: 168.75.sp,
-                    child: BlurHash(
-                      hash: "L27B7e4n~WIU?bofD%xu4.t7RjRj",
-                      image:
+                  GestureDetector(
+                    onTap: () => CustomImagePicker().openImagePicker(
+                      context: context,
+                      text: 'Thay đổi ảnh bìa',
+                      viewUrl:
                           'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797',
-                      imageFit: BoxFit.cover,
+                    ),
+                    child: Container(
+                      width: 300.sp,
+                      height: 168.75.sp,
+                      child: BlurHash(
+                        hash: "L27B7e4n~WIU?bofD%xu4.t7RjRj",
+                        image:
+                            'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797',
+                        imageFit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   SizedBox(height: 10.sp),
                   Row(
                     children: [
-                      _buildTitleFollow(context, 'Followers', '10.2w'),
+                      _buildTitleFollow(context, 'Followers', '10.2k'),
                       SizedBox(width: 24.w),
                       _buildTitleFollow(context, 'Following', '2.1k'),
                     ],
@@ -128,8 +137,8 @@ class _ProfilePageState extends State<ProfilePage>
                   Text(
                     'Đào Hồng Vinh - Dev',
                     style: TextStyle(
-                      fontSize: 12.sp,
-                      fontFamily: 'FreeSans',
+                      fontSize: 13.25.sp,
+                      fontFamily: FontFamily.lato,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -141,8 +150,8 @@ class _ProfilePageState extends State<ProfilePage>
                       'Mobile App Developer (lambiengcode)',
                       style: TextStyle(
                         fontSize: 11.sp,
-                        fontFamily: 'Lato',
-                        fontWeight: FontWeight.w400,
+                        fontFamily: FontFamily.lato,
+                        fontWeight: FontWeight.w500,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -167,8 +176,8 @@ class _ProfilePageState extends State<ProfilePage>
                         ),
                         _buildActionProfile(
                           context,
-                          'Editor',
-                          PhosphorIcons.crop,
+                          'Card',
+                          PhosphorIcons.cardholder,
                         ),
                         _buildActionProfile(
                           context,
@@ -183,28 +192,36 @@ class _ProfilePageState extends State<ProfilePage>
               Positioned(
                 top: 118.75.sp,
                 left: 0,
-                child: Container(
-                  width: 100.w,
-                  alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () => CustomImagePicker().openImagePicker(
+                    context: context,
+                    text: 'Thay đổi ảnh đại diện',
+                    viewUrl:
+                        'https://avatars.githubusercontent.com/u/60530946?v=4',
+                  ),
                   child: Container(
-                    height: 100.sp,
-                    width: 100.sp,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: colorPrimary,
-                        width: 3.5,
-                      ),
-                    ),
+                    width: 100.w,
                     alignment: Alignment.center,
                     child: Container(
-                      height: 88.sp,
-                      width: 88.sp,
+                      height: 100.sp,
+                      width: 100.sp,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage('images/avt.jpg'),
-                          fit: BoxFit.cover,
+                        border: Border.all(
+                          color: colorPrimary,
+                          width: 3.5,
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                      child: Container(
+                        height: 88.sp,
+                        width: 88.sp,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('images/avt.jpg'),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -256,8 +273,8 @@ class _ProfilePageState extends State<ProfilePage>
           case 'Scan':
             Get.toNamed(Routes.QR_SCAN);
             break;
-          case 'Editor':
-            Get.toNamed(Routes.EDIT_PHOTO);
+          case 'Card':
+            // Get.toNamed(Routes.EDIT_PHOTO);
             break;
           case 'File Transfer':
             Get.toNamed(Routes.CHAT_ROOM);

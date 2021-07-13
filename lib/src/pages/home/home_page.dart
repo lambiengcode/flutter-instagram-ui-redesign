@@ -62,13 +62,16 @@ class _HomePageState extends State<HomePage> {
             'Camera',
             PhosphorIcons.camera,
           ),
-          SizedBox(width: 6.sp),
-          _buildActionHome(
-            context,
-            'Notifications',
-            PhosphorIcons.bell_simple,
+          SizedBox(width: 8.sp),
+          GestureDetector(
+            onTap: () => Get.toNamed(Routes.NOTIFICATION),
+            child: _buildActionHome(
+              context,
+              'Notifications',
+              PhosphorIcons.bell_simple,
+            ),
           ),
-          SizedBox(width: 2.w),
+          SizedBox(width: 4.sp),
         ],
       ),
       body: Container(

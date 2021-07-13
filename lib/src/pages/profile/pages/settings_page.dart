@@ -76,6 +76,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 _buildLineSettingWithToggle(
                   context: context,
+                  title: 'Shake to see user around',
+                  icon: PhosphorIcons.vibrate,
+                ),
+                _buildLineSettingWithToggle(
+                  context: context,
                   title: 'Play audio in profile',
                   icon: PhosphorIcons.music_notes,
                   isLast: true,
