@@ -128,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage>
                   SizedBox(height: 10.sp),
                   Row(
                     children: [
-                      _buildTitleFollow(context, 'Followers', '10.2w'),
+                      _buildTitleFollow(context, 'Followers', '10.2k'),
                       SizedBox(width: 24.w),
                       _buildTitleFollow(context, 'Following', '2.1k'),
                     ],
@@ -137,8 +137,8 @@ class _ProfilePageState extends State<ProfilePage>
                   Text(
                     'Đào Hồng Vinh - Dev',
                     style: TextStyle(
-                      fontSize: 12.sp,
-                      fontFamily: 'FreeSans',
+                      fontSize: 13.25.sp,
+                      fontFamily: FontFamily.lato,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -150,8 +150,8 @@ class _ProfilePageState extends State<ProfilePage>
                       'Mobile App Developer (lambiengcode)',
                       style: TextStyle(
                         fontSize: 11.sp,
-                        fontFamily: 'Lato',
-                        fontWeight: FontWeight.w400,
+                        fontFamily: FontFamily.lato,
+                        fontWeight: FontWeight.w500,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -176,8 +176,8 @@ class _ProfilePageState extends State<ProfilePage>
                         ),
                         _buildActionProfile(
                           context,
-                          'Editor',
-                          PhosphorIcons.crop,
+                          'Card',
+                          PhosphorIcons.cardholder,
                         ),
                         _buildActionProfile(
                           context,
@@ -273,8 +273,8 @@ class _ProfilePageState extends State<ProfilePage>
           case 'Scan':
             Get.toNamed(Routes.QR_SCAN);
             break;
-          case 'Editor':
-            Get.toNamed(Routes.EDIT_PHOTO);
+          case 'Card':
+            // Get.toNamed(Routes.EDIT_PHOTO);
             break;
           case 'File Transfer':
             Get.toNamed(Routes.CHAT_ROOM);
