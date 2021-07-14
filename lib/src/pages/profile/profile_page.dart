@@ -177,7 +177,7 @@ class _ProfilePageState extends State<ProfilePage>
                         _buildActionProfile(
                           context,
                           'Card',
-                          PhosphorIcons.cardholder,
+                          PhosphorIcons.identification_card,
                         ),
                         _buildActionProfile(
                           context,
@@ -286,7 +286,7 @@ class _ProfilePageState extends State<ProfilePage>
       child: Container(
         padding: EdgeInsets.all(10.sp),
         alignment: Alignment.center,
-        decoration: AppDecoration.buttonActionBorder(context, 10.sp).decoration,
+        decoration: AppDecoration.buttonActionBorder(context, 8.sp).decoration,
         child: Icon(
           icon,
           size: 18.sp,

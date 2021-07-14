@@ -57,10 +57,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          _buildActionHome(
-            context,
-            'Camera',
-            PhosphorIcons.camera,
+          GestureDetector(
+            onTap: () => Get.toNamed(Routes.POST),
+            child: _buildActionHome(
+              context,
+              'Camera',
+              PhosphorIcons.camera,
+            ),
           ),
           SizedBox(width: 8.sp),
           GestureDetector(
