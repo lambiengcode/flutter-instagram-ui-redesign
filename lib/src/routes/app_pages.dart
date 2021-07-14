@@ -10,6 +10,7 @@ import 'package:whoru/src/pages/home/pages/post_page.dart';
 import 'package:whoru/src/pages/others/notification_page.dart';
 import 'package:whoru/src/pages/profile/pages/choose_language_page.dart';
 import 'package:whoru/src/pages/profile/pages/edit_profile_page.dart';
+import 'package:whoru/src/pages/profile/pages/follower_page.dart';
 import 'package:whoru/src/pages/profile/pages/scan_qr_page.dart';
 import 'package:whoru/src/pages/profile/pages/settings_page.dart';
 part 'app_routes.dart';
@@ -52,7 +53,7 @@ class AppPages {
       name: Routes.POST,
       page: () => PostPage(),
       transition: Transition.downToUp,
-      transitionDuration: Duration(milliseconds: 300),
+      transitionDuration: Duration(milliseconds: 250),
     ),
 
     // Chat Flow
@@ -70,6 +71,14 @@ class AppPages {
     ),
 
     // Profile Page
+    GetPage(
+      name: Routes.FOLLOWER,
+      page: () => FollowerPage(
+        initialIndex: Get.arguments,
+      ),
+      transition: Transition.downToUp,
+      transitionDuration: Duration(milliseconds: 250),
+    ),
     GetPage(
       name: Routes.SETTINGS,
       page: () => SettingsPage(),

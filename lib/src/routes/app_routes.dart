@@ -17,6 +17,7 @@ abstract class Routes {
   static const CALLING = '/calling';
 
   // Profile Flow
+  static const FOLLOWER = '/follower';
   static const SETTINGS = '/settings';
   static const CHOOSE_LANGUAGE = '/chooseLanguage';
   static const QR_SCAN = '/qrScan';

@@ -187,7 +187,7 @@ class _PostPageState extends State<PostPage> {
                     children: [
                       Icon(
                         PhosphorIcons.projector_screen,
-                        size: 18.sp,
+                        size: 17.25.sp,
                       ),
                       SizedBox(width: 6.sp),
                       Text(
@@ -195,7 +195,7 @@ class _PostPageState extends State<PostPage> {
                         style: TextStyle(
                           fontSize: 13.sp,
                           fontFamily: FontFamily.lato,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
