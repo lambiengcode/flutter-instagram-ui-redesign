@@ -22,10 +22,10 @@ class ChatInput extends StatefulWidget {
 
 class _ChatInputState extends State<ChatInput> {
   List<IconData> categories = [
-    FontAwesome5Solid.smile_beam,
-    FontAwesome5Solid.sticky_note,
-    FontAwesome5Solid.star,
-    FontAwesome5Solid.camera_retro,
+    PhosphorIcons.smiley_wink_fill,
+    PhosphorIcons.sticker_fill,
+    PhosphorIcons.gif,
+    PhosphorIcons.aperture_fill,
   ];
   String message = "";
   int maxLines = 1;
@@ -151,7 +151,7 @@ class _ChatInputState extends State<ChatInput> {
               : Theme.of(context).textTheme.bodyText1.color.withOpacity(
                     ThemeService().isSavedDarkMode() ? 1 : .55,
                   ),
-          size: 14.sp,
+          size: 16.sp,
         ),
       ),
     );

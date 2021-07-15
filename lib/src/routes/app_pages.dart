@@ -6,9 +6,11 @@ import 'package:whoru/src/helpers/view_image/view_image.dart';
 import 'package:whoru/src/pages/calling/pages/incomming_call_page.dart';
 import 'package:whoru/src/pages/chat/pages/room_page.dart';
 import 'package:whoru/src/pages/home/pages/details_post_page.dart';
+import 'package:whoru/src/pages/home/pages/post_page.dart';
 import 'package:whoru/src/pages/others/notification_page.dart';
 import 'package:whoru/src/pages/profile/pages/choose_language_page.dart';
 import 'package:whoru/src/pages/profile/pages/edit_profile_page.dart';
+import 'package:whoru/src/pages/profile/pages/follower_page.dart';
 import 'package:whoru/src/pages/profile/pages/scan_qr_page.dart';
 import 'package:whoru/src/pages/profile/pages/settings_page.dart';
 part 'app_routes.dart';
@@ -47,6 +49,12 @@ class AppPages {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 150),
     ),
+    GetPage(
+      name: Routes.POST,
+      page: () => PostPage(),
+      transition: Transition.downToUp,
+      transitionDuration: Duration(milliseconds: 250),
+    ),
 
     // Chat Flow
     GetPage(
@@ -63,6 +71,14 @@ class AppPages {
     ),
 
     // Profile Page
+    GetPage(
+      name: Routes.FOLLOWER,
+      page: () => FollowerPage(
+        initialIndex: Get.arguments,
+      ),
+      transition: Transition.downToUp,
+      transitionDuration: Duration(milliseconds: 250),
+    ),
     GetPage(
       name: Routes.SETTINGS,
       page: () => SettingsPage(),

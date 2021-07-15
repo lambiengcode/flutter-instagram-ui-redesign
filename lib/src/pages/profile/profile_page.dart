@@ -128,9 +128,19 @@ class _ProfilePageState extends State<ProfilePage>
                   SizedBox(height: 10.sp),
                   Row(
                     children: [
-                      _buildTitleFollow(context, 'Followers', '10.2k'),
+                      _buildTitleFollow(
+                        context,
+                        'Followers',
+                        '10.2k',
+                        0,
+                      ),
                       SizedBox(width: 24.w),
-                      _buildTitleFollow(context, 'Following', '2.1k'),
+                      _buildTitleFollow(
+                        context,
+                        'Following',
+                        '2.1k',
+                        1,
+                      ),
                     ],
                   ),
                   SizedBox(height: 18.sp),
@@ -177,7 +187,7 @@ class _ProfilePageState extends State<ProfilePage>
                         _buildActionProfile(
                           context,
                           'Card',
-                          PhosphorIcons.cardholder,
+                          PhosphorIcons.identification_card,
                         ),
                         _buildActionProfile(
                           context,
@@ -236,29 +246,38 @@ class _ProfilePageState extends State<ProfilePage>
     );
   }
 
-  Widget _buildTitleFollow(context, title, value) {
+  Widget _buildTitleFollow(context, title, value, index) {
     return Expanded(
-      child: Column(
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 10.5.sp,
-              fontWeight: FontWeight.w400,
-              color:
-                  Theme.of(context).textTheme.bodyText1.color.withOpacity(.8),
-            ),
+      child: GestureDetector(
+        onTap: () => Get.toNamed(Routes.FOLLOWER, arguments: index),
+        child: Container(
+          color: Colors.transparent,
+          child: Column(
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 10.5.sp,
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .color
+                      .withOpacity(.8),
+                ),
+              ),
+              SizedBox(height: 5.sp),
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: 12.5.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).textTheme.bodyText1.color,
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 5.sp),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 12.5.sp,
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).textTheme.bodyText1.color,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -286,7 +305,7 @@ class _ProfilePageState extends State<ProfilePage>
       child: Container(
         padding: EdgeInsets.all(10.sp),
         alignment: Alignment.center,
-        decoration: AppDecoration.buttonActionBorder(context, 10.sp).decoration,
+        decoration: AppDecoration.buttonActionBorder(context, 8.sp).decoration,
         child: Icon(
           icon,
           size: 18.sp,
@@ -370,7 +389,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   text: 'Posts',
                                 ),
                                 Tab(
-                                  text: 'Videos',
+                                  text: 'Moments',
                                 ),
                               ],
                             ),
