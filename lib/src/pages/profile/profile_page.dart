@@ -389,7 +389,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   text: 'Posts',
                                 ),
                                 Tab(
-                                  text: 'Videos',
+                                  text: 'Moments',
                                 ),
                               ],
                             ),

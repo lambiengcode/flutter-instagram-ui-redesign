@@ -77,19 +77,17 @@ class _FollowerPageState extends State<FollowerPage>
                   AppDecoration.tabBarDecorationSecond(context).decoration,
               child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 4.0,
-                  ),
+                  SizedBox(height: 6.sp),
                   TabBar(
                     controller: _tabController,
                     labelColor: colorPrimary,
                     indicatorColor: colorPrimary,
                     unselectedLabelColor:
                         Theme.of(context).textTheme.bodyText1.color.withOpacity(
-                              ThemeService().isSavedDarkMode() ? 1 : .7,
+                              ThemeService().isSavedDarkMode() ? 1 : .65,
                             ),
                     indicatorSize: TabBarIndicatorSize.tab,
-                    indicatorWeight: 1.2.sp,
+                    indicatorWeight: 1.sp,
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 11.sp,
@@ -102,10 +100,10 @@ class _FollowerPageState extends State<FollowerPage>
                     ),
                     tabs: [
                       Tab(
-                        text: 'Followers',
+                        text: 'Followers:\t10k',
                       ),
                       Tab(
-                        text: 'Following',
+                        text: 'Following:\t2.1k',
                       ),
                     ],
                   ),

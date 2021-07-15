@@ -97,9 +97,7 @@ class _SearchPageState extends State<SearchPage>
                   AppDecoration.tabBarDecorationSecond(context).decoration,
               child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 4.0,
-                  ),
+                  SizedBox(height: 6.sp),
                   TabBar(
                     controller: _tabController,
                     labelColor: colorPrimary,
