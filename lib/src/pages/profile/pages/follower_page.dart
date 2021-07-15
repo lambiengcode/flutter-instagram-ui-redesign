@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:get/get.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
-class SearchPage extends StatefulWidget {
+class FollowerPage extends StatefulWidget {
+  final int initialIndex;
+  FollowerPage({this.initialIndex});
   @override
-  State<StatefulWidget> createState() => _SearchPageState();
+  State<StatefulWidget> createState() => _FollowerPageState();
 }
 
-class _SearchPageState extends State<SearchPage>
+class _FollowerPageState extends State<FollowerPage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  List<int> indexOfs = [2, 14, 24, 29, 38, 47, 56];
-
   var _pages = [
-    Container(),
     Container(),
     Container(),
   ];
@@ -26,7 +26,11 @@ class _SearchPageState extends State<SearchPage>
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(length: 3, vsync: this, initialIndex: 0);
+    _tabController = new TabController(
+      length: 2,
+      vsync: this,
+      initialIndex: widget.initialIndex,
+    );
   }
 
   @override
@@ -34,59 +38,35 @@ class _SearchPageState extends State<SearchPage>
     return Scaffold(
       appBar: AppBar(
         brightness: Theme.of(context).brightness,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: .0,
         automaticallyImplyLeading: false,
-        toolbarHeight: 42.sp,
-        title: GestureDetector(
-          onTap: () {},
-          child: Container(
-            height: 36.sp,
-            decoration:
-                AppDecoration.buttonActionBorder(context, 4.0).decoration,
-            padding: EdgeInsets.only(left: 20.sp),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  Feather.search,
-                  size: 13.25.sp,
-                  color:
-                      Theme.of(context).textTheme.bodyText1.color.withOpacity(
-                            ThemeService().isSavedDarkMode() ? .88 : .65,
-                          ),
-                ),
-                SizedBox(
-                  width: 8.sp,
-                ),
-                Text(
-                  'Search...',
-                  style: TextStyle(
-                    color:
-                        Theme.of(context).textTheme.bodyText1.color.withOpacity(
-                              ThemeService().isSavedDarkMode() ? .95 : .65,
-                            ),
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: FontFamily.lato,
-                  ),
-                ),
-              ],
-            ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: Icon(
+            Feather.x,
+            color: Theme.of(context).textTheme.bodyText1.color,
+            size: 20.sp,
+          ),
+        ),
+        title: Text(
+          'Đào Hồng Vinh',
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyText1.color,
+            fontFamily: FontFamily.lato,
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
           ),
         ),
         actions: [
           IconButton(
             onPressed: () => null,
             icon: Icon(
-              PhosphorIcons.qr_code,
-              size: 24.sp,
-              color: Theme.of(context).textTheme.bodyText1.color.withOpacity(
-                    ThemeService().isSavedDarkMode() ? .88 : .65,
-                  ),
+              PhosphorIcons.sliders_horizontal,
+              color: Theme.of(context).textTheme.bodyText1.color,
+              size: 20.sp,
             ),
           ),
-          SizedBox(width: 2.sp),
         ],
       ),
       body: Container(
@@ -104,10 +84,10 @@ class _SearchPageState extends State<SearchPage>
                     indicatorColor: colorPrimary,
                     unselectedLabelColor:
                         Theme.of(context).textTheme.bodyText1.color.withOpacity(
-                              ThemeService().isSavedDarkMode() ? .88 : .65,
+                              ThemeService().isSavedDarkMode() ? 1 : .65,
                             ),
                     indicatorSize: TabBarIndicatorSize.tab,
-                    indicatorWeight: 2.5,
+                    indicatorWeight: 1.sp,
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 11.sp,
@@ -115,18 +95,15 @@ class _SearchPageState extends State<SearchPage>
                     ),
                     unselectedLabelStyle: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 10.sp,
+                      fontSize: 10.5.sp,
                       fontFamily: FontFamily.lato,
                     ),
                     tabs: [
                       Tab(
-                        text: 'Suggest',
+                        text: 'Followers:\t10k',
                       ),
                       Tab(
-                        text: 'Nearby',
-                      ),
-                      Tab(
-                        text: 'Discover',
+                        text: 'Following:\t2.1k',
                       ),
                     ],
                   ),
