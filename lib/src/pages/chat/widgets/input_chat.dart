@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/themes/app_colors.dart';
@@ -23,9 +22,9 @@ class ChatInput extends StatefulWidget {
 class _ChatInputState extends State<ChatInput> {
   List<IconData> categories = [
     PhosphorIcons.smiley_wink_fill,
-    PhosphorIcons.sticker_fill,
+    PhosphorIcons.sticker_bold,
     PhosphorIcons.gif,
-    PhosphorIcons.aperture_fill,
+    PhosphorIcons.aperture_bold,
   ];
   String message = "";
   int maxLines = 1;
@@ -48,16 +47,19 @@ class _ChatInputState extends State<ChatInput> {
         decoration: controller.showEmojiPicker
             ? AppDecoration.inputChatDecoration(context).decoration
             : null,
-        padding: EdgeInsets.only(bottom: 12.0),
         margin: EdgeInsets.only(top: 16.0),
         child: Column(
           children: <Widget>[
             Container(
               margin: EdgeInsets.symmetric(
-                  horizontal: controller.showEmojiPicker ? .0 : 16.sp),
+                horizontal: controller.showEmojiPicker ||
+                        controller.textFieldFocus.hasFocus
+                    ? .0
+                    : 10.sp,
+              ),
               decoration: AppDecoration.inputChatDecoration(context).decoration,
               padding: EdgeInsets.symmetric(
-                vertical: 2.sp,
+                vertical: 3.sp,
                 horizontal: controller.showEmojiPicker ? 8.sp : .0,
               ),
               child: chatControls(controller),
@@ -167,7 +169,7 @@ class _ChatInputState extends State<ChatInput> {
     return Container(
       child: Row(
         children: <Widget>[
-          SizedBox(width: 6.sp),
+          SizedBox(width: 8.sp),
           IconButton(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -183,9 +185,9 @@ class _ChatInputState extends State<ChatInput> {
               }
             },
             icon: Icon(
-              PhosphorIcons.lightning_fill,
+              PhosphorIcons.smiley_wink_bold,
               color: widget.color.withOpacity(.95),
-              size: 16.sp,
+              size: 20.sp,
             ),
           ),
           Expanded(
@@ -209,19 +211,19 @@ class _ChatInputState extends State<ChatInput> {
                   maxLines: maxLines,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(
-                      left: 4.0,
-                      right: 40.0,
-                      bottom: 4.0,
-                      top: 4.0,
+                      left: 3.sp,
+                      bottom: 3.sp,
+                      top: 3.sp,
+                      right: 10.sp,
                     ),
-                    hintText: 'Type message...',
+                    hintText: 'Type a message...',
                     hintStyle: TextStyle(
                       color: Theme.of(context)
                           .textTheme
                           .bodyText1
                           .color
                           .withOpacity(
-                            ThemeService().isSavedDarkMode() ? .85 : .65,
+                            ThemeService().isSavedDarkMode() ? .75 : .65,
                           ),
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
@@ -257,6 +259,14 @@ class _ChatInputState extends State<ChatInput> {
               ],
             ),
           ),
+          IconButton(
+            icon: Icon(
+              PhosphorIcons.link_bold,
+              color: widget.color.withOpacity(.95),
+              size: 20.sp,
+            ),
+            onPressed: () {},
+          ),
           message.length == 0
               ? IconButton(
                   icon: Icon(
@@ -268,7 +278,7 @@ class _ChatInputState extends State<ChatInput> {
                 )
               : IconButton(
                   icon: Icon(
-                    Feather.send,
+                    PhosphorIcons.telegram_logo_fill,
                     color: widget.color.withOpacity(.95),
                     size: 20.sp,
                   ),
