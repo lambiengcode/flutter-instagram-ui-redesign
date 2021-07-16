@@ -184,25 +184,26 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                       child: _image.path
                                           .decorationIFToFitHeight()
                                           .xContainer(
-                                              padding: EdgeInsets.zero,
-                                              width: 100.w,
-                                              height: isVertical
-                                                  ? (height.toDouble() /
-                                                          width.toDouble()) *
-                                                      100.w
-                                                  : (width.toDouble() /
-                                                          height.toDouble()) *
-                                                      100.h,
-                                              child: BackdropFilter(
-                                                filter: ImageFilter.blur(
-                                                  sigmaX: blurValue,
-                                                  sigmaY: blurValue,
-                                                ),
-                                                child: Container(
-                                                  color: colorValue.withOpacity(
-                                                      opacityValue),
-                                                ),
-                                              )),
+                                            padding: EdgeInsets.zero,
+                                            width: 100.w,
+                                            height: isVertical
+                                                ? (height.toDouble() /
+                                                        width.toDouble()) *
+                                                    100.w
+                                                : (width.toDouble() /
+                                                        height.toDouble()) *
+                                                    100.h,
+                                            child: BackdropFilter(
+                                              filter: ImageFilter.blur(
+                                                sigmaX: blurValue,
+                                                sigmaY: blurValue,
+                                              ),
+                                              child: Container(
+                                                color: colorValue
+                                                    .withOpacity(opacityValue),
+                                              ),
+                                            ),
+                                          ),
                                     ),
                                   )
 
@@ -246,22 +247,26 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                         left: offsets[f.key].dx,
                                         top: offsets[f.key].dy,
                                         ontap: () {
-                                          scaf.currentState
-                                              .showBottomSheet((context) {
-                                            return Sliders(
-                                              index: f.key,
-                                              mapValue: f.value,
-                                            );
-                                          });
+                                          scaf.currentState.showBottomSheet(
+                                            (context) {
+                                              return Sliders(
+                                                index: f.key,
+                                                mapValue: f.value,
+                                              );
+                                            },
+                                          );
                                         },
                                         onpanupdate: (details) {
-                                          setState(() {
-                                            offsets[f.key] = Offset(
+                                          setState(
+                                            () {
+                                              offsets[f.key] = Offset(
                                                 offsets[f.key].dx +
                                                     details.delta.dx,
                                                 offsets[f.key].dy +
-                                                    details.delta.dy);
-                                          });
+                                                    details.delta.dy,
+                                              );
+                                            },
+                                          );
                                         },
                                         mapJson: f.value,
                                       )
@@ -271,30 +276,32 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                             top: offsets[f.key].dy,
                                             ontap: () {
                                               showModalBottomSheet(
-                                                  shape: BorderRadius.only(
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  10),
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  10))
-                                                      .xShapeBorder(),
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return Sliders(
-                                                      index: f.key,
-                                                      mapValue: f.value,
-                                                    );
-                                                  });
+                                                shape: BorderRadius.only(
+                                                        topRight:
+                                                            Radius.circular(10),
+                                                        topLeft:
+                                                            Radius.circular(10))
+                                                    .xShapeBorder(),
+                                                context: context,
+                                                builder: (context) {
+                                                  return Sliders(
+                                                    index: f.key,
+                                                    mapValue: f.value,
+                                                  );
+                                                },
+                                              );
                                             },
                                             onpanupdate: (details) {
-                                              setState(() {
-                                                offsets[f.key] = Offset(
+                                              setState(
+                                                () {
+                                                  offsets[f.key] = Offset(
                                                     offsets[f.key].dx +
                                                         details.delta.dx,
                                                     offsets[f.key].dy +
-                                                        details.delta.dy);
-                                              });
+                                                        details.delta.dy,
+                                                  );
+                                                },
+                                              );
                                             },
                                             mapJson: f.value,
                                           )
@@ -403,12 +410,14 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       size: 16.sp,
                     ),
                     SizedBox(height: 2.sp),
-                    Text('Clear',
-                        style: TextStyle(
-                          fontSize: 10.sp,
-                          fontFamily: FontFamily.lato,
-                          color: mC,
-                        )),
+                    Text(
+                      'Clear',
+                      style: TextStyle(
+                        fontSize: 10.sp,
+                        fontFamily: FontFamily.lato,
+                        color: mC,
+                      ),
+                    ),
                   ],
                 ),
               ),

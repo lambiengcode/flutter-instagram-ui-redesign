@@ -11,21 +11,28 @@ class RoomController extends GetxController {
     update();
   }
 
-  showKeyboard() => textFieldFocus.requestFocus();
+  showKeyboard() {
+    textFieldFocus.requestFocus();
+    update();
+  }
 
-  hideKeyboard() => textFieldFocus.unfocus();
+  hideKeyboard() {
+    textFieldFocus.unfocus();
+    update();
+  }
 
   hideEmojiContainer() {
     showEmojiPicker = false;
-    update();
+    showKeyboard();
   }
 
   showEmojiContainer() {
     showEmojiPicker = true;
-    update();
+    hideKeyboard();
   }
 
   updateTextFieldController(String input) {
     textFieldController.text += input;
+    update();
   }
 }
