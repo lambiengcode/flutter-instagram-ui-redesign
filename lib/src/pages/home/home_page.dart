@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             child: _buildActionHome(
               context,
               'Camera',
-              PhosphorIcons.camera,
+              PhosphorIcons.camera_bold,
             ),
           ),
           SizedBox(width: 8.sp),
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
             child: _buildActionHome(
               context,
               'Notifications',
-              PhosphorIcons.bell_simple,
+              PhosphorIcons.bell_simple_bold,
             ),
           ),
           SizedBox(width: 4.sp),

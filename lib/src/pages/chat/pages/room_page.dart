@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/data/chat.dart';
 import 'package:whoru/src/data/content_chat.dart';
@@ -194,7 +195,9 @@ class _RoomPageState extends State<RoomPage> {
                 endIndent: 10.sp,
               ),
               IconButton(
-                onPressed: () => print('more'),
+                onPressed: () => Get.toNamed(
+                  Routes.CHAT_ROOM + Routes.CUSTOMIZE_ROOM,
+                ),
                 icon: Icon(
                   PhosphorIcons.squares_four,
                   size: 20.sp,
