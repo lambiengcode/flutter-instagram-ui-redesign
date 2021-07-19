@@ -4,6 +4,7 @@ import 'package:whoru/src/helpers/choose_image/image_editor.dart';
 import 'package:whoru/src/helpers/editor_pro/image_editor_pro.dart';
 import 'package:whoru/src/helpers/view_image/view_image.dart';
 import 'package:whoru/src/pages/calling/pages/incomming_call_page.dart';
+import 'package:whoru/src/pages/chat/pages/custom_room_page.dart';
 import 'package:whoru/src/pages/chat/pages/room_page.dart';
 import 'package:whoru/src/pages/home/pages/details_post_page.dart';
 import 'package:whoru/src/pages/home/pages/post_page.dart';
@@ -62,6 +63,14 @@ class AppPages {
       page: () => RoomPage(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 150),
+      children: [
+        GetPage(
+          name: Routes.CUSTOMIZE_ROOM,
+          page: () => CustomRoomPage(),
+          transition: Transition.rightToLeft,
+          transitionDuration: Duration(milliseconds: 150),
+        ),
+      ],
     ),
     GetPage(
       name: Routes.INCOMMING_CALL,

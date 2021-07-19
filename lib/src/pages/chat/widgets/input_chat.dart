@@ -20,14 +20,27 @@ class ChatInput extends StatefulWidget {
 }
 
 class _ChatInputState extends State<ChatInput> {
-  List<IconData> categories = [
-    PhosphorIcons.smiley_wink_fill,
-    PhosphorIcons.sticker_bold,
-    PhosphorIcons.gif,
-    PhosphorIcons.aperture_bold,
+  List<Map<String, IconData>> categories = [
+    {
+      'active': PhosphorIcons.smiley_wink_fill,
+      'inactive': PhosphorIcons.smiley_wink,
+    },
+    {
+      'active': PhosphorIcons.sticker_fill,
+      'inactive': PhosphorIcons.sticker_bold,
+    },
+    {
+      'active': PhosphorIcons.gif_bold,
+      'inactive': PhosphorIcons.gif,
+    },
+    {
+      'active': PhosphorIcons.aperture_fill,
+      'inactive': PhosphorIcons.aperture_bold,
+    },
   ];
   String message = "";
   int maxLines = 1;
+  int indexTabEmoji = 0;
   bool isWriting = false;
 
   bool record = false;
@@ -55,7 +68,7 @@ class _ChatInputState extends State<ChatInput> {
                 horizontal: controller.showEmojiPicker ||
                         controller.textFieldFocus.hasFocus
                     ? .0
-                    : 10.sp,
+                    : 12.sp,
               ),
               decoration: AppDecoration.inputChatDecoration(context).decoration,
               padding: EdgeInsets.symmetric(
@@ -64,7 +77,13 @@ class _ChatInputState extends State<ChatInput> {
               ),
               child: chatControls(controller),
             ),
-            SizedBox(height: controller.showEmojiPicker ? 10.sp : 14.sp),
+            SizedBox(
+              height: controller.showEmojiPicker
+                  ? 8.sp
+                  : controller.textFieldFocus.hasFocus
+                      ? 0.sp
+                      : 14.sp,
+            ),
             controller.showEmojiPicker
                 ? Column(
                     children: [
@@ -82,6 +101,7 @@ class _ChatInputState extends State<ChatInput> {
                       ),
                       SizedBox(height: 4.sp),
                       Container(
+                        height: 100.w / 10 * 3 + 48.sp,
                         alignment: Alignment.center,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -135,7 +155,11 @@ class _ChatInputState extends State<ChatInput> {
 
   Widget listCategoriesMedia(context, index) {
     return GestureDetector(
-      onTap: () => print(index),
+      onTap: () {
+        setState(() {
+          indexTabEmoji = index;
+        });
+      },
       child: Container(
         margin: EdgeInsets.only(
           bottom: 1.25.sp,
@@ -147,8 +171,8 @@ class _ChatInputState extends State<ChatInput> {
         decoration: AppDecoration.buttonActionBorder(context, 30.0).decoration,
         alignment: Alignment.center,
         child: Icon(
-          categories[index],
-          color: index == 0
+          categories[index][index == indexTabEmoji ? 'active' : 'inactive'],
+          color: index == indexTabEmoji
               ? colorPrimary
               : Theme.of(context).textTheme.bodyText1.color.withOpacity(
                     ThemeService().isSavedDarkMode() ? 1 : .55,

@@ -12,6 +12,7 @@ abstract class Routes {
 
   // Chat Flow
   static const CHAT_ROOM = '/chatRoom';
+  static const CUSTOMIZE_ROOM = '/customizeRoom';
   static const INCOMMING_CALL = '/incommingCall';
   static const CALL = '/call';
   static const CALLING = '/calling';

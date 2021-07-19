@@ -68,7 +68,6 @@ class _ScanQRPage extends State<ScanQRPage> {
                     version: QrVersions.auto,
                     size: 190.sp,
                     gapless: true,
-                    errorCorrectionLevel: QrErrorCorrectLevel.M,
                     embeddedImage: NetworkImage(
                       'https://avatars.githubusercontent.com/u/60530946?v=4',
                     ),
