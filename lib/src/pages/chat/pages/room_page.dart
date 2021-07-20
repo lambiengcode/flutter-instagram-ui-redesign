@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/pages/chat/widgets/bottom_sheet_pick_image.dart';
+import 'package:whoru/src/pages/profile/controllers/editor_controller.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/data/chat.dart';
@@ -18,7 +20,8 @@ class RoomPage extends StatefulWidget {
 }
 
 class _RoomPageState extends State<RoomPage> {
-  var roomController = Get.put(RoomController());
+  final pickFileController = Get.put(EditorController());
+  final roomController = Get.put(RoomController());
 
   @override
   void initState() {
@@ -81,6 +84,7 @@ class _RoomPageState extends State<RoomPage> {
           }
         },
         onTap: () {
+          pickFileController.toggleVisiblePickFile(false);
           if (roomController.showEmojiPicker) {
             roomController.hideEmojiContainer();
           } else if (roomController.textFieldFocus.hasFocus) {
@@ -248,11 +252,40 @@ class _RoomPageState extends State<RoomPage> {
                     ),
                   ],
                 ),
+                GetBuilder<EditorController>(
+                  builder: (controller) => Visibility(
+                    visible: controller.visiblePickFile,
+                    child: _pickImageContainer(),
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _pickImageContainer() {
+    return DraggableScrollableSheet(
+      minChildSize: .42,
+      maxChildSize: 1,
+      initialChildSize: .6,
+      builder: (BuildContext context, ScrollController scrollController) {
+        return NotificationListener<DraggableScrollableNotification>(
+          onNotification: (notification) {
+            if (notification.extent <= .42) {
+              pickFileController.toggleVisiblePickFile(false);
+            } else {
+              pickFileController.updateRatioPickFile(notification.extent);
+            }
+            return;
+          },
+          child: BottomSheetPickImage(
+            scrollController: scrollController,
+          ),
+        );
+      },
     );
   }
 }

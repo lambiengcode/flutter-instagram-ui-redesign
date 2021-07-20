@@ -75,15 +75,15 @@ class _EditorPageState extends State<EditorPage> {
                   onTap: () {
                     controller.chooseImage(index);
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2.5),
-                      image: DecorationImage(
-                        image: FileImage(controller.images[index]),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+                  // child: Container(
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(2.5),
+                  //     image: DecorationImage(
+                  //       image: FileImage(controller.images[index]),
+                  //       fit: BoxFit.cover,
+                  //     ),
+                  //   ),
+                  // ),
                 );
               },
             ),

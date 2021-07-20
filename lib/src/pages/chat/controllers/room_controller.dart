@@ -23,12 +23,14 @@ class RoomController extends GetxController {
 
   hideEmojiContainer() {
     showEmojiPicker = false;
-    showKeyboard();
+    update();
+    // showKeyboard();
   }
 
   showEmojiContainer() {
     showEmojiPicker = true;
-    hideKeyboard();
+    update();
+    // hideKeyboard();
   }
 
   updateTextFieldController(String input) {
