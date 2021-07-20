@@ -28,6 +28,8 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor:
+            ThemeService().isSavedDarkMode() ? colorPrimaryBlack : mCL,
         brightness: Theme.of(context).brightness,
         elevation: .0,
         centerTitle: true,
@@ -49,6 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
       body: Container(
+        color: ThemeService().isSavedDarkMode() ? colorBlack : mC,
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (overscroll) {
             overscroll.disallowGlow();
@@ -58,63 +61,92 @@ class _SettingsPageState extends State<SettingsPage> {
             physics: ClampingScrollPhysics(),
             child: Column(
               children: [
-                _buildTitle(context, 'Features'),
-                _buildLineSettingWithValue(
-                  context: context,
-                  title: 'Language',
-                  icon: PhosphorIcons.translate_fill,
-                  value: 'English',
+                Container(
+                  color: ThemeService().isSavedDarkMode()
+                      ? colorPrimaryBlack
+                      : mCL,
+                  child: Column(
+                    children: [
+                      _buildTitle(context, 'Features'),
+                      _buildLineSettingWithValue(
+                        context: context,
+                        title: 'Language',
+                        icon: PhosphorIcons.translate_fill,
+                        value: 'English',
+                      ),
+                      _buildLineSettingToggle(
+                        context: context,
+                        title: 'Dark Mode',
+                      ),
+                      _buildLineSettingWithToggle(
+                        context: context,
+                        title: 'Floating Chat',
+                        icon: PhosphorIcons.chat_circle_dots,
+                      ),
+                      _buildLineSettingWithToggle(
+                        context: context,
+                        title: 'Shake to see user around',
+                        icon: PhosphorIcons.vibrate,
+                      ),
+                      _buildLineSettingWithToggle(
+                        context: context,
+                        title: 'Play audio in profile',
+                        icon: PhosphorIcons.music_notes,
+                        isLast: true,
+                      ),
+                    ],
+                  ),
                 ),
-                _buildLineSettingToggle(
-                  context: context,
-                  title: 'Dark Mode',
+                SizedBox(height: 8.sp),
+                Container(
+                  color: ThemeService().isSavedDarkMode()
+                      ? colorPrimaryBlack
+                      : mCL,
+                  child: Column(
+                    children: [
+                      _buildTitle(context, 'Notifications'),
+                      _buildLineSettingWithToggle(
+                        context: context,
+                        title: 'Messages',
+                        icon: PhosphorIcons.chat_centered_dots,
+                      ),
+                      _buildLineSettingWithToggle(
+                        context: context,
+                        title: 'React Post',
+                        icon: PhosphorIcons.heart,
+                      ),
+                      _buildLineSettingWithToggle(
+                        context: context,
+                        title: 'Follow',
+                        icon: PhosphorIcons.user_circle_plus,
+                        isLast: true,
+                      ),
+                    ],
+                  ),
                 ),
-                _buildLineSettingWithToggle(
-                  context: context,
-                  title: 'Floating Chat',
-                  icon: PhosphorIcons.chat_circle_dots,
+                SizedBox(height: 8.sp),
+                Container(
+                  color: ThemeService().isSavedDarkMode()
+                      ? colorPrimaryBlack
+                      : mCL,
+                  child: Column(
+                    children: [
+                      _buildTitle(context, 'Security'),
+                      _buildLineSettingWithToggle(
+                        context: context,
+                        title: 'PIN',
+                        icon: PhosphorIcons.lock,
+                      ),
+                      _buildLineSettingWithToggle(
+                        context: context,
+                        title: 'Fingerprint',
+                        icon: PhosphorIcons.fingerprint_fill,
+                        isLast: true,
+                      ),
+                      SizedBox(height: 12.sp),
+                    ],
+                  ),
                 ),
-                _buildLineSettingWithToggle(
-                  context: context,
-                  title: 'Shake to see user around',
-                  icon: PhosphorIcons.vibrate,
-                ),
-                _buildLineSettingWithToggle(
-                  context: context,
-                  title: 'Play audio in profile',
-                  icon: PhosphorIcons.music_notes,
-                  isLast: true,
-                ),
-                _buildTitle(context, 'Notifications'),
-                _buildLineSettingWithToggle(
-                  context: context,
-                  title: 'Messages',
-                  icon: PhosphorIcons.chat_centered_dots,
-                ),
-                _buildLineSettingWithToggle(
-                  context: context,
-                  title: 'React Post',
-                  icon: PhosphorIcons.heart,
-                ),
-                _buildLineSettingWithToggle(
-                  context: context,
-                  title: 'Follow',
-                  icon: PhosphorIcons.user_circle_plus,
-                  isLast: true,
-                ),
-                _buildTitle(context, 'Security'),
-                _buildLineSettingWithToggle(
-                  context: context,
-                  title: 'PIN',
-                  icon: PhosphorIcons.lock,
-                ),
-                _buildLineSettingWithToggle(
-                  context: context,
-                  title: 'Fingerprint',
-                  icon: PhosphorIcons.fingerprint_fill,
-                  isLast: true,
-                ),
-                SizedBox(height: 20.sp),
               ],
             ),
           ),
@@ -128,17 +160,17 @@ class _SettingsPageState extends State<SettingsPage> {
       padding: EdgeInsets.only(
         left: 12.sp,
         right: 8.sp,
-        top: title == 'Features' ? 15.sp : 25.sp,
-        bottom: 4.sp,
+        top: 15.sp,
       ),
       child: Row(
         children: [
           Text(
             title,
             style: TextStyle(
-              fontSize: 12.sp,
+              fontSize: 12.25.sp,
               fontFamily: FontFamily.lato_bold,
               fontWeight: FontWeight.bold,
+              color: colorPrimary,
             ),
           ),
         ],

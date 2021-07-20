@@ -12,6 +12,10 @@ class _PostsListviewState extends State<PostsListview> {
   @override
   Widget build(BuildContext context) {
     return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (overscroll) {
+        overscroll.disallowGlow();
+        return true;
+      },
       child: ListView.builder(
         controller: widget.scrollController,
         physics: ClampingScrollPhysics(),

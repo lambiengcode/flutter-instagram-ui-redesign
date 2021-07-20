@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/pages/profile/controllers/editor_controller.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
@@ -20,14 +21,28 @@ class ChatInput extends StatefulWidget {
 }
 
 class _ChatInputState extends State<ChatInput> {
-  List<IconData> categories = [
-    PhosphorIcons.smiley_wink_fill,
-    PhosphorIcons.sticker_bold,
-    PhosphorIcons.gif,
-    PhosphorIcons.aperture_bold,
+  final pickFileController = Get.put(EditorController());
+  List<Map<String, IconData>> categories = [
+    {
+      'active': PhosphorIcons.smiley_wink_fill,
+      'inactive': PhosphorIcons.smiley_wink,
+    },
+    {
+      'active': PhosphorIcons.sticker_fill,
+      'inactive': PhosphorIcons.sticker_bold,
+    },
+    {
+      'active': PhosphorIcons.gif_bold,
+      'inactive': PhosphorIcons.gif,
+    },
+    {
+      'active': PhosphorIcons.aperture_fill,
+      'inactive': PhosphorIcons.aperture_bold,
+    },
   ];
   String message = "";
   int maxLines = 1;
+  int indexTabEmoji = 0;
   bool isWriting = false;
 
   bool record = false;
@@ -55,7 +70,7 @@ class _ChatInputState extends State<ChatInput> {
                 horizontal: controller.showEmojiPicker ||
                         controller.textFieldFocus.hasFocus
                     ? .0
-                    : 10.sp,
+                    : 12.sp,
               ),
               decoration: AppDecoration.inputChatDecoration(context).decoration,
               padding: EdgeInsets.symmetric(
@@ -64,7 +79,13 @@ class _ChatInputState extends State<ChatInput> {
               ),
               child: chatControls(controller),
             ),
-            SizedBox(height: controller.showEmojiPicker ? 10.sp : 14.sp),
+            SizedBox(
+              height: controller.showEmojiPicker
+                  ? 8.sp
+                  : controller.textFieldFocus.hasFocus
+                      ? 0.sp
+                      : 14.sp,
+            ),
             controller.showEmojiPicker
                 ? Column(
                     children: [
@@ -82,6 +103,7 @@ class _ChatInputState extends State<ChatInput> {
                       ),
                       SizedBox(height: 4.sp),
                       Container(
+                        height: 100.w / 10 * 3 + 48.sp,
                         alignment: Alignment.center,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -135,7 +157,11 @@ class _ChatInputState extends State<ChatInput> {
 
   Widget listCategoriesMedia(context, index) {
     return GestureDetector(
-      onTap: () => print(index),
+      onTap: () {
+        setState(() {
+          indexTabEmoji = index;
+        });
+      },
       child: Container(
         margin: EdgeInsets.only(
           bottom: 1.25.sp,
@@ -147,8 +173,8 @@ class _ChatInputState extends State<ChatInput> {
         decoration: AppDecoration.buttonActionBorder(context, 30.0).decoration,
         alignment: Alignment.center,
         child: Icon(
-          categories[index],
-          color: index == 0
+          categories[index][index == indexTabEmoji ? 'active' : 'inactive'],
+          color: index == indexTabEmoji
               ? colorPrimary
               : Theme.of(context).textTheme.bodyText1.color.withOpacity(
                     ThemeService().isSavedDarkMode() ? 1 : .55,
@@ -169,26 +195,14 @@ class _ChatInputState extends State<ChatInput> {
     return Container(
       child: Row(
         children: <Widget>[
-          SizedBox(width: 8.sp),
+          SizedBox(width: 5.sp),
           IconButton(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onPressed: () {
-              if (!controller.showEmojiPicker) {
-                // keyboard is visible
-                controller.hideKeyboard();
-                controller.showEmojiContainer();
-              } else {
-                //keyboard is hidden
-                controller.showKeyboard();
-                controller.hideEmojiContainer();
-              }
-            },
             icon: Icon(
-              PhosphorIcons.smiley_wink_bold,
+              Icons.add_circle,
               color: widget.color.withOpacity(.95),
               size: 20.sp,
             ),
+            onPressed: () => pickFileController.toggleVisiblePickFile(true),
           ),
           Expanded(
             child: Stack(
@@ -211,7 +225,7 @@ class _ChatInputState extends State<ChatInput> {
                   maxLines: maxLines,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(
-                      left: 3.sp,
+                      left: 3.25.sp,
                       bottom: 3.sp,
                       top: 3.sp,
                       right: 10.sp,
@@ -223,7 +237,7 @@ class _ChatInputState extends State<ChatInput> {
                           .bodyText1
                           .color
                           .withOpacity(
-                            ThemeService().isSavedDarkMode() ? .75 : .65,
+                            ThemeService().isSavedDarkMode() ? .85 : .65,
                           ),
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
@@ -260,12 +274,24 @@ class _ChatInputState extends State<ChatInput> {
             ),
           ),
           IconButton(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () {
+              if (!controller.showEmojiPicker) {
+                // keyboard is visible
+                controller.hideKeyboard();
+                controller.showEmojiContainer();
+              } else {
+                //keyboard is hidden
+                controller.showKeyboard();
+                controller.hideEmojiContainer();
+              }
+            },
             icon: Icon(
-              PhosphorIcons.link_bold,
+              PhosphorIcons.smiley_wink_fill,
               color: widget.color.withOpacity(.95),
               size: 20.sp,
             ),
-            onPressed: () {},
           ),
           message.length == 0
               ? IconButton(

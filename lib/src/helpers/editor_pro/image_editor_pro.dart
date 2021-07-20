@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -405,7 +406,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.clear_all_sharp,
+                      PhosphorIcons.eraser_fill,
                       color: mC,
                       size: 16.sp,
                     ),
@@ -581,6 +582,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           fontSize: 10.sp,
                           fontFamily: FontFamily.lato,
                           color: colorPrimary,
+                          fontWeight: FontWeight.w600,
                         )),
                   ],
                 ),
