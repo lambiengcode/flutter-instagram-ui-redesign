@@ -268,13 +268,13 @@ class _RoomPageState extends State<RoomPage> {
 
   Widget _pickImageContainer() {
     return DraggableScrollableSheet(
-      minChildSize: .42,
+      minChildSize: .48,
       maxChildSize: 1,
-      initialChildSize: .6,
+      initialChildSize: .65,
       builder: (BuildContext context, ScrollController scrollController) {
         return NotificationListener<DraggableScrollableNotification>(
           onNotification: (notification) {
-            if (notification.extent <= .42) {
+            if (notification.extent <= .48) {
               pickFileController.toggleVisiblePickFile(false);
             } else {
               pickFileController.updateRatioPickFile(notification.extent);

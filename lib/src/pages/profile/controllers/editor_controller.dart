@@ -8,7 +8,7 @@ class EditorController extends GetxController {
   List<Uint8List> imagesChoosen = [];
   List<File> availables = [];
   bool visiblePickFile = false;
-  double ratioHeightPickFile = .6;
+  double ratioHeightPickFile = .65;
 
   requestPermission() async {
     List<AssetPathEntity> list =
@@ -48,6 +48,6 @@ class EditorController extends GetxController {
     availables.clear();
     PhotoManager.clearFileCache();
     PhotoManager.stopChangeNotify();
-    ratioHeightPickFile = .6;
+    ratioHeightPickFile = .65;
   }
 }
