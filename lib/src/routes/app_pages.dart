@@ -53,7 +53,7 @@ class AppPages {
     GetPage(
       name: Routes.POST,
       page: () => PostPage(),
-      transition: Transition.downToUp,
+      transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 250),
     ),
 

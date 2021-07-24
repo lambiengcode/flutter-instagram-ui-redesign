@@ -120,13 +120,13 @@ class _SearchPageState extends State<SearchPage>
                     ),
                     tabs: [
                       Tab(
-                        text: 'Suggest',
-                      ),
-                      Tab(
-                        text: 'Nearby',
-                      ),
-                      Tab(
                         text: 'Discover',
+                      ),
+                      Tab(
+                        text: 'Trending',
+                      ),
+                      Tab(
+                        text: 'Unwatch',
                       ),
                     ],
                   ),

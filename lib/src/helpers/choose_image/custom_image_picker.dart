@@ -125,7 +125,7 @@ class CustomImagePicker {
                   text: 'Chụp ảnh mới',
                   source: ImageSource.camera,
                 ),
-                Divider(),
+                Divider(indent: 9.w),
                 _buildImageModalButton(
                   context: context,
                   index: 0,
@@ -133,7 +133,7 @@ class CustomImagePicker {
                   text: 'Chọn ảnh có sẵn',
                   source: ImageSource.gallery,
                 ),
-                Divider(),
+                Divider(indent: 9.w),
                 _buildImageModalButton(
                   context: context,
                   index: 0,

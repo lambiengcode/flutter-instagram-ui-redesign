@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/pages/profile/controllers/editor_controller.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
@@ -20,6 +21,7 @@ class ChatInput extends StatefulWidget {
 }
 
 class _ChatInputState extends State<ChatInput> {
+  final pickFileController = Get.put(EditorController());
   List<Map<String, IconData>> categories = [
     {
       'active': PhosphorIcons.smiley_wink_fill,
@@ -193,26 +195,14 @@ class _ChatInputState extends State<ChatInput> {
     return Container(
       child: Row(
         children: <Widget>[
-          SizedBox(width: 8.sp),
+          SizedBox(width: 5.sp),
           IconButton(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onPressed: () {
-              if (!controller.showEmojiPicker) {
-                // keyboard is visible
-                controller.hideKeyboard();
-                controller.showEmojiContainer();
-              } else {
-                //keyboard is hidden
-                controller.showKeyboard();
-                controller.hideEmojiContainer();
-              }
-            },
             icon: Icon(
-              PhosphorIcons.smiley_wink_bold,
+              Icons.add_circle,
               color: widget.color.withOpacity(.95),
               size: 20.sp,
             ),
+            onPressed: () => pickFileController.toggleVisiblePickFile(true),
           ),
           Expanded(
             child: Stack(
@@ -235,7 +225,7 @@ class _ChatInputState extends State<ChatInput> {
                   maxLines: maxLines,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(
-                      left: 3.sp,
+                      left: 3.25.sp,
                       bottom: 3.sp,
                       top: 3.sp,
                       right: 10.sp,
@@ -247,7 +237,7 @@ class _ChatInputState extends State<ChatInput> {
                           .bodyText1
                           .color
                           .withOpacity(
-                            ThemeService().isSavedDarkMode() ? .75 : .65,
+                            ThemeService().isSavedDarkMode() ? .85 : .65,
                           ),
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
@@ -284,12 +274,24 @@ class _ChatInputState extends State<ChatInput> {
             ),
           ),
           IconButton(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: () {
+              if (!controller.showEmojiPicker) {
+                // keyboard is visible
+                controller.hideKeyboard();
+                controller.showEmojiContainer();
+              } else {
+                //keyboard is hidden
+                controller.showKeyboard();
+                controller.hideEmojiContainer();
+              }
+            },
             icon: Icon(
-              PhosphorIcons.link_bold,
+              PhosphorIcons.smiley_wink_fill,
               color: widget.color.withOpacity(.95),
               size: 20.sp,
             ),
-            onPressed: () {},
           ),
           message.length == 0
               ? IconButton(

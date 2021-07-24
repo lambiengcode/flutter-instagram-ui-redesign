@@ -5,6 +5,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/font_family.dart';
+import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class ScanQRPage extends StatefulWidget {
@@ -61,18 +62,34 @@ class _ScanQRPage extends State<ScanQRPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  QrImage(
-                    foregroundColor:
-                        Theme.of(context).textTheme.bodyText1.color,
-                    data: 'profile - lambiengcode',
-                    version: QrVersions.auto,
-                    size: 190.sp,
-                    gapless: true,
-                    embeddedImage: NetworkImage(
-                      'https://avatars.githubusercontent.com/u/60530946?v=4',
-                    ),
-                    embeddedImageStyle: QrEmbeddedImageStyle(
-                      size: Size(35.sp, 35.sp),
+                  Container(
+                    child: Stack(
+                      children: [
+                        QrImage(
+                          backgroundColor: ThemeService().isSavedDarkMode()
+                              ? mC
+                              : Colors.transparent,
+                          data: 'profile - lambiengcode',
+                          version: QrVersions.auto,
+                          size: 180.sp,
+                          gapless: true,
+                          embeddedImage: NetworkImage(
+                              'https://github.com/theyakka/qr.flutter/blob/master/example/assets/images/4.0x/logo_yakka.png?raw=true'),
+                          embeddedImageStyle: QrEmbeddedImageStyle(
+                            size: Size(40.sp, 40.sp),
+                          ),
+                          errorStateBuilder: (cxt, err) {
+                            return Container(
+                              child: Center(
+                                child: Text(
+                                  "Uh oh! Something went wrong...",
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ],

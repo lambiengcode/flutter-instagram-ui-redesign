@@ -142,7 +142,7 @@ class _PostPageState extends State<PostPage> {
             ),
             TextFormField(
               maxLines: int.parse((100.h / 30.sp).toStringAsFixed(0)),
-              autofocus: true,
+              // autofocus: true,
               onFieldSubmitted: (val) => null,
               cursorColor: colorPrimary,
               cursorRadius: Radius.circular(4.0),

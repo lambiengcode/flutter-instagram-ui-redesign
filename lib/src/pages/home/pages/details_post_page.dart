@@ -3,6 +3,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/pages/home/controllers/post_controller.dart';
+import 'package:whoru/src/pages/home/widgets/bottom_input_comment.dart';
+import 'package:whoru/src/pages/home/widgets/comment_card.dart';
 import 'package:whoru/src/pages/home/widgets/post_card.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/font_family.dart';
@@ -79,22 +81,55 @@ class _DetailsPostPageState extends State<DetailsPostPage> {
         ],
       ),
       body: Container(
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
-            children: [
-              Divider(
-                height: .25,
-                thickness: .25,
+        height: 100.h,
+        width: 100.w,
+        child: Stack(
+          children: [
+            Container(
+              child: SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
+                controller: scrollController,
+                child: Column(
+                  children: [
+                    Divider(
+                      height: .25,
+                      thickness: .25,
+                    ),
+                    PostCard(
+                      idPost: widget.idPost,
+                      isInDetails: true,
+                    ),
+                    ListView.builder(
+                      padding: EdgeInsets.only(top: 15.sp, bottom: 48.sp),
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: 1,
+                      itemBuilder: (context, index) {
+                        return CommentCard();
+                      },
+                    ),
+                    // Comment Widget Here
+                  ],
+                ),
               ),
-              PostCard(
-                idPost: widget.idPost,
-                isInDetails: true,
+            ),
+            Positioned(
+              bottom: .0,
+              left: .0,
+              child: Container(
+                height: 50.sp,
+                width: 100.w,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  border: Border.all(
+                    color: Theme.of(context).dividerColor,
+                    width: .25,
+                  ),
+                ),
+                child: BottomInputComment(),
               ),
-
-              // Comment Widget Here
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
