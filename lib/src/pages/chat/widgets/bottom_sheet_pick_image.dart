@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/pages/chat/widgets/image_picker_card.dart';
+import 'package:whoru/src/pages/chat/widgets/option_bar_picker.dart';
 import 'package:whoru/src/pages/profile/controllers/editor_controller.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
@@ -79,57 +81,36 @@ class _BottomSheetPickImageState extends State<BottomSheetPickImage> {
                         ),
                   Container(
                     color: Colors.transparent,
-                    height:
-                        controller.ratioHeightPickFile * (94.h - sizeOfAppBar) -
-                            65.sp,
+                    height: controller.ratioHeightPickFile *
+                            (93.5.h - sizeOfAppBar) -
+                        (controller.ratioHeightPickFile == 1.0 ? 80.sp : 95.sp),
                     child: GridView.builder(
                       shrinkWrap: true,
                       physics: ClampingScrollPhysics(),
                       controller: widget.scrollController,
-                      padding: EdgeInsets.symmetric(horizontal: 8.sp),
+                      padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       gridDelegate:
                           new SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        crossAxisSpacing: 2.sp,
-                        mainAxisSpacing: 2.sp,
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 4.sp,
+                        mainAxisSpacing: 4.5.sp,
                       ),
                       itemCount: controller.images.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {},
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(
-                                  controller.ratioHeightPickFile == 1.0
-                                      ? 2.0
-                                      : index == 0
-                                          ? 12.sp
-                                          : 2.0,
-                                ),
-                                topRight: Radius.circular(
-                                  controller.ratioHeightPickFile == 1.0
-                                      ? 2.0
-                                      : index == 3
-                                          ? 12.sp
-                                          : 2.0,
-                                ),
-                                bottomLeft: Radius.circular(2.0),
-                                bottomRight: Radius.circular(2.0),
-                              ),
-                              image: DecorationImage(
-                                image: MemoryImage(controller.images[index]),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                          child: ImagePickerCard(
+                            imageMemory: controller.images[index],
+                            index: index,
+                            ratioHeight: controller.ratioHeightPickFile,
                           ),
                         );
                       },
                     ),
                   ),
                   // Type area
-                  Container(
-                    height: 65.sp,
+                  OptionBarPicker(
+                    ratioHeight: controller.ratioHeightPickFile,
                   ),
                 ],
               ),

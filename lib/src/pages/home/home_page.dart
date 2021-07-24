@@ -18,6 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ScrollController _scrollController;
+  bool _showDivider = false;
 
   @override
   void initState() {
@@ -27,6 +28,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   _listenScrollListener() {
+    if (_scrollController.position.atEdge &&
+        _scrollController.position.minScrollExtent == 0.0) {
+      setState(() {
+        _showDivider = false;
+      });
+    } else {
+      setState(() {
+        _showDivider = true;
+      });
+    }
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
@@ -81,6 +92,12 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             SizedBox(height: 5.sp),
+            _showDivider
+                ? Divider(
+                    height: .35,
+                    thickness: .35,
+                  )
+                : Container(),
             Expanded(
               child: NotificationListener<OverscrollIndicatorNotification>(
                 onNotification: (overscroll) {
