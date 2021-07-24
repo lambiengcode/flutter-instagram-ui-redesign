@@ -16,7 +16,7 @@ class _OptionBarPickerState extends State<OptionBarPicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90.sp,
+      height: 100.sp,
       alignment: Alignment.bottomCenter,
       margin: EdgeInsets.only(
         bottom: widget.ratioHeight == 1.0 ? .0 : 12.sp,
@@ -29,7 +29,7 @@ class _OptionBarPickerState extends State<OptionBarPicker> {
         itemCount: optionPickers.length,
         itemBuilder: (context, index) {
           return Container(
-            margin: EdgeInsets.only(right: 16.sp),
+            margin: EdgeInsets.only(right: 14.sp),
             child: Column(
               children: [
                 Container(
@@ -39,7 +39,7 @@ class _OptionBarPickerState extends State<OptionBarPicker> {
                       color: index == 0
                           ? optionPickers[index].color
                           : Colors.transparent,
-                      width: index == 0 ? 2.0 : .0,
+                      width: 3.0,
                     ),
                     color: Colors.transparent,
                     shape: BoxShape.circle,

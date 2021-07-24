@@ -83,17 +83,17 @@ class _BottomSheetPickImageState extends State<BottomSheetPickImage> {
                     color: Colors.transparent,
                     height: controller.ratioHeightPickFile *
                             (93.5.h - sizeOfAppBar) -
-                        (controller.ratioHeightPickFile == 1.0 ? 80.sp : 90.sp),
+                        (controller.ratioHeightPickFile == 1.0 ? 80.sp : 95.sp),
                     child: GridView.builder(
                       shrinkWrap: true,
                       physics: ClampingScrollPhysics(),
                       controller: widget.scrollController,
-                      padding: EdgeInsets.symmetric(horizontal: 8.sp),
+                      padding: EdgeInsets.symmetric(horizontal: 10.sp),
                       gridDelegate:
                           new SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         crossAxisSpacing: 4.sp,
-                        mainAxisSpacing: 4.sp,
+                        mainAxisSpacing: 4.5.sp,
                       ),
                       itemCount: controller.images.length,
                       itemBuilder: (context, index) {
