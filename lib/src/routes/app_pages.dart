@@ -7,6 +7,7 @@ import 'package:whoru/src/pages/calling/pages/incomming_call_page.dart';
 import 'package:whoru/src/pages/chat/pages/custom_room_page.dart';
 import 'package:whoru/src/pages/chat/pages/room_page.dart';
 import 'package:whoru/src/pages/home/pages/details_post_page.dart';
+import 'package:whoru/src/pages/home/pages/pick_user_share.dart';
 import 'package:whoru/src/pages/home/pages/post_page.dart';
 import 'package:whoru/src/pages/others/notification_page.dart';
 import 'package:whoru/src/pages/profile/pages/choose_language_page.dart';
@@ -55,6 +56,12 @@ class AppPages {
       page: () => PostPage(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: Routes.PICK_FRIEND_SHARE,
+      page: () => PickUserShare(),
+      transition: Transition.downToUp,
+      transitionDuration: Duration(milliseconds: 150),
     ),
 
     // Chat Flow
