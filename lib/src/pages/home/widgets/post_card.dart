@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
+import 'package:whoru/src/pages/home/widgets/bottom_input_comment_in_post.dart';
 import 'package:whoru/src/pages/home/widgets/carousel_image.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/app_colors.dart';
@@ -11,6 +12,7 @@ import 'package:whoru/src/pages/home/controllers/post_controller.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
+import 'package:whoru/src/utils/stack_avatar/stack_avatar.dart';
 
 class PostCard extends StatefulWidget {
   final String idPost;
@@ -48,7 +50,10 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 1.5.h),
+      padding: EdgeInsets.only(
+        top: 12.sp,
+        bottom: widget.isInDetails ? 12.sp : 4.sp,
+      ),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -62,6 +67,7 @@ class _PostCardState extends State<PostCard> {
           _buildHeader(context),
           _buildBody(context),
           _buildBottom(context),
+          widget.isInDetails ? Container() : BottomInputCommentInPost(),
         ],
       ),
     );
@@ -142,76 +148,86 @@ class _PostCardState extends State<PostCard> {
 
   Widget _buildBottom(context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      padding: EdgeInsets.symmetric(horizontal: 4.sp),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(width: 4.sp),
-              GetBuilder<PostController>(
-                builder: (_) => LikeButton(
-                  key: _globalKey,
-                  isLiked: _.isFavourite(widget.idPost),
-                  likeCountAnimationType: likeCount < 1000
-                      ? LikeCountAnimationType.part
-                      : LikeCountAnimationType.none,
-                  size: 18.sp,
-                  circleColor: CircleColor(
-                    start: Color(0xff00ddff),
-                    end: Color(0xff0099cc),
-                  ),
-                  bubblesColor: BubblesColor(
-                    dotPrimaryColor: colorHigh,
-                    dotSecondaryColor: colorHigh,
-                  ),
-                  likeBuilder: (bool isLiked) {
-                    return Icon(
-                      _.isFavourite(widget.idPost)
-                          ? PhosphorIcons.heart_fill
-                          : PhosphorIcons.heart,
-                      color: _.isFavourite(widget.idPost) ? colorHigh : null,
+              Row(
+                children: [
+                  SizedBox(width: 4.sp),
+                  GetBuilder<PostController>(
+                    builder: (_) => LikeButton(
+                      key: _globalKey,
+                      isLiked: _.isFavourite(widget.idPost),
+                      likeCountAnimationType: likeCount < 1000
+                          ? LikeCountAnimationType.part
+                          : LikeCountAnimationType.none,
                       size: 18.sp,
-                    );
-                  },
-                  likeCount:
-                      _.isFavourite(widget.idPost) ? likeCount + 1 : likeCount,
-                  countBuilder: (int count, bool isLiked, String text) {
-                    var color = isLiked ? colorHigh : null;
-                    Widget result;
-                    result = Text(
-                      text,
-                      style: TextStyle(
-                        color: color,
-                        fontSize: 10.5.sp,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Lato',
+                      circleColor: CircleColor(
+                        start: Color(0xff00ddff),
+                        end: Color(0xff0099cc),
                       ),
-                    );
+                      bubblesColor: BubblesColor(
+                        dotPrimaryColor: colorHigh,
+                        dotSecondaryColor: colorHigh,
+                      ),
+                      likeBuilder: (bool isLiked) {
+                        return Icon(
+                          _.isFavourite(widget.idPost)
+                              ? PhosphorIcons.heart_fill
+                              : PhosphorIcons.heart,
+                          color:
+                              _.isFavourite(widget.idPost) ? colorHigh : null,
+                          size: 18.sp,
+                        );
+                      },
+                      likeCount: _.isFavourite(widget.idPost)
+                          ? likeCount + 1
+                          : likeCount,
+                      countBuilder: (int count, bool isLiked, String text) {
+                        var color = isLiked ? colorHigh : null;
+                        Widget result;
+                        result = Text(
+                          text,
+                          style: TextStyle(
+                            color: color,
+                            fontSize: 10.5.sp,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Lato',
+                          ),
+                        );
 
-                    return result;
-                  },
-                  likeCountPadding: EdgeInsets.only(left: 6.sp),
-                  onTap: onLikeButtonTapped,
-                ),
+                        return result;
+                      },
+                      likeCountPadding: EdgeInsets.only(left: 6.sp),
+                      onTap: onLikeButtonTapped,
+                    ),
+                  ),
+                  SizedBox(width: 16.0),
+                  _buildActionButton(
+                    context,
+                    'Comment',
+                    PhosphorIcons.chat_teardrop_dots,
+                    colorDarkGrey,
+                    '229',
+                  ),
+                ],
               ),
-              SizedBox(width: 16.0),
               _buildActionButton(
                 context,
-                'Comment',
-                PhosphorIcons.chat_teardrop_dots,
+                'Share',
+                PhosphorIcons.share,
                 colorDarkGrey,
-                '229',
+                null,
               ),
             ],
           ),
-          _buildActionButton(
-            context,
-            'Share',
-            PhosphorIcons.share,
-            colorDarkGrey,
-            null,
-          ),
+          SizedBox(height: 8.sp),
+          _buildLineFavouritePost(context),
         ],
       ),
     );
@@ -222,13 +238,15 @@ class _PostCardState extends State<PostCard> {
       onTap: () {
         if (title == 'Comment') {
           if (widget.isInDetails) {
-            print('Scroll to end');
+            print('scroll end');
           } else {
             Get.toNamed(Routes.DETAILS_POST, arguments: {
               'idPost': widget.idPost,
               'author': localImage[0].fullName,
             });
           }
+        } else {
+          Get.toNamed(Routes.PICK_FRIEND_SHARE);
         }
       },
       child: Container(
@@ -252,6 +270,66 @@ class _PostCardState extends State<PostCard> {
                   ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildLineFavouritePost(context) {
+    return Container(
+      padding: EdgeInsets.only(left: 1.sp),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          StackAvatar(
+            images: [
+              localImage[0].image,
+              localImage[1].image,
+              localImage[2].image,
+            ],
+          ),
+          SizedBox(width: 6.sp),
+          Expanded(
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Harold, Kim, Bạn',
+                    style: TextStyle(
+                      fontFamily: FontFamily.lato,
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  TextSpan(
+                    text: '\tvà\t',
+                    style: TextStyle(
+                      fontFamily: FontFamily.lato,
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  TextSpan(
+                    text: '885 người khác',
+                    style: TextStyle(
+                      fontFamily: FontFamily.lato,
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  TextSpan(
+                    text: '\tđã yêu thích bài viết này',
+                    style: TextStyle(
+                      fontFamily: FontFamily.lato,
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
