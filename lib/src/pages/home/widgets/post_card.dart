@@ -299,6 +299,7 @@ class _PostCardState extends State<PostCard> {
                       fontFamily: FontFamily.lato,
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w600,
+                      color: Theme.of(context).textTheme.bodyText1.color,
                     ),
                   ),
                   TextSpan(
@@ -307,6 +308,7 @@ class _PostCardState extends State<PostCard> {
                       fontFamily: FontFamily.lato,
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w400,
+                      color: Theme.of(context).textTheme.bodyText1.color,
                     ),
                   ),
                   TextSpan(
@@ -315,6 +317,7 @@ class _PostCardState extends State<PostCard> {
                       fontFamily: FontFamily.lato,
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w600,
+                      color: Theme.of(context).textTheme.bodyText1.color,
                     ),
                   ),
                   TextSpan(
@@ -323,6 +326,7 @@ class _PostCardState extends State<PostCard> {
                       fontFamily: FontFamily.lato,
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w400,
+                      color: Theme.of(context).textTheme.bodyText1.color,
                     ),
                   ),
                 ],

@@ -16,8 +16,8 @@ class _BottomInputCommentInPostState extends State<BottomInputCommentInPost> {
       children: [
         SizedBox(height: 8.sp),
         Divider(
-          height: .1,
-          thickness: .1,
+          height: .085,
+          thickness: .085,
         ),
         SizedBox(height: 4.sp),
         Row(

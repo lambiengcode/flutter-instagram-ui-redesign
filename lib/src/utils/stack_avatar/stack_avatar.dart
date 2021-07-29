@@ -24,14 +24,14 @@ class _StackAvatarState extends State<StackAvatar> {
 
   Widget _buildAvatar(context, index) {
     return Container(
-      height: 24.sp,
-      width: 24.sp,
-      margin: EdgeInsets.only(left: index * 12.sp),
+      height: 22.5.sp,
+      width: 22.5.sp,
+      margin: EdgeInsets.only(left: (2 - index) * 12.sp),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
           color: Theme.of(context).scaffoldBackgroundColor,
-          width: 3.sp,
+          width: 2.sp,
         ),
         image: DecorationImage(
           image: NetworkImage(widget.images[index]),

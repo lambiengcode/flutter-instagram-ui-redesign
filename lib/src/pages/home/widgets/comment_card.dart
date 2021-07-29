@@ -55,6 +55,8 @@ class _CommentCardState extends State<CommentCard> {
                                 fontFamily: FontFamily.lato,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12.sp,
+                                color:
+                                    Theme.of(context).textTheme.bodyText1.color,
                               ),
                             ),
                             TextSpan(
@@ -64,6 +66,8 @@ class _CommentCardState extends State<CommentCard> {
                                 fontFamily: FontFamily.lato,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 11.85.sp,
+                                color:
+                                    Theme.of(context).textTheme.bodyText1.color,
                               ),
                             ),
                           ],
