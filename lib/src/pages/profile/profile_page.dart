@@ -374,12 +374,12 @@ class _ProfilePageState extends State<ProfilePage>
                               labelStyle: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 11.sp,
-                                fontFamily: 'Lato',
+                                fontFamily: FontFamily.lato,
                               ),
                               unselectedLabelStyle: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 10.25.sp,
-                                fontFamily: 'Lato',
+                                fontFamily: FontFamily.lato,
                               ),
                               tabs: [
                                 Tab(

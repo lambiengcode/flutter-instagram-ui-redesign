@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -47,7 +48,7 @@ class _BottomInputCommentState extends State<BottomInputComment> {
                     ),
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w400,
-                fontFamily: 'Lato',
+                fontFamily: FontFamily.lato,
               ),
               filled: true,
               fillColor: Colors.transparent,

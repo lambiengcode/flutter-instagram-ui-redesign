@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -91,7 +92,7 @@ class _ActivevFriendCardState extends State<ActiveFriendCard> {
             style: TextStyle(
               fontSize: 9.sp,
               fontWeight: FontWeight.w600,
-              fontFamily: 'Lato',
+              fontFamily: FontFamily.lato,
             ),
           ),
         ],

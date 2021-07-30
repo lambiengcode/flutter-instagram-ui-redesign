@@ -37,7 +37,7 @@ class _HorizontalUserState extends State<HorizontalUser> {
               //     color: Colors.blueAccent.shade400,
               //     fontSize: _size.width / 28.5,
               //     fontWeight: FontWeight.w500,
-              //     fontFamily: 'Lato',
+              //     fontFamily: FontFamily.lato,
               //   ),
               // ),
               Icon(

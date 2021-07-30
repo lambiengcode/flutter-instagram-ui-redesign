@@ -197,7 +197,7 @@ class _PostCardState extends State<PostCard> {
                             color: color,
                             fontSize: 10.5.sp,
                             fontWeight: FontWeight.w600,
-                            fontFamily: 'Lato',
+                            fontFamily: FontFamily.lato,
                           ),
                         );
 
@@ -265,7 +265,7 @@ class _PostCardState extends State<PostCard> {
                     style: TextStyle(
                       fontSize: 10.5.sp,
                       fontWeight: FontWeight.w600,
-                      fontFamily: 'Lato',
+                      fontFamily: FontFamily.lato,
                     ),
                   ),
           ],
@@ -276,7 +276,7 @@ class _PostCardState extends State<PostCard> {
 
   Widget _buildLineFavouritePost(context) {
     return Container(
-      padding: EdgeInsets.only(left: 1.sp),
+      padding: EdgeInsets.only(left: 1.sp, right: 5.sp),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,

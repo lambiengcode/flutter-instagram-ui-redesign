@@ -4,6 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/profile/widgets/bottom_pick_image.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -50,7 +51,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           style: TextStyle(
             color: mCM,
             fontSize: _size.width / 20.0,
-            fontFamily: 'Lato',
+            fontFamily: FontFamily.lato,
             fontWeight: FontWeight.bold,
           ),
         ),
