@@ -32,17 +32,20 @@ class AppColors {
   final Color header;
   final Color button;
   final Color contentText1;
+  final Color contentText2;
 
-  const AppColors(
-      {@required this.header,
-      @required this.primary,
-      @required this.background,
-      @required this.accent,
-      @required this.disabled,
-      @required this.error,
-      @required this.divider,
-      @required this.button,
-      @required this.contentText1});
+  const AppColors({
+    @required this.header,
+    @required this.primary,
+    @required this.background,
+    @required this.accent,
+    @required this.disabled,
+    @required this.error,
+    @required this.divider,
+    @required this.button,
+    @required this.contentText1,
+    @required this.contentText2,
+  });
 
   factory AppColors.light() {
     return AppColors(
@@ -54,7 +57,8 @@ class AppColors {
       error: Color(0xFFFF7466),
       divider: Colors.black26,
       button: Color(0xFF657786),
-      contentText1: colorDarkGrey,
+      contentText1: colorBlack,
+      contentText2: colorPrimaryBlack,
     );
   }
 
@@ -69,6 +73,7 @@ class AppColors {
       divider: Colors.white24,
       button: Colors.white,
       contentText1: mCL,
+      contentText2: mCL,
     );
   }
 }

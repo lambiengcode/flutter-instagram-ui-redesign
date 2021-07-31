@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/pages/profile/controllers/editor_controller.dart';
+import 'package:whoru/src/themes/font_family.dart';
 
 class EditorPage extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _EditorPageState extends State<EditorPage> {
             '0 / 10',
             style: TextStyle(
               fontSize: _size.width / 20.0,
-              fontFamily: 'Lato',
+              fontFamily: FontFamily.lato,
               fontWeight: FontWeight.w600,
             ),
           ),

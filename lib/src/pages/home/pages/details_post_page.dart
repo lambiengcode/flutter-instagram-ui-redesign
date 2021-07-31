@@ -100,7 +100,7 @@ class _DetailsPostPageState extends State<DetailsPostPage> {
                       isInDetails: true,
                     ),
                     ListView.builder(
-                      padding: EdgeInsets.only(top: 15.sp, bottom: 48.sp),
+                      padding: EdgeInsets.only(top: 10.sp, bottom: 48.sp),
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: 1,

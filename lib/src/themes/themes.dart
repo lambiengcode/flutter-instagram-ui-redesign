@@ -33,6 +33,12 @@ class AppTheme {
           bodyText1: TextStyle(color: appColors.contentText1),
         ),
       ),
+      textTheme: TextTheme(
+        headline1: TextStyle(color: appColors.header),
+        headline2: TextStyle(color: appColors.header),
+        bodyText1: TextStyle(color: appColors.contentText1),
+        bodyText2: TextStyle(color: appColors.contentText2),
+      ),
       buttonColor: appColors.primary,
       dividerColor: appColors.divider,
     );
@@ -66,6 +72,12 @@ class AppTheme {
           headline2: TextStyle(color: appColors.header),
           bodyText1: TextStyle(color: appColors.contentText1),
         ),
+      ),
+      textTheme: TextTheme(
+        headline1: TextStyle(color: appColors.header),
+        headline2: TextStyle(color: appColors.header),
+        bodyText1: TextStyle(color: appColors.contentText1),
+        bodyText2: TextStyle(color: appColors.contentText2),
       ),
       buttonColor: appColors.primary,
       dividerColor: appColors.divider,

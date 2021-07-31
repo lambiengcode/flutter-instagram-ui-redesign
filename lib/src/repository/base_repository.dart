@@ -20,7 +20,9 @@ class BaseRepository {
       url,
       path,
       options: getOptions(),
-      onReceiveProgress: onReceive(),
+      onReceiveProgress: (received, total) {
+        onReceive(received, total);
+      },
     );
     return response;
   }
@@ -34,7 +36,9 @@ class BaseRepository {
       gateway,
       data: formData,
       options: getOptions(),
-      onSendProgress: onSend(),
+      onSendProgress: (send, total) {
+        onSend(send, total);
+      },
     );
     return response;
   }

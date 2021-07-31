@@ -3,7 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/data/chat.dart';
-import 'package:whoru/src/pages/chat/widgets/message_card.dart';
+import 'package:whoru/src/pages/home/widgets/user_share_card.dart';
 import 'package:whoru/src/routes/app_pages.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
@@ -94,7 +94,7 @@ class _PickUserShareState extends State<PickUserShare> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () => Get.toNamed(Routes.CHAT_ROOM),
-                      child: MessageCard(
+                      child: UserShareCard(
                         pendingMessage: chats[index].pendingMessage,
                         urlToImage: chats[index].image,
                         fullName: chats[index].fullName,
@@ -102,7 +102,7 @@ class _PickUserShareState extends State<PickUserShare> {
                         time: chats[index].time,
                         notification: chats[index].notification,
                         blurHash: chats[index].blurHash,
-                        isLast: index == chats.length + 1,
+                        isLast: index == chats.length - 1,
                       ),
                     );
                   },

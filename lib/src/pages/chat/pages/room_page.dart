@@ -11,6 +11,7 @@ import 'package:whoru/src/data/content_chat.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
 import 'package:whoru/src/pages/chat/widgets/content_chat_card.dart';
 import 'package:whoru/src/pages/chat/widgets/input_chat.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
@@ -157,7 +158,7 @@ class _RoomPageState extends State<RoomPage> {
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
-                        fontFamily: 'Lato',
+                        fontFamily: FontFamily.lato,
                         color: Theme.of(context).textTheme.bodyText1.color,
                       ),
                     ),
@@ -167,7 +168,7 @@ class _RoomPageState extends State<RoomPage> {
                       style: Theme.of(context).textTheme.bodyText1.copyWith(
                             fontSize: _size.width / 30.0,
                             fontWeight: FontWeight.w400,
-                            fontFamily: 'Lato',
+                            fontFamily: FontFamily.lato,
                           ),
                     ),
                   ],
