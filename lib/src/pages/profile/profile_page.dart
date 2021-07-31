@@ -287,7 +287,7 @@ class _ProfilePageState extends State<ProfilePage>
       onTap: () {
         switch (title) {
           case 'Edit Profile':
-            // Get.toNamed(Routes.EDIT_PROFILE);
+            Get.toNamed(Routes.EDIT_PROFILE);
             break;
           case 'Scan':
             Get.toNamed(Routes.QR_SCAN);

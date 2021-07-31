@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/profile/widgets/bottom_pick_image.dart';
 import 'package:whoru/src/themes/font_family.dart';
-import 'package:whoru/src/utils/blurhash/blurhash.dart';
+import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -30,9 +30,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         brightness: Theme.of(context).brightness,
         backgroundColor: Colors.transparent,
@@ -42,7 +40,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           icon: Icon(
             Feather.arrow_left,
             color: mCM,
-            size: _size.width / 15.0,
+            size: 20.sp,
           ),
           onPressed: () => Get.back(),
         ),
@@ -50,7 +48,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           'Edit Profile',
           style: TextStyle(
             color: mCM,
-            fontSize: _size.width / 20.0,
+            fontSize: 15.sp,
             fontFamily: FontFamily.lato,
             fontWeight: FontWeight.bold,
           ),
@@ -60,34 +58,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
             icon: Icon(
               Feather.check,
               color: colorCompleted,
-              size: _size.width / 16.0,
+              size: 20.sp,
             ),
             onPressed: () => print('settings'),
           ),
         ],
       ),
       body: Container(
-        color: mC,
-        height: _size.height,
+        height: 100.h,
         child: SingleChildScrollView(
           child: Stack(
             children: [
               Column(
                 children: [
-                  GestureDetector(
-                    onTap: () => showImageBottomSheet(),
-                    child: Container(
-                      width: _size.width,
-                      height: _size.height * .265,
-                      child: BlurHash(
-                        hash: "L79ZK77eC+of+G8^VXz;Ty^lb^2?",
-                        image:
-                            'https://img.freepik.com/free-photo/camera-laptop-black-minimal-table-top-view-copy-space-minimal-abstract-background-creative-flat-lay_232693-463.jpg?size=626&ext=jpg&ga=GA1.2.1860982554.1612112797',
-                        imageFit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: _size.height * .045),
+                  SizedBox(height: 8.sp),
                   _buildLineInfo(
                       context, 'FullName', 'Please input your fullname'),
                   _buildDivider(context),
@@ -107,55 +91,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                   _buildDivider(context),
                   SizedBox(height: 32.0),
-                  Container(
-                    width: _size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 24.0),
-                    child: Text(
-                      'Change Password',
-                      style: TextStyle(
-                        color: colorHigh,
-                        fontSize: _size.width / 26.8,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-                  _buildDivider(context),
                 ],
-              ),
-              Positioned(
-                top: _size.height * .182,
-                left: 0,
-                child: GestureDetector(
-                  onTap: () => showImageBottomSheet(),
-                  child: Container(
-                    width: _size.width,
-                    alignment: Alignment.center,
-                    child: Container(
-                      height: _size.height * .152,
-                      width: _size.height * .152,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: colorPrimary,
-                          width: 3.5,
-                        ),
-                      ),
-                      alignment: Alignment.center,
-                      child: Container(
-                        height: _size.height * .132,
-                        width: _size.height * .132,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage('images/avt.jpg'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ),
             ],
           ),
@@ -165,15 +101,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   Widget _buildLineInfo(context, title, valid) {
-    final _size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.fromLTRB(14.0, 18.0, 18.0, 4.0),
+      padding: EdgeInsets.fromLTRB(6.sp, 20.sp, 18.0, 4.0),
       child: TextFormField(
         cursorColor: colorTitle,
         cursorRadius: Radius.circular(30.0),
         style: TextStyle(
-          color: colorTitle,
-          fontSize: _size.width / 26.0,
+          fontSize: 12.sp,
           fontWeight: FontWeight.w500,
         ),
         validator: (val) => val.length == 0 ? valid : null,
@@ -181,7 +115,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           setState(() {});
         },
         inputFormatters: [
-          title == 'Phone Number' || title == 'Số Điện Thoại'
+          title == 'phoneNumber'.trArgs()
               ? FilteringTextInputFormatter.digitsOnly
               : FilteringTextInputFormatter.singleLineFormatter,
         ],
@@ -189,13 +123,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
           contentPadding: EdgeInsets.only(
-            left: 12.0,
+            left: 10.sp,
+            top: 4.sp,
           ),
           border: InputBorder.none,
           labelText: title,
           labelStyle: TextStyle(
-            color: colorTitle,
-            fontSize: _size.width / 26.0,
+            fontSize: 11.sp,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -205,10 +139,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Widget _buildDivider(context) {
     return Divider(
-      color: Colors.grey.shade400,
       thickness: .25,
       height: .25,
-      indent: 25.0,
+      indent: 16.sp,
       endIndent: 25.0,
     );
   }
