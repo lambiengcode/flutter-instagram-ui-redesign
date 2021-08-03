@@ -7,6 +7,7 @@ import 'package:whoru/src/pages/profile/controllers/editor_controller.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/pages/chat/controllers/room_controller.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/themes/theme_service.dart';
 import 'package:whoru/src/utils/emoji/emoji.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
@@ -144,13 +145,13 @@ class _ChatInputState extends State<ChatInput> {
         color: colorPrimary,
         fontSize: 10.sp,
         fontWeight: FontWeight.w400,
-        fontFamily: 'Lato',
+        fontFamily: FontFamily.lato,
       ),
       noRecentsStyle: TextStyle(
         color: colorPrimary,
         fontSize: 10.sp,
         fontWeight: FontWeight.w400,
-        fontFamily: 'Lato',
+        fontFamily: FontFamily.lato,
       ),
     );
   }
@@ -241,7 +242,7 @@ class _ChatInputState extends State<ChatInput> {
                           ),
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
-                      fontFamily: 'Lato',
+                      fontFamily: FontFamily.lato,
                     ),
                     filled: true,
                     fillColor: Colors.transparent,

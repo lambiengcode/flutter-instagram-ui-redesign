@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/font_family.dart';
 
 class ContentChatCard extends StatefulWidget {
   final String id;
@@ -123,7 +124,7 @@ class _ContentChatCardState extends State<ContentChatCard> {
               color: isMe ? mCL : null,
               fontSize: _size.width / 26.0,
               fontWeight: FontWeight.w400,
-              fontFamily: 'Lato',
+              fontFamily: FontFamily.lato,
             ),
           )
         : widget.content != null

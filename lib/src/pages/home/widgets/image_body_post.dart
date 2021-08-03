@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/blurhash/blurhash.dart';
 
 class ImageBodyPost extends StatefulWidget {
@@ -204,7 +205,7 @@ class _ImageBodyPostCard extends State<ImageBodyPost> {
                             color: mCL,
                             fontWeight: FontWeight.w400,
                             fontSize: _size.width / 16.0,
-                            fontFamily: 'Lato',
+                            fontFamily: FontFamily.lato,
                           ),
                         ),
                       ),

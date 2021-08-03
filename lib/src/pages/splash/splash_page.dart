@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
 
 class SplashPage extends StatefulWidget {
@@ -49,7 +50,7 @@ class _SplashPageState extends State<SplashPage> {
                             fontSize: 14.sp,
                             color: mCL,
                             fontWeight: FontWeight.w600,
-                            fontFamily: 'Lato',
+                            fontFamily: FontFamily.lato,
                           ),
                         ),
                         TextSpan(
@@ -58,7 +59,7 @@ class _SplashPageState extends State<SplashPage> {
                             fontSize: 12.sp,
                             color: mCL,
                             fontWeight: FontWeight.w600,
-                            fontFamily: 'Lato',
+                            fontFamily: FontFamily.lato,
                           ),
                         ),
                       ],
@@ -75,7 +76,7 @@ class _SplashPageState extends State<SplashPage> {
                     text: '@${DateTime.now().year} Develop by ',
                     style: TextStyle(
                       color: mC,
-                      fontFamily: 'Lato',
+                      fontFamily: FontFamily.lato,
                       fontSize: 8.5.sp,
                       fontWeight: FontWeight.w400,
                     ),
@@ -84,7 +85,7 @@ class _SplashPageState extends State<SplashPage> {
                     text: 'WANTED',
                     style: TextStyle(
                       color: mCL,
-                      fontFamily: 'Lato',
+                      fontFamily: FontFamily.lato,
                       fontSize: 8.5.sp,
                       fontWeight: FontWeight.w600,
                     ),

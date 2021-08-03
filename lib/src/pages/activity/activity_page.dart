@@ -8,6 +8,7 @@ import 'package:whoru/src/pages/activity/pages/find_page.dart';
 import 'package:whoru/src/pages/activity/pages/history_page.dart';
 import 'package:whoru/src/pages/activity/pages/stranger_page.dart';
 import 'package:whoru/src/themes/app_colors.dart';
+import 'package:whoru/src/themes/font_family.dart';
 
 class ActivityPage extends StatefulWidget {
   @override
@@ -136,7 +137,7 @@ class _ActivityPageState extends State<ActivityPage>
                               color: colorPrimary,
                               fontSize: _size.width / 22.5,
                               fontWeight: FontWeight.w600,
-                              fontFamily: 'Lato',
+                              fontFamily: FontFamily.lato,
                             ),
                           ),
                           SizedBox(height: 2.5),
@@ -151,7 +152,7 @@ class _ActivityPageState extends State<ActivityPage>
                                       color: colorTitle,
                                       fontSize: _size.width / 26.0,
                                       fontWeight: FontWeight.w400,
-                                      fontFamily: 'Lato',
+                                      fontFamily: FontFamily.lato,
                                     ),
                                   );
                                 default:
@@ -162,7 +163,7 @@ class _ActivityPageState extends State<ActivityPage>
                                         color: colorTitle,
                                         fontSize: _size.width / 26.0,
                                         fontWeight: FontWeight.w400,
-                                        fontFamily: 'Lato',
+                                        fontFamily: FontFamily.lato,
                                       ),
                                     );
                                   }
@@ -173,7 +174,7 @@ class _ActivityPageState extends State<ActivityPage>
                                       color: colorTitle,
                                       fontSize: _size.width / 26.0,
                                       fontWeight: FontWeight.w400,
-                                      fontFamily: 'Lato',
+                                      fontFamily: FontFamily.lato,
                                     ),
                                   );
                               }
@@ -223,12 +224,12 @@ class _ActivityPageState extends State<ActivityPage>
                 labelStyle: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: _size.width / 26.5,
-                  fontFamily: 'Lato',
+                  fontFamily: FontFamily.lato,
                 ),
                 unselectedLabelStyle: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: _size.width / 28.5,
-                  fontFamily: 'Lato',
+                  fontFamily: FontFamily.lato,
                 ),
                 tabs: [
                   Tab(

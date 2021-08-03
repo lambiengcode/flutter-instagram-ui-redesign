@@ -287,7 +287,7 @@ class _ProfilePageState extends State<ProfilePage>
       onTap: () {
         switch (title) {
           case 'Edit Profile':
-            // Get.toNamed(Routes.EDIT_PROFILE);
+            Get.toNamed(Routes.EDIT_PROFILE);
             break;
           case 'Scan':
             Get.toNamed(Routes.QR_SCAN);
@@ -374,12 +374,12 @@ class _ProfilePageState extends State<ProfilePage>
                               labelStyle: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 11.sp,
-                                fontFamily: 'Lato',
+                                fontFamily: FontFamily.lato,
                               ),
                               unselectedLabelStyle: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 10.25.sp,
-                                fontFamily: 'Lato',
+                                fontFamily: FontFamily.lato,
                               ),
                               tabs: [
                                 Tab(
