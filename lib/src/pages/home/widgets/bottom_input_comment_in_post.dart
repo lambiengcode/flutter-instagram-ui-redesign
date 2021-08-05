@@ -15,19 +15,14 @@ class _BottomInputCommentInPostState extends State<BottomInputCommentInPost> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 8.sp),
-        Divider(
-          height: .085,
-          thickness: .085,
-        ),
-        SizedBox(height: 4.sp),
+        SizedBox(height: 2.sp),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(width: 5.sp),
             Container(
-              height: 28.sp,
-              width: 28.sp,
+              height: 26.sp,
+              width: 26.sp,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
@@ -48,7 +43,7 @@ class _BottomInputCommentInPostState extends State<BottomInputCommentInPost> {
                 onTap: () {},
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyText1.color,
-                  fontSize: 12.sp,
+                  fontSize: 11.sp,
                 ),
                 keyboardType: TextInputType.multiline,
                 maxLines: 1,
@@ -65,7 +60,7 @@ class _BottomInputCommentInPostState extends State<BottomInputCommentInPost> {
                         Theme.of(context).textTheme.bodyText1.color.withOpacity(
                               ThemeService().isSavedDarkMode() ? .85 : .65,
                             ),
-                    fontSize: 11.sp,
+                    fontSize: 10.5.sp,
                     fontWeight: FontWeight.w400,
                     fontFamily: FontFamily.lato,
                   ),
@@ -82,13 +77,13 @@ class _BottomInputCommentInPostState extends State<BottomInputCommentInPost> {
             Icon(
               PhosphorIcons.smiley_wink_fill,
               color: colorPrimary,
-              size: 20.sp,
+              size: 18.sp,
             ),
-            SizedBox(width: 10.sp),
+            SizedBox(width: 8.sp),
             Icon(
               PhosphorIcons.telegram_logo_fill,
               color: colorPrimary,
-              size: 20.sp,
+              size: 18.sp,
             ),
             SizedBox(width: 8.sp),
           ],
