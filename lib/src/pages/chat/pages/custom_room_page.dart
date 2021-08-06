@@ -70,7 +70,7 @@ class _CustomRoomPageState extends State<CustomRoomPage> {
       ),
       body: Container(
         child: SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           child: Column(
             children: [
               SizedBox(height: 6.sp),

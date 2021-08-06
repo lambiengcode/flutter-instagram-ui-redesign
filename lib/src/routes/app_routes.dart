@@ -8,7 +8,8 @@ abstract class Routes {
   static const DETAILS_POST = '/detailsPost';
   static const VIEW_PHOTO = '/viewPhoto';
   static const NOTIFICATION = '/notification';
-  static const POST = '/post';
+  static const PICK_MEDIA_POST = '/pickMediaPost';
+  static const POST_CONTENT = '/postContent';
   static const PICK_FRIEND_SHARE = '/pickFriendShare';
 
   // Chat Flow

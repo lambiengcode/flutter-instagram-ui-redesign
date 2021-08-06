@@ -7,6 +7,7 @@ import 'package:whoru/src/pages/calling/pages/incomming_call_page.dart';
 import 'package:whoru/src/pages/chat/pages/custom_room_page.dart';
 import 'package:whoru/src/pages/chat/pages/room_page.dart';
 import 'package:whoru/src/pages/home/pages/details_post_page.dart';
+import 'package:whoru/src/pages/home/pages/pick_image_post_page.dart';
 import 'package:whoru/src/pages/home/pages/pick_user_share.dart';
 import 'package:whoru/src/pages/home/pages/post_page.dart';
 import 'package:whoru/src/pages/others/notification_page.dart';
@@ -52,11 +53,20 @@ class AppPages {
       transitionDuration: Duration(milliseconds: 150),
     ),
     GetPage(
-      name: Routes.POST,
-      page: () => PostPage(),
+      name: Routes.PICK_MEDIA_POST,
+      page: () => PickImagePostPage(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 250),
+      children: [
+        GetPage(
+          name: Routes.POST_CONTENT,
+          page: () => PostPage(),
+          transition: Transition.rightToLeft,
+          transitionDuration: Duration(milliseconds: 250),
+        ),
+      ],
     ),
+
     GetPage(
       name: Routes.PICK_FRIEND_SHARE,
       page: () => PickUserShare(),

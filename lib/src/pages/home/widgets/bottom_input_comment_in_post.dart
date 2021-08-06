@@ -21,14 +21,10 @@ class _BottomInputCommentInPostState extends State<BottomInputCommentInPost> {
           children: [
             SizedBox(width: 5.sp),
             Container(
-              height: 26.sp,
-              width: 26.sp,
+              height: 24.sp,
+              width: 24.sp,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  width: 3.sp,
-                ),
                 image: DecorationImage(
                   image: NetworkImage(
                     'https://avatars.githubusercontent.com/u/60530946?v=4',
