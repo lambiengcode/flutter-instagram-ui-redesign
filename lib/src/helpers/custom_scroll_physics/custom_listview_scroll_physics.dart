@@ -12,8 +12,8 @@ class CustomListViewScrollPhysics extends ScrollPhysics {
 
   @override
   SpringDescription get spring => const SpringDescription(
-        mass: 1000.0,
-        stiffness: 1000.0,
+        mass: 80.0,
+        stiffness: 100.0,
         damping: 1.0,
       );
 }
