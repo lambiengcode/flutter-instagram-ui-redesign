@@ -50,6 +50,15 @@ class _CarouselImageState extends State<CarouselImage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        Container(
+          height: (100.h / 100.w) < 16 / 9
+              ? 1.0 * 100.w
+              : widget.minAspectRatio < 1
+                  ? 1 * 100.w
+                  : 100.w / widget.minAspectRatio,
+          width: 100.w,
+          color: colorPrimaryBlack,
+        ),
         CarouselSlider(
           options: CarouselOptions(
             aspectRatio: (100.h / 100.w) < 16 / 9
@@ -117,8 +126,8 @@ class _CarouselImageState extends State<CarouselImage> {
                         ? Container(
                             height: (100.h / 100.w) < 16 / 9
                                 ? 1.0 * 100.w
-                                : widget.minAspectRatio < 100.w
-                                    ? 100.w
+                                : widget.minAspectRatio < 1
+                                    ? 1 * 100.w
                                     : 100.w / widget.minAspectRatio,
                             width: 100.w,
                             color: Colors.black26,

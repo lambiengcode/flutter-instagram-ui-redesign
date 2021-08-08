@@ -274,10 +274,8 @@ class _ChatInputState extends State<ChatInput> {
               ],
             ),
           ),
-          IconButton(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               if (!controller.showEmojiPicker) {
                 // keyboard is visible
                 controller.hideKeyboard();
@@ -288,7 +286,7 @@ class _ChatInputState extends State<ChatInput> {
                 controller.hideEmojiContainer();
               }
             },
-            icon: Icon(
+            child: Icon(
               PhosphorIcons.smiley_wink_fill,
               color: widget.color.withOpacity(.95),
               size: 20.sp,

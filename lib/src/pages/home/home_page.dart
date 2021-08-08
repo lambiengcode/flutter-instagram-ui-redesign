@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/data/chat.dart';
+import 'package:whoru/src/helpers/custom_scroll_physics/custom_listview_scroll_physics.dart';
 import 'package:whoru/src/pages/chat/widgets/active_friend_card.dart';
 import 'package:whoru/src/pages/home/widgets/horizontal_user.dart';
 import 'package:whoru/src/pages/home/widgets/post_card.dart';
@@ -18,7 +19,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ScrollController _scrollController;
-  bool _showDivider = false;
 
   @override
   void initState() {
@@ -28,16 +28,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   _listenScrollListener() {
-    if (_scrollController.position.atEdge &&
-        _scrollController.position.minScrollExtent == 0.0) {
-      setState(() {
-        _showDivider = false;
-      });
-    } else {
-      setState(() {
-        _showDivider = true;
-      });
-    }
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
@@ -69,7 +59,7 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           GestureDetector(
-            onTap: () => Get.toNamed(Routes.POST),
+            onTap: () => Get.toNamed(Routes.PICK_MEDIA_POST),
             child: _buildActionHome(
               context,
               'Camera',
@@ -92,12 +82,6 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             SizedBox(height: 5.sp),
-            _showDivider
-                ? Divider(
-                    height: .35,
-                    thickness: .35,
-                  )
-                : Container(),
             Expanded(
               child: NotificationListener<OverscrollIndicatorNotification>(
                 onNotification: (overscroll) {
@@ -106,7 +90,11 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: ListView.builder(
                   controller: _scrollController,
-                  physics: ClampingScrollPhysics(),
+                  physics: CustomListViewScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(
+                      parent: BouncingScrollPhysics(),
+                    ),
+                  ),
                   itemCount: 15,
                   itemBuilder: (context, index) {
                     return index == 0

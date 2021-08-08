@@ -121,9 +121,11 @@ class _DetailsPostPageState extends State<DetailsPostPage> {
                 width: 100.w,
                 decoration: BoxDecoration(
                   color: Theme.of(context).scaffoldBackgroundColor,
-                  border: Border.all(
-                    color: Theme.of(context).dividerColor,
-                    width: .25,
+                  border: Border(
+                    top: BorderSide(
+                      color: Theme.of(context).dividerColor,
+                      width: .25,
+                    ),
                   ),
                 ),
                 child: BottomInputComment(),

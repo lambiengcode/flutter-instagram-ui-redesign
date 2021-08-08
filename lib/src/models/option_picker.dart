@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 
@@ -24,6 +25,11 @@ List<OptionPicker> optionPickers = [
     title: 'File',
     icon: FontAwesomeIcons.solidFile,
     color: Colors.amber.shade600,
+  ),
+  OptionPicker(
+    title: 'Âm thanh',
+    icon: PhosphorIcons.music_note_fill,
+    color: Colors.deepPurpleAccent.shade200,
   ),
   OptionPicker(
     title: 'Vị trí',
