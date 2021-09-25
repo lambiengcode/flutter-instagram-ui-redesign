@@ -4,6 +4,7 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:whoru/src/pages/home/widgets/camera_preview_box.dart';
 import 'package:whoru/src/pages/profile/controllers/editor_controller.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/font_family.dart';
@@ -85,21 +86,26 @@ class _PickImagePostPageState extends State<PickImagePostPage> {
                     child: GetBuilder<EditorController>(
                       builder: (_) => StaggeredGridView.countBuilder(
                         padding: EdgeInsets.symmetric(horizontal: 4.sp),
-                        crossAxisCount: 6,
-                        itemCount: _.images.length,
+                        crossAxisCount: 4,
+                        itemCount: _.images.length + 1,
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2.sp),
-                              image: DecorationImage(
-                                image: MemoryImage(_.images[index]),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          );
+                          return index == 0
+                              ? CameraPreviewBox()
+                              : Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(2.sp),
+                                    image: DecorationImage(
+                                      image: MemoryImage(_.images[index - 1]),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                );
                         },
                         staggeredTileBuilder: (int index) =>
-                            StaggeredTile.count(2, index % 3 == 0 ? 3 : 2),
+                            StaggeredTile.count(
+                          index % 7 == 0 ? 2 : 1,
+                          index % 7 == 0 ? 2 : 1,
+                        ),
                         mainAxisSpacing: 2.5.sp,
                         crossAxisSpacing: 2.5.sp,
                       ),
