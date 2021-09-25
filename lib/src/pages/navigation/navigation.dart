@@ -101,8 +101,8 @@ class _NavigationState extends State<Navigation> {
                 'Message',
               ),
               _buildItemBottomBar(
-                PhosphorIcons.broadcast,
-                PhosphorIcons.broadcast_fill,
+                PhosphorIcons.intersect,
+                PhosphorIcons.intersect_fill,
                 3,
                 'Discover',
               ),

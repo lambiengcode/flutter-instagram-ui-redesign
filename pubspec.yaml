@@ -26,7 +26,6 @@ dependencies:
 
   # Others library
   cupertino_icons: ^1.0.2
-  http: ^0.13.3
   intl: ^0.17.0
   flutter_phosphor_icons: ^0.0.1+4
   flutter_icons: ^1.1.0
@@ -46,7 +45,6 @@ dependencies:
 
   # State Management library
   provider: ^5.0.0
-  flutter_bloc: ^7.1.0
   get: ^4.1.4
   flutter_simple_dependency_injection: ^2.0.0
 

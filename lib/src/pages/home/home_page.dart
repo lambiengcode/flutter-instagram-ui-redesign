@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
             child: _buildActionHome(
               context,
               'Camera',
-              PhosphorIcons.camera_bold,
+              PhosphorIcons.telegram_logo_fill,
             ),
           ),
           SizedBox(width: 8.sp),
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
             child: _buildActionHome(
               context,
               'Notifications',
-              PhosphorIcons.bell_simple_bold,
+              PhosphorIcons.bell_simple_fill,
             ),
           ),
           SizedBox(width: 4.sp),
@@ -117,12 +117,12 @@ class _HomePageState extends State<HomePage> {
   Widget _buildActionHome(context, title, icon) {
     return Container(
       margin: EdgeInsets.only(bottom: 2.sp),
-      padding: EdgeInsets.all(12.sp),
+      padding: EdgeInsets.all(11.sp),
       alignment: Alignment.center,
       decoration: AppDecoration.buttonActionCircle(context).decoration,
       child: Icon(
         icon,
-        size: 16.sp,
+        size: 18.sp,
         color: Theme.of(context).buttonColor,
       ),
     );
@@ -135,24 +135,18 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 65.sp,
             width: 100.w,
-            child: NotificationListener<OverscrollIndicatorNotification>(
-              onNotification: (overscroll) {
-                overscroll.disallowGlow();
-                return true;
+            child: ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 2.w),
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: chats.length,
+              itemBuilder: (context, index) {
+                return ActiveFriendCard(
+                  blurHash: chats[index].blurHash,
+                  urlToImage: chats[index].image,
+                  fullName: chats[index].fullName,
+                );
               },
-              child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 2.w),
-                physics: ClampingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: chats.length,
-                itemBuilder: (context, index) {
-                  return ActiveFriendCard(
-                    blurHash: chats[index].blurHash,
-                    urlToImage: chats[index].image,
-                    fullName: chats[index].fullName,
-                  );
-                },
-              ),
             ),
           ),
           Padding(
