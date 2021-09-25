@@ -72,7 +72,6 @@ Future<Uint8List> cropImageDataWithDartLibrary(
   ///crop rect base on raw image
 }
 
-
 /// you can encode your image
 ///
 /// it costs much time and blocks ui.
