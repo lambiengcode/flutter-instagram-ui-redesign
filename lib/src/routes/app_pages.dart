@@ -36,7 +36,7 @@ class AppPages {
         author: Get.arguments['author'],
       ),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
     ),
     GetPage(
       name: Routes.VIEW_PHOTO,
@@ -44,25 +44,25 @@ class AppPages {
           initImageList: Get.arguments['listPhoto'],
           initPosition: Get.arguments['index']),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
     ),
     GetPage(
       name: Routes.NOTIFICATION,
       page: () => NotificationPage(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
     ),
     GetPage(
       name: Routes.PICK_MEDIA_POST,
       page: () => PickImagePostPage(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 250),
+      transitionDuration: Duration(milliseconds: 100),
       children: [
         GetPage(
           name: Routes.POST_CONTENT,
           page: () => PostPage(),
           transition: Transition.rightToLeft,
-          transitionDuration: Duration(milliseconds: 250),
+          transitionDuration: Duration(milliseconds: 100),
         ),
       ],
     ),
@@ -71,7 +71,7 @@ class AppPages {
       name: Routes.PICK_FRIEND_SHARE,
       page: () => PickUserShare(),
       transition: Transition.downToUp,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
     ),
 
     // Chat Flow
@@ -79,13 +79,13 @@ class AppPages {
       name: Routes.CHAT_ROOM,
       page: () => RoomPage(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
       children: [
         GetPage(
           name: Routes.CUSTOMIZE_ROOM,
           page: () => CustomRoomPage(),
           transition: Transition.rightToLeft,
-          transitionDuration: Duration(milliseconds: 150),
+          transitionDuration: Duration(milliseconds: 100),
         ),
       ],
     ),
@@ -93,7 +93,7 @@ class AppPages {
       name: Routes.INCOMMING_CALL,
       page: () => IncommingCallPage(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
     ),
 
     // Profile Page
@@ -103,19 +103,19 @@ class AppPages {
         initialIndex: Get.arguments,
       ),
       transition: Transition.downToUp,
-      transitionDuration: Duration(milliseconds: 250),
+      transitionDuration: Duration(milliseconds: 100),
     ),
     GetPage(
       name: Routes.SETTINGS,
       page: () => SettingsPage(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
       children: [
         GetPage(
           name: Routes.CHOOSE_LANGUAGE,
           page: () => ChooseLanguagePage(),
           transition: Transition.rightToLeft,
-          transitionDuration: Duration(milliseconds: 150),
+          transitionDuration: Duration(milliseconds: 100),
         ),
       ],
     ),
@@ -123,19 +123,19 @@ class AppPages {
       name: Routes.QR_SCAN,
       page: () => ScanQRPage(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
     ),
     GetPage(
       name: Routes.EDIT_PROFILE,
       page: () => EditProfilePage(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
     ),
     GetPage(
       name: Routes.EDIT_PHOTO,
       page: () => ImageEditor(image: Get.arguments),
       transition: Transition.zoom,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
     ),
     GetPage(
       name: Routes.EDITOR_PRO,
@@ -143,7 +143,7 @@ class AppPages {
         images: Get.arguments['images'],
       ),
       transition: Transition.zoom,
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: Duration(milliseconds: 100),
     ),
   ];
 }

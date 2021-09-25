@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:whoru/src/pages/search/pages/discover_page.dart';
 import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/font_family.dart';
@@ -18,7 +19,7 @@ class _SearchPageState extends State<SearchPage>
   List<int> indexOfs = [2, 14, 24, 29, 38, 47, 56];
 
   var _pages = [
-    Container(),
+    DiscoverPage(),
     Container(),
     Container(),
   ];
