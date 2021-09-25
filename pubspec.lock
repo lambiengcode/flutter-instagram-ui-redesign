@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.6.1"
-  bloc:
-    dependency: transitive
-    description:
-      name: bloc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.0.0"
   blurhash:
     dependency: "direct main"
     description:
@@ -71,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
+  camerawesome:
+    dependency: "direct main"
+    description:
+      name: camerawesome
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0+1"
   carousel_slider:
     dependency: "direct main"
     description:
@@ -209,13 +209,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_bloc:
-    dependency: "direct main"
-    description:
-      name: flutter_bloc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.1.0"
   flutter_blurhash:
     dependency: "direct main"
     description:
@@ -356,7 +349,7 @@ packages:
     source: hosted
     version: "1.0.0"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
       url: "https://pub.dartlang.org"

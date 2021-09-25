@@ -82,76 +82,68 @@ class _ChatPageState extends State<ChatPage> {
             ),
             SizedBox(height: 8.sp),
             Expanded(
-              child: NotificationListener<OverscrollIndicatorNotification>(
-                onNotification: (overscroll) {
-                  overscroll.disallowGlow();
-                  return true;
-                },
-                child: ListView.builder(
-                  physics: ClampingScrollPhysics(),
-                  padding: EdgeInsets.all(0),
-                  itemCount: chats.length + 2,
-                  itemBuilder: (context, index) {
-                    return index == 0
-                        ? Column(
-                            children: [
-                              _buildActiveFriend(context),
-                              SizedBox(height: 16.0),
-                            ],
-                          )
-                        : index == 1
-                            ? Column(
-                                children: [
-                                  _buildTitle(context, 'Pinned'),
-                                  ListView.builder(
-                                    padding: EdgeInsets.only(top: 8.0),
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: 1,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () =>
-                                            Get.toNamed(Routes.CHAT_ROOM),
-                                        child: MessageCard(
-                                          pendingMessage:
-                                              chats[3].pendingMessage,
-                                          urlToImage: chats[3].image,
-                                          fullName: chats[3].fullName,
-                                          lastMessage: chats[3].lastMessage,
-                                          time: chats[3].time,
-                                          notification: chats[3].notification,
-                                          blurHash: chats[3].blurHash,
-                                          isLast: false,
-                                        ),
-                                      );
-                                    },
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                padding: EdgeInsets.all(0),
+                itemCount: chats.length + 2,
+                itemBuilder: (context, index) {
+                  return index == 0
+                      ? Column(
+                          children: [
+                            _buildActiveFriend(context),
+                            SizedBox(height: 16.0),
+                          ],
+                        )
+                      : index == 1
+                          ? Column(
+                              children: [
+                                _buildTitle(context, 'Pinned'),
+                                ListView.builder(
+                                  padding: EdgeInsets.only(top: 8.0),
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: 1,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () =>
+                                          Get.toNamed(Routes.CHAT_ROOM),
+                                      child: MessageCard(
+                                        pendingMessage: chats[3].pendingMessage,
+                                        urlToImage: chats[3].image,
+                                        fullName: chats[3].fullName,
+                                        lastMessage: chats[3].lastMessage,
+                                        time: chats[3].time,
+                                        notification: chats[3].notification,
+                                        blurHash: chats[3].blurHash,
+                                        isLast: false,
+                                      ),
+                                    );
+                                  },
+                                ),
+                                SizedBox(height: 12.5),
+                                _buildTitle(context, 'Recent Conversation'),
+                                SizedBox(height: 8.0),
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => Get.toNamed(Routes.CHAT_ROOM),
+                                  child: MessageCard(
+                                    pendingMessage:
+                                        chats[index - 2].pendingMessage,
+                                    urlToImage: chats[index - 2].image,
+                                    fullName: chats[index - 2].fullName,
+                                    lastMessage: chats[index - 2].lastMessage,
+                                    time: chats[index - 2].time,
+                                    notification: chats[index - 2].notification,
+                                    blurHash: chats[index - 2].blurHash,
+                                    isLast: index == chats.length + 1,
                                   ),
-                                  SizedBox(height: 12.5),
-                                  _buildTitle(context, 'Recent Conversation'),
-                                  SizedBox(height: 8.0),
-                                ],
-                              )
-                            : Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () => Get.toNamed(Routes.CHAT_ROOM),
-                                    child: MessageCard(
-                                      pendingMessage:
-                                          chats[index - 2].pendingMessage,
-                                      urlToImage: chats[index - 2].image,
-                                      fullName: chats[index - 2].fullName,
-                                      lastMessage: chats[index - 2].lastMessage,
-                                      time: chats[index - 2].time,
-                                      notification:
-                                          chats[index - 2].notification,
-                                      blurHash: chats[index - 2].blurHash,
-                                      isLast: index == chats.length + 1,
-                                    ),
-                                  )
-                                ],
-                              );
-                  },
-                ),
+                                )
+                              ],
+                            );
+                },
               ),
             ),
           ],
