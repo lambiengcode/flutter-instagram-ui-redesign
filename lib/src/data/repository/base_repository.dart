@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:whoru/src/data/local/user_local.dart';
 import 'package:whoru/src/public/constants.dart';
 
-
 class BaseRepository {
   var dio = diox.Dio(diox.BaseOptions(
     baseUrl: Constants.baseUrl,
