@@ -1,17 +1,15 @@
-import 'package:get/get.dart' as getx;
 import 'package:dio/dio.dart' as diox;
-import 'package:provider/provider.dart';
-import 'package:whoru/src/common/routes.dart';
 import 'dart:convert' as convert;
 import 'dart:async';
+import 'package:whoru/src/data/local/user_local.dart';
+import 'package:whoru/src/public/constants.dart';
 
-import 'package:whoru/src/providers/user_provider.dart';
 
 class BaseRepository {
   var dio = diox.Dio(diox.BaseOptions(
-    baseUrl: baseUrl,
-    connectTimeout: 5000,
-    receiveTimeout: 3000,
+    baseUrl: Constants.baseUrl,
+    connectTimeout: 10000,
+    receiveTimeout: 10000,
   )); // with default Options
 
   Future<diox.Response<dynamic>> downloadFile(
@@ -50,8 +48,10 @@ class BaseRepository {
     var response = await dio.post(
       gateway,
       data: convert.jsonEncode(body),
+      options: getOptions(),
     );
     printEndpoint('POST', gateway);
+    printResponse(response);
     return response;
   }
 
@@ -68,13 +68,26 @@ class BaseRepository {
     return response;
   }
 
-  Future<diox.Response<dynamic>> getRoute(String gateway, String params) async {
+  Future<diox.Response<dynamic>> getRoute(
+    String gateway, {
+    String params,
+    String query,
+  }) async {
+    Map<String, String> paramsObject = {};
+    if (params != null) {
+      params.split('&').forEach((element) {
+        paramsObject[element.split('=')[0].toString()] =
+            element.split('=')[1].toString();
+      });
+    }
+
     var response = await dio.get(
-      gateway + params,
+      gateway + (params ?? ''),
       options: getOptions(),
+      queryParameters: query == null ? null : paramsObject,
     );
     printEndpoint('GET', gateway);
-    printResponse(response);
+    // printResponse(response);
     return response;
   }
 
@@ -93,10 +106,13 @@ class BaseRepository {
 
   diox.Options getOptions() {
     return diox.Options(
+      validateStatus: (status) => true,
       headers: {
-        'Authorization':
-            'Bearer ${Provider.of<UserProvider>(getx.Get.context, listen: false).user.accessToken}',
-        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + UserLocal().getAccessToken(),
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Connection': 'keep-alive',
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip, deflate, br',
       },
     );
   }
@@ -107,6 +123,6 @@ class BaseRepository {
 
   printResponse(diox.Response<dynamic> response) {
     print('StatusCode: ${response.statusCode}');
-    print('Body: ${convert.jsonDecode(response.data)}');
+    print('Body: ${response.data.toString()}');
   }
 }
