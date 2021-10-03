@@ -40,7 +40,6 @@ dependencies:
   qr_flutter: ^4.0.0
   
   # Local database
-  shared_preferences:
   get_storage: ^2.0.2
 
   # State Management library
@@ -51,7 +50,7 @@ dependencies:
   # Photo library
   flutter_blurhash: ^0.6.0
   blurhash: ^0.2.1 
-  photo_manager: ^1.2.6
+  photo_manager: ^1.3.4
   image_picker: ^0.7.4
   extended_image: ^4.1.0
   flutter_image_compress: ^1.0.0
@@ -60,6 +59,7 @@ dependencies:
   carousel_slider: ^4.0.0
   photo_view: ^0.12.0
   camerawesome: ^0.3.0+1
+  
   # Editor
   zoom_widget: ^0.1.3
   font_awesome_flutter: ^9.0.0
@@ -67,12 +67,8 @@ dependencies:
   permission_handler: ^7.0.0
   screenshot: ^0.3.0
   signature: ^4.0.2
-  flutter_colorpicker: ^0.4.0
+  flutter_colorpicker: ^0.6.0
   firexcode: ^1.0.5
-
-  # Map library
-  location: ^4.2.3
-  geocoder: ^0.2.1 
 
 dev_dependencies:
   flutter_test:

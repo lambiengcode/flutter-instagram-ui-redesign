@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:whoru/src/pages/home/widgets/camera_preview_box.dart';
 import 'package:whoru/src/pages/profile/controllers/editor_controller.dart';
+import 'package:whoru/src/themes/app_colors.dart';
 import 'package:whoru/src/themes/app_decoration.dart';
 import 'package:whoru/src/themes/font_family.dart';
 import 'package:whoru/src/utils/sizer/sizer.dart';
@@ -106,8 +107,8 @@ class _PickImagePostPageState extends State<PickImagePostPage> {
                           index % 7 == 0 ? 2 : 1,
                           index % 7 == 0 ? 2 : 1,
                         ),
-                        mainAxisSpacing: 2.5.sp,
-                        crossAxisSpacing: 2.5.sp,
+                        mainAxisSpacing: 4.sp,
+                        crossAxisSpacing: 4.sp,
                       ),
                     ),
                   ),
@@ -118,11 +119,9 @@ class _PickImagePostPageState extends State<PickImagePostPage> {
               left: .0,
               bottom: .0,
               child: Container(
-                height: 55.sp,
+                height: 50.sp,
                 width: 100.w,
-                padding: EdgeInsets.only(bottom: 4.sp),
-                decoration:
-                    AppDecoration.containerOnlyShadowTop(context).decoration,
+                color: Theme.of(context).primaryColor,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +130,7 @@ class _PickImagePostPageState extends State<PickImagePostPage> {
                     Text(
                       'Write a content',
                       style: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: mC,
                         fontSize: 12.sp,
                         fontFamily: FontFamily.lato,
                         fontWeight: FontWeight.w600,
@@ -140,8 +139,8 @@ class _PickImagePostPageState extends State<PickImagePostPage> {
                     SizedBox(width: 10.sp),
                     Icon(
                       FontAwesomeIcons.featherAlt,
-                      size: 16.sp,
-                      color: Theme.of(context).primaryColor,
+                      size: 14.5.sp,
+                      color: mC,
                     ),
                   ],
                 ),

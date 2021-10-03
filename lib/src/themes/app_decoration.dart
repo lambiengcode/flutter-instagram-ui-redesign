@@ -238,7 +238,7 @@ class AppDecoration {
           color: Colors.black.withOpacity(.35),
           boxShadow: [
             BoxShadow(
-              color: colorPrimaryBlack.withOpacity(.15),
+              color: Colors.grey.shade900,
               offset: Offset(2, 2),
               blurRadius: 2,
               spreadRadius: -2,
