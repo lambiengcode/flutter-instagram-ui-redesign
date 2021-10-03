@@ -14,7 +14,10 @@ class EditorController extends GetxController {
     List<AssetPathEntity> list =
         await PhotoManager.getAssetPathList(type: RequestType.image);
     AssetPathEntity data = list[0];
-    List<AssetEntity> imageList = await data.assetList;
+    List<AssetEntity> imageList = await data.getAssetListRange(
+      start: 0,
+      end: 50,
+    );
     imageList.asMap().forEach((index, element) async {
       AssetEntity entity = element;
       File file = await entity.file;
